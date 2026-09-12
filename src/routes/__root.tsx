@@ -14,8 +14,8 @@ const LOCAL_BUSINESS_JSONLD = {
   "@context": "https://schema.org",
   "@type": "HealthClub",
   name: "Jukl Health Clubs",
-  image: "https://juklhealth.lovable.app/og-image.jpg",
-  url: "https://juklhealth.lovable.app",
+  image: "https://juklhealth.com/og-image.jpg",
+  url: "https://juklhealth.com",
   telephone: "+43-660-0000000",
   email: "julian@juklhealth.com",
   address: {
@@ -112,7 +112,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "de_AT" },
+      { property: "og:url", content: "https://juklhealth.com" },
+      { property: "og:image", content: "https://juklhealth.com/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: "Trainerin und Trainer beim Athletiktraining im JuklHealth Performance Club",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://juklhealth.com/og-image.jpg" },
       { name: "twitter:title", content: "Jukl Health Clubs" },
       {
         name: "twitter:description",
