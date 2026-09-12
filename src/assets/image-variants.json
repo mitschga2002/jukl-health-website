@@ -1,0 +1,600 @@
+{
+  "/img/amin-elghazzali-1460.webp": {
+    "width": 1460,
+    "height": 971,
+    "variants": [
+      {
+        "url": "/img/amin-elghazzali-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/amin-elghazzali-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/amin-elghazzali-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/amin-elghazzali-1460.webp",
+        "width": 1460
+      }
+    ]
+  },
+  "/img/analysen-hero-1446.webp": {
+    "width": 1446,
+    "height": 981,
+    "variants": [
+      {
+        "url": "/img/analysen-hero-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/analysen-hero-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/analysen-hero-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/analysen-hero-1446.webp",
+        "width": 1446
+      }
+    ]
+  },
+  "/img/angebot-1508.webp": {
+    "width": 1508,
+    "height": 848,
+    "variants": [
+      {
+        "url": "/img/angebot-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/angebot-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/angebot-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/angebot-1508.webp",
+        "width": 1508
+      }
+    ]
+  },
+  "/img/athletiktraining-1459.webp": {
+    "width": 1459,
+    "height": 972,
+    "variants": [
+      {
+        "url": "/img/athletiktraining-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/athletiktraining-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/athletiktraining-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/athletiktraining-1459.webp",
+        "width": 1459
+      }
+    ]
+  },
+  "/img/biljana-kleinheinz-1458.webp": {
+    "width": 1458,
+    "height": 973,
+    "variants": [
+      {
+        "url": "/img/biljana-kleinheinz-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/biljana-kleinheinz-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/biljana-kleinheinz-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/biljana-kleinheinz-1458.webp",
+        "width": 1458
+      }
+    ]
+  },
+  "/img/caroline-fritsch-1387.webp": {
+    "width": 1387,
+    "height": 922,
+    "variants": [
+      {
+        "url": "/img/caroline-fritsch-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/caroline-fritsch-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/caroline-fritsch-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/caroline-fritsch-1387.webp",
+        "width": 1387
+      }
+    ]
+  },
+  "/img/florian-winder-1460.webp": {
+    "width": 1460,
+    "height": 971,
+    "variants": [
+      {
+        "url": "/img/florian-winder-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/florian-winder-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/florian-winder-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/florian-winder-1460.webp",
+        "width": 1460
+      }
+    ]
+  },
+  "/img/gesundheitscoaching-1400.webp": {
+    "width": 1400,
+    "height": 950,
+    "variants": [
+      {
+        "url": "/img/gesundheitscoaching-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/gesundheitscoaching-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/gesundheitscoaching-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/gesundheitscoaching-1400.webp",
+        "width": 1400
+      }
+    ]
+  },
+  "/img/gruppentraining-1032.webp": {
+    "width": 1032,
+    "height": 1374,
+    "variants": [
+      {
+        "url": "/img/gruppentraining-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/gruppentraining-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/gruppentraining-1032.webp",
+        "width": 1032
+      }
+    ]
+  },
+  "/img/hero-athlete-1385.webp": {
+    "width": 1385,
+    "height": 923,
+    "variants": [
+      {
+        "url": "/img/hero-athlete-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/hero-athlete-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/hero-athlete-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/hero-athlete-1385.webp",
+        "width": 1385
+      }
+    ]
+  },
+  "/img/julian-portrait-1460.webp": {
+    "width": 1460,
+    "height": 971,
+    "variants": [
+      {
+        "url": "/img/julian-portrait-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/julian-portrait-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/julian-portrait-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/julian-portrait-1460.webp",
+        "width": 1460
+      }
+    ]
+  },
+  "/img/leistungsanalyse-1217.webp": {
+    "width": 1217,
+    "height": 1824,
+    "variants": [
+      {
+        "url": "/img/leistungsanalyse-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/leistungsanalyse-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/leistungsanalyse-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/leistungsanalyse-1217.webp",
+        "width": 1217
+      }
+    ]
+  },
+  "/img/lucas-vidal-1400.webp": {
+    "width": 1400,
+    "height": 950,
+    "variants": [
+      {
+        "url": "/img/lucas-vidal-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/lucas-vidal-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/lucas-vidal-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/lucas-vidal-1400.webp",
+        "width": 1400
+      }
+    ]
+  },
+  "/img/meine-person-banner-1920.webp": {
+    "width": 1920,
+    "height": 600,
+    "variants": [
+      {
+        "url": "/img/meine-person-banner-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/meine-person-banner-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/meine-person-banner-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/meine-person-banner-1600.webp",
+        "width": 1600
+      },
+      {
+        "url": "/img/meine-person-banner-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "/img/pc-banner-1386.webp": {
+    "width": 1386,
+    "height": 923,
+    "variants": [
+      {
+        "url": "/img/pc-banner-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pc-banner-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pc-banner-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pc-banner-1386.webp",
+        "width": 1386
+      }
+    ]
+  },
+  "/img/pc-hero-1386.webp": {
+    "width": 1386,
+    "height": 923,
+    "variants": [
+      {
+        "url": "/img/pc-hero-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pc-hero-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pc-hero-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pc-hero-1386.webp",
+        "width": 1386
+      }
+    ]
+  },
+  "/img/personal-training-1458.webp": {
+    "width": 1458,
+    "height": 972,
+    "variants": [
+      {
+        "url": "/img/personal-training-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/personal-training-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/personal-training-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/personal-training-1458.webp",
+        "width": 1458
+      }
+    ]
+  },
+  "/img/physiotherapie-1460.webp": {
+    "width": 1460,
+    "height": 971,
+    "variants": [
+      {
+        "url": "/img/physiotherapie-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/physiotherapie-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/physiotherapie-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/physiotherapie-1460.webp",
+        "width": 1460
+      }
+    ]
+  },
+  "/img/profisport-1824.webp": {
+    "width": 1824,
+    "height": 1217,
+    "variants": [
+      {
+        "url": "/img/profisport-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/profisport-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/profisport-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/profisport-1600.webp",
+        "width": 1600
+      },
+      {
+        "url": "/img/profisport-1824.webp",
+        "width": 1824
+      }
+    ]
+  },
+  "/img/rico-andriessen-1460.webp": {
+    "width": 1460,
+    "height": 971,
+    "variants": [
+      {
+        "url": "/img/rico-andriessen-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/rico-andriessen-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/rico-andriessen-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/rico-andriessen-1460.webp",
+        "width": 1460
+      }
+    ]
+  },
+  "/img/stoffwechsel-1065.webp": {
+    "width": 1065,
+    "height": 1331,
+    "variants": [
+      {
+        "url": "/img/stoffwechsel-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/stoffwechsel-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/stoffwechsel-1065.webp",
+        "width": 1065
+      }
+    ]
+  },
+  "/img/strength-club-1824.webp": {
+    "width": 1824,
+    "height": 1217,
+    "variants": [
+      {
+        "url": "/img/strength-club-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/strength-club-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/strength-club-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/strength-club-1600.webp",
+        "width": 1600
+      },
+      {
+        "url": "/img/strength-club-1824.webp",
+        "width": 1824
+      }
+    ]
+  },
+  "/img/team-banner-1824.webp": {
+    "width": 1824,
+    "height": 1217,
+    "variants": [
+      {
+        "url": "/img/team-banner-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/team-banner-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/team-banner-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/team-banner-1600.webp",
+        "width": 1600
+      },
+      {
+        "url": "/img/team-banner-1824.webp",
+        "width": 1824
+      }
+    ]
+  },
+  "/img/training-banner-1588.webp": {
+    "width": 1588,
+    "height": 893,
+    "variants": [
+      {
+        "url": "/img/training-banner-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/training-banner-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/training-banner-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/training-banner-1588.webp",
+        "width": 1588
+      }
+    ]
+  },
+  "/img/training-mit-kunde-1672.webp": {
+    "width": 1672,
+    "height": 941,
+    "variants": [
+      {
+        "url": "/img/training-mit-kunde-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/training-mit-kunde-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/training-mit-kunde-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/training-mit-kunde-1600.webp",
+        "width": 1600
+      },
+      {
+        "url": "/img/training-mit-kunde-1672.webp",
+        "width": 1672
+      }
+    ]
+  },
+  "/img/vortraege-banner-1080.webp": {
+    "width": 1080,
+    "height": 1350,
+    "variants": [
+      {
+        "url": "/img/vortraege-banner-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/vortraege-banner-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/vortraege-banner-1080.webp",
+        "width": 1080
+      }
+    ]
+  },
+  "/img/widnau-club-1080.webp": {
+    "width": 1080,
+    "height": 1350,
+    "variants": [
+      {
+        "url": "/img/widnau-club-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/widnau-club-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/widnau-club-1080.webp",
+        "width": 1080
+      }
+    ]
+  }
+}

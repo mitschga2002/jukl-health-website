@@ -1,0 +1,34 @@
+# JuklHealth Performance Club
+
+> Performance Training, Athletik Coaching und klinische Physiotherapie in Dornbirn – wissenschaftlich fundiert, individuell betreut, mit messbaren Resultaten.
+
+JuklHealth Performance Club ist ein Trainings- und Gesundheitsstudio in Dornbirn (Vorarlberg). Das Team aus Sportwissenschaft, Physiotherapie und Coaching betreut Freizeit- und Profisportler:innen sowie Menschen mit gesundheitlichen Zielen. Standorte: Performance Club Dornbirn, Strength Club und Training Club Widnau.
+
+## Pages
+
+- [Startseite](/): Überblick über JuklHealth, Angebote und Standorte.
+- [Clubs](/clubs): Unsere Standorte in Dornbirn und Widnau.
+- [Performance Club](/performance-club): Der Hauptstandort in Dornbirn.
+- [Training Club Widnau](/training-club-widnau): Standort in Widnau (CH).
+- [Räumlichkeiten](/raeumlichkeiten): Ausstattung und Trainingsflächen.
+- [Training & Physio](/training-physio): Kombinierte Trainings- und Physioangebote.
+- [Training](/training): Alle Trainingsformate im Überblick.
+- [Personal Training](/personaltraining): 1:1 Betreuung.
+- [Gruppentraining](/gruppentraining): Training in kleinen Gruppen.
+- [Athletiktraining](/athletiktraining): Leistungs- und Vereinssport.
+- [Physiotherapie](/physiotherapie): Klinische Physiotherapie.
+- [Trainingstherapie](/trainingstherapie): Rehabilitation durch Training.
+- [Outdoor Training](/outdoor-training): Training in der Natur.
+- [Analysen](/analysen): Diagnostik und Analysen.
+- [Mikronährstoffanalyse](/mikronaehrstoffanalyse): Nährstoff-Diagnostik.
+- [Bioimpedanzanalyse](/bioimpedanzanalyse): Körperzusammensetzung messen.
+- [Team](/team): Unser Team aus Sportwissenschaft und Physiotherapie.
+- [Meine Person](/meine-person): Über Julian Kleinheinz, Gründer.
+- [Shop](/shop): Produkte und Ausrüstung.
+- [Vorträge](/vortraege): Vorträge und Webinare.
+- [Kontakt](/kontakt): Kontakt und Terminanfrage.
+
+## Optional
+
+- [Impressum](/impressum)
+- [Datenschutz](/datenschutz)
