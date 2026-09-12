@@ -21,11 +21,9 @@ import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as MeinePersonRouteImport } from './routes/meine-person'
 import { Route as MikronaehrstoffanalyseRouteImport } from './routes/mikronaehrstoffanalyse'
-import { Route as OutdoorTrainingRouteImport } from './routes/outdoor-training'
 import { Route as PerformanceClubRouteImport } from './routes/performance-club'
 import { Route as PersonaltrainingRouteImport } from './routes/personaltraining'
 import { Route as PhysiotherapieRouteImport } from './routes/physiotherapie'
-import { Route as RaeumlichkeitenRouteImport } from './routes/raeumlichkeiten'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as StartRouteImport } from './routes/start'
 import { Route as StrengthClubRouteImport } from './routes/strength-club'
@@ -98,11 +96,6 @@ const MikronaehrstoffanalyseRoute = MikronaehrstoffanalyseRouteImport.update({
   path: '/mikronaehrstoffanalyse',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OutdoorTrainingRoute = OutdoorTrainingRouteImport.update({
-  id: '/outdoor-training',
-  path: '/outdoor-training',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PerformanceClubRoute = PerformanceClubRouteImport.update({
   id: '/performance-club',
   path: '/performance-club',
@@ -116,11 +109,6 @@ const PersonaltrainingRoute = PersonaltrainingRouteImport.update({
 const PhysiotherapieRoute = PhysiotherapieRouteImport.update({
   id: '/physiotherapie',
   path: '/physiotherapie',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RaeumlichkeitenRoute = RaeumlichkeitenRouteImport.update({
-  id: '/raeumlichkeiten',
-  path: '/raeumlichkeiten',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -192,11 +180,9 @@ export interface FileRoutesByFullPath {
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
   '/mikronaehrstoffanalyse': typeof MikronaehrstoffanalyseRoute
-  '/outdoor-training': typeof OutdoorTrainingRoute
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
-  '/raeumlichkeiten': typeof RaeumlichkeitenRoute
   '/shop': typeof ShopRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
@@ -222,11 +208,9 @@ export interface FileRoutesByTo {
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
   '/mikronaehrstoffanalyse': typeof MikronaehrstoffanalyseRoute
-  '/outdoor-training': typeof OutdoorTrainingRoute
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
-  '/raeumlichkeiten': typeof RaeumlichkeitenRoute
   '/shop': typeof ShopRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
@@ -253,11 +237,9 @@ export interface FileRoutesById {
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
   '/mikronaehrstoffanalyse': typeof MikronaehrstoffanalyseRoute
-  '/outdoor-training': typeof OutdoorTrainingRoute
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
-  '/raeumlichkeiten': typeof RaeumlichkeitenRoute
   '/shop': typeof ShopRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
@@ -285,11 +267,9 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/meine-person'
     | '/mikronaehrstoffanalyse'
-    | '/outdoor-training'
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
-    | '/raeumlichkeiten'
     | '/shop'
     | '/start'
     | '/strength-club'
@@ -315,11 +295,9 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/meine-person'
     | '/mikronaehrstoffanalyse'
-    | '/outdoor-training'
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
-    | '/raeumlichkeiten'
     | '/shop'
     | '/start'
     | '/strength-club'
@@ -345,11 +323,9 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/meine-person'
     | '/mikronaehrstoffanalyse'
-    | '/outdoor-training'
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
-    | '/raeumlichkeiten'
     | '/shop'
     | '/start'
     | '/strength-club'
@@ -376,11 +352,9 @@ export interface RootRouteChildren {
   KontaktRoute: typeof KontaktRoute
   MeinePersonRoute: typeof MeinePersonRoute
   MikronaehrstoffanalyseRoute: typeof MikronaehrstoffanalyseRoute
-  OutdoorTrainingRoute: typeof OutdoorTrainingRoute
   PerformanceClubRoute: typeof PerformanceClubRoute
   PersonaltrainingRoute: typeof PersonaltrainingRoute
   PhysiotherapieRoute: typeof PhysiotherapieRoute
-  RaeumlichkeitenRoute: typeof RaeumlichkeitenRoute
   ShopRoute: typeof ShopRoute
   StartRoute: typeof StartRoute
   StrengthClubRoute: typeof StrengthClubRoute
@@ -480,13 +454,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MikronaehrstoffanalyseRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/outdoor-training': {
-      id: '/outdoor-training'
-      path: '/outdoor-training'
-      fullPath: '/outdoor-training'
-      preLoaderRoute: typeof OutdoorTrainingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/performance-club': {
       id: '/performance-club'
       path: '/performance-club'
@@ -506,13 +473,6 @@ declare module '@tanstack/react-router' {
       path: '/physiotherapie'
       fullPath: '/physiotherapie'
       preLoaderRoute: typeof PhysiotherapieRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/raeumlichkeiten': {
-      id: '/raeumlichkeiten'
-      path: '/raeumlichkeiten'
-      fullPath: '/raeumlichkeiten'
-      preLoaderRoute: typeof RaeumlichkeitenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -608,11 +568,9 @@ const rootRouteChildren: RootRouteChildren = {
   KontaktRoute: KontaktRoute,
   MeinePersonRoute: MeinePersonRoute,
   MikronaehrstoffanalyseRoute: MikronaehrstoffanalyseRoute,
-  OutdoorTrainingRoute: OutdoorTrainingRoute,
   PerformanceClubRoute: PerformanceClubRoute,
   PersonaltrainingRoute: PersonaltrainingRoute,
   PhysiotherapieRoute: PhysiotherapieRoute,
-  RaeumlichkeitenRoute: RaeumlichkeitenRoute,
   ShopRoute: ShopRoute,
   StartRoute: StartRoute,
   StrengthClubRoute: StrengthClubRoute,

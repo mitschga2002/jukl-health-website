@@ -11,6 +11,7 @@ import {
 export const Route = createFileRoute("/mikronaehrstoffanalyse")({
   head: () => ({
     meta: [
+      { name: "robots", content: "noindex, nofollow" },
       { title: "Mikronährstoffanalyse — JuklHealth" },
       {
         name: "description",
@@ -35,15 +36,14 @@ function Mikro() {
 
       <Section eyebrow="VORGEHEN" title="Mikronährstoffanalyse">
         <p>
-          In unserem Fachlabor wird dein feinstofflicher Bedarf an Mikronährstoffen und
-          anderen Biomolekülen umfassend gemessen und ermittelt. Die Auswertungen sind
-          einfach und verständlich aufgebaut — du weißt sofort, bei welchen Stoffen Bedarf
-          besteht und bei welchen nicht.
+          In unserem Fachlabor wird dein feinstofflicher Bedarf an Mikronährstoffen und anderen
+          Biomolekülen umfassend gemessen und ermittelt. Die Auswertungen sind einfach und
+          verständlich aufgebaut — du weißt sofort, bei welchen Stoffen Bedarf besteht und bei
+          welchen nicht.
         </p>
         <p>
-          Ganz gleich, welche Nährstoffe dir fehlen — mit den Ergebnissen kannst du
-          Maßnahmen ergreifen, Mängel ausgleichen, dein Wohlbefinden und deine Leistung
-          steigern.
+          Ganz gleich, welche Nährstoffe dir fehlen — mit den Ergebnissen kannst du Maßnahmen
+          ergreifen, Mängel ausgleichen, dein Wohlbefinden und deine Leistung steigern.
         </p>
         <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
       </Section>

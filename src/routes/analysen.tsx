@@ -16,7 +16,6 @@ const gesundheitscoaching = "/img/gesundheitscoaching-1400.webp";
 const athletiktraining = "/img/athletiktraining-1459.webp";
 const physiotherapie = "/img/physiotherapie-1460.webp";
 
-
 export const Route = createFileRoute("/analysen")({
   head: () => ({
     meta: [
@@ -28,7 +27,9 @@ export const Route = createFileRoute("/analysen")({
       },
       { property: "og:title", content: "Analysen — JuklHealth" },
       { property: "og:description", content: "Datenbasis für nachhaltige Leistung & Gesundheit." },
+      { property: "og:url", content: "https://juklhealth.com/analysen" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/analysen" }],
   }),
   component: Analysen,
 });
@@ -36,7 +37,6 @@ export const Route = createFileRoute("/analysen")({
 function Anchor({ id }: { id: string }) {
   return <span id={id} className="block h-0 scroll-mt-24" aria-hidden />;
 }
-
 
 function Analysen() {
   return (
@@ -54,18 +54,17 @@ function Analysen() {
         title="FMS-Bewegungsscreening"
         imageLabel="FMS · Functional Movement Screen"
         image={athletiktraining}
-
       >
         <p>
-          Der Functional Movement Screen (FMS) ist ein standardisiertes Screeningverfahren,
-          das einen fundierten Überblick über deine grundlegenden Bewegungsmuster sowie
-          mögliche Stärken und Schwächen liefert.
+          Der Functional Movement Screen (FMS) ist ein standardisiertes Screeningverfahren, das
+          einen fundierten Überblick über deine grundlegenden Bewegungsmuster sowie mögliche Stärken
+          und Schwächen liefert.
         </p>
         <p>
-          Asymmetrien, Bewegungseinschränkungen und muskuläre Defizite können das
-          Verletzungsrisiko erhöhen und die Leistungsfähigkeit beeinträchtigen. Auf Basis
-          der Ergebnisse entwickeln wir eine gezielte korrigierende Trainingsstrategie,
-          um vorhandene Stärken weiter auszubauen und Schwächen gezielt zu verbessern.
+          Asymmetrien, Bewegungseinschränkungen und muskuläre Defizite können das Verletzungsrisiko
+          erhöhen und die Leistungsfähigkeit beeinträchtigen. Auf Basis der Ergebnisse entwickeln
+          wir eine gezielte korrigierende Trainingsstrategie, um vorhandene Stärken weiter
+          auszubauen und Schwächen gezielt zu verbessern.
         </p>
         <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
       </SplitBlock>
@@ -79,16 +78,14 @@ function Analysen() {
         image={stoffwechsel}
       >
         <p>
-          Abnehmen, Muskeln aufbauen, den Körper formen oder die Leistung steigern? Mit
-          unseren Analyse-Tools machen wir deinen Stoffwechsel sichtbar. Die
-          Stoffwechselanalyse ist seit über 40 Jahren ein etabliertes Verfahren in der
-          Sportmedizin.
+          Abnehmen, Muskeln aufbauen, den Körper formen oder die Leistung steigern? Mit unseren
+          Analyse-Tools machen wir deinen Stoffwechsel sichtbar. Die Stoffwechselanalyse ist seit
+          über 40 Jahren ein etabliertes Verfahren in der Sportmedizin.
         </p>
         <p>
-          Über deine Atmung wird der Stoffwechsel analysiert: Stoffwechseltyp,
-          Kalorienverbrauch in Ruhe und Bewegung, optimaler Pulsbereich für
-          Fettverbrennung — individuell auf dich angepasst, wie ein maßgeschneidertes
-          Kleid.
+          Über deine Atmung wird der Stoffwechsel analysiert: Stoffwechseltyp, Kalorienverbrauch in
+          Ruhe und Bewegung, optimaler Pulsbereich für Fettverbrennung — individuell auf dich
+          angepasst, wie ein maßgeschneidertes Kleid.
         </p>
         <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
       </SplitBlock>
@@ -101,10 +98,9 @@ function Analysen() {
         image={leistungsanalyse}
       >
         <p>
-          Trainiere nicht „nach Gefühl", sondern auf Basis deiner Daten. Wir ermitteln
-          unter definierter Belastung deine individuellen Trainingszonen, aerobe und
-          anaerobe Schwelle sowie deinen Energieumsatz — auf Fahrrad­ergometer oder
-          Laufband.
+          Trainiere nicht „nach Gefühl", sondern auf Basis deiner Daten. Wir ermitteln unter
+          definierter Belastung deine individuellen Trainingszonen, aerobe und anaerobe Schwelle
+          sowie deinen Energieumsatz — auf Fahrrad­ergometer oder Laufband.
         </p>
         <BulletList
           items={[
@@ -129,22 +125,20 @@ function Analysen() {
         title="Physioanalyse"
         imageLabel="Physioanalyse"
         image={physiotherapie}
-
       >
         <p>
-          Dein Körper ist dein Werkzeug. In der Physioanalyse finden wir die Ursache
-          hinter Schmerzen, Verspannungen oder Leistungsplateaus. Wir screenen Haltung,
-          Beweglichkeit, Kraftverhältnisse (L/R), Stabilität und deine wichtigsten
-          Bewegungsmuster.
+          Dein Körper ist dein Werkzeug. In der Physioanalyse finden wir die Ursache hinter
+          Schmerzen, Verspannungen oder Leistungsplateaus. Wir screenen Haltung, Beweglichkeit,
+          Kraftverhältnisse (L/R), Stabilität und deine wichtigsten Bewegungsmuster.
         </p>
         <p>
-          Am Ende: strukturierter Befund mit Prioritäten, individueller Übungsplan
-          (PDF/Video) mit klarer Dosierung — optional verknüpft mit Personal Training,
-          Leistungsanalyse oder deinem Performance Club Plan.
+          Am Ende: strukturierter Befund mit Prioritäten, individueller Übungsplan (PDF/Video) mit
+          klarer Dosierung — optional verknüpft mit Personal Training, Leistungsanalyse oder deinem
+          Performance Club Plan.
         </p>
         <p className="text-muted-foreground text-sm mt-2">
-          Dauer 60–75 Min. Geeignet bei wiederkehrenden Beschwerden, nach Reha oder
-          zur Senkung des Re-Injury-Risikos.
+          Dauer 60–75 Min. Geeignet bei wiederkehrenden Beschwerden, nach Reha oder zur Senkung des
+          Re-Injury-Risikos.
         </p>
         <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
       </SplitBlock>
@@ -158,17 +152,11 @@ function Analysen() {
       >
         <p>
           Are you ready to upgrade yourself? Wir streben eine Steigerung deiner Energie,
-          Leistungsfähigkeit und deines Wohlbefindens an. Anamnese, Anliegen, Ziele —
-          und dann gemeinsam die fünf Säulen stärken.
+          Leistungsfähigkeit und deines Wohlbefindens an. Anamnese, Anliegen, Ziele — und dann
+          gemeinsam die fünf Säulen stärken.
         </p>
         <BulletList
-          items={[
-            "Schlaf",
-            "Ernährung",
-            "Bewegung",
-            "Mentale Gesundheit",
-            "Regeneration",
-          ]}
+          items={["Schlaf", "Ernährung", "Bewegung", "Mentale Gesundheit", "Regeneration"]}
         />
         <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
       </SplitBlock>

@@ -21,7 +21,9 @@ export const Route = createFileRoute("/physiotherapie")({
       },
       { property: "og:title", content: "Physiotherapie – JuklHealth" },
       { property: "og:description", content: "Klinische Physiotherapie in Dornbirn." },
+      { property: "og:url", content: "https://juklhealth.com/physiotherapie" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/physiotherapie" }],
   }),
   component: Physio,
 });

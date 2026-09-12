@@ -1,11 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  BulletList,
-  CTAButton,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, BulletList, CTAButton } from "@/components/site/content";
 
 const widnauClub = "/img/widnau-club-1080.webp";
 
@@ -23,7 +17,9 @@ export const Route = createFileRoute("/training-club-widnau")({
         property: "og:description",
         content: "1:1 Personal Training in Widnau, Schweiz.",
       },
+      { property: "og:url", content: "https://juklhealth.com/training-club-widnau" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/training-club-widnau" }],
   }),
   component: Widnau,
 });
@@ -38,12 +34,11 @@ function Widnau() {
         image={widnauClub}
       />
 
-
       <Section eyebrow="STANDORT" title="Schützenstrasse 13 · CH-9443 Widnau">
         <p>
-          Auf 50 m² bieten wir Personal Training, Athletiktrainings und Trainingstherapien
-          auf neuestem Stand – 1:1, mit angenehm privatem Ambiente. Nur eine kurze Fahrt
-          vom Rheintal aus, ideal für Kunden aus Vorarlberg und der Ostschweiz.
+          Auf 50 m² bieten wir Personal Training, Athletiktrainings und Trainingstherapien auf
+          neuestem Stand – 1:1, mit angenehm privatem Ambiente. Nur eine kurze Fahrt vom Rheintal
+          aus, ideal für Kunden aus Vorarlberg und der Ostschweiz.
         </p>
         <BulletList
           items={[

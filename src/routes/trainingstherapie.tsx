@@ -1,11 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  BulletList,
-  CTAButton,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, BulletList, CTAButton } from "@/components/site/content";
 
 const athletik = "/img/athletiktraining-1459.webp";
 
@@ -23,7 +17,9 @@ export const Route = createFileRoute("/trainingstherapie")({
         property: "og:description",
         content: "Aktives Aufbautraining nach Beschwerden oder Verletzungen.",
       },
+      { property: "og:url", content: "https://juklhealth.com/trainingstherapie" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/trainingstherapie" }],
   }),
   component: Reha,
 });
