@@ -52,7 +52,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
-      <main className="jh-container">
+      <main>
         <Hero />
         <DisciplineTicker />
         <PerformanceClubBlock />
