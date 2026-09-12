@@ -7,8 +7,8 @@ const sitemap = [
     links: [
       { to: "/clubs", label: "Clubs Übersicht" },
       { to: "/performance-club", label: "Performance Club" },
+      { to: "/strength-club", label: "Strength Club" },
       { to: "/training-club-widnau", label: "Training Club Widnau" },
-      { to: "/raeumlichkeiten", label: "Räumlichkeiten" },
     ],
   },
   {
@@ -26,9 +26,11 @@ const sitemap = [
     heading: "Analysen",
     links: [
       { to: "/analysen", label: "Übersicht" },
-      { to: "/analysen", hash: "leistung", label: "Leistungsanalyse" },
-      { to: "/analysen", hash: "stoffwechsel", label: "Stoffwechselanalyse" },
       { to: "/analysen", hash: "fms", label: "Bewegungsanalyse" },
+      { to: "/analysen", hash: "stoffwechsel", label: "Stoffwechselanalyse" },
+      { to: "/analysen", hash: "leistung", label: "Leistungsanalyse" },
+      { to: "/analysen", hash: "physio", label: "Physioanalyse" },
+      { to: "/analysen", hash: "coaching", label: "Gesundheitscoaching" },
     ],
   },
   {
@@ -48,7 +50,15 @@ export function SiteFooter() {
       <div className="jh-container">
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           <div className="col-span-2 lg:col-span-1">
-            <img src={logoWhite} alt="JuklHealth" loading="lazy" decoding="async" className="h-11 w-auto mb-6" />
+            <img
+              src={logoWhite}
+              alt="JuklHealth"
+              width={1920}
+              height={878}
+              loading="lazy"
+              decoding="async"
+              className="h-11 w-auto mb-6"
+            />
             <Link
               to="/kontakt"
               className="inline-block bg-primary text-primary-foreground px-7 py-3 font-display text-sm hover:bg-primary-hover"
@@ -84,8 +94,12 @@ export function SiteFooter() {
         <div className="flex flex-col lg:flex-row justify-between text-[11px] uppercase tracking-[0.18em] text-background/50 gap-4 border-t border-background/15 pt-6">
           <div>© {new Date().getFullYear()} JuklHealth Performance Club · Dornbirn, AT</div>
           <div className="flex gap-8">
-            <Link to="/impressum" className="hover:text-primary">Impressum</Link>
-            <Link to="/datenschutz" className="hover:text-primary">Datenschutz</Link>
+            <Link to="/impressum" className="hover:text-primary">
+              Impressum
+            </Link>
+            <Link to="/datenschutz" className="hover:text-primary">
+              Datenschutz
+            </Link>
             <a
               href="https://www.instagram.com/juklhealth_clubs/"
               target="_blank"

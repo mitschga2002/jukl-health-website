@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import logoBlack from "@/assets/jukl-logo-black.png";
-
 
 const mainLinks = [
   { to: "/team", label: "Team" },
   { to: "/meine-person", label: "Über uns" },
   { to: "/vortraege", label: "Vorträge" },
 ] as const;
-
 
 const clubLinks = [
   { to: "/clubs", label: "Übersicht" },
@@ -27,14 +25,15 @@ const trainingLinks = [
   { to: "/trainingstherapie", label: "Trainingstherapie" },
 ] as const;
 
+// Order mirrors the order the sections appear on /analysen.
 const analysenLinks = [
   { to: "/analysen", label: "Übersicht" },
-  { to: "/analysen", hash: "leistung", label: "Leistungsanalyse" },
-  { to: "/analysen", hash: "stoffwechsel", label: "Stoffwechselanalyse" },
   { to: "/analysen", hash: "fms", label: "Bewegungsanalyse" },
+  { to: "/analysen", hash: "stoffwechsel", label: "Stoffwechselanalyse" },
+  { to: "/analysen", hash: "leistung", label: "Leistungsanalyse" },
+  { to: "/analysen", hash: "physio", label: "Physioanalyse" },
+  { to: "/analysen", hash: "coaching", label: "Gesundheitscoaching" },
 ] as const;
-
-
 
 function useActiveMatcher() {
   const { pathname, hash } = useRouterState({ select: (s) => s.location });
@@ -73,7 +72,6 @@ function Dropdown({
               {i.label}
             </Link>
           ))}
-
         </div>
       </div>
     </div>
@@ -91,10 +89,8 @@ function MobileGroup({
 }) {
   const isActive = useActiveMatcher();
   return (
-    <div className="border-t border-foreground/10 pt-4">
-      <div className="text-[11px] uppercase tracking-[0.22em] text-primary mb-3">
-        {label}
-      </div>
+    <div>
+      <div className="text-[11px] uppercase tracking-[0.22em] text-primary mb-3">{label}</div>
       <ul className="space-y-1">
         {items.map((i) => (
           <li key={i.to + (i.hash ?? "") + i.label}>
@@ -119,11 +115,38 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
+  // Lock the page behind the overlay so iOS Safari scrolls the menu itself
+  // rather than the document underneath it.
+  useEffect(() => {
+    if (!open) return;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = overflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-foreground/10">
       <div className="jh-container px-6 lg:px-10 py-3 flex justify-between items-center gap-4">
-        <Link to="/" className="flex items-center shrink-0" aria-label="JuklHealth Startseite" onClick={close}>
-          <img src={logoBlack} alt="JuklHealth" className="h-12 lg:h-14 w-auto" />
+        <Link
+          to="/"
+          className="flex items-center shrink-0"
+          aria-label="JuklHealth Startseite"
+          onClick={close}
+        >
+          <img
+            src={logoBlack}
+            alt="JuklHealth"
+            width={640}
+            height={368}
+            className="h-12 lg:h-14 w-auto"
+          />
         </Link>
         <div className="hidden lg:flex gap-7 text-sm font-semibold items-center">
           <Dropdown label="Clubs" items={clubLinks} />
@@ -134,9 +157,7 @@ export function SiteNav() {
               key={l.to}
               to={l.to}
               className="hover:text-primary uppercase"
-              activeProps={{
-                className: "text-primary",
-              }}
+              activeProps={{ className: "text-primary" }}
               activeOptions={{ exact: true }}
             >
               {l.label}
@@ -144,9 +165,10 @@ export function SiteNav() {
           ))}
         </div>
         <div className="flex items-center gap-2 shrink-0">
+          {/* Desktop only: below lg the same CTA sits inside the menu overlay. */}
           <Link
             to="/kontakt"
-            className="hidden sm:inline-block bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
+            className="hidden lg:inline-block bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
             onClick={close}
           >
             Jetzt kontaktieren
@@ -164,37 +186,74 @@ export function SiteNav() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-foreground/10 bg-background max-h-[calc(100vh-72px)] overflow-y-auto">
-          <div className="px-6 py-6 space-y-4">
-            <MobileGroup label="Clubs" items={clubLinks} onNavigate={close} />
-            <MobileGroup label="Training / Physio" items={trainingLinks} onNavigate={close} />
-            <MobileGroup label="Analysen" items={analysenLinks} onNavigate={close} />
-
-            <div className="border-t border-foreground/10 pt-4">
-              <ul className="space-y-1">
-                {mainLinks.map((l) => (
-                  <li key={l.to}>
-                    <Link
-                      to={l.to}
-                      onClick={close}
-                      className="block py-2 text-sm font-semibold hover:text-primary"
-                      activeProps={{ className: "text-primary" }}
-                      activeOptions={{ exact: true }}
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
+        <div
+          id="mobile-menu"
+          className="lg:hidden fixed inset-0 z-50 bg-background flex flex-col"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Hauptmenü"
+        >
+          <div className="flex items-center justify-between px-6 py-3 border-b border-foreground/10 shrink-0">
             <Link
-              to="/kontakt"
+              to="/"
+              className="flex items-center"
+              aria-label="JuklHealth Startseite"
               onClick={close}
-              className="block text-center bg-primary text-primary-foreground px-5 py-3 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
             >
-              Jetzt kontaktieren
+              <img
+                src={logoBlack}
+                alt="JuklHealth"
+                width={640}
+                height={368}
+                className="h-12 w-auto"
+              />
             </Link>
+            <button
+              type="button"
+              className="p-2 -mr-2 text-foreground"
+              aria-label="Menü schließen"
+              onClick={close}
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto overscroll-contain px-6 py-6">
+            <div className="space-y-6">
+              <MobileGroup label="Clubs" items={clubLinks} onNavigate={close} />
+              <div className="border-t border-foreground/10 pt-6">
+                <MobileGroup label="Training / Physio" items={trainingLinks} onNavigate={close} />
+              </div>
+              <div className="border-t border-foreground/10 pt-6">
+                <MobileGroup label="Analysen" items={analysenLinks} onNavigate={close} />
+              </div>
+
+              <div className="border-t border-foreground/10 pt-6">
+                <ul className="space-y-1">
+                  {mainLinks.map((l) => (
+                    <li key={l.to}>
+                      <Link
+                        to={l.to}
+                        onClick={close}
+                        className="block py-2 text-sm font-semibold hover:text-primary"
+                        activeProps={{ className: "text-primary" }}
+                        activeOptions={{ exact: true }}
+                      >
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Link
+                to="/kontakt"
+                onClick={close}
+                className="block text-center bg-primary text-primary-foreground px-5 py-3 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
+              >
+                Jetzt kontaktieren
+              </Link>
+            </div>
           </div>
         </div>
       )}
