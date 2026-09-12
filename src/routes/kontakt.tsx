@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { PageShell, PageHero, Section } from "@/components/site/content";
+import { submitContact } from "@/lib/contact.functions";
+import { MapEmbed } from "@/components/site/MapEmbed";
 
 const teamBanner = "/img/team-banner-1824.webp";
 
@@ -22,49 +24,46 @@ export const Route = createFileRoute("/kontakt")({
       },
       { property: "og:title", content: "Kontakt – JuklHealth" },
       { property: "og:description", content: "Julian Kleinheinz · Dornbirn." },
+      { property: "og:url", content: "https://juklhealth.com/kontakt" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/kontakt" }],
   }),
   component: Kontakt,
 });
 
 function Kontakt() {
   const search = useSearch({ from: "/kontakt" }) as Search;
-  const [state, setState] = useState<"idle" | "sent">("idle");
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const name = String(fd.get("name") || "");
-    const email = String(fd.get("email") || "");
-    const phone = String(fd.get("phone") || "");
-    const topic = String(fd.get("topic") || "");
-    const message = String(fd.get("message") || "");
-    const trainer = search.trainer ?? "";
 
-    const subject = trainer
-      ? `Termin-Anfrage für ${trainer}`
-      : topic
-        ? `Anfrage: ${topic}`
-        : "Anfrage über juklhealth.com";
-
-    const bodyLines = [
-      `Name: ${name}`,
-      `E-Mail: ${email}`,
-      phone ? `Telefon: ${phone}` : null,
-      topic ? `Anliegen: ${topic}` : null,
-      trainer ? `Trainer: ${trainer}` : null,
-      "",
-      "Nachricht:",
-      message,
-    ].filter(Boolean) as string[];
-
-    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-
-    window.location.href = mailto;
-    setState("sent");
+    setState("sending");
+    setError("");
+    try {
+      await submitContact({
+        data: {
+          name: String(fd.get("name") || ""),
+          email: String(fd.get("email") || ""),
+          phone: String(fd.get("phone") || ""),
+          topic: String(fd.get("topic") || ""),
+          message: String(fd.get("message") || ""),
+          trainer: search.trainer ?? "",
+        },
+      });
+      form.reset();
+      setState("sent");
+    } catch (err) {
+      setError(
+        err instanceof Error && err.message
+          ? err.message
+          : "Deine Nachricht konnte nicht übermittelt werden.",
+      );
+      setState("error");
+    }
   }
 
   return (
@@ -79,6 +78,7 @@ function Kontakt() {
         }
         image={teamBanner}
         imageAlt="Team von JuklHealth"
+        imageFit="contain"
       />
 
       <Section eyebrow="KONTAKT" title="So erreichst du uns">
@@ -128,15 +128,7 @@ function Kontakt() {
               </a>
             </div>
 
-            <div className="aspect-video w-full border border-foreground/10 overflow-hidden">
-              <iframe
-                title="JuklHealth Location Bildgasse 10, Dornbirn"
-                src="https://www.google.com/maps?q=Bildgasse+10,+6850+Dornbirn,+Austria&output=embed"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full border-0"
-              />
-            </div>
+            <MapEmbed />
           </div>
 
           <form
@@ -167,14 +159,17 @@ function Kontakt() {
                 className="w-full border border-foreground/20 bg-transparent px-4 py-3 focus:outline-none focus:border-primary"
               />
             </Field>
-            <Field id="topic" label="Anliegen">
+            <Field id="topic" label="Anliegen" required>
               <select
                 id="topic"
                 name="topic"
+                required
                 defaultValue=""
                 className="w-full border border-foreground/20 bg-background px-4 py-3 focus:outline-none focus:border-primary"
               >
-                <option value="">Bitte auswählen …</option>
+                <option value="" disabled>
+                  Bitte auswählen …
+                </option>
                 <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
                 <option value="Personal Training">Personal Training</option>
                 <option value="Athletiktraining">Athletiktraining</option>
@@ -207,14 +202,21 @@ function Kontakt() {
 
             <button
               type="submit"
-              className="w-full bg-primary text-primary-foreground py-4 font-display uppercase hover:bg-primary-hover"
+              disabled={state === "sending"}
+              className="w-full bg-primary text-primary-foreground py-4 font-display uppercase hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Nachricht senden
+              {state === "sending" ? "Wird gesendet …" : "Nachricht senden"}
             </button>
 
             {state === "sent" ? (
-              <p className="text-sm text-primary font-semibold">
-                Dein E-Mail-Programm wurde geöffnet. Falls nicht, schreib uns direkt an{" "}
+              <p role="status" className="text-sm text-primary font-semibold">
+                Danke! Deine Nachricht ist bei uns eingegangen — wir melden uns zeitnah.
+              </p>
+            ) : null}
+
+            {state === "error" ? (
+              <p role="alert" className="text-sm text-destructive font-semibold">
+                {error} Du erreichst uns auch direkt unter{" "}
                 <a href={`mailto:${CONTACT_EMAIL}`} className="underline">
                   {CONTACT_EMAIL}
                 </a>
@@ -224,7 +226,12 @@ function Kontakt() {
 
             <p className="text-[11px] text-muted-foreground">
               Mit dem Absenden akzeptierst du unsere{" "}
-              <a href="/datenschutz" className="underline hover:text-primary">
+              <a
+                href="/datenschutz"
+                target="_blank"
+                rel="noreferrer"
+                className="underline hover:text-primary"
+              >
                 Datenschutzerklärung
               </a>
               .

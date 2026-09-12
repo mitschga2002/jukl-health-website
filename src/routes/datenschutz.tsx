@@ -13,7 +13,9 @@ export const Route = createFileRoute("/datenschutz")({
       { property: "og:title", content: "Datenschutz – JuklHealth" },
       { property: "og:description", content: "Datenschutzerklärung gemäß DSGVO." },
       { name: "robots", content: "index, follow" },
+      { property: "og:url", content: "https://juklhealth.com/datenschutz" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/datenschutz" }],
   }),
   component: Datenschutz,
 });
@@ -31,8 +33,8 @@ function Datenschutz() {
         <p>
           Wir haben diese Datenschutzerklärung verfasst, um Ihnen gemäß den Vorgaben der
           Datenschutz-Grundverordnung (EU) 2016/679 und anwendbaren nationalen Gesetzen zu erklären,
-          welche personenbezogenen Daten wir als Verantwortliche verarbeiten, zukünftig verarbeiten werden
-          und welche rechtmäßigen Möglichkeiten Sie haben.
+          welche personenbezogenen Daten wir als Verantwortliche verarbeiten, zukünftig verarbeiten
+          werden und welche rechtmäßigen Möglichkeiten Sie haben.
         </p>
       </Section>
 
@@ -52,15 +54,18 @@ function Datenschutz() {
       </Section>
 
       <Section eyebrow="RECHTSGRUNDLAGEN" title="Rechtsgrundlagen der Verarbeitung">
-        <p>Wir verarbeiten Ihre Daten nur, wenn mindestens eine der folgenden Bedingungen zutrifft:</p>
+        <p>
+          Wir verarbeiten Ihre Daten nur, wenn mindestens eine der folgenden Bedingungen zutrifft:
+        </p>
         <ul className="list-disc pl-6 space-y-2">
           <li>
-            <strong>Einwilligung</strong> (Art. 6 Abs. 1 lit. a DSGVO) – Sie haben uns Ihre Einwilligung
-            gegeben, Daten zu einem bestimmten Zweck zu verarbeiten (z.&nbsp;B. Kontaktformular).
+            <strong>Einwilligung</strong> (Art. 6 Abs. 1 lit. a DSGVO) – Sie haben uns Ihre
+            Einwilligung gegeben, Daten zu einem bestimmten Zweck zu verarbeiten (z.&nbsp;B.
+            Kontaktformular).
           </li>
           <li>
-            <strong>Vertrag</strong> (Art. 6 Abs. 1 lit. b DSGVO) – zur Erfüllung eines Vertrags oder
-            vorvertraglicher Verpflichtungen.
+            <strong>Vertrag</strong> (Art. 6 Abs. 1 lit. b DSGVO) – zur Erfüllung eines Vertrags
+            oder vorvertraglicher Verpflichtungen.
           </li>
           <li>
             <strong>Rechtliche Verpflichtung</strong> (Art. 6 Abs. 1 lit. c DSGVO) – z.&nbsp;B.
@@ -76,9 +81,9 @@ function Datenschutz() {
       <Section eyebrow="SPEICHERDAUER" title="Speicherdauer">
         <p>
           Wir speichern personenbezogene Daten nur so lange, wie es für die Bereitstellung unserer
-          Dienstleistungen unbedingt notwendig ist. Sollten Sie die Löschung Ihrer Daten wünschen oder die
-          Einwilligung widerrufen, werden die Daten so rasch wie möglich gelöscht – soweit keine
-          gesetzliche Aufbewahrungspflicht besteht.
+          Dienstleistungen unbedingt notwendig ist. Sollten Sie die Löschung Ihrer Daten wünschen
+          oder die Einwilligung widerrufen, werden die Daten so rasch wie möglich gelöscht – soweit
+          keine gesetzliche Aufbewahrungspflicht besteht.
         </p>
       </Section>
 
@@ -107,32 +112,42 @@ function Datenschutz() {
 
       <Section eyebrow="SICHERHEIT" title="TLS-Verschlüsselung">
         <p>
-          Wir verwenden HTTPS, um Daten abhörsicher im Internet zu übertragen. Die Verwendung erkennen Sie
-          am Schlosssymbol in Ihrem Browser sowie am Schema <code>https://</code>.
+          Wir verwenden HTTPS, um Daten abhörsicher im Internet zu übertragen. Die Verwendung
+          erkennen Sie am Schlosssymbol in Ihrem Browser sowie am Schema <code>https://</code>.
         </p>
       </Section>
 
       <Section eyebrow="KOMMUNIKATION" title="Kontaktformular & E-Mail">
         <p>
-          Wenn Sie uns per Kontaktformular oder E-Mail kontaktieren, werden die von Ihnen übermittelten
-          Daten (Name, E-Mail-Adresse, ggf. Telefonnummer und Ihre Nachricht) auf unserem Server
-          gespeichert und zur Bearbeitung Ihrer Anfrage verwendet. Die Daten werden gelöscht, sobald der
-          Geschäftsfall beendet wurde und gesetzliche Aufbewahrungsfristen abgelaufen sind.
+          Wenn Sie uns per Kontaktformular oder E-Mail kontaktieren, werden die von Ihnen
+          übermittelten Daten (Name, E-Mail-Adresse, ggf. Telefonnummer und Ihre Nachricht) auf
+          unserem Server gespeichert und zur Bearbeitung Ihrer Anfrage verwendet. Die Daten werden
+          gelöscht, sobald der Geschäftsfall beendet wurde und gesetzliche Aufbewahrungsfristen
+          abgelaufen sind.
         </p>
       </Section>
 
       <Section eyebrow="COOKIES" title="Cookies">
         <p>
-          Diese Website verwendet nur technisch notwendige Cookies für den Betrieb der Seite. Es werden
-          keine Tracking- oder Marketing-Cookies ohne Ihre ausdrückliche Einwilligung gesetzt.
+          Diese Website verwendet nur technisch notwendige Cookies für den Betrieb der Seite. Es
+          werden keine Tracking- oder Marketing-Cookies ohne Ihre ausdrückliche Einwilligung
+          gesetzt.
         </p>
       </Section>
 
       <Section eyebrow="EINGEBETTETE INHALTE" title="Google Maps">
         <p>
-          Auf unserer Kontaktseite ist eine Google-Maps-Karte eingebettet. Beim Aufruf werden Daten
-          (u.&nbsp;a. IP-Adresse) an Google übertragen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
-          (berechtigtes Interesse an einer nutzerfreundlichen Standortdarstellung).
+          Auf unserer Kontaktseite kann eine Google-Maps-Karte angezeigt werden. Die Karte wird
+          nicht automatisch geladen: Sie sehen zunächst nur einen Platzhalter mit einem Hinweis.
+          Erst wenn Sie auf „Karte laden“ klicken, wird die Karte von Google nachgeladen.
+        </p>
+        <p>
+          Bis zu diesem Klick werden keine Daten an Google übertragen. Mit dem Klick werden Daten
+          (u.&nbsp;a. Ihre IP-Adresse) an Google übertragen; Anbieter ist Google Ireland Limited,
+          Gordon House, Barrow Street, Dublin 4, Irland. Rechtsgrundlage ist Ihre Einwilligung nach
+          Art. 6 Abs. 1 lit. a DSGVO, die Sie durch das Anklicken der Schaltfläche erteilen. Sie
+          können diese Einwilligung jederzeit widerrufen, indem Sie die Seite neu laden, ohne die
+          Karte zu aktivieren.
         </p>
       </Section>
     </PageShell>
