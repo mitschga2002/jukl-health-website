@@ -11,7 +11,7 @@ export function PlaceholderPage({ eyebrow, title, description }: Props) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <SiteNav />
-      <main className="flex-1 px-6 lg:px-12 py-24 lg:py-40 max-w-5xl">
+      <main className="flex-1 jh-container px-6 lg:px-12 py-24 lg:py-40">
         <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
           {eyebrow}
         </span>

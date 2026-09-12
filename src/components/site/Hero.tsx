@@ -6,19 +6,17 @@ const heroAthlete = "/img/hero-athlete-1385.webp";
 export function Hero() {
   return (
     <header className="relative grid lg:grid-cols-2 min-h-[80vh] border-b border-foreground/10">
-      <div className="flex flex-col justify-center px-8 lg:px-16 py-20 order-2 lg:order-1">
+      <div className="flex flex-col justify-center min-w-0 px-8 lg:px-16 py-20 order-2 lg:order-1">
         <span className="text-xs uppercase tracking-[0.22em] text-primary mb-8">
           Ein System · Training · Physio · Analyse
         </span>
-        <h1 className="font-display text-5xl lg:text-7xl leading-[1.02] tracking-tight text-balance">
-          Wissenschaftlich fundiertes{" "}
-          <span className="text-primary">Training und Therapie.</span>
+        <h1 className="font-display text-5xl lg:text-7xl leading-[1.02] tracking-tight text-balance hyphens-auto break-words">
+          Wissenschaftlich fundiertes <span className="text-primary">Training und Therapie.</span>
         </h1>
         <p className="mt-8 max-w-lg text-lg text-muted-foreground text-pretty">
-          Das JuklHealth System verbindet klinische Physiotherapie mit
-          individuell abgestimmtem Training – in einem ruhigen, exklusiven
-          Setting in Dornbirn. Plus Trainingsmöglichkeiten 24/7, Leistungs-
-          und Bewegungsanalyse.
+          Das JuklHealth System verbindet klinische Physiotherapie mit individuell abgestimmtem
+          Training – in einem ruhigen, exklusiven Setting in Dornbirn. Plus Trainingsmöglichkeiten
+          24/7, Leistungs- und Bewegungsanalyse.
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
           <Link
@@ -36,7 +34,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative w-full h-[40vh] min-h-[240px] sm:h-[55vh] lg:h-auto lg:min-h-[560px] order-1 lg:order-2 bg-muted">
+      <div className="relative w-full min-w-0 h-[40vh] min-h-[240px] sm:h-[55vh] lg:h-auto lg:min-h-[560px] order-1 lg:order-2 bg-muted">
         <SmartImage
           src={heroAthlete}
           alt="Athlet beim Training im JuklHealth Performance Club"
@@ -44,7 +42,6 @@ export function Hero() {
           sizes="(min-width: 1024px) 50vw, 100vw"
           priority
         />
-
       </div>
     </header>
   );

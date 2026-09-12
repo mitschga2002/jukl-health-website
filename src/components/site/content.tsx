@@ -8,7 +8,7 @@ export function PageShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <SiteNav />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 jh-container">{children}</main>
       <SiteFooter />
     </div>
   );
@@ -23,6 +23,7 @@ export function PageHero({
   imageAlt,
   imagePosition = "center",
   objectPosition,
+  imageFit = "cover",
 }: {
   eyebrow: string;
   title: string;
@@ -41,6 +42,8 @@ export function PageHero({
     | "bottom-right"
     | "bottom-left";
   objectPosition?: string;
+  /** "contain" shows the whole frame - use for group shots that must not be cropped. */
+  imageFit?: "cover" | "contain";
 }) {
   const positionCls = {
     center: "object-center",
@@ -54,6 +57,26 @@ export function PageHero({
     "bottom-left": "object-left-bottom",
   }[imagePosition];
 
+  if (!image) {
+    return (
+      <section className="border-b border-foreground/10">
+        <div className="px-6 lg:px-12 py-16 lg:py-24 max-w-4xl">
+          <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
+            {eyebrow}
+          </span>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl hyphens-auto break-words tracking-tight leading-[1.05] text-balance">
+            {title}
+          </h1>
+          {intro ? (
+            <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
+              {intro}
+            </p>
+          ) : null}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="border-b border-foreground/10">
       <div className="grid w-full lg:grid-cols-2">
@@ -61,7 +84,7 @@ export function PageHero({
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
             {eyebrow}
           </span>
-          <h1 className="font-display text-5xl lg:text-7xl hyphens-auto tracking-tight leading-[1.02] text-balance">
+          <h1 className="font-display text-5xl lg:text-7xl hyphens-auto break-words tracking-tight leading-[1.02] text-balance">
             {title}
           </h1>
           {intro ? (
@@ -83,7 +106,9 @@ export function PageHero({
               alt={imageAlt ?? title}
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className={`absolute inset-0 w-full h-full object-cover ${positionCls}`}
+              className={`absolute inset-0 w-full h-full ${
+                imageFit === "contain" ? "object-contain" : "object-cover"
+              } ${positionCls}`}
               style={objectPosition ? { objectPosition } : undefined}
             />
           ) : (
@@ -280,16 +305,39 @@ export function SplitBlock({
   );
 }
 
-export function Testimonial({ quote, name, role }: { quote: string; name: string; role: string }) {
+export function Testimonial({
+  quote,
+  name,
+  role,
+  image,
+}: {
+  quote: string;
+  name: string;
+  role: string;
+  /** Photo of the person quoted. Falls back to their initial when absent. */
+  image?: string;
+}) {
   return (
     <figure className="border border-foreground/10 p-8 lg:p-10 bg-background h-full flex flex-col justify-between">
       <blockquote className="font-display text-xl lg:text-2xl leading-snug tracking-tight mb-8 text-balance">
         „{quote}“
       </blockquote>
       <figcaption className="flex items-center gap-4 border-t border-foreground/10 pt-5">
-        <div className="w-12 h-12 bg-primary text-primary-foreground grid place-items-center font-display text-lg rounded-full">
-          {name.charAt(0)}
-        </div>
+        {image ? (
+          <img
+            src={image}
+            alt={name}
+            width={48}
+            height={48}
+            loading="lazy"
+            decoding="async"
+            className="w-12 h-12 rounded-full object-cover shrink-0"
+          />
+        ) : (
+          <div className="w-12 h-12 bg-primary text-primary-foreground grid place-items-center font-display text-lg rounded-full shrink-0">
+            {name.charAt(0)}
+          </div>
+        )}
         <div>
           <div className="font-display text-sm">{name}</div>
           <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-0.5">
