@@ -172,7 +172,7 @@ function Team() {
         intro="Freude verspüren und Lebensqualität steigern. Das ist unser Antrieb, als Team aus Sportwissenschaft, Physiotherapie, Coaching und Marketing."
         image={teamBanner}
         imageAlt="Das Team von JuklHealth im Performance Club Dornbirn"
-        imageFit="contain"
+        banner
       />
 
       {members.map((m) => (

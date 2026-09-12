@@ -23,7 +23,7 @@ export function PageHero({
   imageAlt,
   imagePosition = "center",
   objectPosition,
-  imageFit = "cover",
+  banner = false,
 }: {
   eyebrow: string;
   title: string;
@@ -42,8 +42,9 @@ export function PageHero({
     | "bottom-right"
     | "bottom-left";
   objectPosition?: string;
-  /** "contain" shows the whole frame - use for group shots that must not be cropped. */
-  imageFit?: "cover" | "contain";
+  /** Full-width image band under the text instead of a side panel. Keeps the
+   *  photo's entire width visible, so wide group shots are never cut at the edges. */
+  banner?: boolean;
 }) {
   const positionCls = {
     center: "object-center",
@@ -56,6 +57,37 @@ export function PageHero({
     "bottom-right": "object-right-bottom",
     "bottom-left": "object-left-bottom",
   }[imagePosition];
+
+  if (banner && image) {
+    return (
+      <section className="border-b border-foreground/10">
+        <div className="px-6 lg:px-12 py-16 lg:py-24 max-w-4xl">
+          <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
+            {eyebrow}
+          </span>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl hyphens-auto break-words tracking-tight leading-[1.05] text-balance">
+            {title}
+          </h1>
+          {intro ? (
+            <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
+              {intro}
+            </p>
+          ) : null}
+        </div>
+        {/* 16:9 is wider than the photo, so the full width always shows and only
+            the ceiling is trimmed off the top - nobody is cut at the edges. */}
+        <div className="relative w-full aspect-video overflow-hidden bg-muted border-t border-foreground/10">
+          <SmartImage
+            src={image}
+            alt={imageAlt ?? title}
+            priority
+            sizes="100vw"
+            className="absolute inset-0 w-full h-full object-cover object-bottom"
+          />
+        </div>
+      </section>
+    );
+  }
 
   if (!image) {
     return (
@@ -106,9 +138,7 @@ export function PageHero({
               alt={imageAlt ?? title}
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className={`absolute inset-0 w-full h-full ${
-                imageFit === "contain" ? "object-contain" : "object-cover"
-              } ${positionCls}`}
+              className={`absolute inset-0 w-full h-full object-cover ${positionCls}`}
               style={objectPosition ? { objectPosition } : undefined}
             />
           ) : (

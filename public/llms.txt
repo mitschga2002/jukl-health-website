@@ -18,7 +18,6 @@ JuklHealth Performance Club ist ein Trainings- und Gesundheitsstudio in Dornbirn
 - [Physiotherapie](/physiotherapie): Klinische Physiotherapie.
 - [Trainingstherapie](/trainingstherapie): Rehabilitation durch Training.
 - [Analysen](/analysen): Diagnostik und Analysen – Bewegung, Stoffwechsel, Leistung, Physio, Gesundheitscoaching.
-- [Bioimpedanzanalyse](/bioimpedanzanalyse): Körperzusammensetzung messen.
 - [Team](/team): Unser Team aus Sportwissenschaft und Physiotherapie.
 - [Meine Person](/meine-person): Über Julian Kleinheinz, Gründer.
 - [Vorträge](/vortraege): Vorträge und Webinare.
