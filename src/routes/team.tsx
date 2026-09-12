@@ -28,7 +28,9 @@ export const Route = createFileRoute("/team")({
         property: "og:description",
         content: "Sportwissenschaft, Physiotherapie und Coaching aus einer Hand.",
       },
+      { property: "og:url", content: "https://juklhealth.com/team" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/team" }],
   }),
   component: Team,
 });
@@ -169,6 +171,8 @@ function Team() {
         title="Unser Team – Experten für Performance & Gesundheit"
         intro="Freude verspüren und Lebensqualität steigern. Das ist unser Antrieb, als Team aus Sportwissenschaft, Physiotherapie, Coaching und Marketing."
         image={teamBanner}
+        imageAlt="Das Team von JuklHealth im Performance Club Dornbirn"
+        imageFit="contain"
       />
 
       {members.map((m) => (
@@ -177,8 +181,8 @@ function Team() {
 
       <Section eyebrow="Karriere" title="Werde Teil des Teams.">
         <p>
-          Du brennst für Bewegung, Sportwissenschaft oder Physiotherapie? Schreib uns –
-          wir freuen uns über initiative Bewerbungen.
+          Du brennst für Bewegung, Sportwissenschaft oder Physiotherapie? Schreib uns – wir freuen
+          uns über initiative Bewerbungen.
         </p>
         <CTAButton to="/kontakt">Bewerben</CTAButton>
       </Section>

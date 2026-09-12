@@ -5,10 +5,7 @@ import { Hero } from "@/components/site/Hero";
 import { DisciplineTicker } from "@/components/site/DisciplineTicker";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { Credibility } from "@/components/site/Credibility";
-import {
-  PerformanceClubBlock,
-  ProfisportBlock,
-} from "@/components/site/ContentSections";
+import { PerformanceClubBlock, ProfisportBlock } from "@/components/site/ContentSections";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,7 +52,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
-      <main>
+      <main className="jh-container">
         <Hero />
         <DisciplineTicker />
         <PerformanceClubBlock />

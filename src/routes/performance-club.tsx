@@ -24,7 +24,9 @@ export const Route = createFileRoute("/performance-club")({
         property: "og:description",
         content: "Dein Zentrum für funktionelles Training in Dornbirn.",
       },
+      { property: "og:url", content: "https://juklhealth.com/performance-club" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/performance-club" }],
   }),
   component: PerformanceClub,
 });
@@ -33,7 +35,7 @@ function PerformanceClub() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="MEMBERSHIP"
+        eyebrow="PERFORMANCE CLUB"
         title="Dein Zentrum für funktionelles Training"
         intro="Performance Club Dornbirn — 140 m² Trainingsfläche, top ausgebildete Coaches, klare Trainingsstruktur."
         image={pcBanner}
@@ -41,9 +43,9 @@ function PerformanceClub() {
 
       <Section eyebrow="DORNBIRN" title="Performance Club Dornbirn">
         <p>
-          Im Performance Club trainierst du in einer modernen Umgebung mit
-          persönlicher Betreuung. Unser Angebot reicht von Personal Training über
-          Gruppen- und Athletiktraining bis hin zu betreuten Kleingruppenkursen.
+          Im Performance Club trainierst du in einer modernen Umgebung mit persönlicher Betreuung.
+          Unser Angebot reicht von Personal Training über Gruppen- und Athletiktraining bis hin zu
+          betreuten Kleingruppenkursen.
         </p>
         <h3 className="font-display uppercase text-xl mt-10 mb-4">Allgemeine Informationen</h3>
         <BulletList
@@ -55,7 +57,7 @@ function PerformanceClub() {
             "Training nur mit Terminvereinbarung",
           ]}
         />
-        <CTAButton to="/kontakt">Zu den Kursen</CTAButton>
+        <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
       </Section>
 
       <Section eyebrow="KUNDENSTIMMEN" title="Was unsere Members sagen">

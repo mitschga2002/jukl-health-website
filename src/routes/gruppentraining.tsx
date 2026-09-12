@@ -9,11 +9,12 @@ import {
 } from "@/components/site/content";
 
 const gruppentraining = "/img/gruppentraining-1032.webp";
+const athletiktraining = "/img/athletiktraining-1459.webp";
 
 export const Route = createFileRoute("/gruppentraining")({
   head: () => ({
     meta: [
-      { title: "Gruppentraining & Athletiktraining — JuklHealth" },
+      { title: "Gruppentraining — JuklHealth" },
       {
         name: "description",
         content:
@@ -21,7 +22,9 @@ export const Route = createFileRoute("/gruppentraining")({
       },
       { property: "og:title", content: "Gruppentraining — JuklHealth" },
       { property: "og:description", content: "Training in der Gruppe — Energie, Spaß, Erfolg." },
+      { property: "og:url", content: "https://juklhealth.com/gruppentraining" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/gruppentraining" }],
   }),
   component: Gruppentraining,
 });
@@ -33,6 +36,8 @@ function Gruppentraining() {
         eyebrow="GROUP"
         title="Gruppentraining"
         intro="Gemeinsam erreichen wir deine sportlichen Ziele – mit individuell abgestimmtem Gruppentraining."
+        image={gruppentraining}
+        imageAlt="Gruppentraining in kleiner Gruppe bei JuklHealth"
       />
 
       <Section eyebrow="ABLAUF" title="So läuft ein Gruppentraining">
@@ -56,7 +61,7 @@ function Gruppentraining() {
         eyebrow="FORMATE"
         title="Sport- & Firmen­gruppen"
         imageLabel="Athletiktraining · Mannschaft"
-        image={gruppentraining}
+        image={athletiktraining}
       >
         <p>
           Wir betreuen Vereine, Mannschaften und Firmenteams. Das Training eignet sich ideal als

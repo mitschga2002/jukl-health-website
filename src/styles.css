@@ -151,6 +151,8 @@
     font-weight: 600;
     letter-spacing: -0.02em;
     text-transform: none;
+    /* Long German compounds must not force the page wider than the viewport. */
+    overflow-wrap: break-word;
   }
 
   .font-mono {

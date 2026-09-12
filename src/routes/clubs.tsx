@@ -1,10 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  CTAButton,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, CTAButton } from "@/components/site/content";
+
+const clubsBanner = "/img/strength-club-1824.webp";
 
 export const Route = createFileRoute("/clubs")({
   head: () => ({
@@ -17,7 +14,9 @@ export const Route = createFileRoute("/clubs")({
       },
       { property: "og:title", content: "Clubs — JuklHealth" },
       { property: "og:description", content: "Unsere Performance Clubs in Dornbirn & Widnau." },
+      { property: "og:url", content: "https://juklhealth.com/clubs" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/clubs" }],
   }),
   component: Clubs,
 });
@@ -68,6 +67,8 @@ function Clubs() {
         eyebrow="STANDORTE"
         title="Drei Clubs. Ein System."
         intro="Performance, Strength und Training Club — entwickelt, um dich auf das nächste Level zu bringen."
+        image={clubsBanner}
+        imageAlt="Trainingsfläche im JuklHealth Strength Club Dornbirn"
       />
 
       <Section eyebrow="ÜBERSICHT" title="Wähle deinen Club">
@@ -76,18 +77,16 @@ function Clubs() {
             <Link
               key={c.name}
               to={c.to}
-              className="bg-background p-8 flex flex-col hover:bg-foreground hover:text-background transition-colors group"
+              className="bg-background p-8 flex flex-col hover:bg-muted group"
             >
-              <div className="font-mono text-[10px] text-primary mb-4">
-                [ 0{i + 1} ]
-              </div>
-              <h3 className="font-display text-2xl uppercase mb-2 leading-tight">
+              <div className="font-mono text-[10px] text-primary mb-4">[ 0{i + 1} ]</div>
+              <h3 className="font-display text-2xl uppercase mb-2 leading-tight group-hover:text-primary">
                 {c.name}
               </h3>
               <div className="font-mono text-[10px] uppercase tracking-widest text-primary mb-4">
                 {c.area}
               </div>
-              <p className="text-sm mb-6 group-hover:text-background/80">{c.address}</p>
+              <p className="text-sm text-muted-foreground mb-6">{c.address}</p>
               <ul className="space-y-1 text-sm mb-6">
                 {c.points.map((p) => (
                   <li key={p} className="flex gap-2">
