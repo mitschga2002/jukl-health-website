@@ -8,7 +8,7 @@ export function PageShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <SiteNav />
-      <main className="flex-1 jh-container">{children}</main>
+      <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>
   );
@@ -61,29 +61,31 @@ export function PageHero({
   if (banner && image) {
     return (
       <section className="border-b border-foreground/10">
-        <div className="px-6 lg:px-12 py-16 lg:py-24 max-w-4xl">
-          <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
-            {eyebrow}
-          </span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl hyphens-auto break-words tracking-tight leading-[1.05] text-balance">
-            {title}
-          </h1>
-          {intro ? (
-            <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
-              {intro}
-            </p>
-          ) : null}
-        </div>
-        {/* 16:9 is wider than the photo, so the full width always shows and only
-            the ceiling is trimmed off the top - nobody is cut at the edges. */}
-        <div className="relative w-full aspect-video overflow-hidden bg-muted border-t border-foreground/10">
-          <SmartImage
-            src={image}
-            alt={imageAlt ?? title}
-            priority
-            sizes="100vw"
-            className="absolute inset-0 w-full h-full object-cover object-bottom"
-          />
+        <div className="jh-container">
+          <div className="px-6 lg:px-12 py-16 lg:py-24 max-w-4xl">
+            <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
+              {eyebrow}
+            </span>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl hyphens-auto break-words tracking-tight leading-[1.05] text-balance">
+              {title}
+            </h1>
+            {intro ? (
+              <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
+                {intro}
+              </p>
+            ) : null}
+          </div>
+          {/* 16:9 is wider than the photo, so the full width always shows and only
+              the ceiling is trimmed off the top - nobody is cut at the edges. */}
+          <div className="relative w-full aspect-video overflow-hidden bg-muted border-t border-foreground/10">
+            <SmartImage
+              src={image}
+              alt={imageAlt ?? title}
+              priority
+              sizes="100vw"
+              className="absolute inset-0 w-full h-full object-cover object-bottom"
+            />
+          </div>
         </div>
       </section>
     );
@@ -92,18 +94,20 @@ export function PageHero({
   if (!image) {
     return (
       <section className="border-b border-foreground/10">
-        <div className="px-6 lg:px-12 py-16 lg:py-24 max-w-4xl">
-          <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
-            {eyebrow}
-          </span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl hyphens-auto break-words tracking-tight leading-[1.05] text-balance">
-            {title}
-          </h1>
-          {intro ? (
-            <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
-              {intro}
-            </p>
-          ) : null}
+        <div className="jh-container px-6 lg:px-12 py-16 lg:py-24">
+          <div className="max-w-4xl">
+            <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
+              {eyebrow}
+            </span>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl hyphens-auto break-words tracking-tight leading-[1.05] text-balance">
+              {title}
+            </h1>
+            {intro ? (
+              <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
+                {intro}
+              </p>
+            ) : null}
+          </div>
         </div>
       </section>
     );
@@ -111,7 +115,7 @@ export function PageHero({
 
   return (
     <section className="border-b border-foreground/10">
-      <div className="grid w-full lg:grid-cols-2">
+      <div className="jh-container grid w-full lg:grid-cols-2">
         <div className="px-6 lg:px-12 py-16 lg:py-24 flex flex-col justify-center">
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
             {eyebrow}
@@ -301,7 +305,7 @@ export function SplitBlock({
   }
   return (
     <section className="border-b border-foreground/10">
-      <div className="grid w-full lg:grid-cols-2 gap-0">
+      <div className="jh-container grid w-full lg:grid-cols-2 gap-0">
         <div
           className={`px-6 lg:px-12 py-16 lg:py-24 flex flex-col justify-center ${
             reverse ? "lg:order-2" : ""

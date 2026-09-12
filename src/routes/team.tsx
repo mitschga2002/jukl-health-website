@@ -95,7 +95,7 @@ function MemberBlock({ m }: { m: Member }) {
   if (!m.image) {
     return (
       <section className="border-b border-foreground/10">
-        <div className="px-6 lg:px-12 py-16 lg:py-24 flex flex-col items-center text-center">
+        <div className="jh-container px-6 lg:px-12 py-16 lg:py-24 flex flex-col items-center text-center">
           <h2 className="font-display text-3xl lg:text-5xl tracking-tight leading-[1.05] mb-3">
             {m.name}
           </h2>
@@ -125,38 +125,40 @@ function MemberBlock({ m }: { m: Member }) {
     );
   }
   return (
-    <section className="grid lg:grid-cols-2 border-b border-foreground/10">
-      <div className={m.reverse ? "lg:order-2" : ""}>
-        <ImagePlaceholder label={m.name} ratio="square" className="h-full" image={m.image} />
-      </div>
-      <div
-        className={`px-6 lg:px-12 py-16 lg:py-24 flex flex-col justify-center ${
-          m.reverse ? "lg:order-1" : ""
-        }`}
-      >
-        <h2 className="font-display text-3xl lg:text-5xl tracking-tight leading-[1.05] mb-3">
-          {m.name}
-        </h2>
-        <p className="text-xs uppercase tracking-[0.22em] text-primary mb-6">{m.role}</p>
-        <p className="text-base lg:text-lg leading-relaxed text-muted-foreground max-w-xl">
-          „{m.quote}"
-        </p>
-        <div className="flex gap-3 flex-wrap pt-2">
-          <Link
-            to="/kontakt"
-            search={{ trainer: m.name }}
-            className="inline-block mt-8 bg-primary text-primary-foreground px-8 py-4 font-display text-sm hover:bg-primary-hover"
-          >
-            Termin vereinbaren
-          </Link>
-          {m.learnMore ? (
-            <a
-              href={m.learnMore}
-              className="inline-block mt-8 border border-foreground px-8 py-4 font-display text-sm hover:bg-foreground hover:text-background"
+    <section className="border-b border-foreground/10">
+      <div className="jh-container grid lg:grid-cols-2">
+        <div className={m.reverse ? "lg:order-2" : ""}>
+          <ImagePlaceholder label={m.name} ratio="square" className="h-full" image={m.image} />
+        </div>
+        <div
+          className={`px-6 lg:px-12 py-16 lg:py-24 flex flex-col justify-center ${
+            m.reverse ? "lg:order-1" : ""
+          }`}
+        >
+          <h2 className="font-display text-3xl lg:text-5xl tracking-tight leading-[1.05] mb-3">
+            {m.name}
+          </h2>
+          <p className="text-xs uppercase tracking-[0.22em] text-primary mb-6">{m.role}</p>
+          <p className="text-base lg:text-lg leading-relaxed text-muted-foreground max-w-xl">
+            „{m.quote}"
+          </p>
+          <div className="flex gap-3 flex-wrap pt-2">
+            <Link
+              to="/kontakt"
+              search={{ trainer: m.name }}
+              className="inline-block mt-8 bg-primary text-primary-foreground px-8 py-4 font-display text-sm hover:bg-primary-hover"
             >
-              Mehr erfahren
-            </a>
-          ) : null}
+              Termin vereinbaren
+            </Link>
+            {m.learnMore ? (
+              <a
+                href={m.learnMore}
+                className="inline-block mt-8 border border-foreground px-8 py-4 font-display text-sm hover:bg-foreground hover:text-background"
+              >
+                Mehr erfahren
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     </section>
