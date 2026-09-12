@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./assets/fonts/fonts.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -133,7 +134,11 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "Hind", system-ui, -apple-system, sans-serif;
+    font-family:
+      "Hind",
+      system-ui,
+      -apple-system,
+      sans-serif;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.55;
@@ -163,13 +168,23 @@
 }
 
 @keyframes jh-slide-up {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes jh-ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-slide-up {
@@ -181,7 +196,8 @@
 }
 
 /* Smoother hover transitions site-wide */
-a, button {
+a,
+button {
   transition-property: color, background-color, border-color, opacity, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 250ms;

@@ -31,9 +31,7 @@ const LOCAL_BUSINESS_JSONLD = {
     longitude: 9.7417,
   },
   areaServed: ["Dornbirn", "Vorarlberg", "Rheintal", "Widnau"],
-  sameAs: [
-    "https://www.instagram.com/juklhealth_clubs/",
-  ],
+  sameAs: ["https://www.instagram.com/juklhealth_clubs/"],
 };
 
 function NotFoundComponent() {
@@ -122,12 +120,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Hind:wght@300;400;500;600&display=swap",
-      },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", href: "/favicon-96x96.png", sizes: "96x96" },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
