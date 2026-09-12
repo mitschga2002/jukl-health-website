@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero, Section, CTAButton } from "@/components/site/content";
 
-const clubsBanner = "/img/strength-club-1824.webp";
-
 export const Route = createFileRoute("/clubs")({
   head: () => ({
     meta: [
@@ -67,8 +65,6 @@ function Clubs() {
         eyebrow="STANDORTE"
         title="Drei Clubs. Ein System."
         intro="Performance, Strength und Training Club — entwickelt, um dich auf das nächste Level zu bringen."
-        image={clubsBanner}
-        imageAlt="Trainingsfläche im JuklHealth Strength Club Dornbirn"
       />
 
       <Section eyebrow="ÜBERSICHT" title="Wähle deinen Club">

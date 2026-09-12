@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero, Section, BulletList } from "@/components/site/content";
 
-const trainingBanner = "/img/training-banner-1588.webp";
-
 export const Route = createFileRoute("/training-physio")({
   head: () => ({
     meta: [
@@ -64,8 +62,6 @@ function TrainingPhysio() {
         eyebrow="LEISTUNGEN"
         title="Training & Physio"
         intro="Von der Diagnose bis zur Performance: ein durchgängiges System aus Trainingswissenschaft und klinischer Physiotherapie."
-        image={trainingBanner}
-        imageAlt="Training und Physiotherapie bei JuklHealth in Dornbirn"
       />
 
       <Section eyebrow="ÜBERSICHT" title="Alle Trainingsformate">

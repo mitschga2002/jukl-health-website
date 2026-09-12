@@ -20,21 +20,16 @@ import { Route as GruppentrainingRouteImport } from './routes/gruppentraining'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as MeinePersonRouteImport } from './routes/meine-person'
-import { Route as MikronaehrstoffanalyseRouteImport } from './routes/mikronaehrstoffanalyse'
 import { Route as PerformanceClubRouteImport } from './routes/performance-club'
 import { Route as PersonaltrainingRouteImport } from './routes/personaltraining'
 import { Route as PhysiotherapieRouteImport } from './routes/physiotherapie'
-import { Route as ShopRouteImport } from './routes/shop'
 import { Route as StartRouteImport } from './routes/start'
 import { Route as StrengthClubRouteImport } from './routes/strength-club'
 import { Route as TeamRouteImport } from './routes/team'
-import { Route as TrainingRouteImport } from './routes/training'
 import { Route as TrainingClubWidnauRouteImport } from './routes/training-club-widnau'
 import { Route as TrainingPhysioRouteImport } from './routes/training-physio'
 import { Route as TrainingstherapieRouteImport } from './routes/trainingstherapie'
 import { Route as VortraegeRouteImport } from './routes/vortraege'
-import { Route as EventDetailsSlugRouteImport } from './routes/event-details.$slug'
-import { Route as ProductPageSlugRouteImport } from './routes/product-page.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -91,11 +86,6 @@ const MeinePersonRoute = MeinePersonRouteImport.update({
   path: '/meine-person',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MikronaehrstoffanalyseRoute = MikronaehrstoffanalyseRouteImport.update({
-  id: '/mikronaehrstoffanalyse',
-  path: '/mikronaehrstoffanalyse',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PerformanceClubRoute = PerformanceClubRouteImport.update({
   id: '/performance-club',
   path: '/performance-club',
@@ -111,11 +101,6 @@ const PhysiotherapieRoute = PhysiotherapieRouteImport.update({
   path: '/physiotherapie',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ShopRoute = ShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const StartRoute = StartRouteImport.update({
   id: '/start',
   path: '/start',
@@ -129,11 +114,6 @@ const StrengthClubRoute = StrengthClubRouteImport.update({
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TrainingRoute = TrainingRouteImport.update({
-  id: '/training',
-  path: '/training',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrainingClubWidnauRoute = TrainingClubWidnauRouteImport.update({
@@ -156,16 +136,6 @@ const VortraegeRoute = VortraegeRouteImport.update({
   path: '/vortraege',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventDetailsSlugRoute = EventDetailsSlugRouteImport.update({
-  id: '/event-details/$slug',
-  path: '/event-details/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProductPageSlugRoute = ProductPageSlugRouteImport.update({
-  id: '/product-page/$slug',
-  path: '/product-page/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -179,21 +149,16 @@ export interface FileRoutesByFullPath {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
-  '/mikronaehrstoffanalyse': typeof MikronaehrstoffanalyseRoute
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
-  '/shop': typeof ShopRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
   '/team': typeof TeamRoute
-  '/training': typeof TrainingRoute
   '/training-club-widnau': typeof TrainingClubWidnauRoute
   '/training-physio': typeof TrainingPhysioRoute
   '/trainingstherapie': typeof TrainingstherapieRoute
   '/vortraege': typeof VortraegeRoute
-  '/event-details/$slug': typeof EventDetailsSlugRoute
-  '/product-page/$slug': typeof ProductPageSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -207,21 +172,16 @@ export interface FileRoutesByTo {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
-  '/mikronaehrstoffanalyse': typeof MikronaehrstoffanalyseRoute
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
-  '/shop': typeof ShopRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
   '/team': typeof TeamRoute
-  '/training': typeof TrainingRoute
   '/training-club-widnau': typeof TrainingClubWidnauRoute
   '/training-physio': typeof TrainingPhysioRoute
   '/trainingstherapie': typeof TrainingstherapieRoute
   '/vortraege': typeof VortraegeRoute
-  '/event-details/$slug': typeof EventDetailsSlugRoute
-  '/product-page/$slug': typeof ProductPageSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -236,21 +196,16 @@ export interface FileRoutesById {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
-  '/mikronaehrstoffanalyse': typeof MikronaehrstoffanalyseRoute
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
-  '/shop': typeof ShopRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
   '/team': typeof TeamRoute
-  '/training': typeof TrainingRoute
   '/training-club-widnau': typeof TrainingClubWidnauRoute
   '/training-physio': typeof TrainingPhysioRoute
   '/trainingstherapie': typeof TrainingstherapieRoute
   '/vortraege': typeof VortraegeRoute
-  '/event-details/$slug': typeof EventDetailsSlugRoute
-  '/product-page/$slug': typeof ProductPageSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -266,21 +221,16 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/meine-person'
-    | '/mikronaehrstoffanalyse'
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
-    | '/shop'
     | '/start'
     | '/strength-club'
     | '/team'
-    | '/training'
     | '/training-club-widnau'
     | '/training-physio'
     | '/trainingstherapie'
     | '/vortraege'
-    | '/event-details/$slug'
-    | '/product-page/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -294,21 +244,16 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/meine-person'
-    | '/mikronaehrstoffanalyse'
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
-    | '/shop'
     | '/start'
     | '/strength-club'
     | '/team'
-    | '/training'
     | '/training-club-widnau'
     | '/training-physio'
     | '/trainingstherapie'
     | '/vortraege'
-    | '/event-details/$slug'
-    | '/product-page/$slug'
   id:
     | '__root__'
     | '/'
@@ -322,21 +267,16 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/meine-person'
-    | '/mikronaehrstoffanalyse'
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
-    | '/shop'
     | '/start'
     | '/strength-club'
     | '/team'
-    | '/training'
     | '/training-club-widnau'
     | '/training-physio'
     | '/trainingstherapie'
     | '/vortraege'
-    | '/event-details/$slug'
-    | '/product-page/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -351,21 +291,16 @@ export interface RootRouteChildren {
   ImpressumRoute: typeof ImpressumRoute
   KontaktRoute: typeof KontaktRoute
   MeinePersonRoute: typeof MeinePersonRoute
-  MikronaehrstoffanalyseRoute: typeof MikronaehrstoffanalyseRoute
   PerformanceClubRoute: typeof PerformanceClubRoute
   PersonaltrainingRoute: typeof PersonaltrainingRoute
   PhysiotherapieRoute: typeof PhysiotherapieRoute
-  ShopRoute: typeof ShopRoute
   StartRoute: typeof StartRoute
   StrengthClubRoute: typeof StrengthClubRoute
   TeamRoute: typeof TeamRoute
-  TrainingRoute: typeof TrainingRoute
   TrainingClubWidnauRoute: typeof TrainingClubWidnauRoute
   TrainingPhysioRoute: typeof TrainingPhysioRoute
   TrainingstherapieRoute: typeof TrainingstherapieRoute
   VortraegeRoute: typeof VortraegeRoute
-  EventDetailsSlugRoute: typeof EventDetailsSlugRoute
-  ProductPageSlugRoute: typeof ProductPageSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -447,13 +382,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MeinePersonRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/mikronaehrstoffanalyse': {
-      id: '/mikronaehrstoffanalyse'
-      path: '/mikronaehrstoffanalyse'
-      fullPath: '/mikronaehrstoffanalyse'
-      preLoaderRoute: typeof MikronaehrstoffanalyseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/performance-club': {
       id: '/performance-club'
       path: '/performance-club'
@@ -475,13 +403,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhysiotherapieRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/shop': {
-      id: '/shop'
-      path: '/shop'
-      fullPath: '/shop'
-      preLoaderRoute: typeof ShopRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/start': {
       id: '/start'
       path: '/start'
@@ -501,13 +422,6 @@ declare module '@tanstack/react-router' {
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/training': {
-      id: '/training'
-      path: '/training'
-      fullPath: '/training'
-      preLoaderRoute: typeof TrainingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/training-club-widnau': {
@@ -538,20 +452,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VortraegeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/event-details/$slug': {
-      id: '/event-details/$slug'
-      path: '/event-details/$slug'
-      fullPath: '/event-details/$slug'
-      preLoaderRoute: typeof EventDetailsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/product-page/$slug': {
-      id: '/product-page/$slug'
-      path: '/product-page/$slug'
-      fullPath: '/product-page/$slug'
-      preLoaderRoute: typeof ProductPageSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -567,21 +467,16 @@ const rootRouteChildren: RootRouteChildren = {
   ImpressumRoute: ImpressumRoute,
   KontaktRoute: KontaktRoute,
   MeinePersonRoute: MeinePersonRoute,
-  MikronaehrstoffanalyseRoute: MikronaehrstoffanalyseRoute,
   PerformanceClubRoute: PerformanceClubRoute,
   PersonaltrainingRoute: PersonaltrainingRoute,
   PhysiotherapieRoute: PhysiotherapieRoute,
-  ShopRoute: ShopRoute,
   StartRoute: StartRoute,
   StrengthClubRoute: StrengthClubRoute,
   TeamRoute: TeamRoute,
-  TrainingRoute: TrainingRoute,
   TrainingClubWidnauRoute: TrainingClubWidnauRoute,
   TrainingPhysioRoute: TrainingPhysioRoute,
   TrainingstherapieRoute: TrainingstherapieRoute,
   VortraegeRoute: VortraegeRoute,
-  EventDetailsSlugRoute: EventDetailsSlugRoute,
-  ProductPageSlugRoute: ProductPageSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
