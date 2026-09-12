@@ -22,13 +22,18 @@ export const Route = createFileRoute("/vortraege")({
       },
       { property: "og:title", content: "Vorträge — JuklHealth" },
       { property: "og:description", content: "Keynotes, Workshops & Webinare." },
+      { property: "og:url", content: "https://juklhealth.com/vortraege" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/vortraege" }],
   }),
   component: Vortraege,
 });
 
 const referenzen: { year: string; entry: string }[] = [
-  { year: "2025", entry: "Speaker Lehrer Konferenz Buchs — Kommunikation & Erfolgsfaktoren Elite-Fußball" },
+  {
+    year: "2025",
+    entry: "Speaker Lehrer Konferenz Buchs — Kommunikation & Erfolgsfaktoren Elite-Fußball",
+  },
   { year: "2025", entry: "Energiemanagement im Leistungsfußball — FC St. Gallen" },
   { year: "2025", entry: "VFV UEFA C und UEFA B Lizenz Vortragender" },
   { year: "2025", entry: "Workshopreihe Russmedia — High Performance Energieprinzipien" },

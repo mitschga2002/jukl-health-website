@@ -13,7 +13,9 @@ export const Route = createFileRoute("/impressum")({
       { property: "og:title", content: "Impressum – JuklHealth" },
       { property: "og:description", content: "Rechtliche Informationen zu Juklhealth." },
       { name: "robots", content: "index, follow" },
+      { property: "og:url", content: "https://juklhealth.com/impressum" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/impressum" }],
   }),
   component: Impressum,
 });
@@ -57,7 +59,8 @@ function Impressum() {
           </Row>
           <Row k="Aufsichtsbehörde">Bezirkshauptmannschaft Dornbirn</Row>
           <Row k="Berufsbezeichnung">
-            Erstellung von Trainingskonzepten für gesundheitsbewusste Personen · Personaltrainer · Athletiktrainer
+            Erstellung von Trainingskonzepten für gesundheitsbewusste Personen · Personaltrainer ·
+            Athletiktrainer
           </Row>
           <Row k="Verleihungsstaat">Österreich</Row>
         </dl>
@@ -65,30 +68,31 @@ function Impressum() {
 
       <Section eyebrow="HAFTUNG" title="Haftung für Inhalte">
         <p>
-          Wir entwickeln die Inhalte dieser Webseite ständig weiter und bemühen uns, korrekte und aktuelle
-          Informationen bereitzustellen. Leider können wir keine Haftung für die Korrektheit aller Inhalte
-          übernehmen, speziell für jene, die seitens Dritter bereitgestellt wurden.
+          Wir entwickeln die Inhalte dieser Webseite ständig weiter und bemühen uns, korrekte und
+          aktuelle Informationen bereitzustellen. Leider können wir keine Haftung für die
+          Korrektheit aller Inhalte übernehmen, speziell für jene, die seitens Dritter
+          bereitgestellt wurden.
         </p>
         <p>
-          Sollten Ihnen problematische oder rechtswidrige Inhalte auffallen, bitten wir Sie, uns umgehend zu
-          kontaktieren.
+          Sollten Ihnen problematische oder rechtswidrige Inhalte auffallen, bitten wir Sie, uns
+          umgehend zu kontaktieren.
         </p>
       </Section>
 
       <Section eyebrow="HAFTUNG" title="Haftung für Links">
         <p>
-          Unsere Webseite enthält Links zu anderen Webseiten, für deren Inhalt wir nicht verantwortlich sind.
-          Haftung für verlinkte Websites besteht laut § 17 ECG für uns nicht, da wir keine Kenntnis
-          rechtswidriger Tätigkeiten hatten und haben. Wenn Ihnen rechtswidrige Links auffallen, bitten wir
-          Sie, uns zu kontaktieren.
+          Unsere Webseite enthält Links zu anderen Webseiten, für deren Inhalt wir nicht
+          verantwortlich sind. Haftung für verlinkte Websites besteht laut § 17 ECG für uns nicht,
+          da wir keine Kenntnis rechtswidriger Tätigkeiten hatten und haben. Wenn Ihnen
+          rechtswidrige Links auffallen, bitten wir Sie, uns zu kontaktieren.
         </p>
       </Section>
 
       <Section eyebrow="URHEBERRECHT" title="Urheberrechtshinweis">
         <p>
-          Alle Inhalte dieser Webseite (Bilder, Fotos, Texte, Videos) unterliegen dem Urheberrecht. Falls
-          notwendig, werden wir die unerlaubte Nutzung von Teilen der Inhalte unserer Seite rechtlich
-          verfolgen.
+          Alle Inhalte dieser Webseite (Bilder, Fotos, Texte, Videos) unterliegen dem Urheberrecht.
+          Falls notwendig, werden wir die unerlaubte Nutzung von Teilen der Inhalte unserer Seite
+          rechtlich verfolgen.
         </p>
       </Section>
     </PageShell>

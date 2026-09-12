@@ -23,14 +23,19 @@ export const Route = createFileRoute("/meine-person")({
       },
       { property: "og:title", content: "Meine Person — JuklHealth" },
       { property: "og:description", content: "Julian Kleinheinz — Werdegang & Vision." },
+      { property: "og:url", content: "https://juklhealth.com/meine-person" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/meine-person" }],
   }),
   component: MeinePerson,
 });
 
 const timeline: { year: string; entry: string }[] = [
   { year: "2025", entry: "Eröffnung Strength Club und Trainingsclub Widnau" },
-  { year: "2023–2026", entry: "FC St. Gallen — Leiter Athletik Nachwuchs + Mitarbeit Super League" },
+  {
+    year: "2023–2026",
+    entry: "FC St. Gallen — Leiter Athletik Nachwuchs + Mitarbeit Super League",
+  },
   { year: "2021–2023", entry: "Athletiktrainer SCR Altach (1. Bundesliga)" },
   { year: "2021", entry: "Eröffnung des Performance Club" },
   { year: "2021", entry: "Publikation des Buches „Upgrade Yourself“ mit Dailymed" },
@@ -66,19 +71,19 @@ function MeinePerson() {
 
       <Section eyebrow="PHILOSOPHIE" title="Stetiger Lern- und Verbesserungsprozess">
         <p>
-          Ich habe den Drang jeden Tag etwas Neues zu lernen. Dadurch bin ich in einem
-          stetigen Lern- und Verbesserungsprozess und immer dabei, mein Wissen und meinen
-          Körper auf eine andere, unbekannte Art zu fordern und weiterzuentwickeln.
+          Ich habe den Drang jeden Tag etwas Neues zu lernen. Dadurch bin ich in einem stetigen
+          Lern- und Verbesserungsprozess und immer dabei, mein Wissen und meinen Körper auf eine
+          andere, unbekannte Art zu fordern und weiterzuentwickeln.
         </p>
         <p>
-          Meine Philosophie besteht darin, in jeder Disziplin etwas zu lernen und
-          Bewegungsabläufe sowie motorische Grundeigenschaften auf eine selbstentwickelte
-          Art erfolgreich zu schulen. So erreichen Büroathleten und Athleten mit meinem
-          Fachwissen, Enthusiasmus und der richtigen Motivation ihre Ziele.
+          Meine Philosophie besteht darin, in jeder Disziplin etwas zu lernen und Bewegungsabläufe
+          sowie motorische Grundeigenschaften auf eine selbstentwickelte Art erfolgreich zu schulen.
+          So erreichen Büroathleten und Athleten mit meinem Fachwissen, Enthusiasmus und der
+          richtigen Motivation ihre Ziele.
         </p>
         <p>
-          Es gibt mir sehr viel Energie, den Prozess zu begleiten und die Weiterentwicklung
-          und Fortschritte zu sehen, die uns Step by Step den Zielen näher bringen.
+          Es gibt mir sehr viel Energie, den Prozess zu begleiten und die Weiterentwicklung und
+          Fortschritte zu sehen, die uns Step by Step den Zielen näher bringen.
         </p>
         <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
       </Section>
@@ -92,7 +97,12 @@ function MeinePerson() {
         ]}
       />
 
-      <SplitBlock eyebrow="STATIONEN" title="Lebenslauf" imageLabel="Portrait · Julian Kleinheinz" image={julianPortrait}>
+      <SplitBlock
+        eyebrow="STATIONEN"
+        title="Lebenslauf"
+        imageLabel="Portrait · Julian Kleinheinz"
+        image={julianPortrait}
+      >
         <p>
           Über 15 Jahre Praxis in Spitzensport, Athletik, Physiotherapie-Schnittstelle und
           Gesundheitscoaching — auf höchstem Niveau und im Alltag von Büroathleten.

@@ -8,6 +8,7 @@ export const Route = createFileRoute("/event-details/$slug")({
     const description = `${title} – Vortrag und Webinar bei JuklHealth in Dornbirn. Termine, Inhalte und Anmeldung rund um Training, Gesundheit und Performance.`;
     return {
       meta: [
+        { name: "robots", content: "noindex, nofollow" },
         { title: `${title} – Vorträge | JuklHealth` },
         { name: "description", content: description },
         { property: "og:title", content: `${title} – JuklHealth Vortrag` },

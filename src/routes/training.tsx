@@ -18,6 +18,7 @@ const physiotherapie = "/img/physiotherapie-1460.webp";
 export const Route = createFileRoute("/training")({
   head: () => ({
     meta: [
+      { name: "robots", content: "noindex, nofollow" },
       { title: "Training — JuklHealth Performance Club" },
       {
         name: "description",
@@ -27,7 +28,8 @@ export const Route = createFileRoute("/training")({
       { property: "og:title", content: "Training — JuklHealth" },
       {
         property: "og:description",
-        content: "Alle Trainingsformate im Überblick — vom Personal Training bis zur Trainingstherapie.",
+        content:
+          "Alle Trainingsformate im Überblick — vom Personal Training bis zur Trainingstherapie.",
       },
     ],
   }),
@@ -83,8 +85,8 @@ function Training() {
         image={personalTraining}
       >
         <p>
-          Gerne widmen wir dir exklusiv unsere Aufmerksamkeit, um gezielt Wünsche im
-          Detail nachzugehen oder gewissen Problemzonen auf den Zahn zu fühlen.
+          Gerne widmen wir dir exklusiv unsere Aufmerksamkeit, um gezielt Wünsche im Detail
+          nachzugehen oder gewissen Problemzonen auf den Zahn zu fühlen.
         </p>
         <BulletList items={ablauf.slice(0, 6)} />
       </SplitBlock>
@@ -97,8 +99,8 @@ function Training() {
         image={gruppentraining}
       >
         <p>
-          Mehr Spaß beim Training in kleinen Gruppen. Trainiere mit Kollegen, Freunden
-          oder Partner — im Performance Club oder draußen in der Natur.
+          Mehr Spaß beim Training in kleinen Gruppen. Trainiere mit Kollegen, Freunden oder Partner
+          — im Performance Club oder draußen in der Natur.
         </p>
         <BulletList
           items={[
@@ -117,9 +119,9 @@ function Training() {
         image={athletiktraining}
       >
         <p>
-          Als Ergänzung in Vorbereitung, Übergangsphase oder Saison — trainiere mit
-          deiner Mannschaft wie die Profis. Beugt Verletzungen vor und startet top-fit
-          in die nächsten Spiele.
+          Als Ergänzung in Vorbereitung, Übergangsphase oder Saison — trainiere mit deiner
+          Mannschaft wie die Profis. Beugt Verletzungen vor und startet top-fit in die nächsten
+          Spiele.
         </p>
         <BulletList
           items={[
@@ -139,8 +141,8 @@ function Training() {
         image={physiotherapie}
       >
         <p>
-          Schneller zurück in schmerzfreie Bewegung — mit individueller Physiotherapie
-          und aktivem Training. Ursache finden, gezielt behandeln, sicher zurück.
+          Schneller zurück in schmerzfreie Bewegung — mit individueller Physiotherapie und aktivem
+          Training. Ursache finden, gezielt behandeln, sicher zurück.
         </p>
         <BulletList
           items={[
@@ -160,8 +162,8 @@ function Training() {
         image={athletiktraining}
       >
         <p>
-          Gezieltes aktives Aufbautraining nach Beschwerden oder Verletzungen. Wir
-          verbinden medizinisch fundierte Kräftigung, Mobilität und Technik-Coaching.
+          Gezieltes aktives Aufbautraining nach Beschwerden oder Verletzungen. Wir verbinden
+          medizinisch fundierte Kräftigung, Mobilität und Technik-Coaching.
         </p>
         <BulletList
           items={[

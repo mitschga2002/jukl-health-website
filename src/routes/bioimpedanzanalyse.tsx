@@ -19,7 +19,9 @@ export const Route = createFileRoute("/bioimpedanzanalyse")({
       },
       { property: "og:title", content: "Bioimpedanzanalyse – JuklHealth" },
       { property: "og:description", content: "Körperzusammensetzung präzise gemessen." },
+      { property: "og:url", content: "https://juklhealth.com/bioimpedanzanalyse" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/bioimpedanzanalyse" }],
   }),
   component: Bia,
 });
@@ -35,14 +37,14 @@ function Bia() {
 
       <Section eyebrow="GRUNDLAGE" title="Mehr als die Badezimmerwaage">
         <p>
-          Die Bioimpedanzanalyse ist eine weltweit anerkannte Messmethode zur Ermittlung
-          der Körperzusammensetzung. Die einfache Badezimmerwaage unterscheidet nicht, ob
-          Gewicht durch Muskulatur oder Fettgewebe zustande kommt.
+          Die Bioimpedanzanalyse ist eine weltweit anerkannte Messmethode zur Ermittlung der
+          Körperzusammensetzung. Die einfache Badezimmerwaage unterscheidet nicht, ob Gewicht durch
+          Muskulatur oder Fettgewebe zustande kommt.
         </p>
         <p>
-          In der Ernährungsmedizin wird der Ernährungs- und Gesundheitszustand nicht nur
-          nach Gewicht oder BMI beurteilt, sondern nach der Körperzusammensetzung. Darum
-          ist die Bioimpedanzanalyse die richtige Wahl, um Top-Ergebnisse zu erzielen.
+          In der Ernährungsmedizin wird der Ernährungs- und Gesundheitszustand nicht nur nach
+          Gewicht oder BMI beurteilt, sondern nach der Körperzusammensetzung. Darum ist die
+          Bioimpedanzanalyse die richtige Wahl, um Top-Ergebnisse zu erzielen.
         </p>
       </Section>
 

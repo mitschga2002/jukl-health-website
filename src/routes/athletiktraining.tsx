@@ -24,7 +24,9 @@ export const Route = createFileRoute("/athletiktraining")({
         property: "og:description",
         content: "Athletiktraining wie bei den Profis – individuell periodisiert.",
       },
+      { property: "og:url", content: "https://juklhealth.com/athletiktraining" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/athletiktraining" }],
   }),
   component: Athletik,
 });
@@ -41,9 +43,9 @@ function Athletik() {
 
       <Section eyebrow="INHALTE" title="Schnelligkeit · Kraft · Stabilität">
         <p>
-          Als Ergänzung in der Vorbereitung, Übergangsphase oder während der Saison
-          trainiere mit deiner Mannschaft wie die Profis. Beugt Verletzungen vor und
-          startet top-fit in die nächsten Spiele.
+          Als Ergänzung in der Vorbereitung, Übergangsphase oder während der Saison trainiere mit
+          deiner Mannschaft wie die Profis. Beugt Verletzungen vor und startet top-fit in die
+          nächsten Spiele.
         </p>
         <BulletList
           items={[

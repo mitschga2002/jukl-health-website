@@ -17,11 +17,14 @@ export const Route = createFileRoute("/personaltraining")({
       { title: "Personal Training — JuklHealth" },
       {
         name: "description",
-        content: "1:1 Personal Training mit voller Aufmerksamkeit. Anamnese, FMS, individueller Plan und messbare Fortschritte.",
+        content:
+          "1:1 Personal Training mit voller Aufmerksamkeit. Anamnese, FMS, individueller Plan und messbare Fortschritte.",
       },
       { property: "og:title", content: "Personal Training — JuklHealth" },
       { property: "og:description", content: "1:1 Personal Training mit voller Betreuung." },
+      { property: "og:url", content: "https://juklhealth.com/personaltraining" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/personaltraining" }],
   }),
   component: PersonalTraining,
 });

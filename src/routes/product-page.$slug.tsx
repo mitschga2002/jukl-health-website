@@ -8,6 +8,7 @@ export const Route = createFileRoute("/product-page/$slug")({
     const description = `${title} im JuklHealth Shop – Performance-Ausrüstung, Kleidung und Ergänzungen für Training, Regeneration und Alltag. Details, Größen und Bestellung.`;
     return {
       meta: [
+        { name: "robots", content: "noindex, nofollow" },
         { title: `${title} – Shop | JuklHealth` },
         { name: "description", content: description },
         { property: "og:title", content: `${title} – JuklHealth Shop` },

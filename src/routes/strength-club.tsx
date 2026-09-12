@@ -1,11 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  BulletList,
-  CTAButton,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, BulletList, CTAButton } from "@/components/site/content";
 
 const strengthClub = "/img/strength-club-1824.webp";
 
@@ -23,7 +17,9 @@ export const Route = createFileRoute("/strength-club")({
         property: "og:description",
         content: "160 m² · 24/7 Zugang · max. 100 Mitglieder.",
       },
+      { property: "og:url", content: "https://juklhealth.com/strength-club" },
     ],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/strength-club" }],
   }),
   component: StrengthClub,
 });
@@ -40,9 +36,8 @@ function StrengthClub() {
 
       <Section eyebrow="DORNBIRN" title="Bildgasse 10 · Erdgeschoss">
         <p>
-          Auf 160 m² findest du im Strength Club alles, was du brauchst. 1 Jahr, 7 Tage die
-          Woche, 24 h Zugang — plus ein Betreuungssystem, das dich nachweisbar zu deinen
-          Zielen bringt.
+          Auf 160 m² findest du im Strength Club alles, was du brauchst. 1 Jahr, 7 Tage die Woche,
+          24 h Zugang — plus ein Betreuungssystem, das dich nachweisbar zu deinen Zielen bringt.
         </p>
         <BulletList
           items={[
