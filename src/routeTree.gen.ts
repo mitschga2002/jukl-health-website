@@ -12,8 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalysenRouteImport } from './routes/analysen'
 import { Route as AthletiktrainingRouteImport } from './routes/athletiktraining'
-import { Route as BioimpedanzanalyseRouteImport } from './routes/bioimpedanzanalyse'
-import { Route as BioimpendanzanalyseRouteImport } from './routes/bioimpendanzanalyse'
 import { Route as ClubsRouteImport } from './routes/clubs'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as GruppentrainingRouteImport } from './routes/gruppentraining'
@@ -44,16 +42,6 @@ const AnalysenRoute = AnalysenRouteImport.update({
 const AthletiktrainingRoute = AthletiktrainingRouteImport.update({
   id: '/athletiktraining',
   path: '/athletiktraining',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BioimpedanzanalyseRoute = BioimpedanzanalyseRouteImport.update({
-  id: '/bioimpedanzanalyse',
-  path: '/bioimpedanzanalyse',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BioimpendanzanalyseRoute = BioimpendanzanalyseRouteImport.update({
-  id: '/bioimpendanzanalyse',
-  path: '/bioimpendanzanalyse',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClubsRoute = ClubsRouteImport.update({
@@ -141,8 +129,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analysen': typeof AnalysenRoute
   '/athletiktraining': typeof AthletiktrainingRoute
-  '/bioimpedanzanalyse': typeof BioimpedanzanalyseRoute
-  '/bioimpendanzanalyse': typeof BioimpendanzanalyseRoute
   '/clubs': typeof ClubsRoute
   '/datenschutz': typeof DatenschutzRoute
   '/gruppentraining': typeof GruppentrainingRoute
@@ -164,8 +150,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analysen': typeof AnalysenRoute
   '/athletiktraining': typeof AthletiktrainingRoute
-  '/bioimpedanzanalyse': typeof BioimpedanzanalyseRoute
-  '/bioimpendanzanalyse': typeof BioimpendanzanalyseRoute
   '/clubs': typeof ClubsRoute
   '/datenschutz': typeof DatenschutzRoute
   '/gruppentraining': typeof GruppentrainingRoute
@@ -188,8 +172,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/analysen': typeof AnalysenRoute
   '/athletiktraining': typeof AthletiktrainingRoute
-  '/bioimpedanzanalyse': typeof BioimpedanzanalyseRoute
-  '/bioimpendanzanalyse': typeof BioimpendanzanalyseRoute
   '/clubs': typeof ClubsRoute
   '/datenschutz': typeof DatenschutzRoute
   '/gruppentraining': typeof GruppentrainingRoute
@@ -213,8 +195,6 @@ export interface FileRouteTypes {
     | '/'
     | '/analysen'
     | '/athletiktraining'
-    | '/bioimpedanzanalyse'
-    | '/bioimpendanzanalyse'
     | '/clubs'
     | '/datenschutz'
     | '/gruppentraining'
@@ -236,8 +216,6 @@ export interface FileRouteTypes {
     | '/'
     | '/analysen'
     | '/athletiktraining'
-    | '/bioimpedanzanalyse'
-    | '/bioimpendanzanalyse'
     | '/clubs'
     | '/datenschutz'
     | '/gruppentraining'
@@ -259,8 +237,6 @@ export interface FileRouteTypes {
     | '/'
     | '/analysen'
     | '/athletiktraining'
-    | '/bioimpedanzanalyse'
-    | '/bioimpendanzanalyse'
     | '/clubs'
     | '/datenschutz'
     | '/gruppentraining'
@@ -283,8 +259,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalysenRoute: typeof AnalysenRoute
   AthletiktrainingRoute: typeof AthletiktrainingRoute
-  BioimpedanzanalyseRoute: typeof BioimpedanzanalyseRoute
-  BioimpendanzanalyseRoute: typeof BioimpendanzanalyseRoute
   ClubsRoute: typeof ClubsRoute
   DatenschutzRoute: typeof DatenschutzRoute
   GruppentrainingRoute: typeof GruppentrainingRoute
@@ -324,20 +298,6 @@ declare module '@tanstack/react-router' {
       path: '/athletiktraining'
       fullPath: '/athletiktraining'
       preLoaderRoute: typeof AthletiktrainingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bioimpedanzanalyse': {
-      id: '/bioimpedanzanalyse'
-      path: '/bioimpedanzanalyse'
-      fullPath: '/bioimpedanzanalyse'
-      preLoaderRoute: typeof BioimpedanzanalyseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bioimpendanzanalyse': {
-      id: '/bioimpendanzanalyse'
-      path: '/bioimpendanzanalyse'
-      fullPath: '/bioimpendanzanalyse'
-      preLoaderRoute: typeof BioimpendanzanalyseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clubs': {
@@ -459,8 +419,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalysenRoute: AnalysenRoute,
   AthletiktrainingRoute: AthletiktrainingRoute,
-  BioimpedanzanalyseRoute: BioimpedanzanalyseRoute,
-  BioimpendanzanalyseRoute: BioimpendanzanalyseRoute,
   ClubsRoute: ClubsRoute,
   DatenschutzRoute: DatenschutzRoute,
   GruppentrainingRoute: GruppentrainingRoute,
