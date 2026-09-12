@@ -30,7 +30,16 @@ export function PageHero({
   ratio?: "tall" | "wide";
   image?: string;
   imageAlt?: string;
-  imagePosition?: "center" | "left" | "right" | "top" | "bottom" | "top-right" | "top-left" | "bottom-right" | "bottom-left";
+  imagePosition?:
+    | "center"
+    | "left"
+    | "right"
+    | "top"
+    | "bottom"
+    | "top-right"
+    | "top-left"
+    | "bottom-right"
+    | "bottom-left";
   objectPosition?: string;
 }) {
   const positionCls = {
@@ -52,9 +61,9 @@ export function PageHero({
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
             {eyebrow}
           </span>
-          <h1 className="font-display text-5xl lg:text-7xl tracking-tight leading-[1.02] text-balance">
+          <h1 className="font-display text-5xl lg:text-7xl hyphens-auto tracking-tight leading-[1.02] text-balance">
             {title}
-            </h1>
+          </h1>
           {intro ? (
             <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-xl text-pretty">
               {intro}
@@ -203,7 +212,6 @@ export function ImagePlaceholder({
   );
 }
 
-
 export function SplitBlock({
   eyebrow,
   title,
@@ -231,9 +239,7 @@ export function SplitBlock({
           <h2 className="font-display text-3xl lg:text-5xl mb-6 tracking-tight leading-[1.05] max-w-3xl">
             {title}
           </h2>
-          <div className="space-y-4 text-base lg:text-lg leading-relaxed max-w-3xl">
-            {children}
-          </div>
+          <div className="space-y-4 text-base lg:text-lg leading-relaxed max-w-3xl">{children}</div>
         </div>
       </section>
     );
@@ -256,7 +262,9 @@ export function SplitBlock({
           </h2>
           <div className="space-y-4 text-base lg:text-lg leading-relaxed">{children}</div>
         </div>
-        <div className={`relative min-h-[240px] sm:min-h-[320px] lg:min-h-0 ${reverse ? "lg:order-1" : ""}`}>
+        <div
+          className={`relative min-h-[240px] sm:min-h-[320px] lg:min-h-0 ${reverse ? "lg:order-1" : ""}`}
+        >
           <div className="lg:absolute lg:inset-0 aspect-[4/3] sm:aspect-[4/5] lg:aspect-auto lg:h-full">
             <ImagePlaceholder
               label={imageLabel}
@@ -267,22 +275,12 @@ export function SplitBlock({
             />
           </div>
         </div>
-
-
       </div>
     </section>
   );
 }
 
-export function Testimonial({
-  quote,
-  name,
-  role,
-}: {
-  quote: string;
-  name: string;
-  role: string;
-}) {
+export function Testimonial({ quote, name, role }: { quote: string; name: string; role: string }) {
   return (
     <figure className="border border-foreground/10 p-8 lg:p-10 bg-background h-full flex flex-col justify-between">
       <blockquote className="font-display text-xl lg:text-2xl leading-snug tracking-tight mb-8 text-balance">
@@ -308,10 +306,7 @@ export function StatRow({ items }: { items: { value: string; label: string }[] }
     <div className="border-y border-foreground/10">
       <div className="jh-container grid grid-cols-2 lg:grid-cols-4">
         {items.map((s) => (
-          <div
-            key={s.label}
-            className="px-6 py-8 border-r last:border-r-0 border-foreground/10"
-          >
+          <div key={s.label} className="px-6 py-8 border-r last:border-r-0 border-foreground/10">
             <div className="font-display text-4xl lg:text-5xl text-primary tracking-tight">
               {s.value}
             </div>

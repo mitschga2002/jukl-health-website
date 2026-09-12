@@ -16,7 +16,8 @@ export const Route = createFileRoute("/gruppentraining")({
       { title: "Gruppentraining & Athletiktraining — JuklHealth" },
       {
         name: "description",
-        content: "Training mit Kollegen, Mannschaft oder Partner. Kleine Gruppen, individuelle Korrektur, gemeinsamer Antrieb.",
+        content:
+          "Training mit Kollegen, Mannschaft oder Partner. Kleine Gruppen, individuelle Korrektur, gemeinsamer Antrieb.",
       },
       { property: "og:title", content: "Gruppentraining — JuklHealth" },
       { property: "og:description", content: "Training in der Gruppe — Energie, Spaß, Erfolg." },
@@ -30,7 +31,7 @@ function Gruppentraining() {
     <PageShell>
       <PageHero
         eyebrow="GROUP"
-        title="Gruppen- & Athletiktraining"
+        title="Gruppentraining"
         intro="Gemeinsam erreichen wir deine sportlichen Ziele – mit individuell abgestimmtem Gruppentraining."
       />
 
@@ -58,10 +59,10 @@ function Gruppentraining() {
         image={gruppentraining}
       >
         <p>
-          Wir betreuen Vereine, Mannschaften und Firmenteams. Das Training eignet sich
-          ideal als Ergänzung in der Saisonvorbereitung, während der Übergangsphase
-          oder im laufenden Spielbetrieb. Es unterstützt die Leistungsfähigkeit und
-          kann das Verletzungsrisiko reduzieren.
+          Wir betreuen Vereine, Mannschaften und Firmenteams. Das Training eignet sich ideal als
+          Ergänzung in der Saisonvorbereitung, während der Übergangsphase oder im laufenden
+          Spielbetrieb. Es unterstützt die Leistungsfähigkeit und kann das Verletzungsrisiko
+          reduzieren.
         </p>
         <BulletList
           items={[
