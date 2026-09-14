@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <header className="relative border-b border-foreground/10">
       <div className="jh-container grid lg:grid-cols-2 min-h-[80vh]">
-        <div className="flex flex-col justify-center min-w-0 jh-gutter py-16 lg:py-20 order-2 lg:order-1">
+        <div className="flex flex-col justify-center min-w-0 jh-gutter py-16 lg:py-20">
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-8">
             Ein System · Training · Physio · Analyse
           </span>
@@ -35,7 +35,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative w-full min-w-0 h-[40vh] min-h-[240px] sm:h-[55vh] lg:h-auto lg:min-h-[560px] order-1 lg:order-2 bg-muted">
+        <div className="relative w-full min-w-0 h-[40vh] min-h-[240px] sm:h-[55vh] lg:h-auto lg:min-h-[560px] border-t border-foreground/10 lg:border-t-0 lg:border-l bg-muted">
           <SmartImage
             src={heroAthlete}
             alt="Athlet beim Training im JuklHealth Performance Club"
