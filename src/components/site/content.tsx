@@ -62,7 +62,7 @@ export function PageHero({
     return (
       <section className="border-b border-foreground/10">
         <div className="jh-container">
-          <div className="jh-gutter py-16 lg:py-24 max-w-4xl">
+          <div className="jh-gutter py-16 lg:py-20 max-w-4xl">
             <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
               {eyebrow}
             </span>
@@ -75,15 +75,18 @@ export function PageHero({
               </p>
             ) : null}
           </div>
-          {/* 16:9 is wider than the photo, so the full width always shows and only
-              the ceiling is trimmed off the top - nobody is cut at the edges. */}
-          <div className="relative w-full aspect-video overflow-hidden bg-muted border-t border-foreground/10">
+          {/* Measured off the team photo: wall lettering 19-31%, head tops 40%,
+              eye line 49%. A window starting between 19% and 31% slices the
+              lettering, so 3:1 at 65% clears it at 32% and lands the heads in
+              the upper third. Below lg the band is too tall for that window to
+              fit, so 16:9 bottom-aligned trims just the ceiling. */}
+          <div className="relative w-full aspect-video lg:aspect-[3/1] overflow-hidden bg-muted border-t border-foreground/10">
             <SmartImage
               src={image}
               alt={imageAlt ?? title}
               priority
-              sizes="100vw"
-              className="absolute inset-0 w-full h-full object-cover object-bottom"
+              sizes="(min-width: 1400px) 1400px, 100vw"
+              className="absolute inset-0 w-full h-full object-cover object-bottom lg:object-[center_65%]"
             />
           </div>
         </div>
