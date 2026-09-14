@@ -162,7 +162,7 @@ function Analysen() {
       </SplitBlock>
 
       <Section eyebrow="KUNDENSTIMMEN" title="Stimmen aus der Praxis">
-        <div className="grid lg:grid-cols-2 gap-6 not-prose">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 not-prose">
           <Testimonial
             quote="Julian setzt sich mit mir und meiner Krankheit auseinander und wendet speziell auf mich angepasste Trainingsmethoden an. Vielfältig und mit viel Spaß."
             name="Ina Ludwig"

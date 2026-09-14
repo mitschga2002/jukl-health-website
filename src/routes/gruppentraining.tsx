@@ -32,7 +32,7 @@ function Gruppentraining() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="GROUP"
+        eyebrow="Gruppe"
         title="Gruppentraining"
         intro="Gemeinsam erreichen wir deine sportlichen Ziele – mit individuell abgestimmtem Gruppentraining."
       />

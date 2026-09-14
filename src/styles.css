@@ -162,11 +162,36 @@
   }
 }
 
-/* Site container: caps very wide screens so line lengths stay readable. */
+/* Layout rail. Every module sits on the same two vertical lines: `jh-container`
+   caps the module at the rail width, `jh-gutter` insets its content to the
+   content line. Section backgrounds stay outside the container so they still
+   bleed the full viewport.
+
+   Split modules (text next to a photo) keep `jh-container` on the grid so the
+   image half reaches the rail edge, and carry `jh-gutter` on the text half only,
+   which lands its copy on the same line as every full-width module.
+
+   Deliberately outside this system: DisciplineTicker, whose marquee has to run
+   edge to edge. */
+:root {
+  --jh-rail: 1400px;
+  --jh-gutter: 1.5rem;
+}
+
+@media (width >= 64rem) {
+  :root {
+    --jh-gutter: 3rem;
+  }
+}
+
 @utility jh-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: var(--jh-rail);
   margin-inline: auto;
+}
+
+@utility jh-gutter {
+  padding-inline: var(--jh-gutter);
 }
 
 @keyframes jh-slide-up {

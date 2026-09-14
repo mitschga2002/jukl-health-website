@@ -16,7 +16,7 @@ export function PerformanceClubBlock() {
             sizes="(min-width: 1024px) 50vw, 100vw"
           />
         </div>
-        <div className="flex flex-col justify-center px-8 lg:px-16 py-20">
+        <div className="flex flex-col justify-center jh-gutter py-20">
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6">
             Performance Club
           </span>
@@ -53,7 +53,7 @@ export function ProfisportBlock() {
   return (
     <section className="border-b border-foreground/10">
       <div className="jh-container grid grid-cols-1 lg:grid-cols-2">
-        <div className="flex flex-col justify-center px-8 lg:px-16 py-20 order-2 lg:order-1">
+        <div className="flex flex-col justify-center jh-gutter py-20 order-2 lg:order-1">
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6">Profisport</span>
           <h2 className="font-display text-4xl lg:text-6xl tracking-tight leading-[1.05]">
             Trainiere wie die <span className="text-primary">Besten</span>.

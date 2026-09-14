@@ -62,7 +62,7 @@ export function PageHero({
     return (
       <section className="border-b border-foreground/10">
         <div className="jh-container">
-          <div className="px-6 lg:px-12 py-16 lg:py-24 max-w-4xl">
+          <div className="jh-gutter py-16 lg:py-24 max-w-4xl">
             <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
               {eyebrow}
             </span>
@@ -94,7 +94,7 @@ export function PageHero({
   if (!image) {
     return (
       <section className="border-b border-foreground/10">
-        <div className="jh-container px-6 lg:px-12 py-16 lg:py-24">
+        <div className="jh-container jh-gutter py-16 lg:py-24">
           <div className="max-w-4xl">
             <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
               {eyebrow}
@@ -116,7 +116,7 @@ export function PageHero({
   return (
     <section className="border-b border-foreground/10">
       <div className="jh-container grid w-full lg:grid-cols-2">
-        <div className="px-6 lg:px-12 py-16 lg:py-24 flex flex-col justify-center">
+        <div className="jh-gutter py-16 lg:py-24 flex flex-col justify-center">
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
             {eyebrow}
           </span>
@@ -176,23 +176,25 @@ export function Section({
 }) {
   return (
     <section
-      className={`px-6 lg:px-12 py-20 lg:py-28 border-b border-foreground/10 ${
+      className={`py-20 lg:py-28 border-b border-foreground/10 ${
         alt ? "bg-foreground text-background" : ""
       }`}
     >
-      <div className="jh-container max-w-6xl">
-        {eyebrow ? (
-          <span className="text-xs uppercase tracking-[0.22em] text-primary mb-4 block">
-            {eyebrow}
-          </span>
-        ) : null}
-        {title ? (
-          <h2 className="font-display text-3xl lg:text-5xl tracking-tight mb-10 leading-[1.05] text-balance">
-            {title}
-          </h2>
-        ) : null}
-        <div className="prose-content space-y-6 text-base lg:text-lg leading-relaxed">
-          {children}
+      <div className="jh-container jh-gutter">
+        <div>
+          {eyebrow ? (
+            <span className="text-xs uppercase tracking-[0.22em] text-primary mb-4 block">
+              {eyebrow}
+            </span>
+          ) : null}
+          {title ? (
+            <h2 className="font-display text-3xl lg:text-5xl tracking-tight mb-10 leading-[1.05] text-balance">
+              {title}
+            </h2>
+          ) : null}
+          <div className="prose-content space-y-6 text-base lg:text-lg leading-relaxed">
+            {children}
+          </div>
         </div>
       </div>
     </section>
@@ -289,7 +291,7 @@ export function SplitBlock({
   if (!image) {
     return (
       <section className="border-b border-foreground/10">
-        <div className="jh-container px-6 lg:px-12 py-16 lg:py-24 flex flex-col items-center text-center">
+        <div className="jh-container jh-gutter py-16 lg:py-24 flex flex-col">
           {eyebrow ? (
             <span className="text-xs uppercase tracking-[0.22em] text-primary mb-4 block">
               {eyebrow}
@@ -307,7 +309,7 @@ export function SplitBlock({
     <section className="border-b border-foreground/10">
       <div className="jh-container grid w-full lg:grid-cols-2 gap-0">
         <div
-          className={`px-6 lg:px-12 py-16 lg:py-24 flex flex-col justify-center ${
+          className={`jh-gutter py-16 lg:py-24 flex flex-col justify-center ${
             reverse ? "lg:order-2" : ""
           }`}
         >
@@ -388,7 +390,10 @@ export function StatRow({ items }: { items: { value: string; label: string }[] }
     <div className="border-y border-foreground/10">
       <div className="jh-container grid grid-cols-2 lg:grid-cols-4">
         {items.map((s) => (
-          <div key={s.label} className="px-6 py-8 border-r last:border-r-0 border-foreground/10">
+          <div
+            key={s.label}
+            className="jh-gutter py-8 border-r last:border-r-0 border-foreground/10"
+          >
             <div className="font-display text-4xl lg:text-5xl text-primary tracking-tight">
               {s.value}
             </div>

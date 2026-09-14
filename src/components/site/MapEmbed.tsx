@@ -46,7 +46,7 @@ export function MapEmbed() {
         <button
           type="button"
           onClick={() => setLoaded(true)}
-          className="bg-primary text-primary-foreground px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
+          className="bg-primary cursor-pointer text-primary-foreground px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
         >
           Karte laden
         </button>

@@ -65,13 +65,19 @@ function TrainingPhysio() {
       />
 
       <Section eyebrow="ÜBERSICHT" title="Alle Trainingsformate">
-        <div className="grid md:grid-cols-2 gap-px bg-foreground/10 border border-foreground/10 not-prose">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-px bg-foreground/10 border border-foreground/10 not-prose">
           {services.map((s) => (
-            <Link key={s.to + s.label} to={s.to} className="bg-background p-8 hover:bg-muted group">
-              <div className="font-mono text-[11px] text-primary mb-3">[ {s.num} ]</div>
-              <div className="font-display text-2xl mb-2 group-hover:text-primary">{s.label}</div>
-              <div className="text-sm text-muted-foreground">{s.desc}</div>
-              <div className="mt-6 font-mono text-[11px] uppercase tracking-widest text-primary">
+            <Link
+              key={s.to + s.label}
+              to={s.to}
+              className="flex flex-col gap-6 bg-background p-8 hover:bg-muted group justify-between"
+            >
+              <div>
+                <div className="font-mono text-[11px] text-primary mb-3">[ {s.num} ]</div>
+                <div className="font-display text-2xl mb-2 group-hover:text-primary">{s.label}</div>
+                <div className="text-sm text-muted-foreground">{s.desc}</div>
+              </div>
+              <div className="font-mono text-[11px] uppercase tracking-widest text-primary">
                 → entdecken
               </div>
             </Link>
