@@ -5,7 +5,7 @@ const julianPortrait = "/img/julian-portrait-1460.webp";
 
 export function Credibility() {
   return (
-    <section className="bg-foreground text-background py-24">
+    <section className="bg-foreground text-background py-16 lg:py-24">
       <div className="jh-container jh-gutter grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-24">
         <div className="relative">
           <SmartImage
