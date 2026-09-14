@@ -68,9 +68,9 @@ export function SiteFooter() {
           </div>
           {sitemap.map((col) => (
             <div key={col.heading}>
-              <h5 className="text-[11px] uppercase tracking-[0.22em] text-primary mb-4">
+              <h2 className="text-[11px] uppercase tracking-[0.22em] text-primary mb-4">
                 {col.heading}
-              </h5>
+              </h2>
               <ul className="space-y-2">
                 {col.links.map((l) => {
                   const hash = "hash" in l ? l.hash : undefined;
