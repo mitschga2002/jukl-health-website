@@ -78,7 +78,6 @@ function Kontakt() {
         }
         image={teamBanner}
         imageAlt="Team von JuklHealth"
-        banner
       />
 
       <Section eyebrow="KONTAKT" title="So erreichst du uns">

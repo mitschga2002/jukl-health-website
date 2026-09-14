@@ -95,7 +95,7 @@ function MemberBlock({ m }: { m: Member }) {
   if (!m.image) {
     return (
       <section className="border-b border-foreground/10">
-        <div className="jh-container px-6 lg:px-12 py-16 lg:py-24 flex flex-col items-center text-center">
+        <div className="jh-container jh-gutter py-16 lg:py-24 flex flex-col">
           <h2 className="font-display text-3xl lg:text-5xl tracking-tight leading-[1.05] mb-3">
             {m.name}
           </h2>
@@ -103,7 +103,7 @@ function MemberBlock({ m }: { m: Member }) {
           <p className="text-base lg:text-lg leading-relaxed text-muted-foreground max-w-2xl">
             „{m.quote}"
           </p>
-          <div className="flex gap-3 flex-wrap justify-center pt-2">
+          <div className="flex gap-3 flex-wrap pt-2">
             <Link
               to="/kontakt"
               search={{ trainer: m.name }}
@@ -131,7 +131,7 @@ function MemberBlock({ m }: { m: Member }) {
           <ImagePlaceholder label={m.name} ratio="square" className="h-full" image={m.image} />
         </div>
         <div
-          className={`px-6 lg:px-12 py-16 lg:py-24 flex flex-col justify-center ${
+          className={`jh-gutter py-16 lg:py-24 flex flex-col justify-center ${
             m.reverse ? "lg:order-1" : ""
           }`}
         >

@@ -28,7 +28,7 @@ function Reha() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="REHAB"
+        eyebrow="Reha"
         title="Trainingstherapie"
         intro="Gezieltes aktives Aufbautraining nach Beschwerden oder Verletzungen. Progressive trainingstherapeutische Kräftigung, entsprechend deiner aktuellen Belastbarkeit."
         image={athletik}

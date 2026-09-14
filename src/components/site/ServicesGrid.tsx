@@ -35,8 +35,8 @@ const services = [
 
 export function ServicesGrid() {
   return (
-    <section className="py-24 px-6 lg:px-12 bg-background">
-      <div className="jh-container">
+    <section className="py-24 bg-background">
+      <div className="jh-container jh-gutter">
         <div className="mb-16">
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-4 block">
             Unsere Leistungen
@@ -51,13 +51,13 @@ export function ServicesGrid() {
             <Link
               key={s.to + s.title}
               to={s.to}
-              className="group bg-background p-10 flex flex-col justify-between min-h-[260px] hover:bg-muted"
+              className="group bg-background p-10 flex flex-col justify-between hover:bg-muted"
             >
-              <h3 className="font-display text-2xl tracking-tight mb-6 leading-tight group-hover:text-primary">
+              <h3 className="font-display text-2xl tracking-tight mb-4 md:mb-6 leading-tight group-hover:text-primary">
                 {s.title}
               </h3>
               <div>
-                <p className="text-sm text-muted-foreground mb-6">{s.body}</p>
+                <p className="text-sm text-muted-foreground mb-4 md:mb-6">{s.body}</p>
                 <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-primary">
                   Mehr erfahren
                   <span aria-hidden>→</span>

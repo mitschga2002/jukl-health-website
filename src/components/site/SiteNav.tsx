@@ -133,7 +133,7 @@ export function SiteNav() {
 
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-foreground/10">
-      <div className="jh-container px-6 lg:px-10 py-3 flex justify-between items-center gap-4">
+      <div className="jh-container jh-gutter py-3 flex justify-between items-center gap-4">
         <Link
           to="/"
           className="flex items-center shrink-0"
