@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import logoBlack from "@/assets/jukl-logo-black.png";
@@ -113,21 +113,89 @@ function MobileGroup({
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
-  const close = () => setOpen(false);
+  const close = useCallback(() => setOpen(false), []);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
-  // Lock the page behind the overlay so iOS Safari scrolls the menu itself
-  // rather than the document underneath it.
+  // Lock the page behind the overlay. `overflow: hidden` on <body> alone is not
+  // enough on iOS Safari, which still drags the document under the menu, so the
+  // body is pinned at its current offset and the scroll position is restored on
+  // close.
   useEffect(() => {
     if (!open) return;
-    const { overflow } = document.body.style;
-    document.body.style.overflow = "hidden";
+    const scrollY = window.scrollY;
+    const { body } = document;
+    const previous = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+    };
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    return () => {
+      Object.assign(body.style, previous);
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
+
+  // The overlay is mobile only (`lg:hidden`). Past the lg breakpoint it stops
+  // rendering while `open` stays true, which would leave the scroll lock on a
+  // page with no visible control to release it — so close it on the way up.
+  useEffect(() => {
+    if (!open) return;
+    const mq = window.matchMedia("(min-width: 64rem)");
+    if (mq.matches) {
+      setOpen(false);
+      return;
+    }
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [open]);
+
+  // aria-modal only tells assistive tech the rest of the page is inert; keyboard
+  // focus has to be moved into the panel and kept there by hand.
+  useEffect(() => {
+    if (!open) return;
+    const opener = toggleRef.current;
+    const focusables = () =>
+      Array.from(
+        panelRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
+      );
+    focusables()[0]?.focus();
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || !panelRef.current.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = overflow;
       window.removeEventListener("keydown", onKey);
+      opener?.focus();
     };
   }, [open]);
 
@@ -174,10 +242,12 @@ export function SiteNav() {
             Jetzt kontaktieren
           </Link>
           <button
+            ref={toggleRef}
             type="button"
             className="lg:hidden p-2 -mr-2 text-foreground"
             aria-label={open ? "Menü schließen" : "Menü öffnen"}
             aria-expanded={open}
+            aria-controls="mobile-menu"
             onClick={() => setOpen((o) => !o)}
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -187,8 +257,9 @@ export function SiteNav() {
 
       {open && (
         <div
+          ref={panelRef}
           id="mobile-menu"
-          className="lg:hidden fixed inset-0 z-50 bg-background flex flex-col"
+          className="lg:hidden fixed inset-0 z-50 bg-background flex flex-col overscroll-none"
           role="dialog"
           aria-modal="true"
           aria-label="Hauptmenü"

@@ -146,6 +146,15 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* One focus ring for the whole site. Browsers each ship their own (Chrome a
+     black/white double ring, Safari and Firefox a blue halo), none of which
+     match the brand or stay legible on the inverted sections. The offset keeps
+     the ring on the surrounding surface, so it also reads on green buttons. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
   .font-display {
     font-family: "Inter Tight", "Hind", system-ui, sans-serif;
     font-weight: 600;
