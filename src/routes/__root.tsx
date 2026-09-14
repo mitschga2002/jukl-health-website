@@ -104,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Performance Training, Athletik Coaching und klinische Physiotherapie in Dornbirn. Wissenschaftlich fundiert, individuell betreut, messbare Resultate.",
       },
       { name: "author", content: "JuklHealth" },
-      { name: "apple-mobile-web-app-title", content: "JuklHealth" },
+      { name: "apple-mobile-web-app-title", content: "JUKL Health" },
       { property: "og:title", content: "Jukl Health Clubs" },
       {
         property: "og:description",
