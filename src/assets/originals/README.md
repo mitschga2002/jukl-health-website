@@ -2,14 +2,13 @@
 
 The uncompressed masters behind the WebP variants in `public/img/`.
 
-**Source:** downloaded from the Lovable CDN that serves the deployed site
-(`https://juklhealth.com/__l5e/assets-v1/<uuid>/<name>`), which was the only
-copy of these files. They are not referenced by application code — the site
-loads the derived variants from `public/img/` — but they are the input for
-regenerating those variants.
+**Source:** recovered from the CDN that served the previous deployment, which
+was the only copy of these files. They are not referenced by application code —
+the site loads the derived variants from `public/img/` — but they are the input
+for regenerating those variants.
 
 **Known limitation:** these are 1385–1824 px wide. They were already downscaled
-by the upload pipeline before reaching the CDN (camera EXIF stripped; where
+by the upload pipeline before reaching that CDN (camera EXIF stripped; where
 EXIF survives it records the downscaled size). The CDN serves no larger
 rendition and has no resize API, so this is the highest resolution available
 over the network. Full-bleed banners therefore upscale on HiDPI screens.
