@@ -35,7 +35,7 @@ function Impressum() {
           <Row k="Firma">Juklhealth OG</Row>
           <Row k="Adresse">Bildgasse 10, 6850 Dornbirn, Österreich</Row>
           <Row k="Unternehmensgegenstand">Fitness und Gesundheit</Row>
-          <Row k="UID-Nummer">ATU73735835</Row>
+          <Row k="UID-Nummer">ATU82407824</Row>
           <Row k="E-Mail">
             <a className="underline hover:text-primary" href="mailto:julian@juklhealth.com">
               julian@juklhealth.com

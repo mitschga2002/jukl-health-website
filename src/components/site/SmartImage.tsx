@@ -5,10 +5,7 @@ type Entry = { width: number; height: number; variants: Variant[] };
 
 const MAP = variantsMap as Record<string, Entry>;
 
-type SmartImageProps = Omit<
-  React.ImgHTMLAttributes<HTMLImageElement>,
-  "src" | "srcSet"
-> & {
+type SmartImageProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src" | "srcSet"> & {
   src: string;
   alt: string;
   /** Above-the-fold image: loads eagerly with high priority. */
@@ -30,11 +27,7 @@ export function SmartImage({
     <img
       src={src}
       alt={alt}
-      srcSet={
-        entry
-          ? entry.variants.map((v) => `${v.url} ${v.width}w`).join(", ")
-          : undefined
-      }
+      srcSet={entry ? entry.variants.map((v) => `${v.url} ${v.width}w`).join(", ") : undefined}
       sizes={entry ? sizes : undefined}
       width={entry?.width}
       height={entry?.height}
