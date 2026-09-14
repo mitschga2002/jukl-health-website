@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <header className="relative border-b border-foreground/10">
       <div className="jh-container grid lg:grid-cols-2 min-h-[80vh]">
-        <div className="flex flex-col justify-center min-w-0 jh-gutter py-20 order-2 lg:order-1">
+        <div className="flex flex-col justify-center min-w-0 jh-gutter py-16 lg:py-20 order-2 lg:order-1">
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-8">
             Ein System · Training · Physio · Analyse
           </span>

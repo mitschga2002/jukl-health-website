@@ -35,7 +35,7 @@ const services = [
 
 export function ServicesGrid() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-16 lg:py-24 bg-background">
       <div className="jh-container jh-gutter">
         <div className="mb-16">
           <span className="text-xs uppercase tracking-[0.22em] text-primary mb-4 block">

@@ -46,7 +46,7 @@ const sitemap = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-foreground text-background pt-20 pb-12">
+    <footer className="bg-foreground text-background pt-16 pb-10 lg:pt-20 lg:pb-12">
       <div className="jh-container jh-gutter">
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           <div className="col-span-2 lg:col-span-1">
