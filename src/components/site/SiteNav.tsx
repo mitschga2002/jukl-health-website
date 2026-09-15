@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
-import logoBlack from "@/assets/jukl-logo-black.png";
+import { ChevronDown, Menu, X } from "lucide-react";
+import logoBlack from "@/assets/jukl-wordmark-black.png";
+import { PillLink } from "./Pill";
+import { cn } from "@/lib/utils";
 
 const mainLinks = [
   { to: "/team", label: "Team" },
-  { to: "/meine-person", label: "Über uns" },
+  { to: "/meine-person", label: "Über Uns" },
   { to: "/vortraege", label: "Vorträge" },
 ] as const;
 
@@ -54,19 +56,23 @@ function Dropdown({
 }) {
   const isActive = useActiveMatcher();
   return (
-    <div className="relative group">
-      <button className="hover:text-primary uppercase text-sm">
-        {label} <span className="text-primary">↓</span>
+    <div className="group relative">
+      <button className="flex items-center gap-0.5 text-base text-muted-foreground hover:text-primary">
+        {label}
+        <ChevronDown
+          className="size-4 shrink-0 transition-transform duration-300 ease-out group-hover:rotate-180 motion-reduce:transform-none motion-reduce:transition-none"
+          aria-hidden
+        />
       </button>
-      <div className="absolute top-full left-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-        <div className="bg-background border border-foreground/10 shadow-lg py-2 min-w-[240px]">
+      <div className="invisible absolute left-0 top-full pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+        <div className="min-w-[240px] rounded-image border border-border bg-card py-2 shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
           {items.map((i) => (
             <Link
               key={i.to + (i.hash ?? "") + i.label}
               to={i.to}
               hash={i.hash}
-              className={`block px-5 py-2.5 text-sm font-semibold hover:bg-muted hover:text-primary ${
-                isActive(i.to, i.hash) ? "text-primary" : ""
+              className={`block px-5 py-2.5 text-base hover:bg-muted hover:text-primary ${
+                isActive(i.to, i.hash) ? "text-primary" : "text-muted-foreground"
               }`}
             >
               {i.label}
@@ -90,7 +96,7 @@ function MobileGroup({
   const isActive = useActiveMatcher();
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-[0.22em] text-primary mb-3">{label}</div>
+      <div className="mb-3 text-xs uppercase tracking-[0.05em] text-primary">{label}</div>
       <ul className="space-y-1">
         {items.map((i) => (
           <li key={i.to + (i.hash ?? "") + i.label}>
@@ -98,8 +104,8 @@ function MobileGroup({
               to={i.to}
               hash={i.hash}
               onClick={onNavigate}
-              className={`block py-2 text-sm font-semibold hover:text-primary ${
-                isActive(i.to, i.hash) ? "text-primary" : ""
+              className={`block py-2 text-base hover:text-primary ${
+                isActive(i.to, i.hash) ? "text-primary" : "text-muted-foreground"
               }`}
             >
               {i.label}
@@ -111,7 +117,13 @@ function MobileGroup({
   );
 }
 
-export function SiteNav() {
+/**
+ * The design draws the nav as a floating glass bar rather than a full-width
+ * header. On the homepage it sits *on top of* the hero photo, so `overlay`
+ * collapses the bar out of the document flow (`h-0`) and lets it overhang the
+ * section below; every other page keeps it in flow with a margin above.
+ */
+export function SiteNav({ overlay = false }: { overlay?: boolean }) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -168,9 +180,12 @@ export function SiteNav() {
     if (!open) return;
     const opener = toggleRef.current;
     const focusables = () =>
-      Array.from(
-        panelRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
-      );
+      [
+        opener,
+        ...Array.from(
+          panelRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
+        ),
+      ].filter((el): el is HTMLElement => el != null);
     focusables()[0]?.focus();
 
     const onKey = (e: KeyboardEvent) => {
@@ -200,58 +215,63 @@ export function SiteNav() {
   }, [open]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-background border-b border-foreground/10">
-      <div className="jh-container jh-gutter py-3 flex justify-between items-center gap-4">
-        <Link
-          to="/"
-          className="flex items-center shrink-0"
-          aria-label="JuklHealth Startseite"
-          onClick={close}
-        >
-          <img
-            src={logoBlack}
-            alt="JuklHealth"
-            width={640}
-            height={368}
-            className="h-12 lg:h-14 w-auto"
-          />
-        </Link>
-        <div className="hidden lg:flex gap-7 text-sm font-semibold items-center">
-          <Dropdown label="Clubs" items={clubLinks} />
-          <Dropdown label="Training / Physio" items={trainingLinks} />
-          <Dropdown label="Analysen" items={analysenLinks} />
-          {mainLinks.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              className="hover:text-primary uppercase"
-              activeProps={{ className: "text-primary" }}
-              activeOptions={{ exact: true }}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          {/* Desktop only: below lg the same CTA sits inside the menu overlay. */}
+    <nav
+      className={cn(
+        "sticky jh-container top-2 z-50 lg:top-4",
+        overlay ? "h-0" : "mb-2 mt-2 lg:mt-4",
+      )}
+    >
+      <div className="relative z-50 px-4 lg:px-6">
+        <div className="flex items-center justify-between gap-4 rounded-image bg-background/80 px-4 py-3 shadow-[0_4px_8px_rgba(0,0,0,0.05)] backdrop-blur-xl">
           <Link
-            to="/kontakt"
-            className="hidden lg:inline-block bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
+            to="/"
+            className="flex shrink-0 items-center"
+            aria-label="JuklHealth Startseite"
             onClick={close}
           >
-            Jetzt kontaktieren
+            <img
+              src={logoBlack}
+              alt="JuklHealth"
+              width={624}
+              height={133}
+              className="h-[22px] w-auto lg:h-[26px]"
+            />
           </Link>
-          <button
-            ref={toggleRef}
-            type="button"
-            className="lg:hidden p-2 -mr-2 text-foreground"
-            aria-label={open ? "Menü schließen" : "Menü öffnen"}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen((o) => !o)}
-          >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+
+          <div className="hidden items-center gap-6 lg:flex">
+            <Dropdown label="Clubs" items={clubLinks} />
+            <Dropdown label="Angebot" items={trainingLinks} />
+            <Dropdown label="Analysen" items={analysenLinks} />
+            {mainLinks.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                className="text-base text-muted-foreground hover:text-primary"
+                activeProps={{ className: "text-primary" }}
+                activeOptions={{ exact: true }}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            {/* Desktop only: below lg the same CTA sits inside the menu overlay. */}
+            <PillLink to="/kontakt" className="hidden lg:inline-flex" onClick={close}>
+              Jetzt kontaktieren
+            </PillLink>
+            <button
+              ref={toggleRef}
+              type="button"
+              className="-mr-1 p-2 text-foreground lg:hidden"
+              aria-label={open ? "Menü schließen" : "Menü öffnen"}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              onClick={() => setOpen((o) => !o)}
+            >
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -259,54 +279,32 @@ export function SiteNav() {
         <div
           ref={panelRef}
           id="mobile-menu"
-          className="lg:hidden fixed inset-0 z-50 bg-background flex flex-col overscroll-none"
+          className="fixed inset-0 z-40 flex flex-col overscroll-none bg-background lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Hauptmenü"
         >
-          <div className="flex items-center justify-between px-6 py-3 border-b border-foreground/10 shrink-0">
-            <Link
-              to="/"
-              className="flex items-center"
-              aria-label="JuklHealth Startseite"
-              onClick={close}
-            >
-              <img
-                src={logoBlack}
-                alt="JuklHealth"
-                width={640}
-                height={368}
-                className="h-12 w-auto"
-              />
-            </Link>
-            <button
-              type="button"
-              className="p-2 -mr-2 text-foreground"
-              aria-label="Menü schließen"
-              onClick={close}
-            >
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto overscroll-contain px-6 py-6">
+          {/* No header of its own: the sheet opens *under* the floating bar,
+              which keeps the logo and swaps the burger for the close icon.
+              `pt-20` clears the bar (8px offset + ~46px tall). */}
+          <div className="jh-container flex-1 overflow-y-auto overscroll-contain px-8 pb-12 pt-20">
             <div className="space-y-6">
               <MobileGroup label="Clubs" items={clubLinks} onNavigate={close} />
-              <div className="border-t border-foreground/10 pt-6">
-                <MobileGroup label="Training / Physio" items={trainingLinks} onNavigate={close} />
+              <div className="border-t border-border pt-6">
+                <MobileGroup label="Angebot" items={trainingLinks} onNavigate={close} />
               </div>
-              <div className="border-t border-foreground/10 pt-6">
+              <div className="border-t border-border pt-6">
                 <MobileGroup label="Analysen" items={analysenLinks} onNavigate={close} />
               </div>
 
-              <div className="border-t border-foreground/10 pt-6">
+              <div className="border-t border-border pt-6">
                 <ul className="space-y-1">
                   {mainLinks.map((l) => (
                     <li key={l.to}>
                       <Link
                         to={l.to}
                         onClick={close}
-                        className="block py-2 text-sm font-semibold hover:text-primary"
+                        className="block py-2 text-base text-muted-foreground hover:text-primary"
                         activeProps={{ className: "text-primary" }}
                         activeOptions={{ exact: true }}
                       >
@@ -317,13 +315,9 @@ export function SiteNav() {
                 </ul>
               </div>
 
-              <Link
-                to="/kontakt"
-                onClick={close}
-                className="block text-center bg-primary text-primary-foreground px-5 py-3 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
-              >
+              <PillLink to="/kontakt" className="w-full" onClick={close}>
                 Jetzt kontaktieren
-              </Link>
+              </PillLink>
             </div>
           </div>
         </div>

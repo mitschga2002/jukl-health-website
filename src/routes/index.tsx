@@ -3,9 +3,12 @@ import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Hero } from "@/components/site/Hero";
 import { DisciplineTicker } from "@/components/site/DisciplineTicker";
-import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { Credibility } from "@/components/site/Credibility";
-import { PerformanceClubBlock, ProfisportBlock } from "@/components/site/ContentSections";
+import {
+  LocationsBlock,
+  PerformanceClubBlock,
+  ProfisportBlock,
+} from "@/components/site/ContentSections";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,16 +54,16 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteNav />
+      <SiteNav overlay />
       <main>
         <Hero />
         <DisciplineTicker />
         <PerformanceClubBlock />
-        <ServicesGrid />
+        <LocationsBlock />
         <ProfisportBlock />
         <Credibility />
       </main>
-      <SiteFooter />
+      <SiteFooter seamless />
     </div>
   );
 }

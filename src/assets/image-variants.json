@@ -193,9 +193,9 @@
       }
     ]
   },
-  "/img/hero-athlete-1385.webp": {
-    "width": 1385,
-    "height": 923,
+  "/img/hero-athlete-1320.webp": {
+    "width": 1320,
+    "height": 910,
     "variants": [
       {
         "url": "/img/hero-athlete-480.webp",
@@ -206,12 +206,8 @@
         "width": 768
       },
       {
-        "url": "/img/hero-athlete-1200.webp",
-        "width": 1200
-      },
-      {
-        "url": "/img/hero-athlete-1385.webp",
-        "width": 1385
+        "url": "/img/hero-athlete-1320.webp",
+        "width": 1320
       }
     ]
   },

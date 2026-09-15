@@ -1,83 +1,467 @@
-import { SmartImage } from "./SmartImage";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
+import { SmartImage } from "./SmartImage";
+import { Eyebrow, PillLink, PillStatic } from "./Pill";
+import { cn } from "@/lib/utils";
 
-const pcHero = "/img/pc-hero-1386.webp";
-const profisport = "/img/strength-club-1824.webp";
+const services = [
+  {
+    title: "Personal- & Athletiktraining",
+    body: "Eins-zu-eins Betreuung, individuelle Biomechanik und Optimierung der physischen Leistungsfähigkeit.",
+    tags: ["1 : 1", "Personal Training", "Athletik"],
+    to: "/personaltraining",
+    image: "/img/training-banner-1588.webp",
+    imageAlt: "Personal Training mit Battle Ropes im Performance Club",
+    imagePosition: "object-[center_15%]",
+  },
+  {
+    title: "Gruppentraining",
+    body: "Strukturierte Kleingruppen mit individueller Korrektur und konsequenter Intensität.",
+    tags: ["Kleingruppe", "Functional"],
+    to: "/gruppentraining",
+    image: "/img/gruppentraining-1032.webp",
+    imageAlt: "Gruppentraining im JuklHealth Performance Club",
+    imagePosition: "object-[center_45%]",
+  },
+  {
+    title: "Individuelle Trainingsplanung",
+    body: "Evidenzbasierte, strukturierte Programmierungen, die exakt zu deinem Status quo passen.",
+    tags: ["Programming", "Periodisierung"],
+    to: "/athletiktraining",
+    image: "/img/gesundheitscoaching-1400.webp",
+    imageAlt: "Trainingsplanung am Tablet gemeinsam mit dem Athleten",
+    imagePosition: "object-[center_20%]",
+  },
+  {
+    title: "Rehabilitation & Verletzungsprävention",
+    body: "Klinische Physiotherapie und Trainingstherapie zur sicheren Rückkehr und Prävention.",
+    tags: ["Physiotherapie", "Therapie"],
+    to: "/physiotherapie",
+    image: "/img/analysen-hero-1446.webp",
+    imageAlt: "Bewegungsanalyse zur Verletzungsprävention",
+    imagePosition: "object-[center_20%]",
+  },
+  {
+    title: "Mikronährstoff- & Körperanalysen",
+    body: "Datengestützte Leistungs-, Stoffwechsel- und Bewegungsanalysen als objektiver Status quo.",
+    tags: ["Leistung", "Stoffwechsel"],
+    to: "/analysen",
+    image: "/img/leistungsanalyse-1217.webp",
+    imageAlt: "Leistungsdiagnostik mit Atemmaske auf dem Ergometer",
+    imagePosition: "object-[center_30%]",
+  },
+  {
+    title: "Strength Club Abo",
+    body: "160 m², 24/7-Zugang, exklusives Trainingsambiente. Exklusiv auf 100 Mitglieder begrenzt – inklusive Betreuungssystem über ein ganzes Jahr.",
+    tags: ["24/7", "Membership"],
+    to: "/strength-club",
+    image: "/img/strength-club-1824.webp",
+    imageAlt: "Trainingsfläche im Strength Club Dornbirn",
+  },
+] as const;
+
+/* Hover borrows the Standorte timing, not its colour: on the dark slab the
+   green already lives in the arrow button, so the row lifts with a neutral
+   wash and hairline instead. The wash is its own layer rather than a
+   `hover:bg-*` swap so it sits *on* the elevated surface instead of replacing
+   it, and the photo zooms inside a fixed frame — the notch is a mask on the
+   frame, so scaling the <img> instead of the wrapper would drag the cut-out
+   away from the arrow button. */
+const EASE_PREMIUM = "duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
+
+function ServiceRow({ service, index }: { service: (typeof services)[number]; index: number }) {
+  return (
+    <Link
+      to={service.to}
+      className={cn(
+        "group relative grid grid-cols-1 gap-6 rounded-card bg-surface-elevated p-6 transition-shadow xl:grid-cols-12 xl:items-start xl:gap-8 xl:px-6 xl:py-10",
+        EASE_PREMIUM,
+        "hover:inset-ring-1 hover:inset-ring-surface-foreground/20",
+      )}
+    >
+      <span
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 rounded-card bg-surface-foreground/5 opacity-0 transition-opacity group-hover:opacity-100",
+          EASE_PREMIUM,
+        )}
+      />
+
+      <p
+        className={cn(
+          "relative text-base font-light uppercase leading-[1.25] tracking-[0.05em] text-[#d4d4d4] transition-colors group-hover:text-surface-foreground xl:col-span-2",
+          EASE_PREMIUM,
+        )}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </p>
+
+      <h3 className="font-display relative text-[28px] leading-[1.25] text-surface-foreground lg:text-[40px] xl:col-span-4">
+        {service.title}
+      </h3>
+
+      <div className="relative flex flex-col gap-6 xl:col-span-3">
+        <p className="max-w-[372px] text-base font-light leading-[1.3] text-surface-foreground/90">
+          {service.body}
+        </p>
+        <div className="flex max-w-[372px] flex-wrap items-center gap-1.5">
+          {service.tags.map((tag) => (
+            <span
+              key={tag}
+              className={cn(
+                "rounded-image bg-surface-foreground/10 p-2 text-xs font-light uppercase leading-[1.25] text-surface-foreground/90 transition-colors group-hover:bg-surface-foreground/20",
+                EASE_PREMIUM,
+              )}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative xl:col-span-3">
+        <div className="jh-notch-tr h-[200px] w-full overflow-hidden rounded-image [--notch-h:50px] [--notch-r:30px] [--notch-w:50px] xl:ml-auto xl:h-[207px] xl:max-w-[368px]">
+          <SmartImage
+            src={service.image}
+            alt={service.imageAlt}
+            sizes="(min-width: 1280px) 368px, 100vw"
+            className={cn(
+              "h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] motion-reduce:transform-none motion-reduce:transition-none",
+              "imagePosition" in service ? service.imagePosition : undefined,
+            )}
+          />
+        </div>
+        <span
+          className={cn(
+            "absolute right-0 top-0 flex items-center justify-center rounded-full bg-background p-2.5 transition-colors group-hover:bg-primary",
+            EASE_PREMIUM,
+          )}
+        >
+          <ArrowUpRight
+            className={cn(
+              "size-5 text-foreground transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary-foreground motion-reduce:transform-none motion-reduce:transition-none",
+              EASE_PREMIUM,
+            )}
+            strokeWidth={2}
+            aria-hidden
+          />
+        </span>
+      </div>
+    </Link>
+  );
+}
 
 export function PerformanceClubBlock() {
   return (
-    <section className="border-b border-foreground/10">
-      <div className="jh-container grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative bg-muted min-h-[260px] sm:min-h-[380px] lg:min-h-[640px]">
-          <SmartImage
-            src={pcHero}
-            alt="JuklHealth Performance Club"
-            className="absolute inset-0 w-full h-full object-cover"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
-        </div>
-        <div className="flex flex-col justify-center jh-gutter py-16 lg:py-20">
-          <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6">
-            Performance Club
-          </span>
-          <h2 className="font-display text-4xl lg:text-6xl tracking-tight leading-[1.05]">
-            Athletes are <span className="text-primary">made</span> here.
-          </h2>
-          <p className="mt-8 max-w-lg text-muted-foreground">
-            Willkommen im JuklHealth Performance Club, inmitten von Dornbirn. Funktionelles
-            Training, erstklassige Physiotherapie und ein Team aus Trainern, Sportwissenschaftlern
-            und Physiotherapeuten.
-          </p>
-          <ul className="mt-8 space-y-2 text-sm text-muted-foreground">
-            <li>· Personal- & Athletiktraining</li>
-            <li>· Gruppentraining</li>
-            <li>· Individuelle Trainingsplanung</li>
-            <li>· Rehabilitation & Verletzungsprävention</li>
-            <li>· Mikronährstoff- und Körperanalysen</li>
-          </ul>
-          <div className="mt-10">
-            <Link
-              to="/performance-club"
-              className="inline-block border border-foreground px-7 py-4 font-display text-sm hover:bg-foreground hover:text-background"
-            >
-              Mehr erfahren
-            </Link>
+    <section className="jh-container jh-edge">
+      <div className="flex flex-col gap-10 rounded-card bg-surface px-4 py-16 lg:gap-16 lg:px-8 lg:py-24">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-8">
+          <div className="flex flex-col gap-3 lg:w-[1088px] lg:max-w-[65%]">
+            <Eyebrow className="text-surface-muted-foreground">Performance Club</Eyebrow>
+            <h2 className="font-display text-[28px] leading-[1.25] text-surface-foreground lg:text-[42px]">
+              Willkommen im JuklHealth Performance Club in Dornbirn. Funktionelles Training,
+              erstklassige Physiotherapie und interdisziplinäre Expertise aus Sportwissenschaft und
+              Therapie.
+            </h2>
           </div>
+          <div className="flex flex-1 justify-start lg:justify-end">
+            <PillLink to="/performance-club" variant="outlineOnDark">
+              Mehr erfahren
+            </PillLink>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-8">
+          {services.map((service, i) => (
+            <ServiceRow key={service.title} service={service} index={i} />
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-export function ProfisportBlock() {
+const locations = [
+  {
+    name: "Performance Club Dornbirn",
+    area: "140 m²",
+    address: "Bildgasse 10, 3. Stock · A-6850 Dornbirn",
+    points: [
+      "Personal Training & Athletik",
+      "Kurse in Kleingruppen",
+      "Mobility · Movement · Strength · Burn",
+      "Nur mit Terminvereinbarung",
+    ],
+    to: "/performance-club",
+  },
+  {
+    name: "Strength Club Dornbirn",
+    area: "160 m²",
+    address: "Bildgasse 10, Erdgeschoss · A-6850 Dornbirn",
+    points: [
+      "24 h / 7 Tage Zugang",
+      "Max. 100 Mitglieder",
+      "1 Jahr Betreuungssystem",
+      "Exklusives Trainingsambiente",
+    ],
+    to: "/strength-club",
+  },
+  {
+    name: "Training Club Widnau (CH)",
+    area: "50 m²",
+    address: "Schützenstrasse 13 · CH-9443 Widnau",
+    points: [
+      "1:1 Personal Training",
+      "Trainingstherapie",
+      "Privates Ambiente",
+      "15 Jahre Erfahrung",
+    ],
+    to: "/training-club-widnau",
+  },
+] as const;
+
+export function LocationsBlock() {
+  const [active, setActive] = useState<number | null>(null);
+  const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
+  const [highlight, setHighlight] = useState<{
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+  } | null>(null);
+
+  // Measure from the card itself rather than assuming equal columns: the grid
+  // is three across on desktop but stacked, with unequal heights, on mobile.
+  // The last measurement is kept when the pointer leaves so the panel fades out
+  // where it stands instead of snapping back to the first card.
+  useLayoutEffect(() => {
+    if (active === null) return;
+    const el = cardRefs.current[active];
+    if (!el) return;
+    const measure = () =>
+      setHighlight({ x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight });
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [active]);
+
   return (
-    <section className="border-b border-foreground/10">
-      <div className="jh-container grid grid-cols-1 lg:grid-cols-2">
-        <div className="flex flex-col justify-center jh-gutter py-16 lg:py-20 order-2 lg:order-1">
-          <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6">Profisport</span>
-          <h2 className="font-display text-4xl lg:text-6xl tracking-tight leading-[1.05]">
-            Trainiere wie die <span className="text-primary">Besten</span>.
-          </h2>
-          <p className="mt-8 max-w-lg text-muted-foreground">
+    <section className="jh-container jh-gutter">
+      <div className="flex flex-col gap-10 py-16 lg:gap-16 lg:py-24">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-8">
+          <div className="flex flex-col gap-3 lg:w-[1088px] lg:max-w-[65%]">
+            <Eyebrow>Standorte</Eyebrow>
+            <h2 className="font-display text-[32px] leading-[1.25] text-foreground lg:text-[48px]">
+              Drei Clubs. Ein System.
+            </h2>
+          </div>
+          <div className="flex flex-1 justify-start lg:justify-end">
+            <PillLink to="/kontakt">Termin vereinbaren</PillLink>
+          </div>
+        </div>
+
+        {/* One connected slab. The green is a single panel that glides to
+              whichever card is hovered rather than living on a fixed card.
+              It is inset by -1px and sized +2px so its ring covers the slab's
+              own grey border instead of sitting inside it — otherwise the
+              rounded ends stay grey while the straight edges turn green. That
+              also rules out `overflow-hidden`, so the panel rounds the outer
+              corners of whichever end card it is on. */}
+        <div
+          className="relative grid grid-cols-1 rounded-card border border-border lg:grid-cols-3"
+          onMouseLeave={() => setActive(null)}
+        >
+          <div
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute left-0 top-0 z-0 bg-primary/5 shadow-[inset_0_0_0_1px_var(--color-primary)] transition-[transform,width,height,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+              active === 0 && "rounded-t-card lg:rounded-l-card lg:rounded-tr-none",
+              active === locations.length - 1 &&
+                "rounded-b-card lg:rounded-r-card lg:rounded-bl-none",
+            )}
+            style={{
+              width: highlight ? highlight.w + 2 : 0,
+              height: highlight ? highlight.h + 2 : 0,
+              transform: `translate(${(highlight?.x ?? 0) - 1}px, ${(highlight?.y ?? 0) - 1}px)`,
+              opacity: active === null ? 0 : 1,
+            }}
+          />
+          {locations.map((loc, i) => (
+            <Link
+              key={loc.name}
+              to={loc.to}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              className="group relative z-10 flex flex-col gap-3 border-b border-border p-8 last:border-b-0 lg:border-b-0 lg:border-r lg:p-10 lg:last:border-r-0"
+            >
+              <Eyebrow>{String(i + 1).padStart(2, "0")}</Eyebrow>
+              <h3 className="font-display text-[28px] leading-[1.25] text-[#1f2937] lg:text-[40px]">
+                {loc.name}
+              </h3>
+              <p className="text-base font-light uppercase leading-[1.3] text-muted-foreground">
+                {loc.area}
+              </p>
+              <p className="text-base font-medium leading-[1.3] text-muted-foreground">
+                {loc.address}
+              </p>
+              <ul className="px-2 py-1">
+                {loc.points.map((p) => (
+                  <li key={p} className="flex gap-2 text-base leading-[1.75] text-muted-foreground">
+                    <span className="text-primary" aria-hidden>
+                      →
+                    </span>
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto pt-2">
+                <PillStatic className="group-hover:text-primary-hover">Entdecken</PillStatic>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** One photo per club, in the same order the Standorte cards list them. */
+const profisportSlides = [
+  { src: "/img/pc-hero-1386.webp", alt: "Trainingsfläche im Performance Club Dornbirn" },
+  { src: "/img/strength-club-1824.webp", alt: "Trainingsfläche im Strength Club Dornbirn" },
+  { src: "/img/widnau-club-1080.webp", alt: "Trainingsfläche im Training Club Widnau" },
+];
+
+const SLIDE_MS = 3200;
+
+export function ProfisportBlock() {
+  const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const next = useCallback(() => setSlide((s) => (s + 1) % profisportSlides.length), []);
+
+  // Tracked as state rather than read inline, because the timeline below has to
+  // agree with it: if nothing is advancing, nothing should appear to be
+  // counting down either.
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  // The progress bar IS the timer — `next` runs off its animationend, below.
+  // A separate interval would be a second clock: hovering pauses the bar where
+  // it stands but can only cancel and restart an interval, so on release the
+  // bar would finish early and then sit full waiting for the slide to catch up.
+  // One clock means pausing the animation pauses the advance, exactly.
+
+  return (
+    <section className="jh-container jh-gutter">
+      <div className="grid grid-cols-1 gap-16 py-16 lg:grid-cols-2 lg:py-24">
+        <div className="flex flex-col justify-center gap-6">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Profisport</Eyebrow>
+            <h2 className="font-display text-[32px] leading-[1.25] text-foreground lg:text-[48px]">
+              <span className="block">Trainiere wie</span>
+              <span>die </span>
+              <span className="italic text-primary">Besten</span>
+              <span>.</span>
+            </h2>
+          </div>
+          <p className="max-w-[450px] text-base leading-[1.45] text-foreground">
             Deine Erfolgsgeschichte beginnt hier. Wir begleiten Leistungssportler, ambitionierte
             Sportler und Profis auf ihrem Weg. Dein Erfolg ist unser Fokus.
           </p>
-          <div className="mt-10">
-            <Link
-              to="/athletiktraining"
-              className="inline-block border border-foreground px-7 py-4 font-display text-sm hover:bg-foreground hover:text-background"
-            >
+          <div className="flex pt-4">
+            <PillLink to="/athletiktraining" variant="outlineOnLight">
               Mehr erfahren
-            </Link>
+            </PillLink>
           </div>
         </div>
-        <div className="relative bg-muted min-h-[260px] sm:min-h-[380px] lg:min-h-[640px] order-1 lg:order-2">
-          <SmartImage
-            src={profisport}
-            alt="Profisport Training"
-            className="absolute inset-0 w-full h-full object-cover"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
+
+        <div
+          className="relative"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
+        >
+          <div className="jh-notch-br overflow-hidden rounded-image [--notch-h:50px] [--notch-r:30px] [--notch-w:118px] lg:[--notch-w:166px]">
+            <div
+              className="jh-notch-tl relative aspect-[776/484] w-full bg-muted [--notch-h:90px] [--notch-r:34px] [--notch-w:160px] lg:[--notch-h:102px] lg:[--notch-w:182px]"
+              aria-roledescription="Karussell"
+              aria-label="Unsere Clubs"
+            >
+              {profisportSlides.map((s, i) => (
+                <SmartImage
+                  key={s.src}
+                  src={s.src}
+                  alt={s.alt}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  aria-hidden={i !== slide}
+                  className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${
+                    i === slide ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="absolute left-0 top-0 flex h-[80px] w-[150px] flex-col justify-center rounded-card bg-surface px-3 lg:h-[92px] lg:w-[172px] lg:px-4">
+            <p className="whitespace-nowrap text-xl font-light leading-[1.25] text-surface-foreground lg:text-2xl">
+              Athletes are
+            </p>
+            <p className="whitespace-nowrap text-xl leading-[1.25] text-surface-foreground lg:text-2xl">
+              <span className="font-bold italic text-primary">made</span> here.
+            </p>
+          </div>
+
+          {/* The timeline is the whole control: one segment per slide, each a
+              button, with the active one filling across the photo's dwell time.
+              Prev/next arrows would only duplicate what a click on a segment
+              already does. The 40px row keeps the tap target comfortable even
+              though the bar itself is 3px. */}
+          <div className="absolute bottom-0 right-0 flex h-10 items-center gap-1.5">
+            {profisportSlides.map((s, i) => (
+              <button
+                key={s.src}
+                type="button"
+                onClick={() => setSlide(i)}
+                aria-label={`Bild ${i + 1} von ${profisportSlides.length} anzeigen`}
+                aria-current={i === slide}
+                className="group/seg flex h-10 w-8 cursor-pointer items-center lg:w-12"
+              >
+                <span className="block h-[3px] w-full overflow-hidden rounded-full bg-foreground/20 transition-colors group-hover/seg:bg-foreground/35">
+                  {/* Both states drive the same property. Tailwind's
+                      `scale-x-*` compiles to `scale`, which would multiply
+                      against the keyframes' `transform` and pin the bar at
+                      zero width. */}
+                  <span
+                    key={`${i}-${slide}`}
+                    onAnimationEnd={i === slide ? next : undefined}
+                    className="block h-full origin-left rounded-full bg-foreground"
+                    style={
+                      i === slide && !reduced
+                        ? {
+                            animation: `jh-carousel-fill ${SLIDE_MS}ms linear forwards`,
+                            animationPlayState: paused ? "paused" : "running",
+                          }
+                        : {
+                            transform: `scaleX(${i < slide || (i === slide && reduced) ? 1 : 0})`,
+                          }
+                    }
+                  />
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

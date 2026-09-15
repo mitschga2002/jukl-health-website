@@ -13,6 +13,10 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  /* Fixed radii from the design: 16px on media, 24px on section and row cards.
+     Kept off the shadcn `--radius` scale so the UI primitives stay square. */
+  --radius-image: 16px;
+  --radius-card: 24px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -26,6 +30,11 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-muted-foreground: var(--surface-muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
@@ -51,39 +60,47 @@
 
 :root {
   --radius: 0rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0 0 0);
+  /* Palette taken from the Figma homepage: warm off-white page (#fafaf8),
+     near-black ink (#171717), JuklHealth green (#148a0a). */
+  --background: oklch(0.9845 0.0026 106.45);
+  --foreground: oklch(0.2046 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0 0 0);
+  --card-foreground: oklch(0.2046 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0 0 0);
-  --primary: oklch(0.55 0.18 142);
-  --primary-hover: oklch(0.42 0.16 142);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0 0 0);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.55 0.18 142);
-  --accent-foreground: oklch(1 0 0);
+  --popover-foreground: oklch(0.2046 0 0);
+  --primary: oklch(0.5511 0.1814 142.11);
+  --primary-hover: oklch(0.4596 0.1503 142.05);
+  --primary-foreground: oklch(0.9845 0.0026 106.45);
+  --secondary: oklch(0.2046 0 0);
+  --secondary-foreground: oklch(0.9845 0.0026 106.45);
+  --muted: oklch(0.9546 0.0027 106.45);
+  --muted-foreground: oklch(0.3715 0 0);
+  --subtle-foreground: oklch(0.4962 0 0);
+  --accent: oklch(0.5511 0.1814 142.11);
+  --accent-foreground: oklch(0.9845 0.0026 106.45);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0 0 0 / 10%);
-  --input: oklch(0 0 0 / 15%);
-  --ring: oklch(0.55 0.18 142);
-  --chart-1: oklch(0.55 0.18 142);
-  --chart-2: oklch(0 0 0);
-  --chart-3: oklch(0.45 0 0);
+  --destructive-foreground: oklch(0.9845 0.0026 106.45);
+  --border: oklch(0.8699 0 0);
+  --input: oklch(0.8699 0 0);
+  --ring: oklch(0.5511 0.1814 142.11);
+  /* Inverted sections (#171717) and the cards that sit on them (#262626). */
+  --surface: oklch(0.2046 0 0);
+  --surface-foreground: oklch(0.9845 0.0026 106.45);
+  --surface-elevated: oklch(0.2686 0 0);
+  --surface-muted-foreground: oklch(0.4962 0 0);
+  --chart-1: oklch(0.5511 0.1814 142.11);
+  --chart-2: oklch(0.2046 0 0);
+  --chart-3: oklch(0.4962 0 0);
   --chart-4: oklch(0.75 0 0);
   --chart-5: oklch(0.9 0 0);
   --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0 0 0);
-  --sidebar-primary: oklch(0.55 0.18 142);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.96 0 0);
-  --sidebar-accent-foreground: oklch(0 0 0);
-  --sidebar-border: oklch(0 0 0 / 10%);
-  --sidebar-ring: oklch(0.55 0.18 142);
+  --sidebar-foreground: oklch(0.2046 0 0);
+  --sidebar-primary: oklch(0.5511 0.1814 142.11);
+  --sidebar-primary-foreground: oklch(0.9845 0.0026 106.45);
+  --sidebar-accent: oklch(0.9546 0.0027 106.45);
+  --sidebar-accent-foreground: oklch(0.2046 0 0);
+  --sidebar-border: oklch(0.8699 0 0);
+  --sidebar-ring: oklch(0.5511 0.1814 142.11);
 }
 
 .dark {
@@ -98,8 +115,13 @@
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(1 0 0);
   --secondary-foreground: oklch(0 0 0);
-  --muted: oklch(0.18 0 0);
+  --muted: oklch(0.2686 0 0);
   --muted-foreground: oklch(0.7 0 0);
+  --subtle-foreground: oklch(0.62 0 0);
+  --surface: oklch(0.2046 0 0);
+  --surface-foreground: oklch(0.9845 0.0026 106.45);
+  --surface-elevated: oklch(0.2686 0 0);
+  --surface-muted-foreground: oklch(0.4962 0 0);
   --accent: oklch(0.6 0.2 142);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.704 0.191 22.216);
@@ -135,6 +157,7 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family:
+      "Inter",
       "Hind",
       system-ui,
       -apple-system,
@@ -156,40 +179,48 @@
   }
 
   .font-display {
-    font-family: "Inter Tight", "Hind", system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-family: "Inter", "Inter Tight", "Hind", system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     text-transform: none;
     /* Long German compounds must not force the page wider than the viewport. */
     overflow-wrap: break-word;
   }
 
   .font-mono {
-    font-family: "Inter Tight", "Hind", system-ui, sans-serif;
+    font-family: "Inter", "Inter Tight", "Hind", system-ui, sans-serif;
     font-weight: 500;
     letter-spacing: 0.14em;
   }
 }
 
-/* Layout rail. Every module sits on the same two vertical lines: `jh-container`
-   caps the module at the rail width, `jh-gutter` insets its content to the
-   content line. Section backgrounds stay outside the container so they still
-   bleed the full viewport.
+/* Layout rail. There are exactly two vertical lines on the page, and every
+   module lands on one of them:
 
-   Split modules (text next to a photo) keep `jh-container` on the grid so the
-   image half reaches the rail edge, and carry `jh-gutter` on the text half only,
-   which lands its copy on the same line as every full-width module.
+   - the CONTENT line (`jh-gutter`, 56px on desktop) carries all copy, the nav
+     bar, the section headings, the club cards and the footer columns;
+   - the EDGE line (`jh-edge`, 24px) sits further out and is only for the
+     full-bleed picture cards — the hero photo and the dark Performance Club
+     slab — so they visibly overhang the content they frame.
 
-   Deliberately outside this system: DisciplineTicker, whose marquee has to run
-   edge to edge. */
+   `jh-container` caps a module at the rail and is applied OUTSIDE the padding,
+   so the rail matches the design frame (1728px) and the two lines keep their
+   absolute offsets from it at every viewport.
+
+   Full-bleed backgrounds (the dark team slab, the footer, the ticker) skip
+   `jh-container` entirely so the colour reaches the viewport edge, and put the
+   container on the inner wrapper instead — the paint bleeds, the content does
+   not. */
 :root {
-  --jh-rail: 1400px;
-  --jh-gutter: 1.5rem;
+  --jh-rail: 1728px;
+  --jh-gutter: 1rem;
+  --jh-edge: 0.75rem;
 }
 
 @media (width >= 64rem) {
   :root {
-    --jh-gutter: 3rem;
+    --jh-gutter: 3.5rem;
+    --jh-edge: 1.5rem;
   }
 }
 
@@ -203,6 +234,129 @@
   padding-inline: var(--jh-gutter);
 }
 
+@utility jh-edge {
+  padding-inline: var(--jh-edge);
+}
+
+/* Photo notches. Where a control overlaps a photo — the arrow button on a
+   service row, the "10+ Jahre Erfahrung" badge, the carousel arrows — the
+   design does not let it sit on top of the picture: the picture is stamped out
+   around it. Reconstructed from the Figma export of a service row (368x207),
+   the cut is:
+
+     bite          = the control inflated by a 10px gap
+     inner corner  = control radius + gap, centred on the control's centre
+     fillets       = 20px arcs tangent to that circle and to the photo's edge,
+                     which is what keeps the cut from reading as a crop
+
+   The four custom properties below drive it, so one rule serves every control
+   and the numbers can change per breakpoint (`lg:[--notch-w:231px]`):
+
+     --notch-w / --notch-h   bite size   = control size + 2 x gap on the cut sides
+     --notch-r               inner corner = control radius + gap
+     --notch-f               fillet radius
+
+   The shape is assembled with mask-composite, bottom layer first:
+
+     carve  --subtract-->  fill    = the bite, with its rounded inner corner
+            --add------->  fillets = plus the two tangent arcs
+            --subtract-->  base    = the photo minus all of it
+
+   A browser without mask-composite unions the layers instead, which is fully
+   opaque — the photo then simply renders uncut. */
+.jh-notch-tr,
+.jh-notch-tl,
+.jh-notch-br {
+  --notch-f: 20px;
+  --notch-flat: linear-gradient(#000, #000);
+  mask-repeat: no-repeat;
+  mask-composite: subtract, add, add, subtract, add;
+}
+
+.jh-notch-tr {
+  --notch-fillet: radial-gradient(
+    circle var(--notch-f) at 0 100%,
+    #0000 0 var(--notch-f),
+    #000 var(--notch-f)
+  );
+  --notch-carve: radial-gradient(
+    circle var(--notch-r) at 100% 0,
+    #0000 0 var(--notch-r),
+    #000 var(--notch-r)
+  );
+  mask-size:
+    100% 100%,
+    calc(var(--notch-f) + 1px) var(--notch-f),
+    var(--notch-f) calc(var(--notch-f) + 1px),
+    var(--notch-w) var(--notch-h),
+    var(--notch-r) var(--notch-r);
+  mask-image:
+    var(--notch-flat), var(--notch-fillet), var(--notch-fillet), var(--notch-flat),
+    var(--notch-carve);
+  mask-position:
+    center,
+    right calc(var(--notch-w) - 1px) top 0,
+    right 0 top calc(var(--notch-h) - 1px),
+    right 0 top 0,
+    right calc(var(--notch-w) - var(--notch-r)) top calc(var(--notch-h) - var(--notch-r));
+}
+
+.jh-notch-tl {
+  --notch-fillet: radial-gradient(
+    circle var(--notch-f) at 100% 100%,
+    #0000 0 var(--notch-f),
+    #000 var(--notch-f)
+  );
+  --notch-carve: radial-gradient(
+    circle var(--notch-r) at 0 0,
+    #0000 0 var(--notch-r),
+    #000 var(--notch-r)
+  );
+  mask-size:
+    100% 100%,
+    calc(var(--notch-f) + 1px) var(--notch-f),
+    var(--notch-f) calc(var(--notch-f) + 1px),
+    var(--notch-w) var(--notch-h),
+    var(--notch-r) var(--notch-r);
+  mask-image:
+    var(--notch-flat), var(--notch-fillet), var(--notch-fillet), var(--notch-flat),
+    var(--notch-carve);
+  mask-position:
+    center,
+    left calc(var(--notch-w) - 1px) top 0,
+    left 0 top calc(var(--notch-h) - 1px),
+    left 0 top 0,
+    left calc(var(--notch-w) - var(--notch-r)) top calc(var(--notch-h) - var(--notch-r));
+}
+
+.jh-notch-br {
+  --notch-fillet: radial-gradient(
+    circle var(--notch-f) at 0 0,
+    #0000 0 var(--notch-f),
+    #000 var(--notch-f)
+  );
+  --notch-carve: radial-gradient(
+    circle var(--notch-r) at 100% 100%,
+    #0000 0 var(--notch-r),
+    #000 var(--notch-r)
+  );
+  mask-size:
+    100% 100%,
+    calc(var(--notch-f) + 1px) var(--notch-f),
+    var(--notch-f) calc(var(--notch-f) + 1px),
+    var(--notch-w) var(--notch-h),
+    var(--notch-r) var(--notch-r);
+  mask-image:
+    var(--notch-flat), var(--notch-fillet), var(--notch-fillet), var(--notch-flat),
+    var(--notch-carve);
+  mask-position:
+    center,
+    right calc(var(--notch-w) - 1px) bottom 0,
+    right 0 bottom calc(var(--notch-h) - 1px),
+    right 0 bottom 0,
+    right calc(var(--notch-w) - var(--notch-r)) bottom calc(var(--notch-h) - var(--notch-r));
+}
+
 @keyframes jh-slide-up {
   from {
     transform: translateY(40px);
@@ -211,6 +365,18 @@
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+/* Carousel timeline: the active segment fills across one slide's dwell time.
+   scaleX rather than width so it animates on the compositor, and it is paused
+   (not restarted) while the reader holds the carousel. */
+@keyframes jh-carousel-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
