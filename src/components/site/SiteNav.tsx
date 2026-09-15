@@ -65,7 +65,7 @@ function Dropdown({
         />
       </button>
       <div className="invisible absolute left-0 top-full pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-        <div className="min-w-[240px] rounded-image border border-border bg-card py-2 shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+        <div className="min-w-[240px] overflow-hidden rounded-image border border-border bg-background/80 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-xl">
           {items.map((i) => (
             <Link
               key={i.to + (i.hash ?? "") + i.label}
@@ -222,7 +222,7 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
       )}
     >
       <div className="relative z-50 px-4 lg:px-6">
-        <div className="flex items-center justify-between gap-4 rounded-image bg-background/80 px-4 py-3 shadow-[0_4px_8px_rgba(0,0,0,0.05)] backdrop-blur-xl">
+        <div className="flex items-center justify-between gap-4 rounded-image bg-background/80 px-4 py-3 shadow-[0_2px_6px_rgba(0,0,0,0.04)] backdrop-blur-xl">
           <Link
             to="/"
             className="flex shrink-0 items-center"
@@ -287,7 +287,7 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
           {/* No header of its own: the sheet opens *under* the floating bar,
               which keeps the logo and swaps the burger for the close icon.
               `pt-20` clears the bar (8px offset + ~46px tall). */}
-          <div className="jh-container flex-1 overflow-y-auto overscroll-contain px-8 pb-12 pt-20">
+          <div className="jh-container flex-1 overflow-y-auto overscroll-contain px-8 pb-12 pt-24">
             <div className="space-y-6">
               <MobileGroup label="Clubs" items={clubLinks} onNavigate={close} />
               <div className="border-t border-border pt-6">

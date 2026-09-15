@@ -29,7 +29,7 @@ function Impressum() {
         intro="Informationspflicht laut §5 E-Commerce Gesetz, §14 Unternehmensgesetzbuch, §63 Gewerbeordnung und Offenlegungspflicht laut §25 Mediengesetz."
       />
 
-      <Section eyebrow="ANGABEN" title="Juklhealth OG">
+      <Section compact eyebrow="ANGABEN" title="Juklhealth OG">
         <dl className="grid md:grid-cols-2 gap-x-10 gap-y-3 text-base not-prose">
           <Row k="Inhaber">Julian Kleinheinz, BSc & Florian Winder, BSc</Row>
           <Row k="Firma">Juklhealth OG</Row>
@@ -37,11 +37,17 @@ function Impressum() {
           <Row k="Unternehmensgegenstand">Fitness und Gesundheit</Row>
           <Row k="UID-Nummer">ATU82407824</Row>
           <Row k="E-Mail">
-            <a className="underline hover:text-primary" href="mailto:julian@juklhealth.com">
+            <a
+              className="underline hover:text-primary transition-colors duration-300 ease-out"
+              href="mailto:julian@juklhealth.com"
+            >
               julian@juklhealth.com
             </a>
             <br />
-            <a className="underline hover:text-primary" href="mailto:florian@juklhealth.com">
+            <a
+              className="underline hover:text-primary transition-colors duration-300 ease-out"
+              href="mailto:florian@juklhealth.com"
+            >
               florian@juklhealth.com
             </a>
           </Row>
@@ -49,7 +55,7 @@ function Impressum() {
           <Row k="Berufsrecht">
             Gewerbeordnung:{" "}
             <a
-              className="underline hover:text-primary"
+              className="underline hover:text-primary transition-colors duration-300 ease-out"
               href="https://www.ris.bka.gv.at/"
               target="_blank"
               rel="noreferrer"
@@ -66,7 +72,7 @@ function Impressum() {
         </dl>
       </Section>
 
-      <Section eyebrow="HAFTUNG" title="Haftung für Inhalte">
+      <Section compact eyebrow="HAFTUNG" title="Haftung für Inhalte">
         <p>
           Wir entwickeln die Inhalte dieser Webseite ständig weiter und bemühen uns, korrekte und
           aktuelle Informationen bereitzustellen. Leider können wir keine Haftung für die
@@ -79,7 +85,7 @@ function Impressum() {
         </p>
       </Section>
 
-      <Section eyebrow="HAFTUNG" title="Haftung für Links">
+      <Section compact eyebrow="HAFTUNG" title="Haftung für Links">
         <p>
           Unsere Webseite enthält Links zu anderen Webseiten, für deren Inhalt wir nicht
           verantwortlich sind. Haftung für verlinkte Websites besteht laut § 17 ECG für uns nicht,
@@ -88,7 +94,7 @@ function Impressum() {
         </p>
       </Section>
 
-      <Section eyebrow="URHEBERRECHT" title="Urheberrechtshinweis">
+      <Section compact eyebrow="URHEBERRECHT" title="Urheberrechtshinweis">
         <p>
           Alle Inhalte dieser Webseite (Bilder, Fotos, Texte, Videos) unterliegen dem Urheberrecht.
           Falls notwendig, werden wir die unerlaubte Nutzung von Teilen der Inhalte unserer Seite
@@ -102,7 +108,9 @@ function Impressum() {
 function Row({ k, children }: { k: string; children: React.ReactNode }) {
   return (
     <div>
-      <dt className="font-mono text-[11px] uppercase tracking-widest text-primary">{k}</dt>
+      <dt className="text-xs font-light uppercase leading-tight tracking-wider text-primary">
+        {k}
+      </dt>
       <dd className="mt-1">{children}</dd>
     </div>
   );

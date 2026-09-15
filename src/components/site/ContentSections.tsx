@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { SmartImage } from "./SmartImage";
-import { Eyebrow, PillLink, PillStatic } from "./Pill";
+import { Eyebrow, PillLink } from "./Pill";
+import { ConnectedCards } from "./ConnectedCards";
 import { cn } from "@/lib/utils";
 
 const services = [
@@ -222,31 +223,6 @@ const locations = [
 ] as const;
 
 export function LocationsBlock() {
-  const [active, setActive] = useState<number | null>(null);
-  const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
-  const [highlight, setHighlight] = useState<{
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-  } | null>(null);
-
-  // Measure from the card itself rather than assuming equal columns: the grid
-  // is three across on desktop but stacked, with unequal heights, on mobile.
-  // The last measurement is kept when the pointer leaves so the panel fades out
-  // where it stands instead of snapping back to the first card.
-  useLayoutEffect(() => {
-    if (active === null) return;
-    const el = cardRefs.current[active];
-    if (!el) return;
-    const measure = () =>
-      setHighlight({ x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight });
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [active]);
-
   return (
     <section className="jh-container jh-gutter">
       <div className="flex flex-col gap-10 py-16 lg:gap-16 lg:py-24">
@@ -262,69 +238,15 @@ export function LocationsBlock() {
           </div>
         </div>
 
-        {/* One connected slab. The green is a single panel that glides to
-              whichever card is hovered rather than living on a fixed card.
-              It is inset by -1px and sized +2px so its ring covers the slab's
-              own grey border instead of sitting inside it — otherwise the
-              rounded ends stay grey while the straight edges turn green. That
-              also rules out `overflow-hidden`, so the panel rounds the outer
-              corners of whichever end card it is on. */}
-        <div
-          className="relative grid grid-cols-1 rounded-card border border-border lg:grid-cols-3"
-          onMouseLeave={() => setActive(null)}
-        >
-          <div
-            aria-hidden
-            className={cn(
-              "pointer-events-none absolute left-0 top-0 z-0 bg-primary/5 shadow-[inset_0_0_0_1px_var(--color-primary)] transition-[transform,width,height,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              active === 0 && "rounded-t-card lg:rounded-l-card lg:rounded-tr-none",
-              active === locations.length - 1 &&
-                "rounded-b-card lg:rounded-r-card lg:rounded-bl-none",
-            )}
-            style={{
-              width: highlight ? highlight.w + 2 : 0,
-              height: highlight ? highlight.h + 2 : 0,
-              transform: `translate(${(highlight?.x ?? 0) - 1}px, ${(highlight?.y ?? 0) - 1}px)`,
-              opacity: active === null ? 0 : 1,
-            }}
-          />
-          {locations.map((loc, i) => (
-            <Link
-              key={loc.name}
-              to={loc.to}
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              onMouseEnter={() => setActive(i)}
-              onFocus={() => setActive(i)}
-              className="group relative z-10 flex flex-col gap-3 border-b border-border p-8 last:border-b-0 lg:border-b-0 lg:border-r lg:p-10 lg:last:border-r-0"
-            >
-              <Eyebrow>{String(i + 1).padStart(2, "0")}</Eyebrow>
-              <h3 className="font-display text-[28px] leading-[1.25] text-[#1f2937] lg:text-[40px]">
-                {loc.name}
-              </h3>
-              <p className="text-base font-light uppercase leading-[1.3] text-muted-foreground">
-                {loc.area}
-              </p>
-              <p className="text-base font-medium leading-[1.3] text-muted-foreground">
-                {loc.address}
-              </p>
-              <ul className="px-2 py-1">
-                {loc.points.map((p) => (
-                  <li key={p} className="flex gap-2 text-base leading-[1.75] text-muted-foreground">
-                    <span className="text-primary" aria-hidden>
-                      →
-                    </span>
-                    <span>{p}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-auto pt-2">
-                <PillStatic className="group-hover:text-primary-hover">Entdecken</PillStatic>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <ConnectedCards
+          items={locations.map((l) => ({
+            to: l.to,
+            title: l.name,
+            meta: l.area,
+            detail: l.address,
+            points: l.points,
+          }))}
+        />
       </div>
     </section>
   );
@@ -380,7 +302,7 @@ export function ProfisportBlock() {
             Sportler und Profis auf ihrem Weg. Dein Erfolg ist unser Fokus.
           </p>
           <div className="flex pt-4">
-            <PillLink to="/athletiktraining" variant="outlineOnLight">
+            <PillLink to="/training-physio" variant="outlineOnLight">
               Mehr erfahren
             </PillLink>
           </div>

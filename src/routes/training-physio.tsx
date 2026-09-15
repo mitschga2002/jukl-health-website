@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero, Section, BulletList } from "@/components/site/content";
+import { ConnectedCards } from "@/components/site/ConnectedCards";
 
 export const Route = createFileRoute("/training-physio")({
   head: () => ({
@@ -60,45 +61,24 @@ function TrainingPhysio() {
     <PageShell>
       <PageHero
         eyebrow="LEISTUNGEN"
-        title="Training & Physio"
+        title="Trainings- & Physioangebote"
         intro="Von der Diagnose bis zur Performance: ein durchgängiges System aus Trainingswissenschaft und klinischer Physiotherapie."
       />
 
       <Section eyebrow="ÜBERSICHT" title="Alle Trainingsformate">
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-px bg-foreground/10 border border-foreground/10 not-prose">
-          {services.map((s) => (
-            <Link
-              key={s.to + s.label}
-              to={s.to}
-              className="flex flex-col gap-6 bg-background p-8 hover:bg-muted group justify-between"
-            >
-              <div>
-                <div className="font-mono text-[11px] text-primary mb-3">[ {s.num} ]</div>
-                <div className="font-display text-2xl mb-2 group-hover:text-primary">{s.label}</div>
-                <div className="text-sm text-muted-foreground">{s.desc}</div>
-              </div>
-              <div className="font-mono text-[11px] uppercase tracking-widest text-primary">
-                → entdecken
-              </div>
-            </Link>
-          ))}
-          {/* CTA card so the grid does not leave an empty cell. */}
-          <Link
-            to="/kontakt"
-            className="bg-primary text-primary-foreground p-8 flex flex-col justify-between hover:bg-primary-hover"
-          >
-            <div>
-              <div className="font-mono text-[11px] mb-3 opacity-80">[ 06 ]</div>
-              <div className="font-display text-2xl mb-2">Nicht das Richtige dabei?</div>
-              <div className="text-sm opacity-90">
-                Schreib uns – wir stellen dir ein individuelles Erstgespräch zusammen.
-              </div>
-            </div>
-            <div className="mt-6 font-mono text-[11px] uppercase tracking-widest">
-              → Erstgespräch vereinbaren
-            </div>
-          </Link>
-        </div>
+        <ConnectedCards
+          items={[
+            ...services.map((svc) => ({ to: svc.to, title: svc.label, body: svc.desc })),
+            // Closes the second row, so the slab never ends on an empty cell.
+            {
+              to: "/kontakt",
+              title: "Nicht das Richtige dabei?",
+              body: "Schreib uns – wir stellen dir ein individuelles Erstgespräch zusammen.",
+              action: "Erstgespräch vereinbaren",
+              accent: true,
+            },
+          ]}
+        />
       </Section>
 
       <Section eyebrow="WAS DU BEKOMMST" title="Wissenschaft + Praxis">

@@ -3,6 +3,7 @@ import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { submitContact } from "@/lib/contact.functions";
 import { MapEmbed } from "@/components/site/MapEmbed";
+import { Eyebrow, PillButton } from "@/components/site/Pill";
 
 const teamBanner = "/img/team-banner-1824.webp";
 
@@ -78,33 +79,30 @@ function Kontakt() {
         }
         image={teamBanner}
         imageAlt="Team von JuklHealth"
+        ratio="natural"
       />
 
       <Section eyebrow="KONTAKT" title="So erreichst du uns">
         <div className="grid md:grid-cols-2 gap-10 not-prose">
           <div className="space-y-6">
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-widest text-primary mb-1">
-                E-Mail
-              </div>
+              <Eyebrow className="mb-1 text-xs text-primary">E-Mail</Eyebrow>
               <a
                 href="mailto:julian@juklhealth.com"
-                className="font-display text-2xl lg:text-3xl hover:text-primary break-all"
+                className="font-display text-2xl lg:text-3xl hover:text-primary break-all transition-colors duration-300 ease-out"
               >
                 julian@juklhealth.com
               </a>
               <br />
               <a
                 href="mailto:florian@juklhealth.com"
-                className="font-display text-2xl lg:text-3xl hover:text-primary break-all"
+                className="font-display text-2xl lg:text-3xl hover:text-primary break-all transition-colors duration-300 ease-out"
               >
                 florian@juklhealth.com
               </a>
             </div>
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-widest text-primary mb-1">
-                Adresse
-              </div>
+              <Eyebrow className="mb-1 text-xs text-primary">Adresse</Eyebrow>
               <div className="text-lg leading-snug">
                 Bildgasse 10
                 <br />
@@ -114,14 +112,12 @@ function Kontakt() {
               </div>
             </div>
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-widest text-primary mb-1">
-                Social
-              </div>
+              <Eyebrow className="mb-1 text-xs text-primary">Social</Eyebrow>
               <a
                 href="https://www.instagram.com/juklhealth_clubs/"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-primary underline"
+                className="hover:text-primary underline transition-colors duration-300 ease-out"
               >
                 @juklhealth_clubs (Instagram)
               </a>
@@ -132,39 +128,20 @@ function Kontakt() {
 
           <form
             onSubmit={onSubmit}
-            className="space-y-5 border border-foreground/10 p-6 lg:p-8 bg-background"
+            className="space-y-5 rounded-card border border-border bg-card p-6 lg:p-8"
           >
             {search.trainer ? (
-              <div className="text-sm bg-muted px-3 py-2">
+              <div className="rounded-image bg-muted px-3 py-2 text-sm">
                 Termin-Anfrage für <strong>{search.trainer}</strong>
               </div>
             ) : null}
-            <Field id="name" label="Name" required>
-              <input
-                id="name"
-                name="name"
-                required
-                maxLength={200}
-                className="w-full border border-foreground/20 bg-transparent px-4 py-3 focus:outline-none focus:border-primary"
-              />
-            </Field>
-            <Field id="email" label="E-Mail" required>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                maxLength={320}
-                className="w-full border border-foreground/20 bg-transparent px-4 py-3 focus:outline-none focus:border-primary"
-              />
-            </Field>
             <Field id="topic" label="Anliegen" required>
               <select
                 id="topic"
                 name="topic"
                 required
                 defaultValue=""
-                className="w-full border border-foreground/20 bg-background px-4 py-3 focus:outline-none focus:border-primary"
+                className="w-full rounded-image border border-border bg-background px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
               >
                 <option value="" disabled>
                   Bitte auswählen …
@@ -179,13 +156,32 @@ function Kontakt() {
                 <option value="Performance Club">Performance Club</option>
               </select>
             </Field>
+            <Field id="name" label="Name" required>
+              <input
+                id="name"
+                name="name"
+                required
+                maxLength={200}
+                className="w-full rounded-image border border-border bg-transparent px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
+              />
+            </Field>
+            <Field id="email" label="E-Mail" required>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                maxLength={320}
+                className="w-full rounded-image border border-border bg-transparent px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
+              />
+            </Field>
             <Field id="phone" label="Telefon (optional)">
               <input
                 id="phone"
                 name="phone"
                 type="tel"
                 maxLength={60}
-                className="w-full border border-foreground/20 bg-transparent px-4 py-3 focus:outline-none focus:border-primary"
+                className="w-full rounded-image border border-border bg-transparent px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
               />
             </Field>
             <Field id="message" label="Nachricht" required>
@@ -195,17 +191,16 @@ function Kontakt() {
                 required
                 rows={5}
                 maxLength={5000}
-                className="w-full border border-foreground/20 bg-transparent px-4 py-3 focus:outline-none focus:border-primary"
+                className="w-full rounded-image border border-border bg-transparent px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
               />
             </Field>
 
-            <button
-              type="submit"
-              disabled={state === "sending"}
-              className="w-full bg-primary text-primary-foreground py-4 font-display uppercase hover:bg-primary-hover disabled:opacity-60 disabled:cursor-not-allowed"
-            >
+            {/* No arrow: the arrow reads as "this takes you somewhere", and a
+                submit stays on the page. `px-6` replaces the solid finish's
+                lopsided padding, which is cut for the arrow circle. */}
+            <PillButton type="submit" disabled={state === "sending"} className="w-full px-6">
               {state === "sending" ? "Wird gesendet …" : "Nachricht senden"}
-            </button>
+            </PillButton>
 
             {state === "sent" ? (
               <p role="status" className="text-sm text-primary font-semibold">
@@ -229,7 +224,7 @@ function Kontakt() {
                 href="/datenschutz"
                 target="_blank"
                 rel="noreferrer"
-                className="underline hover:text-primary"
+                className="underline hover:text-primary transition-colors duration-300 ease-out"
               >
                 Datenschutzerklärung
               </a>
@@ -257,7 +252,7 @@ function Field({
     <div>
       <label
         htmlFor={id}
-        className="font-mono text-[11px] uppercase tracking-widest text-primary block mb-1"
+        className="mb-1 block text-xs font-light uppercase leading-tight tracking-wider text-primary"
       >
         {label}
         {required ? <span aria-hidden> *</span> : null}

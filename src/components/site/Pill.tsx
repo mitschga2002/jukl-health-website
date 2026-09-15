@@ -15,13 +15,16 @@ const pillVariants = cva(
           "gap-2.5 bg-primary py-1 pl-4 pr-1 text-primary-foreground shadow-[0_1px_2px_rgba(0,0,0,0.25)] hover:bg-primary-hover",
         /* The outline finishes wash rather than invert: a full fill swaps both
            surface and ink at once, which reads as a state change instead of a
-           hover. The tint keeps the label and border exactly where they were. */
+           hover. The tint keeps the label and border exactly where they were.
+           Only the on-photo finish keeps a cast shadow, and a soft one — it is
+           the single case where the pill has to hold its own against an image.
+           On a flat surface the same shadow reads as grime under the hairline. */
         outlineOnPhoto:
-          "gap-2.5 border border-white px-4 py-2 text-white shadow-[0_1px_4px_rgba(0,0,0,0.25)] hover:bg-white/15",
+          "gap-2.5 border border-white px-4 py-2 text-white shadow-[0_1px_3px_rgba(0,0,0,0.18)] hover:bg-white/15",
         outlineOnDark:
-          "gap-2.5 border border-surface-foreground px-6 py-2 text-surface-foreground shadow-[0_1px_4px_rgba(0,0,0,0.25)] hover:bg-surface-foreground/10",
+          "gap-2.5 border border-surface-foreground px-6 py-2 text-surface-foreground hover:bg-surface-foreground/10",
         outlineOnLight:
-          "gap-2.5 border border-foreground px-6 py-2 text-foreground shadow-[0_1px_4px_rgba(0,0,0,0.25)] hover:bg-foreground/5",
+          "gap-2.5 border border-foreground px-6 py-2 text-foreground hover:bg-foreground/5",
         quiet: "gap-2.5 py-[13.5px] text-primary hover:text-primary-hover",
       },
     },
@@ -35,37 +38,26 @@ const pillVariants = cva(
 const arrowMotion =
   "transition-transform duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-none";
 
-type PillProps = VariantProps<typeof pillVariants> & {
-  to: string;
-  hash?: string;
-  children: React.ReactNode;
-  className?: string;
-  /** Outline and quiet finishes show the arrow only when asked; solid always does. */
-  arrow?: boolean;
-  onClick?: () => void;
-};
+type PillVariant = NonNullable<VariantProps<typeof pillVariants>["variant"]>;
 
-export function PillLink({
-  to,
-  hash,
+/** Shared body of every pill, so the three element flavours cannot drift. */
+function PillBody({
+  variant,
+  arrow,
   children,
-  variant = "solid",
-  arrow = true,
-  className,
-  onClick,
-}: PillProps) {
+}: {
+  variant: PillVariant;
+  arrow: boolean;
+  children: React.ReactNode;
+}) {
   return (
-    <Link
-      to={to}
-      hash={hash}
-      onClick={onClick}
-      className={cn("group/pill", pillVariants({ variant }), className)}
-    >
+    <>
       {/* `grow` only bites when the pill is stretched (e.g. `w-full` in the
-          mobile menu): the label then centres in the free space and the arrow
-          stays pinned to the right edge instead of floating mid-button. */}
+          mobile menu or on the contact form): the label then centres in the
+          free space and the arrow stays pinned to the right edge instead of
+          floating mid-button. */}
       <span className="grow text-center">{children}</span>
-      {variant === "solid" ? (
+      {!arrow ? null : variant === "solid" ? (
         <span className="flex shrink-0 items-center justify-center rounded-full bg-background p-2.5">
           <ArrowUpRight
             className={cn(
@@ -77,7 +69,7 @@ export function PillLink({
             aria-hidden
           />
         </span>
-      ) : arrow ? (
+      ) : (
         <ArrowUpRight
           className={cn(
             "size-4 shrink-0",
@@ -87,8 +79,97 @@ export function PillLink({
           strokeWidth={2}
           aria-hidden
         />
-      ) : null}
+      )}
+    </>
+  );
+}
+
+type PillBaseProps = {
+  variant?: PillVariant;
+  children: React.ReactNode;
+  className?: string;
+  /** Off for actions that stay on the page — a form submit, a consent button. */
+  arrow?: boolean;
+};
+
+type PillProps = PillBaseProps & {
+  to: string;
+  hash?: string;
+  /** Router search params, e.g. the trainer preselected from the team page. */
+  search?: Record<string, unknown>;
+  onClick?: () => void;
+};
+
+export function PillLink({
+  to,
+  hash,
+  search,
+  children,
+  variant = "solid",
+  arrow = true,
+  className,
+  onClick,
+}: PillProps) {
+  return (
+    <Link
+      to={to}
+      hash={hash}
+      search={search}
+      onClick={onClick}
+      className={cn("group/pill", pillVariants({ variant }), className)}
+    >
+      <PillBody variant={variant} arrow={arrow}>
+        {children}
+      </PillBody>
     </Link>
+  );
+}
+
+/** Same pill for destinations the router does not own — mailto:, tel:, external. */
+export function PillAnchor({
+  href,
+  target,
+  rel,
+  children,
+  variant = "solid",
+  arrow = true,
+  className,
+}: PillBaseProps & { href: string; target?: string; rel?: string }) {
+  return (
+    <a
+      href={href}
+      target={target}
+      rel={rel}
+      className={cn("group/pill", pillVariants({ variant }), className)}
+    >
+      <PillBody variant={variant} arrow={arrow}>
+        {children}
+      </PillBody>
+    </a>
+  );
+}
+
+/** Same pill for actions rather than navigation — form submit, consent gate. */
+export function PillButton({
+  children,
+  variant = "solid",
+  arrow = false,
+  className,
+  ...rest
+}: PillBaseProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      {...rest}
+      className={cn(
+        "group/pill cursor-pointer disabled:cursor-not-allowed disabled:opacity-60",
+        pillVariants({ variant }),
+        className,
+      )}
+    >
+      <PillBody variant={variant} arrow={arrow}>
+        {children}
+      </PillBody>
+    </button>
   );
 }
 

@@ -1,5 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { PageShell, PageHero, Section, CTAButton } from "@/components/site/content";
+import { createFileRoute } from "@tanstack/react-router";
+import { PageShell, PageHero, Section } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
+import { ConnectedCards } from "@/components/site/ConnectedCards";
 
 export const Route = createFileRoute("/clubs")({
   head: () => ({
@@ -67,37 +69,20 @@ function Clubs() {
         intro="Performance, Strength und Training Club — entwickelt, um dich auf das nächste Level zu bringen."
       />
 
-      <Section eyebrow="ÜBERSICHT" title="Wähle deinen Club">
-        <div className="grid md:grid-cols-3 gap-px bg-foreground/10 not-prose border border-foreground/10">
-          {clubs.map((c, i) => (
-            <Link
-              key={c.name}
-              to={c.to}
-              className="bg-background p-8 flex flex-col hover:bg-muted group"
-            >
-              <div className="font-mono text-[10px] text-primary mb-4">[ 0{i + 1} ]</div>
-              <h3 className="font-display text-2xl uppercase mb-2 leading-tight group-hover:text-primary">
-                {c.name}
-              </h3>
-              <div className="font-mono text-[10px] uppercase tracking-widest text-primary mb-4">
-                {c.area}
-              </div>
-              <p className="text-sm text-muted-foreground mb-6">{c.address}</p>
-              <ul className="space-y-1 text-sm mb-6">
-                {c.points.map((p) => (
-                  <li key={p} className="flex gap-2">
-                    <span className="text-primary">→</span>
-                    <span>{p}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-auto font-mono text-[10px] uppercase tracking-widest text-primary">
-                → entdecken
-              </div>
-            </Link>
-          ))}
-        </div>
-        <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
+      <Section
+        eyebrow="ÜBERSICHT"
+        title="Wähle deinen Club"
+        action={<PillLink to="/kontakt">Termin vereinbaren</PillLink>}
+      >
+        <ConnectedCards
+          items={clubs.map((c) => ({
+            to: c.to,
+            title: c.name,
+            meta: c.area,
+            detail: c.address,
+            points: c.points,
+          }))}
+        />
       </Section>
     </PageShell>
   );

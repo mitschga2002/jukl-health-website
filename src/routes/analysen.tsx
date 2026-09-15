@@ -2,10 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   PageShell,
   PageHero,
-  SplitBlock,
+  Listing,
+  ListingRow,
   BulletList,
-  CTAButton,
-  Testimonial,
+  QuoteSlab,
   Section,
 } from "@/components/site/content";
 
@@ -40,7 +40,7 @@ function Anchor({ id }: { id: string }) {
 
 function Analysen() {
   return (
-    <PageShell>
+    <PageShell seamlessFooter>
       <PageHero
         eyebrow="DATEN & DIAGNOSTIK"
         title="Analysen"
@@ -48,133 +48,138 @@ function Analysen() {
         image={analysenHero}
       />
 
-      <Anchor id="fms" />
-      <SplitBlock
-        eyebrow="01"
-        title="FMS-Bewegungsscreening"
-        imageLabel="FMS · Functional Movement Screen"
-        image={athletiktraining}
-      >
-        <p>
-          Der Functional Movement Screen (FMS) ist ein standardisiertes Screeningverfahren, das
-          einen fundierten Überblick über deine grundlegenden Bewegungsmuster sowie mögliche Stärken
-          und Schwächen liefert.
-        </p>
-        <p>
-          Asymmetrien, Bewegungseinschränkungen und muskuläre Defizite können das Verletzungsrisiko
-          erhöhen und die Leistungsfähigkeit beeinträchtigen. Auf Basis der Ergebnisse entwickeln
-          wir eine gezielte korrigierende Trainingsstrategie, um vorhandene Stärken weiter
-          auszubauen und Schwächen gezielt zu verbessern.
-        </p>
-        <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
-      </SplitBlock>
+      <Listing>
+        <Anchor id="fms" />
+        <ListingRow
+          index={1}
+          to="/kontakt"
+          title="FMS-Bewegungsscreening"
+          image={athletiktraining}
+          imageAlt="FMS · Functional Movement Screen"
+        >
+          <p>
+            Der Functional Movement Screen (FMS) ist ein standardisiertes Screeningverfahren, das
+            einen fundierten Überblick über deine grundlegenden Bewegungsmuster sowie mögliche
+            Stärken und Schwächen liefert.
+          </p>
+          <p>
+            Asymmetrien, Bewegungseinschränkungen und muskuläre Defizite können das
+            Verletzungsrisiko erhöhen und die Leistungsfähigkeit beeinträchtigen. Auf Basis der
+            Ergebnisse entwickeln wir eine gezielte korrigierende Trainingsstrategie, um vorhandene
+            Stärken weiter auszubauen und Schwächen gezielt zu verbessern.
+          </p>
+        </ListingRow>
 
-      <Anchor id="stoffwechsel" />
-      <SplitBlock
-        reverse
-        eyebrow="02"
-        title="Stoffwechselanalyse"
-        imageLabel="Stoffwechselanalyse"
-        image={stoffwechsel}
-      >
-        <p>
-          Abnehmen, Muskeln aufbauen, den Körper formen oder die Leistung steigern? Mit unseren
-          Analyse-Tools machen wir deinen Stoffwechsel sichtbar. Die Stoffwechselanalyse ist seit
-          über 40 Jahren ein etabliertes Verfahren in der Sportmedizin.
-        </p>
-        <p>
-          Über deine Atmung wird der Stoffwechsel analysiert: Stoffwechseltyp, Kalorienverbrauch in
-          Ruhe und Bewegung, optimaler Pulsbereich für Fettverbrennung — individuell auf dich
-          angepasst, wie ein maßgeschneidertes Kleid.
-        </p>
-        <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
-      </SplitBlock>
+        <Anchor id="stoffwechsel" />
+        <ListingRow
+          index={2}
+          to="/kontakt"
+          title="Stoffwechselanalyse"
+          image={stoffwechsel}
+          imageAlt="Stoffwechselanalyse"
+        >
+          <p>
+            Abnehmen, Muskeln aufbauen, den Körper formen oder die Leistung steigern? Mit unseren
+            Analyse-Tools machen wir deinen Stoffwechsel sichtbar. Die Stoffwechselanalyse ist seit
+            über 40 Jahren ein etabliertes Verfahren in der Sportmedizin.
+          </p>
+          <p>
+            Über deine Atmung wird der Stoffwechsel analysiert: Stoffwechseltyp, Kalorienverbrauch
+            in Ruhe und Bewegung, optimaler Pulsbereich für Fettverbrennung — individuell auf dich
+            angepasst, wie ein maßgeschneidertes Kleid.
+          </p>
+        </ListingRow>
 
-      <Anchor id="leistung" />
-      <SplitBlock
-        eyebrow="03"
-        title="Leistungsanalyse"
-        imageLabel="Spiroergometrie · Laufband"
-        image={leistungsanalyse}
-      >
-        <p>
-          Trainiere nicht „nach Gefühl", sondern auf Basis deiner Daten. Wir ermitteln unter
-          definierter Belastung deine individuellen Trainingszonen, aerobe und anaerobe Schwelle
-          sowie deinen Energieumsatz — auf Fahrrad­ergometer oder Laufband.
-        </p>
-        <BulletList
-          items={[
-            "Persönliche Trainingszonen (Puls / Pace / Watt)",
-            "Aerobe & anaerobe Schwelle",
-            "Energieprofil: Fett, Kohlenhydrate und Eiweiß",
-            "Schwellen für präzise Intensitätssteuerung",
-            "Empfehlungen für Umfang, Intervalle, Regeneration",
-            "Ausgiebiges Analysegespräch",
-          ]}
-        />
-        <p className="text-muted-foreground text-sm mt-6">
-          Ablauf ca. 60–75 Min. Optionaler Re-Test nach 8–12 Wochen.
-        </p>
-        <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
-      </SplitBlock>
-
-      <Anchor id="physio" />
-      <SplitBlock
-        reverse
-        eyebrow="04"
-        title="Physioanalyse"
-        imageLabel="Physioanalyse"
-        image={physiotherapie}
-      >
-        <p>
-          Dein Körper ist dein Werkzeug. In der Physioanalyse finden wir die Ursache hinter
-          Schmerzen, Verspannungen oder Leistungsplateaus. Wir screenen Haltung, Beweglichkeit,
-          Kraftverhältnisse (L/R), Stabilität und deine wichtigsten Bewegungsmuster.
-        </p>
-        <p>
-          Am Ende: strukturierter Befund mit Prioritäten, individueller Übungsplan (PDF/Video) mit
-          klarer Dosierung — optional verknüpft mit Personal Training, Leistungsanalyse oder deinem
-          Performance Club Plan.
-        </p>
-        <p className="text-muted-foreground text-sm mt-2">
-          Dauer 60–75 Min. Geeignet bei wiederkehrenden Beschwerden, nach Reha oder zur Senkung des
-          Re-Injury-Risikos.
-        </p>
-        <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
-      </SplitBlock>
-
-      <Anchor id="coaching" />
-      <SplitBlock
-        eyebrow="05"
-        title="Gesundheitscoaching"
-        imageLabel="Gesundheitscoaching"
-        image={gesundheitscoaching}
-      >
-        <p>
-          Are you ready to upgrade yourself? Wir streben eine Steigerung deiner Energie,
-          Leistungsfähigkeit und deines Wohlbefindens an. Anamnese, Anliegen, Ziele — und dann
-          gemeinsam die fünf Säulen stärken.
-        </p>
-        <BulletList
-          items={["Schlaf", "Ernährung", "Bewegung", "Mentale Gesundheit", "Regeneration"]}
-        />
-        <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
-      </SplitBlock>
-
-      <Section eyebrow="KUNDENSTIMMEN" title="Stimmen aus der Praxis">
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 not-prose">
-          <Testimonial
-            quote="Julian setzt sich mit mir und meiner Krankheit auseinander und wendet speziell auf mich angepasste Trainingsmethoden an. Vielfältig und mit viel Spaß."
-            name="Ina Ludwig"
-            role="Privatperson"
+        <Anchor id="leistung" />
+        <ListingRow
+          index={3}
+          to="/kontakt"
+          title="Leistungsanalyse"
+          image={leistungsanalyse}
+          imageAlt="Spiroergometrie · Laufband"
+        >
+          <p>
+            Trainiere nicht „nach Gefühl", sondern auf Basis deiner Daten. Wir ermitteln unter
+            definierter Belastung deine individuellen Trainingszonen, aerobe und anaerobe Schwelle
+            sowie deinen Energieumsatz — auf Fahrrad­ergometer oder Laufband.
+          </p>
+          <BulletList
+            items={[
+              "Persönliche Trainingszonen (Puls / Pace / Watt)",
+              "Aerobe & anaerobe Schwelle",
+              "Energieprofil: Fett, Kohlenhydrate und Eiweiß",
+              "Schwellen für präzise Intensitätssteuerung",
+              "Empfehlungen für Umfang, Intervalle, Regeneration",
+              "Ausgiebiges Analysegespräch",
+            ]}
           />
-          <Testimonial
-            quote="Top motivierter Athletiktrainer mit ausgeprägtem Fachwissen. Athletisch wie konditionell konnte ich enorm zulegen."
-            name="Dario Clasadonte"
-            role="Mittelfeld · FC St. Gallen"
+          <p className="text-sm text-muted-foreground">
+            Ablauf ca. 60–75 Min. Optionaler Re-Test nach 8–12 Wochen.
+          </p>
+        </ListingRow>
+
+        <Anchor id="physio" />
+        <ListingRow
+          index={4}
+          to="/kontakt"
+          title="Physioanalyse"
+          image={physiotherapie}
+          imageAlt="Physioanalyse"
+        >
+          <p>
+            Dein Körper ist dein Werkzeug. In der Physioanalyse finden wir die Ursache hinter
+            Schmerzen, Verspannungen oder Leistungsplateaus. Wir screenen Haltung, Beweglichkeit,
+            Kraftverhältnisse (L/R), Stabilität und deine wichtigsten Bewegungsmuster.
+          </p>
+          <p>
+            Am Ende: strukturierter Befund mit Prioritäten, individueller Übungsplan (PDF/Video) mit
+            klarer Dosierung — optional verknüpft mit Personal Training, Leistungsanalyse oder
+            deinem Performance Club Plan.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Dauer 60–75 Min. Geeignet bei wiederkehrenden Beschwerden, nach Reha oder zur Senkung
+            des Re-Injury-Risikos.
+          </p>
+        </ListingRow>
+
+        <Anchor id="coaching" />
+        <ListingRow
+          index={5}
+          to="/kontakt"
+          title="Gesundheitscoaching"
+          image={gesundheitscoaching}
+          imageAlt="Gesundheitscoaching"
+        >
+          <p>
+            Are you ready to upgrade yourself? Wir streben eine Steigerung deiner Energie,
+            Leistungsfähigkeit und deines Wohlbefindens an. Anamnese, Anliegen, Ziele — und dann
+            gemeinsam die fünf Säulen stärken.
+          </p>
+          <BulletList
+            items={["Schlaf", "Ernährung", "Bewegung", "Mentale Gesundheit", "Regeneration"]}
           />
-        </div>
-      </Section>
+        </ListingRow>
+      </Listing>
+
+      <QuoteSlab
+        seamless
+        eyebrow="Kundenstimmen"
+        title="Stimmen aus der Praxis"
+        quotes={[
+          {
+            quote:
+              "Julian setzt sich mit mir und meiner Krankheit auseinander und wendet speziell auf mich angepasste Trainingsmethoden an. Vielfältig und mit viel Spaß.",
+            name: "Ina Ludwig",
+            role: "Privatperson",
+          },
+          {
+            quote:
+              "Top motivierter Athletiktrainer mit ausgeprägtem Fachwissen. Athletisch wie konditionell konnte ich enorm zulegen.",
+            name: "Dario Clasadonte",
+            role: "Mittelfeld · FC St. Gallen",
+          },
+        ]}
+      />
     </PageShell>
   );
 }

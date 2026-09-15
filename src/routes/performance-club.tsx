@@ -5,7 +5,7 @@ import {
   Section,
   BulletList,
   CTAButton,
-  Testimonial,
+  QuoteSlab,
 } from "@/components/site/content";
 
 const pcBanner = "/img/pc-banner-1386.webp";
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/performance-club")({
 
 function PerformanceClub() {
   return (
-    <PageShell>
+    <PageShell seamlessFooter>
       <PageHero
         eyebrow="PERFORMANCE CLUB"
         title="Dein Zentrum für funktionelles Training"
@@ -47,8 +47,8 @@ function PerformanceClub() {
           Unser Angebot reicht von Personal Training über Gruppen- und Athletiktraining bis hin zu
           betreuten Kleingruppenkursen.
         </p>
-        <h3 className="font-display uppercase text-xl mt-10 mb-4">Allgemeine Informationen</h3>
         <BulletList
+          title="Allgemeine Informationen"
           items={[
             "3. Stock der Bildgasse 10, Dornbirn",
             "Wenn möglich bitte die Treppe benutzen",
@@ -60,25 +60,31 @@ function PerformanceClub() {
         <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
       </Section>
 
-      <Section eyebrow="KUNDENSTIMMEN" title="Was unsere Members sagen">
-        <div className="grid lg:grid-cols-3 gap-6 not-prose">
-          <Testimonial
-            quote="Ich genieße das professionelle Training in der Gruppe. Mir gefällt die ganzheitliche Art — die gute Betreuung sorgt dafür, dass ich die Übungen richtig mache."
-            name="Alexander Konzett"
-            role="Privatperson"
-          />
-          <Testimonial
-            quote="Nach jahrelangen Rückenschmerzen war ich nach wenigen Trainingseinheiten schmerzfrei. Julian hat ein unglaubliches Gespür für den Körper. Best Trainer ever!"
-            name="Selina Madlener"
-            role="Privatperson"
-          />
-          <Testimonial
-            quote="Durch das maßgeschneiderte Training mit den vielen Inputs hat sich meine Lebensqualität nachhaltig verbessert. Viel mehr als ein Coach."
-            name="Angelina Natter"
-            role="Privatperson"
-          />
-        </div>
-      </Section>
+      <QuoteSlab
+        seamless
+        eyebrow="Kundenstimmen"
+        title="Was unsere Members sagen"
+        quotes={[
+          {
+            quote:
+              "Ich genieße das professionelle Training in der Gruppe. Mir gefällt die ganzheitliche Art — die gute Betreuung sorgt dafür, dass ich die Übungen richtig mache.",
+            name: "Alexander Konzett",
+            role: "Privatperson",
+          },
+          {
+            quote:
+              "Nach jahrelangen Rückenschmerzen war ich nach wenigen Trainingseinheiten schmerzfrei. Julian hat ein unglaubliches Gespür für den Körper. Best Trainer ever!",
+            name: "Selina Madlener",
+            role: "Privatperson",
+          },
+          {
+            quote:
+              "Durch das maßgeschneiderte Training mit den vielen Inputs hat sich meine Lebensqualität nachhaltig verbessert. Viel mehr als ein Coach.",
+            name: "Angelina Natter",
+            role: "Privatperson",
+          },
+        ]}
+      />
     </PageShell>
   );
 }

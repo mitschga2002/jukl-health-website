@@ -110,13 +110,13 @@ function MeinePerson() {
       </SplitBlock>
 
       <Section eyebrow="LEBEN" title="Werdegang">
-        <ol className="space-y-0 border-t border-foreground/10">
+        <ol className="overflow-hidden rounded-card border border-border">
           {timeline.map((t, i) => (
             <li
               key={i}
-              className="grid grid-cols-[110px_1fr] gap-6 py-5 border-b border-foreground/10 items-baseline"
+              className="grid grid-cols-[110px_1fr] items-baseline gap-6 border-b border-border px-6 py-5 last:border-b-0"
             >
-              <span className="font-mono text-xs uppercase tracking-widest text-primary">
+              <span className="text-xs font-light uppercase leading-tight tracking-wider text-primary">
                 {t.year}
               </span>
               <span className="text-base lg:text-lg">{t.entry}</span>

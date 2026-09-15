@@ -1,19 +1,51 @@
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
 import { SmartImage } from "./SmartImage";
 import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
-import { Link } from "@tanstack/react-router";
+import { Eyebrow, PillLink } from "./Pill";
+import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
-export function PageShell({ children }: { children: ReactNode }) {
+/* The subpages are built from these blocks, and they speak the homepage's
+   language: rounded cards on the content line, no hairline rules between
+   sections, display type at fixed sizes on a 1.25 leading, and the dark
+   `surface` slab whenever a module has to carry weight. The one structural
+   rule the homepage keeps is that vertical rhythm comes from spacing, never
+   from a border — so nothing here draws a divider. */
+
+/* Vertical rhythm. A subpage stacks far more modules than the homepage does —
+   analysen runs six in a row — so each one contributes less than a homepage
+   module: two adjacent sections come to 80px on a phone instead of 128px. The
+   desktop figure is unchanged, where the extra air is not the problem. */
+const SECTION_Y = "py-10 lg:py-24";
+
+/** Section padding, shared so every module stacks on the same rhythm. */
+const SECTION_STACK = `flex flex-col gap-10 ${SECTION_Y} lg:gap-16`;
+
+export function PageShell({
+  children,
+  seamlessFooter = false,
+}: {
+  children: ReactNode;
+  /** Set when the page's last module is itself the dark surface, so the footer
+   *  drops its own rounded top edge and the two read as one block. */
+  seamlessFooter?: boolean;
+}) {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
       <SiteNav />
       <main className="flex-1">{children}</main>
-      <SiteFooter />
+      <SiteFooter seamless={seamlessFooter} />
     </div>
   );
 }
 
+/**
+ * The header of every subpage. Three shapes — text only, text beside a photo,
+ * text above a full-width band — all drawn as one copy block plus a rounded
+ * photo card, so a subpage opens the way the homepage does.
+ */
 export function PageHero({
   eyebrow,
   title,
@@ -28,7 +60,7 @@ export function PageHero({
   eyebrow: string;
   title: string;
   intro?: string;
-  ratio?: "tall" | "wide";
+  ratio?: "tall" | "wide" | "natural";
   image?: string;
   imageAlt?: string;
   imagePosition?:
@@ -58,173 +90,223 @@ export function PageHero({
     "bottom-left": "object-left-bottom",
   }[imagePosition];
 
+  const copy = (
+    <div className="flex flex-col gap-4">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h1 className="font-display max-w-[720px] hyphens-auto text-balance text-[40px] leading-[1.25] sm:text-[52px] lg:text-[56px]">
+        {title}
+      </h1>
+      {intro ? (
+        <p className="max-w-[600px] text-pretty pt-2 text-base font-light leading-[1.45] text-muted-foreground lg:text-lg">
+          {intro}
+        </p>
+      ) : null}
+    </div>
+  );
+
   if (banner && image) {
     return (
-      <section className="border-b border-foreground/10">
-        <div className="jh-container">
-          <div className="jh-gutter py-16 lg:py-20 max-w-4xl">
-            <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
-              {eyebrow}
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl hyphens-auto break-words tracking-tight leading-[1.05] text-balance">
-              {title}
-            </h1>
-            {intro ? (
-              <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
-                {intro}
-              </p>
-            ) : null}
-          </div>
+      <header className="jh-container jh-gutter">
+        <div className={SECTION_STACK}>
+          {copy}
           {/* Measured off the team photo: wall lettering 19-31%, head tops 40%,
               eye line 49%. A window starting between 19% and 31% slices the
               lettering, so 3:1 at 65% clears it at 32% and lands the heads in
               the upper third. Below lg the band is too tall for that window to
               fit, so 16:9 bottom-aligned trims just the ceiling. */}
-          <div className="relative w-full aspect-video lg:aspect-[3/1] overflow-hidden bg-muted border-t border-foreground/10">
+          <div
+            className={cn(
+              "relative w-full overflow-hidden rounded-card bg-muted",
+              // `natural` lets the photo set its own height, so a wide group
+              // shot is shown whole instead of cropped to a band.
+              ratio !== "natural" && "aspect-video lg:aspect-[3/1]",
+            )}
+          >
             <SmartImage
               src={image}
               alt={imageAlt ?? title}
               priority
               sizes="(min-width: 1400px) 1400px, 100vw"
-              className="absolute inset-0 w-full h-full object-cover object-bottom lg:object-[center_65%]"
+              className={cn(
+                ratio === "natural"
+                  ? "block h-auto w-full"
+                  : "absolute inset-0 size-full object-cover object-bottom lg:object-[center_65%]",
+              )}
             />
           </div>
         </div>
-      </section>
+      </header>
     );
   }
 
   if (!image) {
     return (
-      <section className="border-b border-foreground/10">
-        <div className="jh-container jh-gutter py-16 lg:py-24">
-          <div className="max-w-4xl">
-            <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
-              {eyebrow}
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl hyphens-auto break-words tracking-tight leading-[1.05] text-balance">
-              {title}
-            </h1>
-            {intro ? (
-              <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
-                {intro}
-              </p>
-            ) : null}
-          </div>
+      <header className="jh-container jh-gutter">
+        <div className={SECTION_STACK}>{copy}</div>
+      </header>
+    );
+  }
+
+  return (
+    <header className="jh-container jh-gutter">
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center lg:gap-16",
+          SECTION_Y,
+        )}
+      >
+        {copy}
+        {/* `natural` drops the fixed window: the photo keeps its own ratio and
+            is shown whole, which is what a wide group shot needs. The other
+            ratios crop to a portrait or landscape window on purpose. */}
+        <div
+          className={cn(
+            "relative overflow-hidden rounded-card bg-muted",
+            ratio === "tall" && "min-h-[260px] sm:min-h-[380px] lg:min-h-[520px]",
+            ratio === "wide" && "min-h-[200px] sm:min-h-[280px] lg:min-h-[300px]",
+          )}
+        >
+          <SmartImage
+            src={image}
+            alt={imageAlt ?? title}
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className={cn(
+              ratio === "natural"
+                ? "block h-auto w-full"
+                : cn("absolute inset-0 size-full object-cover", positionCls),
+            )}
+            style={objectPosition ? { objectPosition } : undefined}
+          />
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/**
+ * A titled block of copy. `alt` swaps it onto the dark slab the homepage uses
+ * for its Performance Club module — a rounded card on the wider edge line, not
+ * a full-bleed colour band.
+ */
+export function Section({
+  eyebrow,
+  title,
+  children,
+  action,
+  compact = false,
+  alt,
+}: {
+  eyebrow?: string;
+  title?: string;
+  children: ReactNode;
+  /** A pill beside the heading, the way the homepage sections carry theirs. */
+  action?: ReactNode;
+  /** For a page that is one continuous document — the legal pages run nine of
+   *  these in a row — where the full module rhythm would read as nine separate
+   *  pages instead of one text with headings. */
+  compact?: boolean;
+  alt?: boolean;
+}) {
+  const heading =
+    eyebrow || title ? (
+      <div className="flex flex-col gap-3">
+        {eyebrow ? (
+          <Eyebrow className={alt ? "text-surface-muted-foreground" : ""}>{eyebrow}</Eyebrow>
+        ) : null}
+        {title ? (
+          <h2
+            className={cn(
+              "font-display max-w-[900px] text-balance text-[32px] leading-[1.25] lg:text-[48px]",
+              alt && "text-surface-foreground",
+            )}
+          >
+            {title}
+          </h2>
+        ) : null}
+      </div>
+    ) : null;
+
+  const header =
+    heading || action ? (
+      <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-8">
+        <div className="lg:w-[1088px] lg:max-w-[65%]">{heading}</div>
+        {action ? <div className="flex flex-1 justify-start lg:justify-end">{action}</div> : null}
+      </div>
+    ) : null;
+
+  const body = (
+    <div
+      className={cn(
+        "space-y-6 text-base leading-[1.6] lg:text-lg",
+        alt ? "text-surface-foreground/80" : "text-muted-foreground",
+      )}
+    >
+      {children}
+    </div>
+  );
+
+  if (alt) {
+    return (
+      <section className="jh-container jh-edge">
+        <div className="flex flex-col gap-8 rounded-card bg-surface px-4 py-12 lg:gap-10 lg:px-8 lg:py-24">
+          {header}
+          {body}
         </div>
       </section>
     );
   }
 
   return (
-    <section className="border-b border-foreground/10">
-      <div className="jh-container grid w-full lg:grid-cols-2">
-        <div className="jh-gutter py-16 lg:py-24 flex flex-col justify-center">
-          <span className="text-xs uppercase tracking-[0.22em] text-primary mb-6 block">
-            {eyebrow}
-          </span>
-          <h1 className="font-display text-5xl lg:text-7xl hyphens-auto break-words tracking-tight leading-[1.02] text-balance">
-            {title}
-          </h1>
-          {intro ? (
-            <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-xl text-pretty">
-              {intro}
-            </p>
-          ) : null}
-        </div>
-        <div
-          className={`bg-muted text-foreground/40 relative overflow-hidden border-t lg:border-t-0 lg:border-l border-foreground/10 ${
-            ratio === "tall"
-              ? "min-h-[260px] sm:min-h-[380px] lg:min-h-[560px]"
-              : "min-h-[200px] sm:min-h-[280px] lg:min-h-[300px]"
-          }`}
-        >
-          {image ? (
-            <SmartImage
-              src={image}
-              alt={imageAlt ?? title}
-              priority
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className={`absolute inset-0 w-full h-full object-cover ${positionCls}`}
-              style={objectPosition ? { objectPosition } : undefined}
-            />
-          ) : (
-            <div className="absolute inset-0 grid place-items-center">
-              <div className="text-center px-8">
-                <div className="text-[11px] uppercase tracking-[0.28em] text-primary mb-3">
-                  Bild folgt
-                </div>
-                <div className="font-display text-3xl lg:text-4xl tracking-tight opacity-40">
-                  JuklHealth
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+    <section className="jh-container jh-gutter">
+      <div
+        className={cn(
+          "flex flex-col",
+          compact ? "gap-4 py-6 lg:gap-5 lg:py-8" : cn("gap-8 lg:gap-10", SECTION_Y),
+        )}
+      >
+        {header}
+        {body}
       </div>
     </section>
   );
 }
 
-export function Section({
-  eyebrow,
-  title,
-  children,
-  alt,
-}: {
-  eyebrow?: string;
-  title?: string;
-  children: ReactNode;
-  alt?: boolean;
-}) {
+/**
+ * A feature list kept deliberately quiet: no box, no fill, just rows parted by
+ * a hairline. The page already carries the bordered slabs and the cards, so the
+ * list earns its structure from rhythm and the green marker alone.
+ */
+export function BulletList({ items, title }: { items: string[]; title?: string }) {
   return (
-    <section
-      className={`py-20 lg:py-28 border-b border-foreground/10 ${
-        alt ? "bg-foreground text-background" : ""
-      }`}
-    >
-      <div className="jh-container jh-gutter">
-        <div>
-          {eyebrow ? (
-            <span className="text-xs uppercase tracking-[0.22em] text-primary mb-4 block">
-              {eyebrow}
+    <div className="flex flex-col gap-3">
+      {title ? (
+        <h3 className="font-display text-[22px] leading-[1.25] text-foreground">{title}</h3>
+      ) : null}
+      <ul className="max-w-[760px] divide-y divide-border">
+        {items.map((item) => (
+          <li
+            key={item}
+            className="flex items-start gap-3 py-3 text-base font-light leading-[1.45]"
+          >
+            <span className="shrink-0 text-primary" aria-hidden>
+              →
             </span>
-          ) : null}
-          {title ? (
-            <h2 className="font-display text-3xl lg:text-5xl tracking-tight mb-10 leading-[1.05] text-balance">
-              {title}
-            </h2>
-          ) : null}
-          <div className="prose-content space-y-6 text-base lg:text-lg leading-relaxed">
-            {children}
-          </div>
-        </div>
-      </div>
-    </section>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-export function BulletList({ items }: { items: string[] }) {
-  return (
-    <ul className="grid sm:grid-cols-2 gap-x-10 gap-y-3 mt-6">
-      {items.map((i) => (
-        <li key={i} className="flex gap-3 items-start text-base">
-          <span className="text-primary mt-1.5 text-xs">●</span>
-          <span>{i}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
+/** The one CTA of a subpage section. Same pill as the homepage, so a visitor
+    meets one button shape across the whole site. */
 export function CTAButton({ to, children }: { to: string; children: ReactNode }) {
   return (
-    <Link
-      to={to}
-      className="inline-block mt-8 bg-primary text-primary-foreground px-8 py-4 font-display text-sm hover:bg-primary-hover"
-    >
+    <PillLink to={to} className="mt-8">
       {children}
-    </Link>
+    </PillLink>
   );
 }
 
@@ -251,31 +333,34 @@ export function ImagePlaceholder({
         : "object-center";
   return (
     <div
-      className={`relative ${ratioCls} bg-muted text-foreground/40 overflow-hidden border border-foreground/10 ${className}`}
+      className={cn(
+        "relative overflow-hidden rounded-card bg-muted text-foreground/40",
+        ratioCls,
+        className,
+      )}
     >
       {image ? (
         <SmartImage
           src={image}
           alt={label}
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className={`absolute inset-0 w-full h-full object-cover ${focusCls}`}
+          className={cn("absolute inset-0 size-full object-cover", focusCls)}
         />
       ) : (
         <>
           <div className="absolute inset-0 grid place-items-center">
-            <div className="font-display text-xl lg:text-2xl tracking-tight text-center px-6 opacity-50">
+            <div className="font-display px-6 text-center text-xl tracking-tight opacity-50 lg:text-2xl">
               {label}
             </div>
           </div>
-          <div className="absolute top-4 left-4 text-[11px] uppercase tracking-[0.22em] text-primary">
-            Bild folgt
-          </div>
+          <Eyebrow className="absolute left-5 top-5 text-xs text-primary">Bild folgt</Eyebrow>
         </>
       )}
     </div>
   );
 }
 
+/** Copy beside a photo — the Credibility module's shape, on a light surface. */
 export function SplitBlock({
   eyebrow,
   title,
@@ -291,121 +376,317 @@ export function SplitBlock({
   image?: string;
   reverse?: boolean;
 }) {
+  const copy = (
+    <div className={cn("flex flex-col justify-center gap-6", reverse && "lg:order-2")}>
+      <div className="flex flex-col gap-3">
+        {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+        <h2 className="font-display max-w-[560px] text-balance text-[32px] leading-[1.25] lg:text-[42px]">
+          {title}
+        </h2>
+      </div>
+      <div className="space-y-4 text-base font-light leading-[1.6] text-muted-foreground lg:text-lg">
+        {children}
+      </div>
+    </div>
+  );
+
   if (!image) {
     return (
-      <section className="border-b border-foreground/10">
-        <div className="jh-container jh-gutter py-16 lg:py-24 flex flex-col">
-          {eyebrow ? (
-            <span className="text-xs uppercase tracking-[0.22em] text-primary mb-4 block">
-              {eyebrow}
-            </span>
-          ) : null}
-          <h2 className="font-display text-3xl lg:text-5xl mb-6 tracking-tight leading-[1.05] max-w-3xl">
-            {title}
-          </h2>
-          <div className="space-y-4 text-base lg:text-lg leading-relaxed max-w-3xl">{children}</div>
-        </div>
+      <section className="jh-container jh-gutter">
+        <div className={SECTION_Y}>{copy}</div>
       </section>
     );
   }
+
   return (
-    <section className="border-b border-foreground/10">
-      <div className="jh-container grid w-full lg:grid-cols-2 gap-0">
-        <div
-          className={`jh-gutter py-16 lg:py-24 flex flex-col justify-center ${
-            reverse ? "lg:order-2" : ""
-          }`}
-        >
-          {eyebrow ? (
-            <span className="text-xs uppercase tracking-[0.22em] text-primary mb-4 block">
-              {eyebrow}
-            </span>
-          ) : null}
-          <h2 className="font-display text-3xl lg:text-5xl mb-6 tracking-tight leading-[1.05]">
-            {title}
-          </h2>
-          <div className="space-y-4 text-base lg:text-lg leading-relaxed">{children}</div>
-        </div>
-        <div
-          className={`relative min-h-[240px] sm:min-h-[320px] lg:min-h-0 ${reverse ? "lg:order-1" : ""}`}
-        >
-          <div className="lg:absolute lg:inset-0 aspect-[4/3] sm:aspect-[4/5] lg:aspect-auto lg:h-full">
-            <ImagePlaceholder
-              label={imageLabel}
-              ratio="square"
-              className="h-full !aspect-auto"
-              image={image}
-              focus="upper"
-            />
-          </div>
+    <section className="jh-container jh-gutter">
+      <div className={cn("grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16", SECTION_Y)}>
+        {copy}
+        <div className={cn(reverse && "lg:order-1")}>
+          <ImagePlaceholder
+            label={imageLabel}
+            image={image}
+            focus="upper"
+            className="aspect-[4/3] sm:aspect-[4/5] lg:aspect-[4/5]"
+          />
         </div>
       </div>
     </section>
   );
 }
 
-export function Testimonial({
-  quote,
-  name,
-  role,
-  image,
-}: {
+export type Quote = {
   quote: string;
   name: string;
   role: string;
   /** Photo of the person quoted. Falls back to their initial when absent. */
   image?: string;
+};
+
+/**
+ * Quotes get the dark slab rather than a row of light cards — the same surface
+ * the homepage gives its team module, so the page changes key for them. The
+ * oversized green quote mark is the only ornament; everything else is type.
+ */
+export function QuoteSlab({
+  eyebrow,
+  title,
+  quotes,
+  seamless = false,
+}: {
+  eyebrow: string;
+  title: string;
+  quotes: readonly Quote[];
+  /** Last module on the page: the slab runs full bleed, rounds only its top
+   *  edge and lets `<PageShell seamlessFooter>` continue the same surface. */
+  seamless?: boolean;
 }) {
-  return (
-    <figure className="border border-foreground/10 p-8 lg:p-10 bg-background h-full flex flex-col justify-between">
-      <blockquote className="font-display text-xl lg:text-2xl leading-snug tracking-tight mb-8 text-balance">
-        „{quote}“
-      </blockquote>
-      <figcaption className="flex items-center gap-4 border-t border-foreground/10 pt-5">
-        {image ? (
-          <img
-            src={image}
-            alt={name}
-            width={48}
-            height={48}
-            loading="lazy"
-            decoding="async"
-            className="w-12 h-12 rounded-full object-cover shrink-0"
-          />
-        ) : (
-          <div className="w-12 h-12 bg-primary text-primary-foreground grid place-items-center font-display text-lg rounded-full shrink-0">
-            {name.charAt(0)}
-          </div>
+  const body = (
+    <>
+      <div className="flex flex-col gap-3">
+        <Eyebrow className="text-surface-muted-foreground">{eyebrow}</Eyebrow>
+        <h2 className="font-display max-w-[900px] text-balance text-[32px] leading-[1.25] text-surface-foreground lg:text-[48px]">
+          {title}
+        </h2>
+      </div>
+
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-10 lg:gap-12",
+          quotes.length > 2 ? "lg:grid-cols-3" : "lg:grid-cols-2",
         )}
-        <div>
-          <div className="font-display text-sm">{name}</div>
-          <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-0.5">
-            {role}
-          </div>
+      >
+        {quotes.map((q) => (
+          <figure key={q.name} className="flex flex-col gap-5">
+            <span className="font-display text-[56px] leading-[0.6] text-primary" aria-hidden>
+              „
+            </span>
+            <blockquote className="font-display flex-1 text-balance text-[20px] leading-[1.4] text-surface-foreground lg:text-[24px]">
+              {q.quote}
+            </blockquote>
+            <figcaption className="mt-auto flex items-center gap-4 border-t border-surface-foreground/15 pt-5">
+              {q.image ? (
+                <img
+                  src={q.image}
+                  alt={q.name}
+                  width={48}
+                  height={48}
+                  loading="lazy"
+                  decoding="async"
+                  className="size-12 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <div className="font-display grid size-12 shrink-0 place-items-center rounded-full bg-primary text-lg text-primary-foreground">
+                  {q.name.charAt(0)}
+                </div>
+              )}
+              <div className="flex flex-col gap-0.5">
+                <div className="text-base leading-[1.25] text-surface-foreground">{q.name}</div>
+                <Eyebrow className="text-xs text-surface-muted-foreground">{q.role}</Eyebrow>
+              </div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </>
+  );
+
+  // One surface all the way into the footer, no rule and no tonal step between
+  // them — the quotes just take enough room below themselves that the footer
+  // reads as the next thing rather than as their continuation.
+  if (seamless) {
+    return (
+      <section className="mt-5 rounded-t-card bg-surface">
+        <div className="jh-container jh-gutter">
+          <div className="flex flex-col gap-10 pb-24 pt-12 lg:gap-16 lg:pb-32 lg:pt-24">{body}</div>
         </div>
-      </figcaption>
-    </figure>
+      </section>
+    );
+  }
+
+  return (
+    <section className="jh-container jh-edge">
+      <div className="flex flex-col gap-10 rounded-card bg-surface px-4 py-12 lg:gap-16 lg:px-8 lg:py-24">
+        {body}
+      </div>
+    </section>
   );
 }
 
+/**
+ * Two or three topics side by side, each a card of its own. For the case where
+ * the page would otherwise stack near-identical blocks — same shape, same list,
+ * different audience — and the repetition is what makes it read as filler.
+ */
+export function TopicCards({
+  items,
+}: {
+  items: readonly {
+    eyebrow: string;
+    title: string;
+    points: readonly string[];
+    note?: string;
+  }[];
+}) {
+  return (
+    <div
+      className={cn(
+        "grid grid-cols-1 gap-4",
+        items.length > 2 ? "lg:grid-cols-3" : "lg:grid-cols-2",
+      )}
+    >
+      {items.map((item) => (
+        <div key={item.title} className="flex flex-col gap-5 rounded-card bg-muted p-6 lg:p-10">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>{item.eyebrow}</Eyebrow>
+            <h3 className="font-display text-balance text-[24px] leading-[1.25] lg:text-[30px]">
+              {item.title}
+            </h3>
+          </div>
+          <ul className="flex flex-col gap-2">
+            {item.points.map((p) => (
+              <li key={p} className="flex gap-3 text-base font-light leading-[1.45]">
+                <span className="shrink-0 text-primary" aria-hidden>
+                  →
+                </span>
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+          {item.note ? (
+            <p className="mt-auto pt-2 text-sm text-muted-foreground">{item.note}</p>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** The stack the listing rows sit in, on the same rhythm as any other module. */
+export function Listing({ children }: { children: ReactNode }) {
+  return (
+    <div className="jh-container jh-edge">
+      <div className={cn("flex flex-col gap-8", SECTION_Y)}>{children}</div>
+    </div>
+  );
+}
+
+/* Same slow ease the homepage rows use. */
+const EASE_PREMIUM = "duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
+
+/**
+ * The homepage's Performance Club row, in light: number, title, copy and photo
+ * across one card, with the arrow button stamped out of the photo's top-right
+ * corner instead of a CTA sitting under the copy. The whole row is the link, so
+ * the hover answers across the card the way the homepage rows do.
+ */
+export function ListingRow({
+  index,
+  to,
+  title,
+  image,
+  imageAlt,
+  children,
+}: {
+  index: number;
+  to: string;
+  title: string;
+  image?: string;
+  imageAlt?: string;
+  children: ReactNode;
+}) {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        "group relative grid grid-cols-1 gap-6 rounded-card bg-muted p-6 transition-shadow xl:grid-cols-12 xl:items-start xl:gap-8 xl:p-10",
+        EASE_PREMIUM,
+        "hover:inset-ring-1 hover:inset-ring-foreground/15",
+      )}
+    >
+      {/* Its own layer rather than a `hover:bg-*` swap, so the wash sits on the
+          muted card instead of replacing it. */}
+      <span
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 rounded-card bg-foreground/[0.04] opacity-0 transition-opacity group-hover:opacity-100",
+          EASE_PREMIUM,
+        )}
+      />
+
+      <Eyebrow
+        className={cn(
+          "relative transition-colors group-hover:text-foreground xl:col-span-1",
+          EASE_PREMIUM,
+        )}
+      >
+        {String(index).padStart(2, "0")}
+      </Eyebrow>
+      <h2 className="font-display relative text-balance text-[28px] leading-[1.25] lg:text-[36px] xl:col-span-3">
+        {title}
+      </h2>
+      <div className="relative flex flex-col gap-4 text-base font-light leading-[1.6] text-muted-foreground xl:col-span-5">
+        {children}
+      </div>
+      {image ? (
+        <div className="relative xl:col-span-3">
+          {/* The notch is a mask on the frame, so the <img> is what scales —
+              scaling the frame would drag the cut-out off the arrow button. */}
+          <div className="jh-notch-tr aspect-[4/3] w-full overflow-hidden rounded-image [--notch-h:50px] [--notch-r:30px] [--notch-w:50px] xl:aspect-[3/4]">
+            <SmartImage
+              src={image}
+              alt={imageAlt ?? title}
+              sizes="(min-width: 1280px) 380px, 100vw"
+              className="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] motion-reduce:transform-none motion-reduce:transition-none"
+            />
+          </div>
+          <span
+            className={cn(
+              "absolute right-0 top-0 flex items-center justify-center rounded-full bg-background p-2.5 transition-colors group-hover:bg-primary",
+              EASE_PREMIUM,
+            )}
+          >
+            <ArrowUpRight
+              className={cn(
+                "size-5 text-foreground transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary-foreground motion-reduce:transform-none motion-reduce:transition-none",
+                EASE_PREMIUM,
+              )}
+              strokeWidth={2}
+              aria-hidden
+            />
+          </span>
+        </div>
+      ) : null}
+    </Link>
+  );
+}
+
+/** Four figures in one connected slab, the way the Standorte cards join up. */
 export function StatRow({ items }: { items: { value: string; label: string }[] }) {
   return (
-    <div className="border-y border-foreground/10">
-      <div className="jh-container grid grid-cols-2 lg:grid-cols-4">
-        {items.map((s) => (
-          <div
-            key={s.label}
-            className="jh-gutter py-8 border-r last:border-r-0 border-foreground/10"
-          >
-            <div className="font-display text-4xl lg:text-5xl text-primary tracking-tight">
-              {s.value}
+    <section className="jh-container jh-gutter">
+      <div className={SECTION_Y}>
+        <div className="grid grid-cols-2 rounded-card border border-border lg:grid-cols-4">
+          {items.map((s, i) => (
+            <div
+              key={s.label}
+              className={cn(
+                "flex flex-col gap-2 border-border p-8",
+                // Hairlines between cells only, so the card keeps a clean outline:
+                // every cell draws its right edge except the last of each row.
+                i % 2 === 0 && "border-r",
+                i < 2 && "border-b lg:border-b-0",
+                "lg:border-r lg:last:border-r-0",
+              )}
+            >
+              <div className="font-display text-[32px] leading-[1.25] text-primary lg:text-[42px]">
+                {s.value}
+              </div>
+              <Eyebrow className="text-xs">{s.label}</Eyebrow>
             </div>
-            <div className="text-[11px] uppercase tracking-[0.22em] mt-2 text-muted-foreground">
-              {s.label}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
