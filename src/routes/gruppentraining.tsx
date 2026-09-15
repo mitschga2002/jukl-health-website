@@ -5,8 +5,9 @@ import {
   Section,
   SplitBlock,
   BulletList,
-  CTAButton,
+  StepList,
 } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
 
 const gruppentraining = "/img/gruppentraining-1032.webp";
 
@@ -37,9 +38,21 @@ function Gruppentraining() {
         intro="Gemeinsam erreichen wir deine sportlichen Ziele – mit individuell abgestimmtem Gruppentraining."
       />
 
-      <Section eyebrow="ABLAUF" title="So läuft ein Gruppentraining">
-        <BulletList
-          items={[
+      {/* This page opens on a text-only hero — no photo — so it reaches the
+          Ablauf with nothing behind it yet. The slab is where the page finally
+          gets some weight. */}
+      <Section
+        alt
+        eyebrow="ABLAUF"
+        title="So läuft ein Gruppentraining"
+        action={
+          <PillLink to="/kontakt" variant="outlineOnDark">
+            Jetzt anfragen
+          </PillLink>
+        }
+      >
+        <StepList
+          steps={[
             "Aufnahme der aktuellen Verfassung aller Teilnehmer",
             "Gemeinsame Definition der Trainingsziele und Inhalte",
             "Abstimmung des Trainingsplans auf Bedürfnisse der Gruppe",
@@ -51,7 +64,6 @@ function Gruppentraining() {
             "Training im Fitnessstudio oder draußen in der Natur",
           ]}
         />
-        <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
       </Section>
 
       <SplitBlock

@@ -5,6 +5,7 @@ import {
   Section,
   CTAButton,
   ImagePlaceholder,
+  SECTION_Y,
 } from "@/components/site/content";
 import { Eyebrow, PillAnchor, PillLink } from "@/components/site/Pill";
 import { cn } from "@/lib/utils";
@@ -121,14 +122,14 @@ function MemberBlock({ m }: { m: Member }) {
   if (!m.image) {
     return (
       <section className="jh-container jh-gutter">
-        <div className="py-10 lg:py-24">{copy}</div>
+        <div className={SECTION_Y}>{copy}</div>
       </section>
     );
   }
 
   return (
     <section className="jh-container jh-gutter">
-      <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-2 lg:gap-16 lg:py-24">
+      <div className={cn("grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16", SECTION_Y)}>
         <div className={m.reverse ? "lg:order-2" : ""}>
           <ImagePlaceholder label={m.name} ratio="square" image={m.image} />
         </div>

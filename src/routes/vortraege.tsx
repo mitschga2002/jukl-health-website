@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
+import { PageShell, PageHero, Section, TopicCards, SECTION_Y } from "@/components/site/content";
 import { Eyebrow, PillLink } from "@/components/site/Pill";
+import { cn } from "@/lib/utils";
 
 const banner = "/img/vortraege-banner-1080.webp";
 const video = "/img/vortraege-video.mp4";
@@ -113,7 +114,12 @@ function Vortraege() {
       {/* The video had a section to itself with nothing beside it. Paired with
           the formats line it becomes a block rather than a stray asset. */}
       <section className="jh-container jh-gutter">
-        <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-24">
+        <div
+          className={cn(
+            "grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center lg:gap-16",
+            SECTION_Y,
+          )}
+        >
           <video
             src={video}
             controls

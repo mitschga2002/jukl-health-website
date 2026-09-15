@@ -5,8 +5,9 @@ import {
   Section,
   SplitBlock,
   BulletList,
-  CTAButton,
+  StepList,
 } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
 
 const personalTraining = "/img/personal-training-1458.webp";
 const trainingMitKunde = "/img/training-mit-kunde-1672.webp";
@@ -41,9 +42,21 @@ function PersonalTraining() {
         imagePosition="left"
       />
 
-      <Section eyebrow="ABLAUF" title="So arbeiten wir zusammen">
-        <BulletList
-          items={[
+      {/* The dark slab, as on /physiotherapie: on every service page the process
+          module is the one that carries weight, and it is the same block each
+          time so a visitor moving between them recognises it. */}
+      <Section
+        alt
+        eyebrow="ABLAUF"
+        title="So arbeiten wir zusammen"
+        action={
+          <PillLink to="/kontakt" variant="outlineOnDark">
+            Jetzt anfragen
+          </PillLink>
+        }
+      >
+        <StepList
+          steps={[
             "Anamnese und Analyse deines aktuellen Gesundheits- und Fitnesszustands",
             "Bewegungsanalyse mit dem Functional Movement Screen (FMS)",
             "Persönliche Ziele besprechen und definieren",
@@ -56,7 +69,6 @@ function PersonalTraining() {
             "Training im Performance Club oder draußen in der Natur",
           ]}
         />
-        <CTAButton to="/kontakt">Jetzt anfragen</CTAButton>
       </Section>
 
       <SplitBlock

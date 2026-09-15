@@ -4,9 +4,10 @@ import {
   PageHero,
   Section,
   BulletList,
-  CTAButton,
+  StepList,
   SplitBlock,
 } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
 
 const physio = "/img/physiotherapie-1460.webp";
 
@@ -38,9 +39,22 @@ function Physio() {
         image={physio}
       />
 
-      <Section eyebrow="ABLAUF" title="Wie wir vorgehen">
-        <BulletList
-          items={[
+      {/* The homepage's dark slab. The Ablauf is the page's argument — this is
+          how a course of treatment runs — so it carries the weight rather than
+          opening as a bulleted list on the same light ground as everything else.
+          The CTA moves up beside the heading, where the homepage keeps its pill. */}
+      <Section
+        alt
+        eyebrow="ABLAUF"
+        title="Wie wir vorgehen"
+        action={
+          <PillLink to="/kontakt" variant="outlineOnDark">
+            Termin vereinbaren
+          </PillLink>
+        }
+      >
+        <StepList
+          steps={[
             "Anamnese & Sichtung Befunde",
             "Physiotherapeutische Diagnostik",
             "Manuelle Techniken & aktive Mobilisation",
@@ -48,7 +62,6 @@ function Physio() {
             "Return to Sport / Play – Testungen",
           ]}
         />
-        <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
       </Section>
 
       <SplitBlock

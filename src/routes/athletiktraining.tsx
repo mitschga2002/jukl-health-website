@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  BulletList,
-  CTAButton,
-  SplitBlock,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, BulletList, SplitBlock } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
 
 const athletiktrainingImg = "/img/athletiktraining-1459.webp";
 
@@ -41,13 +35,27 @@ function Athletik() {
         image={athletiktrainingImg}
       />
 
-      <Section eyebrow="INHALTE" title="Schnelligkeit · Kraft · Stabilität">
+      {/* The slab, but not the numbered steps the other service pages use:
+          Schnelligkeit, Kraft and Stabilität are what the training contains,
+          not an order to do them in, and numbering them would claim a sequence
+          that isn't there. */}
+      <Section
+        alt
+        eyebrow="INHALTE"
+        title="Schnelligkeit · Kraft · Stabilität"
+        action={
+          <PillLink to="/kontakt" variant="outlineOnDark">
+            Athletik anfragen
+          </PillLink>
+        }
+      >
         <p>
           Als Ergänzung in der Vorbereitung, Übergangsphase oder während der Saison trainiere mit
           deiner Mannschaft wie die Profis. Beugt Verletzungen vor und startet top-fit in die
           nächsten Spiele.
         </p>
         <BulletList
+          alt
           items={[
             "Schnelligkeit, Kraft, Stabilität, Beweglichkeit",
             "Individuelle Periodisierung über Saisonphasen",
@@ -57,7 +65,6 @@ function Athletik() {
             "Kontinuierliche Leistungssteigerung durch systematischen Trainingsaufbau",
           ]}
         />
-        <CTAButton to="/kontakt">Athletik anfragen</CTAButton>
       </Section>
 
       <SplitBlock
