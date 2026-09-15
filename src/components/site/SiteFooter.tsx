@@ -1,18 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import logoWhite from "@/assets/jukl-logo-white.png";
+import logoWhite from "@/assets/jukl-wordmark-white.png";
+import { PillLink } from "./Pill";
+import { cn } from "@/lib/utils";
 
 const sitemap = [
   {
     heading: "Clubs",
     links: [
-      { to: "/clubs", label: "Clubs Übersicht" },
+      { to: "/clubs", label: "Übersicht" },
       { to: "/performance-club", label: "Performance Club" },
       { to: "/strength-club", label: "Strength Club" },
       { to: "/training-club-widnau", label: "Training Club Widnau" },
     ],
   },
   {
-    heading: "Training",
+    heading: "Angebot",
     links: [
       { to: "/training-physio", label: "Übersicht" },
       { to: "/personaltraining", label: "Personal Training" },
@@ -44,70 +46,76 @@ const sitemap = [
   },
 ] as const;
 
-export function SiteFooter() {
+/**
+ * `seamless` is for pages whose last module is already the dark surface (the
+ * homepage team slab): the footer then drops its own rounded top edge and the
+ * two read as one block, exactly as the design draws them.
+ */
+export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
   return (
-    <footer className="bg-foreground text-background pt-16 pb-10 lg:pt-20 lg:pb-12">
+    <footer className={cn("bg-surface", !seamless && "mt-16 rounded-t-card lg:mt-24")}>
       <div className="jh-container jh-gutter">
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
-          <div className="col-span-2 lg:col-span-1">
-            <img
-              src={logoWhite}
-              alt="JuklHealth"
-              width={1920}
-              height={878}
-              loading="lazy"
-              decoding="async"
-              className="h-11 w-auto mb-6"
-            />
-            <Link
-              to="/kontakt"
-              className="inline-block bg-primary text-primary-foreground px-7 py-3 font-display text-sm hover:bg-primary-hover"
-            >
-              Jetzt kontaktieren
-            </Link>
-          </div>
-          {sitemap.map((col) => (
-            <div key={col.heading}>
-              <h2 className="text-[11px] uppercase tracking-[0.22em] text-primary mb-4">
-                {col.heading}
-              </h2>
-              <ul className="space-y-2">
+        <div className="pb-8 pt-16 lg:pt-24">
+          <div className="grid grid-cols-1 gap-8 min-[380px]:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+            <div className="flex flex-col items-start gap-10 min-[380px]:col-span-2 lg:col-span-4">
+              <img
+                src={logoWhite}
+                alt="JuklHealth"
+                width={1552}
+                height={303}
+                loading="lazy"
+                decoding="async"
+                className="h-[34px] w-auto lg:h-[41px]"
+              />
+              <PillLink to="/kontakt">Jetzt kontaktieren</PillLink>
+            </div>
+
+            {sitemap.map((col) => (
+              <div key={col.heading} className="flex flex-col gap-3 lg:col-span-2">
+                <div className="pb-2">
+                  <h2 className="text-base uppercase leading-[1.25] tracking-[0.05em] text-primary">
+                    {col.heading}
+                  </h2>
+                </div>
                 {col.links.map((l) => {
                   const hash = "hash" in l ? l.hash : undefined;
                   return (
-                    <li key={l.to + (hash ?? "") + l.label}>
-                      <Link
-                        to={l.to}
-                        hash={hash}
-                        className="text-sm text-background/70 hover:text-primary"
-                      >
-                        {l.label}
-                      </Link>
-                    </li>
+                    <Link
+                      key={l.to + (hash ?? "") + l.label}
+                      to={l.to}
+                      hash={hash}
+                      className="text-base leading-[1.25] text-surface-foreground/80 hover:text-primary"
+                    >
+                      {l.label}
+                    </Link>
                   );
                 })}
-              </ul>
-            </div>
-          ))}
-        </div>
+              </div>
+            ))}
+          </div>
 
-        <div className="flex flex-col lg:flex-row justify-between text-[11px] uppercase tracking-[0.18em] text-background/50 gap-4 border-t border-background/15 pt-6">
-          <div>© {new Date().getFullYear()} JuklHealth Performance Club · Dornbirn, AT</div>
-          <div className="flex gap-8">
-            <Link to="/impressum" className="hover:text-primary">
-              Impressum
-            </Link>
-            <Link to="/datenschutz" className="hover:text-primary">
-              Datenschutz
-            </Link>
-            <a
-              href="https://www.instagram.com/juklhealth_clubs/"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-primary"
-            >
-              Instagram
-            </a>
+          <div className="mt-8 border-t border-surface-foreground/15 pt-6 lg:mt-14">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <p className="text-base leading-[1.25] text-surface-muted-foreground">
+                © {new Date().getFullYear()} JuklHealth Performance Club · Dornbirn, AT
+              </p>
+              <div className="flex flex-wrap gap-6 text-base uppercase leading-[1.25] tracking-[0.05em] text-surface-muted-foreground lg:gap-8">
+                <Link to="/impressum" className="hover:text-primary">
+                  Impressum
+                </Link>
+                <Link to="/datenschutz" className="hover:text-primary">
+                  Datenschutz
+                </Link>
+                <a
+                  href="https://www.instagram.com/juklhealth_clubs/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-primary"
+                >
+                  Instagram
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

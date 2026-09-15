@@ -1,4 +1,5 @@
 const disciplines = [
+  "Performance Club",
   "Personal Training",
   "Athletiktraining",
   "Gruppentraining",
@@ -6,21 +7,17 @@ const disciplines = [
   "Analysen",
   "Physiotherapie",
   "Trainingstherapie",
-  "Performance Club",
 ];
 
 function Track({ ariaHidden = false }: { ariaHidden?: boolean }) {
   return (
-    <div className="flex gap-10 items-center px-5 shrink-0" aria-hidden={ariaHidden || undefined}>
+    <div className="flex shrink-0 items-center gap-10 pl-10" aria-hidden={ariaHidden || undefined}>
       {disciplines.map((d) => (
-        <div key={d} className="flex gap-10 items-center">
-          <span className="text-xs uppercase tracking-[0.28em] text-primary-foreground whitespace-nowrap">
-            {d}
+        <div key={d} className="flex shrink-0 items-center gap-10">
+          <span className="whitespace-nowrap text-xl leading-[1.25] text-foreground">{d}</span>
+          <span className="font-light leading-[1.25] text-foreground/50" aria-hidden>
+            •
           </span>
-          <span
-            className="w-1.5 h-1.5 rounded-full bg-primary-foreground/40 shrink-0"
-            aria-hidden
-          />
         </div>
       ))}
     </div>
@@ -32,9 +29,9 @@ export function DisciplineTicker() {
   return (
     <section
       aria-label="Trainingsdisziplinen"
-      className="bg-primary py-5 overflow-hidden whitespace-nowrap"
+      className="mb-16 mt-12 overflow-hidden whitespace-nowrap border-y border-border py-8 lg:mb-24 lg:mt-16"
     >
-      <div className="flex animate-ticker w-max">
+      <div className="flex w-max animate-ticker">
         <Track />
         <Track ariaHidden />
         <Track ariaHidden />

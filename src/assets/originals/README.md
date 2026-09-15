@@ -20,5 +20,13 @@ pixel dimensions recorded there:
 
     magick <master> -resize <W>x<H>! -quality 85 -define webp:method=6 public/img/<stem>-<W>.webp
 
+`hero-athlete` is the one stem with a crop step before the resize. Its variants
+are cut to the largest region centred on the two people, so that the hero can
+hold them in the middle of the frame at any viewport with a plain
+`object-position: center`:
+
+    magick hero-athlete.jpg -crop 1320x910+0+13 +repage -resize <W>x<H>! \
+      -quality 85 -define webp:method=6 public/img/hero-athlete-<W>.webp
+
 Four stems have no master here (`angebot`, `lucas-vidal`, `profisport`,
 `rico-andriessen`); they postdate the last deploy and exist only as variants.
