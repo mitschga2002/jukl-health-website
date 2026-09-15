@@ -8,6 +8,7 @@ import {
   CTAButton,
   StatRow,
 } from "@/components/site/content";
+import { cn } from "@/lib/utils";
 
 const banner = "/img/meine-person-banner-1920.webp";
 const julianPortrait = "/img/julian-portrait-1460.webp";
@@ -56,6 +57,18 @@ const timeline: { year: string; entry: string }[] = [
   { year: "2016/2017", entry: "Trainer Body & Soul Innsbruck" },
   { year: "2014", entry: "Sportstudium Universität Innsbruck" },
   { year: "2009", entry: "Abschluss Sportgymnasium Dornbirn" },
+];
+
+/* Grouped so the year is stated once per station instead of repeating down the
+   rail — 2017 alone carried three rows. A Map, not `Object.entries`: plain
+   years are integer-like keys, so an object would reorder them ascending and
+   drop the ranges ("seit 2019", "2018/2019") at the end. The array is already
+   in the order the page wants, newest first, so insertion order is the order. */
+const stationen = [
+  ...timeline.reduce((acc, t) => {
+    acc.set(t.year, [...(acc.get(t.year) ?? []), t.entry]);
+    return acc;
+  }, new Map<string, string[]>()),
 ];
 
 function MeinePerson() {
@@ -110,20 +123,62 @@ function MeinePerson() {
       </SplitBlock>
 
       <Section eyebrow="LEBEN" title="Werdegang">
-        <ol className="overflow-hidden rounded-card border border-border">
-          {timeline.map((t, i) => (
+        {/* 22 bordered rows read as a wall, and the hairline between every one
+            of them is the divider the rest of the site never draws. A rail
+            instead: one line down the page, a marker per year, and the years
+            themselves in display type doing the structuring. */}
+        <ol className="relative flex flex-col gap-8 pl-8 lg:gap-10 lg:pl-0 mb-12 lg:mb-16">
+          {stationen.map(([year, entries], i) => (
             <li
-              key={i}
-              className="grid grid-cols-[110px_1fr] items-baseline gap-6 border-b border-border px-6 py-5 last:border-b-0"
+              key={year}
+              className="relative grid grid-cols-1 gap-2 lg:grid-cols-[13rem_1fr] lg:items-baseline lg:gap-0"
             >
-              <span className="text-xs font-light uppercase leading-tight tracking-wider text-primary">
-                {t.year}
-              </span>
-              <span className="text-base lg:text-lg">{t.entry}</span>
+              {/* One segment per station rather than a single rail behind the
+                  list: a rail spanning the <ol> can only end at the last
+                  station's *text*, leaving a thread hanging past the final
+                  marker. Each segment reaches from its own marker to the next
+                  one — the negative bottom is the flex gap it has to cross — so
+                  the last station simply draws none and the line stops on the
+                  dot. Only the first is tinted, which is all the original
+                  gradient was saying: this end is the present. */}
+              {i < stationen.length - 1 ? (
+                <span
+                  aria-hidden
+                  className={cn(
+                    "absolute -bottom-8 -left-8 top-[0.55em] w-px -translate-x-1/2 lg:-bottom-10 lg:left-52",
+                    i === 0 ? "bg-gradient-to-b from-primary/60 to-border" : "bg-border",
+                  )}
+                />
+              ) : null}
+              {/* Sits on the rail, and its ring is the background colour — the
+                  line appears to break around each marker rather than run under it. */}
+              <span
+                aria-hidden
+                className="absolute -left-8 top-[0.55em] size-2.5 -translate-x-1/2 rounded-full bg-primary ring-4 ring-background lg:left-52"
+              />
+              {/* "2023–2026" and "seit 2019" are a hair wider than the column
+                  was, so they broke across two lines beside a one-line entry.
+                  There is room on the rail for a wider column, and `nowrap`
+                  holds the promise; below lg the year is on its own full-width
+                  line, where wrapping is free and harmless. */}
+              <h3 className="font-display text-[22px] leading-[1.25] text-primary lg:whitespace-nowrap lg:pr-10 lg:text-right">
+                {year}
+              </h3>
+              <ul className="flex flex-col gap-2 lg:pl-10">
+                {entries.map((entry) => (
+                  <li
+                    key={entry}
+                    className="max-w-[620px] text-base leading-[1.45] text-foreground lg:text-lg"
+                  >
+                    {entry}
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ol>
         <BulletList
+          title="Qualifikationen"
           items={[
             "Sportwissenschaftler (BSc, Universität Innsbruck)",
             "FMSpro Experte · Functional Movement Screen",

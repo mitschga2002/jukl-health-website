@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell, PageHero, Section, BulletList, CTAButton } from "@/components/site/content";
+import { PageShell, PageHero, Section, StepList } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
 
 const athletik = "/img/athletiktraining-1459.webp";
 
@@ -26,7 +27,7 @@ export const Route = createFileRoute("/trainingstherapie")({
 
 function Reha() {
   return (
-    <PageShell>
+    <PageShell seamlessFooter>
       <PageHero
         eyebrow="Reha"
         title="Trainingstherapie"
@@ -34,9 +35,22 @@ function Reha() {
         image={athletik}
       />
 
-      <Section eyebrow="AUFBAU" title="Progressive Belastungssteuerung">
-        <BulletList
-          items={[
+      {/* The page's only module, and its last, so the slab does not stop above
+          the footer and leave a stripe of background between two dark blocks —
+          it runs full bleed and the footer continues the same surface. */}
+      <Section
+        alt
+        seamless
+        eyebrow="AUFBAU"
+        title="Progressive Belastungssteuerung"
+        action={
+          <PillLink to="/kontakt" variant="outlineOnDark">
+            Termin vereinbaren
+          </PillLink>
+        }
+      >
+        <StepList
+          steps={[
             "Schmerzadaptierter Einstieg",
             "Progressive Kräftigung entsprechend deiner Belastbarkeit („Load to Tolerance“)",
             "Technik-Coaching für Alltag und Sport",
@@ -44,7 +58,6 @@ function Reha() {
             "Enge Abstimmung mit Physiotherapie und Sportmedizin",
           ]}
         />
-        <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
       </Section>
     </PageShell>
   );

@@ -64,14 +64,14 @@ function Dropdown({
           aria-hidden
         />
       </button>
-      <div className="invisible absolute left-0 top-full pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+      <div className="invisible absolute left-0 top-full pt-6 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
         <div className="min-w-[240px] overflow-hidden rounded-image border border-border bg-background/80 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-xl">
           {items.map((i) => (
             <Link
               key={i.to + (i.hash ?? "") + i.label}
               to={i.to}
               hash={i.hash}
-              className={`block px-5 py-2.5 text-base hover:bg-muted hover:text-primary ${
+              className={`block px-5 py-2.5 text-base hover:bg-foreground/[0.04] hover:text-primary ${
                 isActive(i.to, i.hash) ? "text-primary" : "text-muted-foreground"
               }`}
             >
@@ -222,55 +222,64 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
       )}
     >
       <div className="relative z-50 px-4 lg:px-6">
-        <div className="flex items-center justify-between gap-4 rounded-image bg-background/80 px-4 py-3 shadow-[0_2px_6px_rgba(0,0,0,0.04)] backdrop-blur-xl">
-          <Link
-            to="/"
-            className="flex shrink-0 items-center"
-            aria-label="JuklHealth Startseite"
-            onClick={close}
-          >
-            <img
-              src={logoBlack}
-              alt="JuklHealth"
-              width={624}
-              height={133}
-              className="h-[22px] w-auto lg:h-[26px]"
-            />
-          </Link>
-
-          <div className="hidden items-center gap-6 lg:flex">
-            <Dropdown label="Clubs" items={clubLinks} />
-            <Dropdown label="Angebot" items={trainingLinks} />
-            <Dropdown label="Analysen" items={analysenLinks} />
-            {mainLinks.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                className="text-base text-muted-foreground hover:text-primary"
-                activeProps={{ className: "text-primary" }}
-                activeOptions={{ exact: true }}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex shrink-0 items-center gap-2">
-            {/* Desktop only: below lg the same CTA sits inside the menu overlay. */}
-            <PillLink to="/kontakt" className="hidden lg:inline-flex" onClick={close}>
-              Jetzt kontaktieren
-            </PillLink>
-            <button
-              ref={toggleRef}
-              type="button"
-              className="-mr-1 p-2 text-foreground lg:hidden"
-              aria-label={open ? "Menü schließen" : "Menü öffnen"}
-              aria-expanded={open}
-              aria-controls="mobile-menu"
-              onClick={() => setOpen((o) => !o)}
+        <div className="relative rounded-image shadow-[0_2px_6px_rgba(0,0,0,0.04)]">
+          {/* The bar's frosted surface lives on its own layer rather than on
+              the bar element, so the bar does not become a Backdrop Root and
+              the dropdown nested inside it can still blur the page behind it. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 rounded-image bg-background/80 backdrop-blur-xl"
+          />
+          <div className="relative flex items-center justify-between gap-4 px-4 py-3">
+            <Link
+              to="/"
+              className="flex shrink-0 items-center"
+              aria-label="JuklHealth Startseite"
+              onClick={close}
             >
-              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+              <img
+                src={logoBlack}
+                alt="JuklHealth"
+                width={624}
+                height={133}
+                className="h-[22px] w-auto lg:h-[26px]"
+              />
+            </Link>
+
+            <div className="hidden items-center gap-6 lg:flex">
+              <Dropdown label="Clubs" items={clubLinks} />
+              <Dropdown label="Angebot" items={trainingLinks} />
+              <Dropdown label="Analysen" items={analysenLinks} />
+              {mainLinks.map((l) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  className="text-base text-muted-foreground hover:text-primary"
+                  activeProps={{ className: "text-primary" }}
+                  activeOptions={{ exact: true }}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex shrink-0 items-center gap-2">
+              {/* Desktop only: below lg the same CTA sits inside the menu overlay. */}
+              <PillLink to="/kontakt" className="hidden lg:inline-flex" onClick={close}>
+                Jetzt kontaktieren
+              </PillLink>
+              <button
+                ref={toggleRef}
+                type="button"
+                className="-mr-1 p-2 text-foreground lg:hidden"
+                aria-label={open ? "Menü schließen" : "Menü öffnen"}
+                aria-expanded={open}
+                aria-controls="mobile-menu"
+                onClick={() => setOpen((o) => !o)}
+              >
+                {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
           </div>
         </div>
       </div>

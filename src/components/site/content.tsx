@@ -16,9 +16,12 @@ import type { ReactNode } from "react";
 
 /* Vertical rhythm. A subpage stacks far more modules than the homepage does —
    analysen runs six in a row — so each one contributes less than a homepage
-   module: two adjacent sections come to 80px on a phone instead of 128px. The
-   desktop figure is unchanged, where the extra air is not the problem. */
-const SECTION_Y = "py-10 lg:py-24";
+   module: two adjacent sections come to 80px on a phone and 128px on desktop,
+   instead of the homepage's 128px / 192px. The homepage can afford the wider
+   figure because its big padding is mostly card interior — the dark slab, the
+   ticker — so the eye reads it as one block's breathing room. A subpage sets
+   short flat modules side by side, where the same figure reads as a hole. */
+export const SECTION_Y = "py-10 lg:py-16";
 
 /** Section padding, shared so every module stacks on the same rhythm. */
 const SECTION_STACK = `flex flex-col gap-10 ${SECTION_Y} lg:gap-16`;
@@ -196,6 +199,7 @@ export function Section({
   action,
   compact = false,
   alt,
+  seamless = false,
 }: {
   eyebrow?: string;
   title?: string;
@@ -207,6 +211,11 @@ export function Section({
    *  pages instead of one text with headings. */
   compact?: boolean;
   alt?: boolean;
+  /** `alt` only. The last module on a thin page: the slab runs full bleed,
+   *  rounds its top edge alone and lets `<PageShell seamlessFooter>` carry the
+   *  same surface down into the footer — otherwise a dark card and the dark
+   *  footer sit a gap apart with a stripe of background caught between them. */
+  seamless?: boolean;
 }) {
   const heading =
     eyebrow || title ? (
@@ -246,6 +255,19 @@ export function Section({
     </div>
   );
 
+  if (alt && seamless) {
+    return (
+      <section className="mt-5 rounded-t-card bg-surface">
+        <div className="jh-container jh-gutter">
+          <div className="flex flex-col gap-8 pb-24 pt-12 lg:gap-10 lg:pb-32 lg:pt-24">
+            {header}
+            {body}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (alt) {
     return (
       <section className="jh-container jh-edge">
@@ -277,17 +299,42 @@ export function Section({
  * a hairline. The page already carries the bordered slabs and the cards, so the
  * list earns its structure from rhythm and the green marker alone.
  */
-export function BulletList({ items, title }: { items: string[]; title?: string }) {
+export function BulletList({
+  items,
+  title,
+  alt,
+}: {
+  items: string[];
+  title?: string;
+  /** Inside a `<Section alt>`: `border` is a light-theme token and all but
+   *  disappears on the slab, so the hairlines take the surface's own ink. */
+  alt?: boolean;
+}) {
   return (
     <div className="flex flex-col gap-3">
       {title ? (
-        <h3 className="font-display text-[22px] leading-[1.25] text-foreground">{title}</h3>
+        <h3
+          className={cn(
+            "font-display text-[22px] leading-[1.25]",
+            alt ? "text-surface-foreground" : "text-foreground",
+          )}
+        >
+          {title}
+        </h3>
       ) : null}
-      <ul className="max-w-[760px] divide-y divide-border">
+      <ul
+        className={cn(
+          "max-w-[760px] divide-y",
+          alt ? "divide-surface-foreground/15" : "divide-border",
+        )}
+      >
         {items.map((item) => (
           <li
             key={item}
-            className="flex items-start gap-3 py-3 text-base font-light leading-[1.45]"
+            className={cn(
+              "flex items-start gap-3 py-3 text-base font-light leading-[1.45]",
+              alt && "text-surface-foreground",
+            )}
           >
             <span className="shrink-0 text-primary" aria-hidden>
               →
@@ -573,6 +620,53 @@ export function TopicCards({
               {item.note}
             </p>
           ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * A numbered sequence on the dark slab — the homepage's Performance Club rows
+ * with the photo and the link taken away: number, step, one elevated card each.
+ * For an `Ablauf`, where a bulleted list states the steps but not that they are
+ * in order.
+ */
+export function StepList({ steps }: { steps: readonly string[] }) {
+  /* An Ablauf of ten steps at the same scale as one of five would run the slab
+     to nine hundred pixels of near-identical cards. Past six the type steps
+     down instead — still the same module, just talking faster. It stays one
+     column at every length: these are ordered, and two columns turn reading
+     them in order into a zigzag. */
+  const long = steps.length > 6;
+
+  return (
+    <div className={cn("flex flex-col", long ? "gap-2" : "gap-3")}>
+      {steps.map((step, i) => (
+        <div
+          key={step}
+          className={cn(
+            "flex items-baseline rounded-card bg-surface-elevated",
+            long ? "gap-4 p-5 lg:gap-8 lg:px-8 lg:py-5" : "gap-5 p-6 lg:gap-10 lg:px-10 lg:py-8",
+          )}
+        >
+          {/* Same neutral figure the homepage rows number themselves with. */}
+          <span
+            className={cn(
+              "font-display shrink-0 leading-[1.25] text-[#d4d4d4]",
+              long ? "text-[17px] lg:text-[20px]" : "text-[20px] lg:text-[26px]",
+            )}
+          >
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <p
+            className={cn(
+              "font-display text-balance leading-[1.3] text-surface-foreground",
+              long ? "text-[17px] lg:text-[21px]" : "text-[20px] lg:text-[28px]",
+            )}
+          >
+            {step}
+          </p>
         </div>
       ))}
     </div>
