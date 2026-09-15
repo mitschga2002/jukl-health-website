@@ -69,12 +69,20 @@ function Vortraege() {
         objectPosition="50% 40%"
       />
 
+      {/* The homepage's dark slab: the two audiences are the page's core claim,
+          so the section changes key instead of stacking as another light block. */}
       <Section
+        alt
         eyebrow="THEMEN"
         title="Zwei Zielgruppen, ein Prinzip"
-        action={<PillLink to="/kontakt">Anfrage senden</PillLink>}
+        action={
+          <PillLink to="/kontakt" variant="outlineOnDark">
+            Anfrage senden
+          </PillLink>
+        }
       >
         <TopicCards
+          alt
           items={[
             {
               eyebrow: "Für Unternehmen",
