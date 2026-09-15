@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   PageShell,
   PageHero,
@@ -6,6 +6,8 @@ import {
   CTAButton,
   ImagePlaceholder,
 } from "@/components/site/content";
+import { Eyebrow, PillAnchor, PillLink } from "@/components/site/Pill";
+import { cn } from "@/lib/utils";
 
 const teamBanner = "/img/team-banner-1824.webp";
 const julianPortrait = "/img/julian-portrait-1460.webp";
@@ -92,74 +94,45 @@ const members: Member[] = [
 ];
 
 function MemberBlock({ m }: { m: Member }) {
+  const copy = (
+    <div className={cn("flex flex-col justify-center gap-6", m.image && m.reverse && "lg:order-1")}>
+      <div className="flex flex-col gap-3">
+        <h2 className="font-display text-balance text-[32px] leading-[1.25] lg:text-[42px]">
+          {m.name}
+        </h2>
+        <Eyebrow className="text-xs text-primary">{m.role}</Eyebrow>
+      </div>
+      <p className="max-w-[560px] text-base font-light leading-[1.6] text-muted-foreground lg:text-lg">
+        „{m.quote}"
+      </p>
+      <div className="flex flex-wrap gap-3 pt-2">
+        <PillLink to="/kontakt" search={{ trainer: m.name }}>
+          Termin vereinbaren
+        </PillLink>
+        {m.learnMore ? (
+          <PillAnchor href={m.learnMore} variant="outlineOnLight">
+            Mehr erfahren
+          </PillAnchor>
+        ) : null}
+      </div>
+    </div>
+  );
+
   if (!m.image) {
     return (
-      <section className="border-b border-foreground/10">
-        <div className="jh-container jh-gutter py-16 lg:py-24 flex flex-col">
-          <h2 className="font-display text-3xl lg:text-5xl tracking-tight leading-[1.05] mb-3">
-            {m.name}
-          </h2>
-          <p className="text-xs uppercase tracking-[0.22em] text-primary mb-6">{m.role}</p>
-          <p className="text-base lg:text-lg leading-relaxed text-muted-foreground max-w-2xl">
-            „{m.quote}"
-          </p>
-          <div className="flex gap-3 flex-wrap pt-2">
-            <Link
-              to="/kontakt"
-              search={{ trainer: m.name }}
-              className="inline-block mt-8 bg-primary text-primary-foreground px-8 py-4 font-display text-sm hover:bg-primary-hover"
-            >
-              Termin vereinbaren
-            </Link>
-            {m.learnMore ? (
-              <a
-                href={m.learnMore}
-                className="inline-block mt-8 border border-foreground px-8 py-4 font-display text-sm hover:bg-foreground hover:text-background"
-              >
-                Mehr erfahren
-              </a>
-            ) : null}
-          </div>
-        </div>
+      <section className="jh-container jh-gutter">
+        <div className="py-10 lg:py-24">{copy}</div>
       </section>
     );
   }
+
   return (
-    <section className="border-b border-foreground/10">
-      <div className="jh-container grid lg:grid-cols-2">
+    <section className="jh-container jh-gutter">
+      <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-2 lg:gap-16 lg:py-24">
         <div className={m.reverse ? "lg:order-2" : ""}>
-          <ImagePlaceholder label={m.name} ratio="square" className="h-full" image={m.image} />
+          <ImagePlaceholder label={m.name} ratio="square" image={m.image} />
         </div>
-        <div
-          className={`jh-gutter py-16 lg:py-24 flex flex-col justify-center ${
-            m.reverse ? "lg:order-1" : ""
-          }`}
-        >
-          <h2 className="font-display text-3xl lg:text-5xl tracking-tight leading-[1.05] mb-3">
-            {m.name}
-          </h2>
-          <p className="text-xs uppercase tracking-[0.22em] text-primary mb-6">{m.role}</p>
-          <p className="text-base lg:text-lg leading-relaxed text-muted-foreground max-w-xl">
-            „{m.quote}"
-          </p>
-          <div className="flex gap-3 flex-wrap pt-2">
-            <Link
-              to="/kontakt"
-              search={{ trainer: m.name }}
-              className="inline-block mt-8 bg-primary text-primary-foreground px-8 py-4 font-display text-sm hover:bg-primary-hover"
-            >
-              Termin vereinbaren
-            </Link>
-            {m.learnMore ? (
-              <a
-                href={m.learnMore}
-                className="inline-block mt-8 border border-foreground px-8 py-4 font-display text-sm hover:bg-foreground hover:text-background"
-              >
-                Mehr erfahren
-              </a>
-            ) : null}
-          </div>
-        </div>
+        {copy}
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PillButton } from "./Pill";
 
 const MAPS_SRC = "https://www.google.com/maps?q=Bildgasse+10,+6850+Dornbirn,+Austria&output=embed";
 
@@ -15,7 +16,7 @@ export function MapEmbed() {
 
   if (loaded) {
     return (
-      <div className="aspect-video w-full border border-foreground/10 overflow-hidden">
+      <div className="aspect-video w-full overflow-hidden rounded-card border border-border">
         <iframe
           title="JuklHealth Standort Bildgasse 10, Dornbirn"
           src={MAPS_SRC}
@@ -28,7 +29,7 @@ export function MapEmbed() {
   }
 
   return (
-    <div className="aspect-video w-full border border-foreground/10 bg-muted grid place-items-center p-6">
+    <div className="grid aspect-video w-full place-items-center rounded-card border border-border bg-muted p-6">
       <div className="text-center max-w-sm">
         <div className="font-display text-lg mb-2">Google Maps</div>
         <p className="text-sm text-muted-foreground mb-5">
@@ -37,19 +38,15 @@ export function MapEmbed() {
             href="/datenschutz"
             target="_blank"
             rel="noreferrer"
-            className="underline hover:text-primary"
+            className="underline hover:text-primary transition-colors duration-300 ease-out"
           >
             Datenschutzerklärung
           </a>
           .
         </p>
-        <button
-          type="button"
-          onClick={() => setLoaded(true)}
-          className="bg-primary cursor-pointer text-primary-foreground px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-primary-hover"
-        >
+        <PillButton type="button" onClick={() => setLoaded(true)} className="px-6">
           Karte laden
-        </button>
+        </PillButton>
         <p className="text-[11px] text-muted-foreground mt-4">Bildgasse 10 · A-6850 Dornbirn</p>
       </div>
     </div>

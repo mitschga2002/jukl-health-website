@@ -29,7 +29,7 @@ function Datenschutz() {
         intro="Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO."
       />
 
-      <Section eyebrow="ÜBERBLICK" title="Einleitung">
+      <Section compact eyebrow="ÜBERBLICK" title="Einleitung">
         <p>
           Wir haben diese Datenschutzerklärung verfasst, um Ihnen gemäß den Vorgaben der
           Datenschutz-Grundverordnung (EU) 2016/679 und anwendbaren nationalen Gesetzen zu erklären,
@@ -38,7 +38,7 @@ function Datenschutz() {
         </p>
       </Section>
 
-      <Section eyebrow="VERANTWORTLICH" title="Kontaktdaten">
+      <Section compact eyebrow="VERANTWORTLICH" title="Kontaktdaten">
         <p>
           <strong>JUKLHEALTH</strong>
           <br />
@@ -47,13 +47,16 @@ function Datenschutz() {
           Bildgasse 10, 6850 Dornbirn, Österreich
           <br />
           E-Mail:{" "}
-          <a className="underline hover:text-primary" href="mailto:julian@juklhealth.com">
+          <a
+            className="underline hover:text-primary transition-colors duration-300 ease-out"
+            href="mailto:julian@juklhealth.com"
+          >
             julian@juklhealth.com
           </a>
         </p>
       </Section>
 
-      <Section eyebrow="RECHTSGRUNDLAGEN" title="Rechtsgrundlagen der Verarbeitung">
+      <Section compact eyebrow="RECHTSGRUNDLAGEN" title="Rechtsgrundlagen der Verarbeitung">
         <p>
           Wir verarbeiten Ihre Daten nur, wenn mindestens eine der folgenden Bedingungen zutrifft:
         </p>
@@ -78,7 +81,7 @@ function Datenschutz() {
         </ul>
       </Section>
 
-      <Section eyebrow="SPEICHERDAUER" title="Speicherdauer">
+      <Section compact eyebrow="SPEICHERDAUER" title="Speicherdauer">
         <p>
           Wir speichern personenbezogene Daten nur so lange, wie es für die Bereitstellung unserer
           Dienstleistungen unbedingt notwendig ist. Sollten Sie die Löschung Ihrer Daten wünschen
@@ -87,7 +90,7 @@ function Datenschutz() {
         </p>
       </Section>
 
-      <Section eyebrow="IHRE RECHTE" title="Rechte laut DSGVO">
+      <Section compact eyebrow="IHRE RECHTE" title="Rechte laut DSGVO">
         <ul className="list-disc pl-6 space-y-2">
           <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
           <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
@@ -99,7 +102,7 @@ function Datenschutz() {
         <p>
           Bei Verstößen können Sie sich an die österreichische Datenschutzbehörde wenden:{" "}
           <a
-            className="underline hover:text-primary"
+            className="underline hover:text-primary transition-colors duration-300 ease-out"
             href="https://www.dsb.gv.at/"
             target="_blank"
             rel="noreferrer"
@@ -110,14 +113,14 @@ function Datenschutz() {
         </p>
       </Section>
 
-      <Section eyebrow="SICHERHEIT" title="TLS-Verschlüsselung">
+      <Section compact eyebrow="SICHERHEIT" title="TLS-Verschlüsselung">
         <p>
           Wir verwenden HTTPS, um Daten abhörsicher im Internet zu übertragen. Die Verwendung
           erkennen Sie am Schlosssymbol in Ihrem Browser sowie am Schema <code>https://</code>.
         </p>
       </Section>
 
-      <Section eyebrow="KOMMUNIKATION" title="Kontaktformular & E-Mail">
+      <Section compact eyebrow="KOMMUNIKATION" title="Kontaktformular & E-Mail">
         <p>
           Wenn Sie uns per Kontaktformular oder E-Mail kontaktieren, werden die von Ihnen
           übermittelten Daten (Name, E-Mail-Adresse, ggf. Telefonnummer und Ihre Nachricht) auf
@@ -127,7 +130,7 @@ function Datenschutz() {
         </p>
       </Section>
 
-      <Section eyebrow="COOKIES" title="Cookies">
+      <Section compact eyebrow="COOKIES" title="Cookies">
         <p>
           Diese Website verwendet nur technisch notwendige Cookies für den Betrieb der Seite. Es
           werden keine Tracking- oder Marketing-Cookies ohne Ihre ausdrückliche Einwilligung
@@ -135,7 +138,7 @@ function Datenschutz() {
         </p>
       </Section>
 
-      <Section eyebrow="EINGEBETTETE INHALTE" title="Google Maps">
+      <Section compact eyebrow="EINGEBETTETE INHALTE" title="Google Maps">
         <p>
           Auf unserer Kontaktseite kann eine Google-Maps-Karte angezeigt werden. Die Karte wird
           nicht automatisch geladen: Sie sehen zunächst nur einen Platzhalter mit einem Hinweis.

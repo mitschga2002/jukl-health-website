@@ -1,13 +1,13 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
   useRouter,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 
+import { PillAnchor, PillButton, PillLink } from "@/components/site/Pill";
 import appCss from "../styles.css?url";
 
 const LOCAL_BUSINESS_JSONLD = {
@@ -37,19 +37,16 @@ const LOCAL_BUSINESS_JSONLD = {
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Seite nicht gefunden</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
+      <div className="flex max-w-md flex-col items-center gap-4 text-center">
+        <p className="font-display text-[64px] leading-[1.25] text-primary">404</p>
+        <h1 className="font-display text-[28px] leading-[1.25] text-foreground">
+          Seite nicht gefunden
+        </h1>
+        <p className="text-base font-light leading-[1.45] text-muted-foreground">
           Diese Seite existiert nicht oder wurde verschoben.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary-hover"
-          >
-            Zur Startseite
-          </Link>
+        <div className="pt-2">
+          <PillLink to="/">Zur Startseite</PillLink>
         </div>
       </div>
     </div>
@@ -62,29 +59,26 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+      <div className="flex max-w-md flex-col items-center gap-4 text-center">
+        <h1 className="font-display text-[28px] leading-[1.25] text-foreground">
           Diese Seite konnte nicht geladen werden
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="text-base font-light leading-[1.45] text-muted-foreground">
           Bitte versuche es erneut oder kehre zur Startseite zurück.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
+        <div className="flex flex-wrap justify-center gap-3 pt-2">
+          <PillButton
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary-hover"
+            className="px-6"
           >
             Erneut versuchen
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent"
-          >
+          </PillButton>
+          <PillAnchor href="/" variant="outlineOnLight">
             Startseite
-          </a>
+          </PillAnchor>
         </div>
       </div>
     </div>

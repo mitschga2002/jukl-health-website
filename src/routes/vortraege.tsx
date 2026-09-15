@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  SplitBlock,
-  BulletList,
-  CTAButton,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
+import { Eyebrow, PillLink } from "@/components/site/Pill";
 
 const banner = "/img/vortraege-banner-1080.webp";
 const video = "/img/vortraege-video.mp4";
@@ -57,6 +51,13 @@ const referenzen: { year: string; entry: string }[] = [
   { year: "2012–2016", entry: "Tutorien an der Universität Innsbruck" },
 ];
 
+const jahre = Object.entries(
+  referenzen.reduce<Record<string, string[]>>((acc, r) => {
+    (acc[r.year] ??= []).push(r.entry);
+    return acc;
+  }, {}),
+).sort((a, b) => b[0].localeCompare(a[0]));
+
 function Vortraege() {
   return (
     <PageShell>
@@ -68,67 +69,86 @@ function Vortraege() {
         objectPosition="50% 40%"
       />
 
-      <SplitBlock
-        eyebrow="FÜR UNTERNEHMEN"
-        title="Energie & Fokus im Arbeitsalltag"
-        imageLabel="Keynote · Office"
+      <Section
+        eyebrow="THEMEN"
+        title="Zwei Zielgruppen, ein Prinzip"
+        action={<PillLink to="/kontakt">Anfrage senden</PillLink>}
       >
-        <BulletList
+        <TopicCards
           items={[
-            "High-Performance-Energieprinzipien: Schlaf, Atmung, Ernährung, Bewegung, Wasser",
-            "Produktivitäts­rhythmen ohne Burnout — Energie­management & Micro-Breaks",
-            "Gesunder Rücken & Beweglichkeit — Routinen für Büro & Homeoffice",
-            "Stress- & Emotions­management — Fokus-Atmung & Tools",
-            "Stoffwechsel verstehen — Ernährung, die wirklich funktioniert",
+            {
+              eyebrow: "Für Unternehmen",
+              title: "Energie & Fokus im Arbeitsalltag",
+              points: [
+                "High-Performance-Energieprinzipien: Schlaf, Atmung, Ernährung, Bewegung, Wasser",
+                "Produktivitäts\u00adrhythmen ohne Burnout — Energie\u00admanagement & Micro-Breaks",
+                "Gesunder Rücken & Beweglichkeit — Routinen für Büro & Homeoffice",
+                "Stress- & Emotions\u00admanagement — Fokus-Atmung & Tools",
+                "Stoffwechsel verstehen — Ernährung, die wirklich funktioniert",
+              ],
+            },
+            {
+              eyebrow: "Für Sportinstitutionen",
+              title: "Leistung steuern · Verletzungsrisiko senken",
+              points: [
+                "Energiemanagement im Leistungs\u00adfußball & Teamsport",
+                "Ernährungs\u00adstrategien & Stoffwechselanalyse",
+                "Trainings\u00adzonen & Schwellen\u00adsteuerung (Puls/Pace/Watt)",
+                "Schlaf, Regeneration & Reise\u00admanagement",
+                "Screening & Prävention — FMS, Mobility, Return-to-Play",
+              ],
+            },
           ]}
-        />
-        <p className="text-muted-foreground text-sm mt-6">
-          Formate: Keynote · Impuls · Lunch & Learn · Webinar-Reihe · On-Site oder Online.
-        </p>
-        <CTAButton to="/kontakt">Anfrage senden</CTAButton>
-      </SplitBlock>
-
-      <SplitBlock
-        reverse
-        eyebrow="FÜR SPORTINSTITUTIONEN"
-        title="Leistung steuern · Verletzungsrisiko senken"
-        imageLabel="Sport-Institutionen"
-      >
-        <BulletList
-          items={[
-            "Energiemanagement im Leistungs­fußball & Teamsport",
-            "Ernährungs­strategien & Stoffwechselanalyse",
-            "Trainings­zonen & Schwellen­steuerung (Puls/Pace/Watt)",
-            "Schlaf, Regeneration & Reise­management",
-            "Screening & Prävention — FMS, Mobility, Return-to-Play",
-          ]}
-        />
-      </SplitBlock>
-
-      <Section eyebrow="EINBLICK" title="Live vor Ort">
-        <video
-          src={video}
-          controls
-          playsInline
-          preload="metadata"
-          className="w-full max-w-[280px] sm:max-w-sm lg:max-w-lg mx-auto aspect-[9/16] object-cover bg-foreground"
         />
       </Section>
 
+      {/* The video had a section to itself with nothing beside it. Paired with
+          the formats line it becomes a block rather than a stray asset. */}
+      <section className="jh-container jh-gutter">
+        <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-24">
+          <video
+            src={video}
+            controls
+            playsInline
+            preload="metadata"
+            className="aspect-[9/16] w-full max-w-[280px] rounded-card bg-foreground object-cover sm:max-w-sm lg:max-w-none"
+          />
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <Eyebrow>Einblick</Eyebrow>
+              <h2 className="font-display text-balance text-[32px] leading-[1.25] lg:text-[42px]">
+                Live vor Ort
+              </h2>
+            </div>
+            <p className="max-w-[460px] text-base font-light leading-[1.6] text-muted-foreground lg:text-lg">
+              Formate: Keynote · Impuls · Lunch & Learn · Webinar-Reihe · On-Site oder Online.
+            </p>
+            <div className="flex">
+              <PillLink to="/kontakt" variant="outlineOnLight">
+                Anfrage senden
+              </PillLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Section eyebrow="REFERENZEN" title="Bisherige Auftritte">
-        <ol className="space-y-0 border-t border-foreground/10">
-          {referenzen.map((r, i) => (
-            <li
-              key={i}
-              className="grid grid-cols-[80px_1fr] gap-6 py-4 border-b border-foreground/10 items-baseline"
-            >
-              <span className="font-mono text-xs uppercase tracking-widest text-primary">
-                {r.year}
-              </span>
-              <span>{r.entry}</span>
-            </li>
+        {/* Grouped by year and flowed into columns: 22 bordered rows made a
+            wall, and the year repeated on most of them. */}
+        <div className="columns-1 gap-8 sm:columns-2 lg:columns-3">
+          {jahre.map(([year, entries]) => (
+            <div key={year} className="mb-8 flex break-inside-avoid flex-col gap-2">
+              <h3 className="font-display text-[22px] leading-[1.25] text-primary">{year}</h3>
+              <ul className="flex flex-col gap-2">
+                {entries.map((entry) => (
+                  <li key={entry} className="text-base font-light leading-[1.45]">
+                    {entry}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ol>
+        </div>
       </Section>
     </PageShell>
   );

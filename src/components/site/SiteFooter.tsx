@@ -56,8 +56,8 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
     <footer className={cn("bg-surface", !seamless && "mt-16 rounded-t-card lg:mt-24")}>
       <div className="jh-container jh-gutter">
         <div className="pb-8 pt-16 lg:pt-24">
-          <div className="grid grid-cols-1 gap-8 min-[380px]:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-            <div className="flex flex-col items-start gap-10 min-[380px]:col-span-2 lg:col-span-4">
+          <div className="grid grid-cols-1 gap-8 min-[380px]:grid-cols-2 xl:grid-cols-12 xl:gap-8">
+            <div className="flex flex-col items-start gap-10 min-[380px]:col-span-2 xl:col-span-4">
               <img
                 src={logoWhite}
                 alt="JuklHealth"
@@ -71,7 +71,7 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
             </div>
 
             {sitemap.map((col) => (
-              <div key={col.heading} className="flex flex-col gap-3 lg:col-span-2">
+              <div key={col.heading} className="flex flex-col gap-3 xl:col-span-2">
                 <div className="pb-2">
                   <h2 className="text-base uppercase leading-[1.25] tracking-[0.05em] text-primary">
                     {col.heading}
@@ -100,17 +100,17 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
                 © {new Date().getFullYear()} JuklHealth Performance Club · Dornbirn, AT
               </p>
               <div className="flex flex-wrap gap-6 text-base uppercase leading-[1.25] tracking-[0.05em] text-surface-muted-foreground lg:gap-8">
-                <Link to="/impressum" className="hover:text-primary">
+                <Link to="/impressum" className="hover:text-primary text-sm">
                   Impressum
                 </Link>
-                <Link to="/datenschutz" className="hover:text-primary">
+                <Link to="/datenschutz" className="hover:text-primary text-sm">
                   Datenschutz
                 </Link>
                 <a
                   href="https://www.instagram.com/juklhealth_clubs/"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-primary"
+                  className="hover:text-primary text-sm"
                 >
                   Instagram
                 </a>
