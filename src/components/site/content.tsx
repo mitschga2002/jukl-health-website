@@ -520,6 +520,7 @@ export function QuoteSlab({
  */
 export function TopicCards({
   items,
+  alt,
 }: {
   items: readonly {
     eyebrow: string;
@@ -527,6 +528,9 @@ export function TopicCards({
     points: readonly string[];
     note?: string;
   }[];
+  /** Inside a `<Section alt>`: the cards take the homepage's elevated step on
+   *  the dark slab instead of the light `muted` fill. */
+  alt?: boolean;
 }) {
   return (
     <div
@@ -536,9 +540,15 @@ export function TopicCards({
       )}
     >
       {items.map((item) => (
-        <div key={item.title} className="flex flex-col gap-5 rounded-card bg-muted p-6 lg:p-10">
+        <div
+          key={item.title}
+          className={cn(
+            "flex flex-col gap-5 rounded-card p-6 lg:p-10",
+            alt ? "bg-surface-elevated text-surface-foreground" : "bg-muted",
+          )}
+        >
           <div className="flex flex-col gap-3">
-            <Eyebrow>{item.eyebrow}</Eyebrow>
+            <Eyebrow className={alt ? "text-surface-muted-foreground" : ""}>{item.eyebrow}</Eyebrow>
             <h3 className="font-display text-balance text-[24px] leading-[1.25] lg:text-[30px]">
               {item.title}
             </h3>
@@ -554,7 +564,14 @@ export function TopicCards({
             ))}
           </ul>
           {item.note ? (
-            <p className="mt-auto pt-2 text-sm text-muted-foreground">{item.note}</p>
+            <p
+              className={cn(
+                "mt-auto pt-2 text-sm",
+                alt ? "text-surface-foreground/70" : "text-muted-foreground",
+              )}
+            >
+              {item.note}
+            </p>
           ) : null}
         </div>
       ))}
