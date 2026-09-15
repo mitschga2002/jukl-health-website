@@ -5,7 +5,7 @@ import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
 import { Eyebrow, PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 /* The subpages are built from these blocks, and they speak the homepage's
    language: rounded cards on the content line, no hairline rules between
@@ -635,19 +635,38 @@ export function TopicCards({
 export function StepList({ steps }: { steps: readonly string[] }) {
   /* An Ablauf of ten steps at the same scale as one of five would run the slab
      to nine hundred pixels of near-identical cards. Past six the type steps
-     down instead — still the same module, just talking faster. It stays one
-     column at every length: these are ordered, and two columns turn reading
-     them in order into a zigzag. */
+     down and the list breaks into two columns on desktop, where there is width
+     going spare either way.
+
+     A column-flowed grid, not CSS `columns`. Both read downwards — 01-05 on the
+     left, 06-10 on the right — but `columns` balances the two by height and
+     leaves the cards landing wherever their own text ends, so a one-line step
+     opposite a two-line one puts every card below it out of step with its
+     neighbour. Fixing the row count instead lines the two columns up, and
+     `1fr` rows make every row the height of the tallest card in it.
+
+     The row count is data-dependent, so it arrives as a custom property rather
+     than a class Tailwind would have to generate per length; it is only read
+     inside the `lg` rule, so below that the inline value is set but unused and
+     the list is a plain stack. */
   const long = steps.length > 6;
+  const rows = Math.ceil(steps.length / 2);
 
   return (
-    <div className={cn("flex flex-col", long ? "gap-2" : "gap-3")}>
+    <div
+      className={cn(
+        "flex flex-col gap-3",
+        long &&
+          "lg:grid lg:auto-cols-fr lg:grid-flow-col lg:[grid-template-rows:repeat(var(--step-rows),minmax(0,1fr))]",
+      )}
+      style={long ? ({ "--step-rows": rows } as CSSProperties) : undefined}
+    >
       {steps.map((step, i) => (
         <div
           key={step}
           className={cn(
             "flex items-baseline rounded-card bg-surface-elevated",
-            long ? "gap-4 p-5 lg:gap-8 lg:px-8 lg:py-5" : "gap-5 p-6 lg:gap-10 lg:px-10 lg:py-8",
+            long ? "gap-4 p-5 lg:gap-6 lg:px-6 lg:py-5" : "gap-5 p-6 lg:gap-10 lg:px-10 lg:py-8",
           )}
         >
           {/* Same neutral figure the homepage rows number themselves with. */}
