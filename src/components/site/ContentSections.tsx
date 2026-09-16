@@ -5,7 +5,7 @@ import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
 import { ConnectedCards } from "./ConnectedCards";
 import { cn } from "@/lib/utils";
-import { notchStyle } from "./notch";
+import { NotchFrame } from "./NotchFrame";
 
 const services = [
   {
@@ -123,9 +123,9 @@ function ServiceRow({ service, index }: { service: (typeof services)[number]; in
       </div>
 
       <div className="relative xl:col-span-3">
-        <div
-          className="jh-notch h-[200px] w-full overflow-hidden rounded-image xl:ml-auto xl:h-[207px] xl:max-w-[368px]"
-          style={notchStyle("tr", { w: 50, h: 50, r: 30 })}
+        <NotchFrame
+          className="h-[200px] w-full xl:ml-auto xl:h-[207px] xl:max-w-[368px]"
+          notch={{ corner: "tr", base: { w: 50, h: 50, r: 30 } }}
         >
           <SmartImage
             src={service.image}
@@ -136,7 +136,7 @@ function ServiceRow({ service, index }: { service: (typeof services)[number]; in
               "imagePosition" in service ? service.imagePosition : undefined,
             )}
           />
-        </div>
+        </NotchFrame>
         <span
           className={cn(
             "absolute right-0 top-0 flex items-center justify-center rounded-full bg-background p-2.5 transition-colors group-hover:bg-primary",
@@ -319,36 +319,40 @@ export function ProfisportBlock() {
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
         >
-          {/* The rounding/clipping and the mask sit on separate elements on
-              purpose: an element that is both clipped by a rounded rect and
-              masked gets rasterised as two layers, and the join between them
-              can show as a hairline outline around the picture. */}
-          <div className="overflow-hidden rounded-image">
+          {/* Both cuts — the label's top-left and the timeline's bottom-right —
+              come out of the one mask; see NotchFrame for why not two. */}
+          <NotchFrame
+            className="aspect-[776/484] w-full"
+            notch={{
+              corner: "br",
+              base: { w: 118, h: 50, r: 30 },
+              lg: { w: 166, h: 50, r: 30 },
+            }}
+            notch2={{
+              corner: "tl",
+              base: { w: 160, h: 90, r: 34 },
+              lg: { w: 182, h: 102, r: 34 },
+            }}
+          >
             <div
-              className="jh-notch"
-              style={notchStyle("br", { w: 118, h: 50, r: 30 }, { w: 166, h: 50, r: 30 })}
+              className="relative size-full bg-background"
+              aria-roledescription="Karussell"
+              aria-label="Unsere Clubs"
             >
-              <div
-                className="jh-notch relative aspect-[776/484] w-full bg-background"
-                style={notchStyle("tl", { w: 160, h: 90, r: 34 }, { w: 182, h: 102, r: 34 })}
-                aria-roledescription="Karussell"
-                aria-label="Unsere Clubs"
-              >
-                {profisportSlides.map((s, i) => (
-                  <SmartImage
-                    key={s.src}
-                    src={s.src}
-                    alt={s.alt}
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    aria-hidden={i !== slide}
-                    className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${
-                      i === slide ? "opacity-100" : "opacity-0"
-                    }`}
-                  />
-                ))}
-              </div>
+              {profisportSlides.map((s, i) => (
+                <SmartImage
+                  key={s.src}
+                  src={s.src}
+                  alt={s.alt}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  aria-hidden={i !== slide}
+                  className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${
+                    i === slide ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
             </div>
-          </div>
+          </NotchFrame>
 
           <div className="absolute left-0 top-0 flex h-[80px] w-[150px] flex-col justify-center rounded-card bg-surface px-3 lg:h-[92px] lg:w-[172px] lg:px-4">
             <p className="whitespace-nowrap text-xl font-light leading-[1.25] text-surface-foreground lg:text-2xl">

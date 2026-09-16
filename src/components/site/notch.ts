@@ -20,6 +20,9 @@
  *
  * Describing the whole cut as one path removes the compositing entirely: one
  * shape, one subtract, nothing to accumulate.
+ *
+ * The mask is applied by `<NotchFrame>`, never to the photo element itself —
+ * see `BLEED` for why.
  */
 export type NotchCorner = "tr" | "tl" | "br";
 
@@ -27,15 +30,22 @@ export type NotchCorner = "tr" | "tl" | "br";
 const FILLET = 20;
 
 /**
- * How far the cut overhangs the photo's own edges.
+ * How far the masked element overhangs the photo, in px.
  *
- * The bite's outer sides sit exactly on the element's border, so the shape's
- * antialiased boundary lands on the same device row as the photo's last row.
- * Whenever layout puts that row on a half pixel — which browser zoom does
- * constantly; 1.75x was enough — the mask only clears it partially and a 1px
- * line of photo survives along the edge. Pushing the shape a couple of pixels
- * past the element moves that soft boundary outside the visible area, where
- * there is nothing left to show through.
+ * A photo's edge almost never lands on a device pixel row — fractional layout
+ * heights and browser zoom (1.75x was enough) see to that — so its last row is
+ * antialiased: part photo, part whatever is behind. When the mask ends on the
+ * same row, Chromium resolves the two edges independently, and in the bite the
+ * mask comes out fractionally open exactly where the photo is fractionally
+ * present. A 1px line of photo survives along the edge, tracing the bottom of
+ * the cut.
+ *
+ * So the mask surface is not the photo. `<NotchFrame>` masks an element that
+ * extends `BLEED` past the photo on every side, and the shape below extends the
+ * bite the same distance past the photo's edge. The photo's soft last row then
+ * sits well inside the mask, on rows that are entirely bite, and the frame's
+ * overflow clip trims the overhang. Two pixels covers the widest antialiased
+ * edge any zoom level produces.
  */
 const BLEED = 2;
 
@@ -58,7 +68,7 @@ export function notchMask(corner: NotchCorner, w: number, h: number, r: number):
   // Traced for the top-right corner, then mirrored for the others. The photo's
   // top edge sits at y = b and its right edge at x = W, so the fillets stay
   // tangent to them exactly as designed; the last three points carry the shape
-  // out past both, into the bleed that never gets painted.
+  // out past both, across the bleed.
   //   (0,b)  where the cut meets the photo's top edge
   //   arc f  concave fillet down to the bite's left edge
   //   line   down the bite's left edge
@@ -93,40 +103,51 @@ export function notchMask(corner: NotchCorner, w: number, h: number, r: number):
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
-/** Where the cut sits, matching the corner the shape was built for. */
+/**
+ * Where the cut sits on the masked element. The element already overhangs the
+ * photo by `BLEED`, so the tile's own bleed lands on that overhang when the
+ * tile is flush with the corner.
+ */
 export function notchPosition(corner: NotchCorner): string {
-  const o = `${-BLEED}px`;
-  return {
-    tr: `right ${o} top ${o}`,
-    tl: `left ${o} top ${o}`,
-    br: `right ${o} bottom ${o}`,
-  }[corner];
+  return { tr: "right top", tl: "left top", br: "right bottom" }[corner];
 }
 
-/** Size of the mask tile: the bite plus the fillet bleed on two sides. */
+/** Size of the mask tile: the bite, the fillet on two sides, and the bleed. */
 export function notchSize(w: number, h: number): string {
   return `${w + FILLET + BLEED}px ${h + FILLET + BLEED}px`;
 }
 
+type Bite = { w: number; h: number; r: number };
+
 /**
- * The inline custom properties a notched element needs. Pass `lg` to change the
- * cut at the `lg` breakpoint — the stylesheet falls back to the base values
- * when the `-lg` ones are absent.
+ * One cut. Pass `lg` to change the bite at the `lg` breakpoint — the
+ * stylesheet falls back to the base values when the `-lg` ones are absent.
  */
-export function notchStyle(
-  corner: NotchCorner,
-  base: { w: number; h: number; r: number },
-  lg?: { w: number; h: number; r: number },
-): React.CSSProperties {
+export type NotchSpec = { corner: NotchCorner; base: Bite; lg?: Bite };
+
+function notchVars(prefix: string, { corner, base, lg }: NotchSpec): Record<string, string> {
   return {
-    "--notch-svg": notchMask(corner, base.w, base.h, base.r),
-    "--notch-size": notchSize(base.w, base.h),
-    "--notch-pos": notchPosition(corner),
+    [`${prefix}-svg`]: notchMask(corner, base.w, base.h, base.r),
+    [`${prefix}-size`]: notchSize(base.w, base.h),
+    [`${prefix}-pos`]: notchPosition(corner),
     ...(lg
       ? {
-          "--notch-svg-lg": notchMask(corner, lg.w, lg.h, lg.r),
-          "--notch-size-lg": notchSize(lg.w, lg.h),
+          [`${prefix}-svg-lg`]: notchMask(corner, lg.w, lg.h, lg.r),
+          [`${prefix}-size-lg`]: notchSize(lg.w, lg.h),
         }
       : {}),
+  };
+}
+
+/**
+ * The inline custom properties `.jh-notch` reads. A second cut, when given,
+ * goes into the same mask as another layer — two nested masked elements would
+ * each resolve their own edges and bring the hairline back.
+ */
+export function notchStyle(first: NotchSpec, second?: NotchSpec): React.CSSProperties {
+  return {
+    "--notch-bleed": `${BLEED}px`,
+    ...notchVars("--notch", first),
+    ...(second ? notchVars("--notch2", second) : {}),
   } as React.CSSProperties;
 }
