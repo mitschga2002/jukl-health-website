@@ -5,12 +5,13 @@ import { PageShell, PageHero, Section } from "@/components/site/content";
 import { submitContact } from "@/lib/contact.functions";
 import { LocationMap } from "@/components/site/LocationMap";
 import { Eyebrow, PillButton } from "@/components/site/Pill";
+import { SITE } from "@/lib/site";
 
 const teamBanner = "/img/team-banner-1824.webp";
 
 type Search = { trainer?: string };
 
-const CONTACT_EMAIL = "julian@juklhealth.com";
+const CONTACT_EMAIL = SITE.emails.primary;
 
 /* The form now sits on the dark slab, where `border-border` — a light-theme
    token — all but disappears. One declaration for all five controls, so they
@@ -108,28 +109,25 @@ function Kontakt() {
           <div className="space-y-6">
             <div>
               <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">E-Mail</Eyebrow>
-              <a
-                href="mailto:julian@juklhealth.com"
-                className="font-display break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-surface-foreground/70 lg:text-3xl"
-              >
-                julian@juklhealth.com
-              </a>
-              <br />
-              <a
-                href="mailto:florian@juklhealth.com"
-                className="font-display break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-surface-foreground/70 lg:text-3xl"
-              >
-                florian@juklhealth.com
-              </a>
+              {SITE.emails.all.map((email) => (
+                <a
+                  key={email}
+                  href={`mailto:${email}`}
+                  className="font-display block break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-surface-foreground/70 lg:text-3xl"
+                >
+                  {email}
+                </a>
+              ))}
             </div>
             <div>
               <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">Adresse</Eyebrow>
               <div className="text-lg leading-snug text-surface-foreground">
-                Bildgasse 10
-                <br />
-                A-6850 Dornbirn
-                <br />
-                Österreich
+                {SITE.address.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+                {SITE.address.country}
               </div>
             </div>
             <div>
@@ -146,7 +144,7 @@ function Kontakt() {
 
             <LocationMap
               name="JuklHealth Clubs"
-              lines={["Bildgasse 10", "A-6850 Dornbirn"]}
+              lines={[...SITE.address.lines]}
               lat={47.4151713}
               lon={9.7330917}
               destination="Bildgasse 10, 6850 Dornbirn, Österreich"

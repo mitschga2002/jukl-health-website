@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import logoWhite from "@/assets/jukl-wordmark-white.png";
 import { PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
+import { SITE } from "@/lib/site";
 
 const sitemap = [
   {
@@ -57,7 +58,7 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
       <div className="jh-container jh-gutter">
         <div className="pb-8 pt-16 lg:pt-24">
           <div className="grid grid-cols-1 gap-8 min-[380px]:grid-cols-2 xl:grid-cols-12 xl:gap-8">
-            <div className="flex flex-col items-start gap-10 min-[380px]:col-span-2 xl:col-span-4">
+            <div className="flex flex-col items-start gap-8 min-[380px]:col-span-2 xl:col-span-4">
               <img
                 src={logoWhite}
                 alt="JuklHealth"
@@ -67,6 +68,17 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
                 decoding="async"
                 className="h-[34px] w-auto lg:h-[41px]"
               />
+              <address className="flex flex-col gap-1 text-base not-italic leading-[1.25] text-surface-foreground/80">
+                {SITE.address.lines.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+                <a
+                  href={`mailto:${SITE.emails.primary}`}
+                  className="mt-2 transition-colors duration-300 ease-out hover:text-surface-foreground"
+                >
+                  {SITE.emails.primary}
+                </a>
+              </address>
               <PillLink to="/kontakt">Jetzt kontaktieren</PillLink>
             </div>
 
@@ -107,7 +119,7 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
                   Datenschutz
                 </Link>
                 <a
-                  href="https://www.instagram.com/juklhealth_clubs/"
+                  href={SITE.instagram.url}
                   target="_blank"
                   rel="noreferrer"
                   className="text-sm hover:text-surface-foreground"
