@@ -48,7 +48,7 @@ function Datenschutz() {
           <br />
           E-Mail:{" "}
           <a
-            className="underline hover:text-primary transition-colors duration-300 ease-out"
+            className="underline transition-colors duration-300 ease-out hover:text-foreground"
             href="mailto:julian@juklhealth.com"
           >
             julian@juklhealth.com
@@ -102,7 +102,7 @@ function Datenschutz() {
         <p>
           Bei Verstößen können Sie sich an die österreichische Datenschutzbehörde wenden:{" "}
           <a
-            className="underline hover:text-primary transition-colors duration-300 ease-out"
+            className="underline transition-colors duration-300 ease-out hover:text-foreground"
             href="https://www.dsb.gv.at/"
             target="_blank"
             rel="noreferrer"
@@ -138,19 +138,23 @@ function Datenschutz() {
         </p>
       </Section>
 
-      <Section compact eyebrow="EINGEBETTETE INHALTE" title="Google Maps">
+      <Section compact eyebrow="KARTEN" title="OpenStreetMap & Routenplanung">
         <p>
-          Auf unserer Kontaktseite kann eine Google-Maps-Karte angezeigt werden. Die Karte wird
-          nicht automatisch geladen: Sie sehen zunächst nur einen Platzhalter mit einem Hinweis.
-          Erst wenn Sie auf „Karte laden“ klicken, wird die Karte von Google nachgeladen.
+          Auf unseren Standort- und Kontaktseiten binden wir Karten von OpenStreetMap ein. Beim
+          Aufruf dieser Seiten werden die Kartenkacheln von den Servern der OpenStreetMap Foundation
+          geladen; dabei wird Ihre IP-Adresse an diese übertragen. Es werden keine Cookies zu Werbe-
+          oder Trackingzwecken gesetzt, und wir übermitteln keine Angaben darüber, auf welcher Seite
+          die Karte eingebunden ist. Rechtsgrundlage ist unser berechtigtes Interesse an einer
+          datensparsamen Darstellung unserer Standorte (Art. 6 Abs. 1 lit. f DSGVO). Kartendaten: ©
+          OpenStreetMap-Mitwirkende.
         </p>
         <p>
-          Bis zu diesem Klick werden keine Daten an Google übertragen. Mit dem Klick werden Daten
-          (u.&nbsp;a. Ihre IP-Adresse) an Google übertragen; Anbieter ist Google Ireland Limited,
-          Gordon House, Barrow Street, Dublin 4, Irland. Rechtsgrundlage ist Ihre Einwilligung nach
-          Art. 6 Abs. 1 lit. a DSGVO, die Sie durch das Anklicken der Schaltfläche erteilen. Sie
-          können diese Einwilligung jederzeit widerrufen, indem Sie die Seite neu laden, ohne die
-          Karte zu aktivieren.
+          Auf der Karte finden Sie zusätzlich einen Link „Route planen“. Solange Sie diesen Link
+          nicht anklicken, werden keine Daten an Google übertragen. Klicken Sie ihn an, verlassen
+          Sie unsere Website und öffnen Google Maps in einem neuen Tab; ab diesem Zeitpunkt gelten
+          die Datenschutzbestimmungen von Google (Google Ireland Limited, Gordon House, Barrow
+          Street, Dublin 4, Irland). Auch hier übermitteln wir keine Angaben darüber, von welcher
+          Seite Sie gekommen sind.
         </p>
       </Section>
     </PageShell>

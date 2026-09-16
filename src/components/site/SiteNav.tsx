@@ -57,7 +57,7 @@ function Dropdown({
   const isActive = useActiveMatcher();
   return (
     <div className="group relative">
-      <button className="flex items-center gap-0.5 text-base text-muted-foreground hover:text-primary">
+      <button className="flex items-center gap-0.5 text-base text-muted-foreground hover:text-foreground">
         {label}
         <ChevronDown
           className="size-4 shrink-0 transition-transform duration-300 ease-out group-hover:rotate-180 motion-reduce:transform-none motion-reduce:transition-none"
@@ -71,7 +71,7 @@ function Dropdown({
               key={i.to + (i.hash ?? "") + i.label}
               to={i.to}
               hash={i.hash}
-              className={`block px-5 py-2.5 text-base hover:bg-foreground/[0.04] hover:text-primary ${
+              className={`block px-5 py-2.5 text-base hover:bg-foreground/[0.04] hover:text-foreground ${
                 isActive(i.to, i.hash) ? "text-primary" : "text-muted-foreground"
               }`}
             >
@@ -104,7 +104,7 @@ function MobileGroup({
               to={i.to}
               hash={i.hash}
               onClick={onNavigate}
-              className={`block py-2 text-base hover:text-primary ${
+              className={`block py-2 text-base hover:text-foreground ${
                 isActive(i.to, i.hash) ? "text-primary" : "text-muted-foreground"
               }`}
             >
@@ -254,7 +254,7 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
                 <Link
                   key={l.to}
                   to={l.to}
-                  className="text-base text-muted-foreground hover:text-primary"
+                  className="text-base text-muted-foreground hover:text-foreground"
                   activeProps={{ className: "text-primary" }}
                   activeOptions={{ exact: true }}
                 >
@@ -313,7 +313,7 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
                       <Link
                         to={l.to}
                         onClick={close}
-                        className="block py-2 text-base text-muted-foreground hover:text-primary"
+                        className="block py-2 text-base text-muted-foreground hover:text-foreground"
                         activeProps={{ className: "text-primary" }}
                         activeOptions={{ exact: true }}
                       >

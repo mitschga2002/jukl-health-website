@@ -48,9 +48,9 @@ export const submitContact = createServerFn({ method: "POST" })
     }
 
     if (!sent) {
-      throw new Error(
-        "Deine Nachricht konnte nicht übermittelt werden. Bitte schreib uns direkt an julian@juklhealth.com.",
-      );
+      // Just the failure. The fallback address is the page's to add — it has
+      // one already, as a mailto link, and saying it here too printed it twice.
+      throw new Error("Deine Nachricht konnte nicht übermittelt werden.");
     }
 
     return { ok: true as const };

@@ -370,6 +370,111 @@
   }
 }
 
+/* Standort map (Leaflet + OpenStreetMap raster tiles).
+
+   OSM serves its tiles in one style only — the light "Mapnik" sheet everyone
+   knows — and a themed tile set means an account with a tile vendor. So the
+   dark look is a filter over the standard tiles instead: `grayscale` drops the
+   map's own palette of greens and yellows, `invert` turns paper into ink and
+   the roads into light on dark, and the contrast and brightness settle the
+   result onto `--surface` so the map reads as the same material as the dark
+   slabs elsewhere on the site. Retheming it is these four numbers.
+
+   The filter is on `.leaflet-tile-pane` alone, so it never reaches the marker,
+   the controls or the attribution sitting in panes above it — inverting those
+   would put the brand green back out as magenta. */
+.jh-map {
+  --jh-map-filter: grayscale(1) invert(1) contrast(0.92) brightness(0.78);
+  background: var(--surface);
+}
+
+.jh-map .leaflet-tile-pane {
+  filter: var(--jh-map-filter);
+}
+
+/* Leaflet ships its own type stack and a white chrome; both are overridden so
+   the map's furniture belongs to this site rather than to Leaflet. */
+.jh-map.leaflet-container {
+  background: var(--surface);
+  font-family: inherit;
+}
+
+.jh-map .leaflet-bar {
+  border: none;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.35);
+}
+
+.jh-map .leaflet-bar a,
+.jh-map .leaflet-bar a:hover {
+  background: var(--surface-elevated);
+  color: var(--surface-foreground);
+  border-bottom-color: color-mix(in oklab, var(--surface-foreground) 15%, transparent);
+}
+
+.jh-map .leaflet-bar a:hover {
+  background: color-mix(in oklab, var(--surface-elevated) 80%, var(--surface-foreground));
+}
+
+/* The ODbL credit: legible, but it is a footnote and reads as one. */
+.jh-map .leaflet-control-attribution {
+  background: color-mix(in oklab, var(--surface) 75%, transparent);
+  color: color-mix(in oklab, var(--surface-foreground) 55%, transparent);
+  font-size: 10px;
+  padding: 2px 6px;
+}
+
+.jh-map .leaflet-control-attribution a {
+  color: color-mix(in oklab, var(--surface-foreground) 80%, transparent);
+}
+
+/* The pin is the one piece of colour on the map, so it is the brand green with
+   a ring of the surface ink around it — the same treatment the arrow buttons
+   get where they overlap a photo. The pulse marks it at a glance on a map that
+   is otherwise all greys. */
+.jh-pin {
+  position: relative;
+}
+
+.jh-pin-dot,
+.jh-pin-ring {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+}
+
+.jh-pin-dot {
+  background: var(--primary);
+  box-shadow:
+    0 0 0 3px var(--surface-foreground),
+    0 2px 8px rgb(0 0 0 / 0.45);
+}
+
+.jh-pin-ring {
+  background: color-mix(in oklab, var(--primary) 45%, transparent);
+  animation: jh-pin-pulse 2.6s ease-out infinite;
+}
+
+@keyframes jh-pin-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jh-pin-ring {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
 /* Carousel timeline: the active segment fills across one slide's dwell time.
    scaleX rather than width so it animates on the compositor, and it is paused
    (not restarted) while the reader holds the carousel. */
