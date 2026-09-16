@@ -242,7 +242,8 @@
 
 /* Photo notches. The cut itself — bite, rounded inner corner and both tangent
    fillets — is described as a single SVG path by `notchStyle()` in
-   `components/site/notch.ts`, which supplies the three custom properties below.
+   `components/site/notch.ts`, which supplies the custom properties below, and
+   applied through `<NotchFrame>`, which owns the element structure.
 
    It is one shape on purpose. This was previously assembled from five gradient
    layers composited with `mask-composite`; the geometry was exact, but each
@@ -252,25 +253,47 @@
    — visible on every notch, with a hard corner where the cut is rounded. One
    path means one subtract and nothing to accumulate.
 
+   The masked element overhangs the photo by `--notch-bleed` on every side and
+   the photo is inset back by the same amount, so the photo's edge rows never
+   share a device pixel with the mask's boundary — the reason for that is spelt
+   out at `BLEED` in notch.ts. The frame's overflow clip trims the overhang.
+
+   The third layer is a second cut in another corner (the carousel has one at
+   each end). Frames with a single cut leave it unset and it falls back to a
+   transparent layer, which an `add` leaves as nothing.
+
    A browser without `mask-composite` unions the layers instead, which is fully
    opaque: the photo then simply renders uncut. */
 .jh-notch {
-  mask-image: linear-gradient(#000, #000), var(--notch-svg);
+  position: absolute;
+  inset: calc(-1 * var(--notch-bleed));
+  mask-image:
+    linear-gradient(#000, #000), var(--notch-svg),
+    var(--notch2-svg, linear-gradient(transparent, transparent));
   mask-size:
     100% 100%,
-    var(--notch-size);
-  mask-position: center, var(--notch-pos);
+    var(--notch-size),
+    var(--notch2-size, 1px 1px);
+  mask-position: center, var(--notch-pos), var(--notch2-pos, center);
   mask-repeat: no-repeat;
-  mask-composite: subtract, add;
+  mask-composite: subtract, add, add;
+}
+
+.jh-notch-photo {
+  position: absolute;
+  inset: var(--notch-bleed);
 }
 
 /* `notchStyle()` sets the `-lg` pair only when the cut changes size at lg. */
 @media (width >= 64rem) {
   .jh-notch {
-    mask-image: linear-gradient(#000, #000), var(--notch-svg-lg, var(--notch-svg));
+    mask-image:
+      linear-gradient(#000, #000), var(--notch-svg-lg, var(--notch-svg)),
+      var(--notch2-svg-lg, var(--notch2-svg, linear-gradient(transparent, transparent)));
     mask-size:
       100% 100%,
-      var(--notch-size-lg, var(--notch-size));
+      var(--notch-size-lg, var(--notch-size)),
+      var(--notch2-size-lg, var(--notch2-size, 1px 1px));
   }
 }
 

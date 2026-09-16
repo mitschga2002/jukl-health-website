@@ -1,6 +1,6 @@
 import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
-import { notchStyle } from "./notch";
+import { NotchFrame } from "./NotchFrame";
 
 const julianPortrait = "/img/julian-portrait-1460.webp";
 
@@ -15,13 +15,21 @@ export function Credibility() {
       <div className="jh-container jh-gutter">
         <div className="grid grid-cols-1 gap-12 pb-8 pt-16 lg:grid-cols-2 lg:gap-16 lg:pt-24">
           <div className="relative">
-            <SmartImage
-              src={julianPortrait}
-              alt="Julian Kleinheinz — Sportwissenschaftler & Gesundheitscoach"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="jh-notch aspect-[776/484] w-full rounded-image object-cover object-top"
-              style={notchStyle("tr", { w: 150, h: 94, r: 34 }, { w: 231, h: 114, r: 34 })}
-            />
+            <NotchFrame
+              className="aspect-[776/484] w-full"
+              notch={{
+                corner: "tr",
+                base: { w: 150, h: 94, r: 34 },
+                lg: { w: 231, h: 114, r: 34 },
+              }}
+            >
+              <SmartImage
+                src={julianPortrait}
+                alt="Julian Kleinheinz — Sportwissenschaftler & Gesundheitscoach"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="size-full object-cover object-top"
+              />
+            </NotchFrame>
             <div className="absolute right-0 top-0 flex h-[84px] w-[140px] flex-col items-center justify-center gap-1 rounded-card bg-primary p-2.5 lg:h-[104px] lg:w-[221px]">
               <p className="font-display text-[32px] leading-[1.25] text-primary-foreground lg:text-[42px]">
                 10+
