@@ -94,7 +94,16 @@ function Kontakt() {
           two read as one block instead of a card with a stripe of background
           caught above the footer. */}
       <Section alt seamless eyebrow="KONTAKT" title="So erreichst du uns">
-        <div className="not-prose grid gap-10 md:grid-cols-2 lg:gap-16">
+        {/* `grid-cols-1` is not redundant with the implicit single column below
+            `md`: an implicit track is `auto`, and an auto track takes its
+            minimum from the max-content width of what is in it. The map card
+            is `aspect-video` over a 380px floor, so its intrinsic width is
+            380 × 16/9 ≈ 676px — which blew the column, and the page with it,
+            past the viewport on a phone. `grid-cols-1` is `minmax(0, 1fr)`,
+            which caps that minimum at 0 and lets the card take the column's
+            width instead of setting it. The club pages already spell it out
+            for the same reason. */}
+        <div className="not-prose grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-16">
           <div className="space-y-6">
             <div>
               <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">E-Mail</Eyebrow>

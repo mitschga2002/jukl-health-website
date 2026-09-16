@@ -5,6 +5,7 @@ import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
 import { ConnectedCards } from "./ConnectedCards";
 import { cn } from "@/lib/utils";
+import { notchStyle } from "./notch";
 
 const services = [
   {
@@ -122,7 +123,10 @@ function ServiceRow({ service, index }: { service: (typeof services)[number]; in
       </div>
 
       <div className="relative xl:col-span-3">
-        <div className="jh-notch-tr h-[200px] w-full overflow-hidden rounded-image [--notch-h:50px] [--notch-r:30px] [--notch-w:50px] xl:ml-auto xl:h-[207px] xl:max-w-[368px]">
+        <div
+          className="jh-notch h-[200px] w-full overflow-hidden rounded-image xl:ml-auto xl:h-[207px] xl:max-w-[368px]"
+          style={notchStyle("tr", { w: 50, h: 50, r: 30 })}
+        >
           <SmartImage
             src={service.image}
             alt={service.imageAlt}
@@ -320,9 +324,13 @@ export function ProfisportBlock() {
               masked gets rasterised as two layers, and the join between them
               can show as a hairline outline around the picture. */}
           <div className="overflow-hidden rounded-image">
-            <div className="jh-notch-br [--notch-h:50px] [--notch-r:30px] [--notch-w:118px] lg:[--notch-w:166px]">
+            <div
+              className="jh-notch"
+              style={notchStyle("br", { w: 118, h: 50, r: 30 }, { w: 166, h: 50, r: 30 })}
+            >
               <div
-                className="jh-notch-tl relative aspect-[776/484] w-full bg-background [--notch-h:90px] [--notch-r:34px] [--notch-w:160px] lg:[--notch-h:102px] lg:[--notch-w:182px]"
+                className="jh-notch relative aspect-[776/484] w-full bg-background"
+                style={notchStyle("tl", { w: 160, h: 90, r: 34 }, { w: 182, h: 102, r: 34 })}
                 aria-roledescription="Karussell"
                 aria-label="Unsere Clubs"
               >
