@@ -58,6 +58,7 @@ function Kontakt() {
           phone: String(fd.get("phone") || ""),
           topic: String(fd.get("topic") || ""),
           message: String(fd.get("message") || ""),
+          consent: fd.get("consent") === "on",
           trainer: search.trainer ?? "",
         },
       });
@@ -199,6 +200,43 @@ function Kontakt() {
               />
             </Field>
 
+            {/* The consent itself. A privacy policy is information, not terms
+                — the old line said "akzeptierst du unsere Datenschutzerklärung",
+                which asked the visitor to agree to a document that is not an
+                agreement. What needs agreeing to is the processing, and that
+                is what this says. The link is separate so reading the policy
+                does not require ticking anything. */}
+            <label
+              htmlFor="consent"
+              className="flex cursor-pointer items-start gap-3 text-xs leading-[1.5] text-surface-foreground/80"
+            >
+              <input
+                id="consent"
+                name="consent"
+                type="checkbox"
+                required
+                className="mt-0.5 size-4 shrink-0 cursor-pointer accent-primary"
+              />
+              <span>
+                Ich willige ein, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet
+                werden. Die Einwilligung kann ich jederzeit mit Wirkung für die Zukunft widerrufen.{" "}
+                <span aria-hidden>*</span>
+              </span>
+            </label>
+
+            <p className="text-[11px] text-surface-foreground/60">
+              Wie wir mit deinen Daten umgehen, steht in unserer{" "}
+              <a
+                href="/datenschutz"
+                target="_blank"
+                rel="noreferrer"
+                className="underline transition-colors duration-300 ease-out hover:text-surface-foreground/80"
+              >
+                Datenschutzerklärung
+              </a>
+              .
+            </p>
+
             {/* No arrow: the arrow reads as "this takes you somewhere", and a
                 submit stays on the page. `px-6` replaces the solid finish's
                 lopsided padding, which is cut for the arrow circle. */}
@@ -221,19 +259,6 @@ function Kontakt() {
                 .
               </p>
             ) : null}
-
-            <p className="text-[11px] text-surface-foreground/60">
-              Mit dem Absenden akzeptierst du unsere{" "}
-              <a
-                href="/datenschutz"
-                target="_blank"
-                rel="noreferrer"
-                className="underline transition-colors duration-300 ease-out hover:text-surface-foreground/80"
-              >
-                Datenschutzerklärung
-              </a>
-              .
-            </p>
           </form>
         </div>
       </Section>

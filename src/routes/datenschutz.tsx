@@ -128,6 +128,20 @@ function Datenschutz() {
           gelöscht, sobald der Geschäftsfall beendet wurde und gesetzliche Aufbewahrungsfristen
           abgelaufen sind.
         </p>
+        <p>
+          Das Kontaktformular lässt sich nur mit einer ausdrücklichen Einwilligung absenden;
+          Rechtsgrundlage ist daher Art. 6 Abs. 1 lit. a DSGVO. Sie können diese Einwilligung
+          jederzeit mit Wirkung für die Zukunft widerrufen — eine formlose Nachricht an{" "}
+          <a
+            href="mailto:julian@juklhealth.com"
+            className="underline transition-colors duration-300 ease-out hover:text-foreground"
+          >
+            julian@juklhealth.com
+          </a>{" "}
+          genügt. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon
+          unberührt. Soweit Ihre Anfrage auf den Abschluss eines Vertrags gerichtet ist, stützt sich
+          die Verarbeitung zusätzlich auf Art. 6 Abs. 1 lit. b DSGVO.
+        </p>
       </Section>
 
       <Section compact eyebrow="COOKIES" title="Cookies">
