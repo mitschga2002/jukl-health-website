@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, BulletList } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 import { LocationMap } from "@/components/site/LocationMap";
@@ -41,7 +42,7 @@ function StrengthClub() {
         eyebrow="ANGEBOT"
         title="24 h Zugang & ein Jahr Betreuung"
         action={
-          <PillLink to="/kontakt" variant="outlineOnDark">
+          <PillLink {...contactFormLink("Strength Club")} variant="outlineOnDark">
             Zur Anmeldung
           </PillLink>
         }

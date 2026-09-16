@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactFormLink } from "@/lib/contact-topics";
 import {
   PageShell,
   PageHero,
@@ -160,7 +161,7 @@ function Team() {
           Du brennst für Bewegung, Sportwissenschaft oder Physiotherapie? Schreib uns – wir freuen
           uns über initiative Bewerbungen.
         </p>
-        <CTAButton to="/kontakt">Bewerben</CTAButton>
+        <CTAButton {...contactFormLink("Bewerbung")}>Bewerben</CTAButton>
       </Section>
     </PageShell>
   );

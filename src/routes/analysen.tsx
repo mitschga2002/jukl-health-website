@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactFormLink } from "@/lib/contact-topics";
 import {
   PageShell,
   PageHero,
@@ -52,7 +53,7 @@ function Analysen() {
         <Anchor id="fms" />
         <ListingRow
           index={1}
-          to="/kontakt"
+          {...contactFormLink("Analysen")}
           title="FMS-Bewegungsscreening"
           image={athletiktraining}
           imageAlt="FMS · Functional Movement Screen"
@@ -73,7 +74,7 @@ function Analysen() {
         <Anchor id="stoffwechsel" />
         <ListingRow
           index={2}
-          to="/kontakt"
+          {...contactFormLink("Analysen")}
           title="Stoffwechselanalyse"
           image={stoffwechsel}
           imageAlt="Stoffwechselanalyse"
@@ -93,7 +94,7 @@ function Analysen() {
         <Anchor id="leistung" />
         <ListingRow
           index={3}
-          to="/kontakt"
+          {...contactFormLink("Analysen")}
           title="Leistungsanalyse"
           image={leistungsanalyse}
           imageAlt="Spiroergometrie · Laufband"
@@ -121,7 +122,7 @@ function Analysen() {
         <Anchor id="physio" />
         <ListingRow
           index={4}
-          to="/kontakt"
+          {...contactFormLink("Analysen")}
           title="Physioanalyse"
           image={physiotherapie}
           imageAlt="Physioanalyse"
@@ -145,7 +146,7 @@ function Analysen() {
         <Anchor id="coaching" />
         <ListingRow
           index={5}
-          to="/kontakt"
+          {...contactFormLink("Analysen")}
           title="Gesundheitscoaching"
           image={gesundheitscoaching}
           imageAlt="Gesundheitscoaching"
