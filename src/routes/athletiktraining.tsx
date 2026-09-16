@@ -3,6 +3,7 @@ import { PageShell, PageHero, Section, BulletList, SplitBlock } from "@/componen
 import { PillLink } from "@/components/site/Pill";
 
 const athletiktrainingImg = "/img/athletiktraining-1459.webp";
+const mannschaftMobility = "/img/angebot-1508.webp";
 
 export const Route = createFileRoute("/athletiktraining")({
   head: () => ({
@@ -32,7 +33,8 @@ function Athletik() {
         eyebrow="ATHLETIK"
         title="Athletiktraining"
         intro="Ideal als Ergänzung in der Saisonvorbereitung, während der Übergangsphase oder im laufenden Spielbetrieb. Das Athletiktraining verbessert Kraft, Schnelligkeit und Stabilität und trägt zur Verletzungsprävention bei."
-        image={athletiktrainingImg}
+        image={mannschaftMobility}
+        imageAlt="Mannschaft bei einer Mobility-Einheit auf dem Sportplatz"
       />
 
       {/* The slab, but not the numbered steps the other service pages use:

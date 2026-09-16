@@ -1,12 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  BulletList,
-  StepList,
-  SplitBlock,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, BulletList, StepList } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 
 const physio = "/img/physiotherapie-1460.webp";
@@ -64,13 +57,7 @@ function Physio() {
         />
       </Section>
 
-      <SplitBlock
-        reverse
-        eyebrow="WOFÜR"
-        title="Indikationen"
-        imageLabel="Physiotherapie Dornbirn"
-        image={physio}
-      >
+      <Section eyebrow="WOFÜR" title="Indikationen">
         <BulletList
           items={[
             "Akute & chronische Schmerzen (Rücken, Schulter, Knie, Hüfte)",
@@ -79,7 +66,7 @@ function Physio() {
             "Prävention & Leistungsoptimierung",
           ]}
         />
-      </SplitBlock>
+      </Section>
     </PageShell>
   );
 }
