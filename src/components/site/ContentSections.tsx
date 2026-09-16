@@ -9,7 +9,7 @@ import { NotchFrame } from "./NotchFrame";
 
 const services = [
   {
-    title: "Personal- & Athletiktraining",
+    title: "Personal- & Athletik­training",
     body: "Eins-zu-eins Betreuung, individuelle Biomechanik und Optimierung der physischen Leistungsfähigkeit.",
     tags: ["1 : 1", "Personal Training", "Athletik"],
     to: "/personaltraining",
@@ -18,7 +18,7 @@ const services = [
     imagePosition: "object-[center_15%]",
   },
   {
-    title: "Gruppentraining",
+    title: "Gruppen­training",
     body: "Strukturierte Kleingruppen mit individueller Korrektur und konsequenter Intensität.",
     tags: ["Kleingruppe", "Functional"],
     to: "/gruppentraining",
@@ -27,7 +27,7 @@ const services = [
     imagePosition: "object-[center_45%]",
   },
   {
-    title: "Individuelle Trainingsplanung",
+    title: "Individuelle Trainings­planung",
     body: "Evidenzbasierte, strukturierte Programmierungen, die exakt zu deinem Status quo passen.",
     tags: ["Programming", "Periodisierung"],
     to: "/athletiktraining",
@@ -36,7 +36,7 @@ const services = [
     imagePosition: "object-[center_20%]",
   },
   {
-    title: "Rehabilitation & Verletzungsprävention",
+    title: "Rehabili­tation & Verletzungs­prävention",
     body: "Klinische Physiotherapie und Trainingstherapie zur sicheren Rückkehr und Prävention.",
     tags: ["Physiotherapie", "Therapie"],
     to: "/physiotherapie",
@@ -45,7 +45,7 @@ const services = [
     imagePosition: "object-[center_20%]",
   },
   {
-    title: "Mikronährstoff- & Körperanalysen",
+    title: "Mikronährstoff- & Körper­analysen",
     body: "Datengestützte Leistungs-, Stoffwechsel- und Bewegungsanalysen als objektiver Status quo.",
     tags: ["Leistung", "Stoffwechsel"],
     to: "/analysen",

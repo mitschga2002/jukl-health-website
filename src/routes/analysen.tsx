@@ -54,7 +54,7 @@ function Analysen() {
         <ListingRow
           index={1}
           {...contactFormLink("Analysen")}
-          title="FMS-Bewegungsscreening"
+          title="FMS-Bewegungs­screening"
           image={athletiktraining}
           imageAlt="FMS · Functional Movement Screen"
         >
@@ -75,7 +75,7 @@ function Analysen() {
         <ListingRow
           index={2}
           {...contactFormLink("Analysen")}
-          title="Stoffwechselanalyse"
+          title="Stoffwechsel­analyse"
           image={stoffwechsel}
           imageAlt="Stoffwechselanalyse"
         >
@@ -95,7 +95,7 @@ function Analysen() {
         <ListingRow
           index={3}
           {...contactFormLink("Analysen")}
-          title="Leistungsanalyse"
+          title="Leistungs­analyse"
           image={leistungsanalyse}
           imageAlt="Spiroergometrie · Laufband"
         >
@@ -123,7 +123,7 @@ function Analysen() {
         <ListingRow
           index={4}
           {...contactFormLink("Analysen")}
-          title="Physioanalyse"
+          title="Physio­analyse"
           image={physiotherapie}
           imageAlt="Physioanalyse"
         >
@@ -147,7 +147,7 @@ function Analysen() {
         <ListingRow
           index={5}
           {...contactFormLink("Analysen")}
-          title="Gesundheitscoaching"
+          title="Gesundheits­coaching"
           image={gesundheitscoaching}
           imageAlt="Gesundheitscoaching"
         >

@@ -61,7 +61,7 @@ function TrainingPhysio() {
     <PageShell>
       <PageHero
         eyebrow="LEISTUNGEN"
-        title="Trainings- & Physioangebote"
+        title="Trainings- & Physio­angebote"
         intro="Von der Diagnose bis zur Performance: ein durchgängiges System aus Trainingswissenschaft und klinischer Physiotherapie."
       />
 

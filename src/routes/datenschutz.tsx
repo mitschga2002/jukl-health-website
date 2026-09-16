@@ -25,7 +25,7 @@ function Datenschutz() {
     <PageShell>
       <PageHero
         eyebrow="RECHTLICHES"
-        title="Datenschutzerklärung"
+        title="Datenschutz­erklärung"
         intro="Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO."
       />
 

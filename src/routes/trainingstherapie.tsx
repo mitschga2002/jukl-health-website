@@ -31,7 +31,7 @@ function Reha() {
     <PageShell seamlessFooter>
       <PageHero
         eyebrow="Reha"
-        title="Trainingstherapie"
+        title="Trainings­therapie"
         intro="Gezieltes aktives Aufbautraining nach Beschwerden oder Verletzungen. Progressive trainingstherapeutische Kräftigung, entsprechend deiner aktuellen Belastbarkeit."
         image={athletik}
       />

@@ -43,7 +43,7 @@ export function Credibility() {
           <div className="flex flex-col justify-center gap-6 lg:px-16">
             <div className="flex flex-col gap-3">
               <Eyebrow className="text-surface-muted-foreground">Das Team</Eyebrow>
-              <h2 className="font-display text-[32px] leading-[1.25] hyphens-auto text-surface-foreground lg:text-[48px]">
+              <h2 className="font-display text-[32px] leading-[1.25] text-surface-foreground lg:text-[48px]">
                 Expertise aus Sportwissenschaft und Physiotherapie.
               </h2>
             </div>

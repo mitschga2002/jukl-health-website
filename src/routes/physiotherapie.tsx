@@ -28,7 +28,7 @@ function Physio() {
     <PageShell>
       <PageHero
         eyebrow="PHYSIO"
-        title="Physiotherapie"
+        title="Physio­therapie"
         intro="Schneller zurück in schmerzfreie Bewegung: individuelle Physiotherapie mit aktivem Training. Ursache finden, gezielt behandeln, sicher zurück."
         image={physio}
       />

@@ -97,7 +97,7 @@ export function PageHero({
   const copy = (
     <div className="flex flex-col gap-4">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h1 className="font-display max-w-[720px] hyphens-auto text-balance text-[40px] leading-[1.25] sm:text-[52px] lg:text-[56px]">
+      <h1 className="font-display max-w-[720px] text-balance text-[40px] leading-[1.25] sm:text-[52px] lg:text-[56px]">
         {title}
       </h1>
       {intro ? (
