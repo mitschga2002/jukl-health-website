@@ -1,12 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  SplitBlock,
-  BulletList,
-  StepList,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, BulletList, StepList } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 
 const gruppentraining = "/img/gruppentraining-1032.webp";
@@ -36,11 +29,12 @@ function Gruppentraining() {
         eyebrow="Gruppe"
         title="Gruppentraining"
         intro="Gemeinsam erreichen wir deine sportlichen Ziele – mit individuell abgestimmtem Gruppentraining."
+        image={gruppentraining}
+        imageAlt="Gruppentraining im JuklHealth Performance Club"
       />
 
-      {/* This page opens on a text-only hero — no photo — so it reaches the
-          Ablauf with nothing behind it yet. The slab is where the page finally
-          gets some weight. */}
+      {/* The dark slab, as on the other service pages: the process module is
+          the one that carries weight, and it is the same block each time. */}
       <Section
         alt
         eyebrow="ABLAUF"
@@ -66,12 +60,7 @@ function Gruppentraining() {
         />
       </Section>
 
-      <SplitBlock
-        eyebrow="FORMATE"
-        title="Sport- & Firmen­gruppen"
-        imageLabel="Athletiktraining · Mannschaft"
-        image={gruppentraining}
-      >
+      <Section eyebrow="FORMATE" title="Sport- & Firmen­gruppen">
         <p>
           Wir betreuen Vereine, Mannschaften und Firmenteams. Das Training eignet sich ideal als
           Ergänzung in der Saisonvorbereitung, während der Übergangsphase oder im laufenden
@@ -86,7 +75,7 @@ function Gruppentraining() {
             "Outdoor- und Indoor-Setups",
           ]}
         />
-      </SplitBlock>
+      </Section>
     </PageShell>
   );
 }
