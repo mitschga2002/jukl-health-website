@@ -16,7 +16,9 @@ import {
 const teamBanner = "/img/team-banner-1824.webp";
 
 /* `topic` is what a service page's CTA hands over so the form opens on the
-   right "Anliegen"; anything not on the list is dropped rather than shown. */
+   right "Anliegen"; anything not on the list is dropped rather than shown.
+   `trainer` comes from the team page and rides along silently: it is sent
+   with the enquiry but never shown on the page. */
 type Search = { trainer?: string; topic?: ContactTopic };
 
 const CONTACT_EMAIL = SITE.emails.primary;
@@ -90,11 +92,7 @@ function Kontakt() {
       <PageHero
         eyebrow="KONTAKT"
         title="Schreib uns."
-        intro={
-          search.trainer
-            ? `Termin-Anfrage für ${search.trainer}. Wir melden uns zeitnah.`
-            : "Julian Kleinheinz, BSc · Bildgasse 10 · A-6850 Dornbirn"
-        }
+        intro="Julian Kleinheinz, BSc · Bildgasse 10 · A-6850 Dornbirn"
         image={teamBanner}
         imageAlt="Team von JuklHealth"
         ratio="natural"
@@ -167,11 +165,6 @@ function Kontakt() {
             onSubmit={onSubmit}
             className="scroll-mt-24 space-y-5 rounded-card bg-surface-elevated p-6 lg:p-8"
           >
-            {search.trainer ? (
-              <div className="rounded-image bg-surface-foreground/10 px-3 py-2 text-sm text-surface-foreground">
-                Termin-Anfrage für <strong>{search.trainer}</strong>
-              </div>
-            ) : null}
             <Field id="topic" label="Anliegen" required>
               {/* A native `<select>` draws its chevron against the right edge
                   of the border box, where the field's `px-4` never reaches it:
