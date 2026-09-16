@@ -113,7 +113,7 @@ function Kontakt() {
                 <a
                   key={email}
                   href={`mailto:${email}`}
-                  className="font-display block break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-surface-foreground/70 lg:text-3xl"
+                  className="font-display w-fit block break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-surface-foreground/70 lg:text-3xl"
                 >
                   {email}
                 </a>
