@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, BulletList, StepList } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 
@@ -41,7 +42,7 @@ function Physio() {
         eyebrow="ABLAUF"
         title="Wie wir vorgehen"
         action={
-          <PillLink to="/kontakt" variant="outlineOnDark">
+          <PillLink {...contactFormLink("Physiotherapie")} variant="outlineOnDark">
             Termin vereinbaren
           </PillLink>
         }

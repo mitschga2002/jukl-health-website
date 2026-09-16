@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, StepList } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 
@@ -44,7 +45,7 @@ function Reha() {
         eyebrow="AUFBAU"
         title="Progressive Belastungssteuerung"
         action={
-          <PillLink to="/kontakt" variant="outlineOnDark">
+          <PillLink {...contactFormLink("Trainingstherapie")} variant="outlineOnDark">
             Termin vereinbaren
           </PillLink>
         }

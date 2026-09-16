@@ -1,16 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-
-const TOPICS = [
-  "Allgemeine Anfrage",
-  "Personal Training",
-  "Athletiktraining",
-  "Gruppentraining",
-  "Physiotherapie",
-  "Trainingstherapie",
-  "Analysen",
-  "Performance Club",
-] as const;
+import { CONTACT_TOPICS } from "@/lib/contact-topics";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Name ist erforderlich").max(200),
@@ -18,7 +8,7 @@ const schema = z.object({
   phone: z.string().trim().max(60).optional().or(z.literal("")),
   message: z.string().trim().min(1, "Nachricht ist erforderlich").max(5000),
   trainer: z.string().trim().max(60).optional().or(z.literal("")),
-  topic: z.enum(TOPICS).optional().or(z.literal("")),
+  topic: z.enum(CONTACT_TOPICS).optional().or(z.literal("")),
   /* Checked in the browser too, but the browser is not where this is decided:
      the form can be posted without ever rendering, so consent is a condition
      of the request rather than a tick the UI is trusted to have collected. */

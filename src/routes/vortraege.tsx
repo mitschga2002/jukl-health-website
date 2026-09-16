@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, TopicCards, SECTION_Y } from "@/components/site/content";
 import { Eyebrow, PillLink } from "@/components/site/Pill";
 import { cn } from "@/lib/utils";
@@ -77,7 +78,7 @@ function Vortraege() {
         eyebrow="THEMEN"
         title="Zwei Zielgruppen, ein Prinzip"
         action={
-          <PillLink to="/kontakt" variant="outlineOnDark">
+          <PillLink {...contactFormLink("Vorträge & Workshops")} variant="outlineOnDark">
             Anfrage senden
           </PillLink>
         }
@@ -138,7 +139,7 @@ function Vortraege() {
               Formate: Keynote · Impuls · Lunch & Learn · Webinar-Reihe · On-Site oder Online.
             </p>
             <div className="flex">
-              <PillLink to="/kontakt" variant="outlineOnLight">
+              <PillLink {...contactFormLink("Vorträge & Workshops")} variant="outlineOnLight">
                 Anfrage senden
               </PillLink>
             </div>

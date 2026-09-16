@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 
 export type ConnectedCard = {
   to: string;
+  /** Router search params, e.g. the contact form's preselected topic. */
+  search?: Record<string, unknown>;
+  hash?: string;
   title: string;
   /** Small caps line under the title — a size, a duration, a category. */
   meta?: string;
@@ -124,6 +127,8 @@ export function ConnectedCards({
         <Link
           key={item.to + item.title}
           to={item.to}
+          search={item.search}
+          hash={item.hash}
           ref={(el) => {
             cardRefs.current[i] = el;
           }}

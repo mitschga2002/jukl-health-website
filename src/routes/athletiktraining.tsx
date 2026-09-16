@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, BulletList, SplitBlock } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 
@@ -46,7 +47,7 @@ function Athletik() {
         eyebrow="INHALTE"
         title="Schnelligkeit · Kraft · Stabilität"
         action={
-          <PillLink to="/kontakt" variant="outlineOnDark">
+          <PillLink {...contactFormLink("Athletiktraining")} variant="outlineOnDark">
             Athletik anfragen
           </PillLink>
         }

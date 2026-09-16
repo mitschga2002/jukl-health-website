@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactFormLink } from "@/lib/contact-topics";
 import {
   PageShell,
   PageHero,
@@ -50,7 +51,7 @@ function PersonalTraining() {
         eyebrow="ABLAUF"
         title="So arbeiten wir zusammen"
         action={
-          <PillLink to="/kontakt" variant="outlineOnDark">
+          <PillLink {...contactFormLink("Personal Training")} variant="outlineOnDark">
             Jetzt anfragen
           </PillLink>
         }

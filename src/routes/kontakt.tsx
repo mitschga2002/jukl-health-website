@@ -6,10 +6,18 @@ import { submitContact } from "@/lib/contact.functions";
 import { LocationMap } from "@/components/site/LocationMap";
 import { Eyebrow, PillButton } from "@/components/site/Pill";
 import { SITE } from "@/lib/site";
+import {
+  CONTACT_FORM_ID,
+  CONTACT_TOPICS,
+  isContactTopic,
+  type ContactTopic,
+} from "@/lib/contact-topics";
 
 const teamBanner = "/img/team-banner-1824.webp";
 
-type Search = { trainer?: string };
+/* `topic` is what a service page's CTA hands over so the form opens on the
+   right "Anliegen"; anything not on the list is dropped rather than shown. */
+type Search = { trainer?: string; topic?: ContactTopic };
 
 const CONTACT_EMAIL = SITE.emails.primary;
 
@@ -22,6 +30,7 @@ const FIELD =
 export const Route = createFileRoute("/kontakt")({
   validateSearch: (s: Record<string, unknown>): Search => ({
     trainer: typeof s.trainer === "string" ? s.trainer : undefined,
+    topic: isContactTopic(s.topic) ? s.topic : undefined,
   }),
   head: () => ({
     meta: [
@@ -151,9 +160,12 @@ function Kontakt() {
             />
           </div>
 
+          {/* `scroll-mt-24` clears the floating nav when a CTA lands here by
+              hash; the same margin the analysis anchors use. */}
           <form
+            id={CONTACT_FORM_ID}
             onSubmit={onSubmit}
-            className="space-y-5 rounded-card bg-surface-elevated p-6 lg:p-8"
+            className="scroll-mt-24 space-y-5 rounded-card bg-surface-elevated p-6 lg:p-8"
           >
             {search.trainer ? (
               <div className="rounded-image bg-surface-foreground/10 px-3 py-2 text-sm text-surface-foreground">
@@ -170,24 +182,26 @@ function Kontakt() {
                   clicking it still opens the menu. `pr-11` keeps a long option
                   from running under it. */}
               <div className="relative">
+                {/* Uncontrolled on purpose — the visitor may still change it —
+                    but keyed on the preselection, so a client-side hop from one
+                    CTA to another remounts it with the new default instead of
+                    keeping the first. */}
                 <select
+                  key={search.topic ?? ""}
                   id="topic"
                   name="topic"
                   required
-                  defaultValue=""
+                  defaultValue={search.topic ?? ""}
                   className={`${FIELD} appearance-none bg-surface-elevated pr-11`}
                 >
                   <option value="" disabled>
                     Bitte auswählen …
                   </option>
-                  <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
-                  <option value="Personal Training">Personal Training</option>
-                  <option value="Athletiktraining">Athletiktraining</option>
-                  <option value="Gruppentraining">Gruppentraining</option>
-                  <option value="Physiotherapie">Physiotherapie</option>
-                  <option value="Trainingstherapie">Trainingstherapie</option>
-                  <option value="Analysen">Analysen</option>
-                  <option value="Performance Club">Performance Club</option>
+                  {CONTACT_TOPICS.map((t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  ))}
                 </select>
                 <ChevronDown
                   aria-hidden

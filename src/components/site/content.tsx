@@ -350,9 +350,20 @@ export function BulletList({
 
 /** The one CTA of a subpage section. Same pill as the homepage, so a visitor
     meets one button shape across the whole site. */
-export function CTAButton({ to, children }: { to: string; children: ReactNode }) {
+export function CTAButton({
+  to,
+  search,
+  hash,
+  children,
+}: {
+  to: string;
+  /** Router search params, e.g. the contact form's preselected topic. */
+  search?: Record<string, unknown>;
+  hash?: string;
+  children: ReactNode;
+}) {
   return (
-    <PillLink to={to} className="mt-8">
+    <PillLink to={to} search={search} hash={hash} className="mt-8">
       {children}
     </PillLink>
   );
@@ -714,6 +725,8 @@ const EASE_PREMIUM = "duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
 export function ListingRow({
   index,
   to,
+  search,
+  hash,
   title,
   image,
   imageAlt,
@@ -721,6 +734,9 @@ export function ListingRow({
 }: {
   index: number;
   to: string;
+  /** Router search params, e.g. the contact form's preselected topic. */
+  search?: Record<string, unknown>;
+  hash?: string;
   title: string;
   image?: string;
   imageAlt?: string;
@@ -729,6 +745,8 @@ export function ListingRow({
   return (
     <Link
       to={to}
+      search={search}
+      hash={hash}
       className={cn(
         "group relative grid grid-cols-1 gap-6 rounded-card bg-muted p-6 transition-shadow xl:grid-cols-12 xl:items-start xl:gap-8 xl:p-10",
         EASE_PREMIUM,
