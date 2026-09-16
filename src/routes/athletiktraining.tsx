@@ -32,7 +32,7 @@ function Athletik() {
     <PageShell>
       <PageHero
         eyebrow="ATHLETIK"
-        title="Athletiktraining"
+        title="Athletik­training"
         intro="Ideal als Ergänzung in der Saisonvorbereitung, während der Übergangsphase oder im laufenden Spielbetrieb. Das Athletiktraining verbessert Kraft, Schnelligkeit und Stabilität und trägt zur Verletzungsprävention bei."
         image={mannschaftMobility}
         imageAlt="Mannschaft bei einer Mobility-Einheit auf dem Sportplatz"

@@ -28,7 +28,7 @@ function Gruppentraining() {
     <PageShell>
       <PageHero
         eyebrow="Gruppe"
-        title="Gruppentraining"
+        title="Gruppen­training"
         intro="Gemeinsam erreichen wir deine sportlichen Ziele – mit individuell abgestimmtem Gruppentraining."
         image={gruppentraining}
         imageAlt="Gruppentraining im JuklHealth Performance Club"

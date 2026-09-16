@@ -59,7 +59,7 @@ export function Hero() {
               Ein System · Training · Physio · Analyse
             </span>
             <h1 className="font-display max-w-[620px] text-[40px] leading-[1.25] text-background sm:text-[52px] lg:text-[64px]">
-              <span className="block font-extralight">Wissenschaftlich fundiertes</span>
+              <span className="block font-extralight">Wissenschaft­lich fundier­tes</span>
               <span className="block font-bold italic">Training und Therapie.</span>
             </h1>
           </div>
