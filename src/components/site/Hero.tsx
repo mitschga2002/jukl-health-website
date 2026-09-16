@@ -28,10 +28,15 @@ export function Hero() {
         sizes="100vw"
         priority
       />
+      {/* The landscape photo is scaled to the viewport's height on a phone, so
+          `object-position` cannot move it vertically. Instead it is drawn 40px
+          taller than the hero and hung 40px above it, which lifts the two faces
+          into the band between the floating nav and the eyebrow pill; without
+          the lift they sit exactly behind the pill and the headline. */}
       <SmartImage
         src={heroAthleteMobile}
         alt="Trainer und Athletin beim Training im JuklHealth Performance Club"
-        className="absolute inset-0 size-full object-cover lg:hidden"
+        className="absolute inset-x-0 -top-10 h-[calc(100%+2.5rem)] w-full object-cover lg:hidden"
         sizes="100vw"
         priority
       />

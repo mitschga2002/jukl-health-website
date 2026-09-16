@@ -199,11 +199,15 @@
 /* Layout rail. There are exactly two vertical lines on the page, and every
    module lands on one of them:
 
-   - the CONTENT line (`jh-gutter`, 56px on desktop) carries all copy, the nav
-     bar, the section headings, the club cards and the footer columns;
+   - the CONTENT line (`jh-gutter`, 56px on desktop) carries all copy, the
+     section headings, the club cards and the footer columns;
    - the EDGE line (`jh-edge`, 24px) sits further out and is only for the
-     full-bleed picture cards — the hero photo and the dark Performance Club
-     slab — so they visibly overhang the content they frame.
+     full-bleed picture cards — the floating nav bar and the dark rounded
+     slabs — so they visibly overhang the content they frame.
+
+   Below lg both lines collapse to the same 16px: a 4px overhang does not read
+   as intentional on a phone, it reads as a misalignment, so every module
+   shares one edge there.
 
    `jh-container` caps a module at the rail and is applied OUTSIDE the padding,
    so the rail matches the design frame (1728px) and the two lines keep their
@@ -216,7 +220,7 @@
 :root {
   --jh-rail: 1728px;
   --jh-gutter: 1rem;
-  --jh-edge: 0.75rem;
+  --jh-edge: 1rem;
 }
 
 @media (width >= 64rem) {
