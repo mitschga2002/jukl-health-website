@@ -240,133 +240,37 @@
   padding-inline: var(--jh-edge);
 }
 
-/* Photo notches. Where a control overlaps a photo — the arrow button on a
-   service row, the "10+ Jahre Erfahrung" badge, the carousel arrows — the
-   design does not let it sit on top of the picture: the picture is stamped out
-   around it. Reconstructed from the Figma export of a service row (368x207),
-   the cut is:
+/* Photo notches. The cut itself — bite, rounded inner corner and both tangent
+   fillets — is described as a single SVG path by `notchStyle()` in
+   `components/site/notch.ts`, which supplies the three custom properties below.
 
-     bite          = the control inflated by a 10px gap
-     inner corner  = control radius + gap, centred on the control's centre
-     fillets       = 20px arcs tangent to that circle and to the photo's edge,
-                     which is what keeps the cut from reading as a crop
+   It is one shape on purpose. This was previously assembled from five gradient
+   layers composited with `mask-composite`; the geometry was exact, but each
+   `subtract` leaves a little rounding error along the layer boundaries, and
+   with two of them the photo came out fractionally transparent in a 1px band
+   tracing the bite's raw rectangle. The page bled through it as a pale hairline
+   — visible on every notch, with a hard corner where the cut is rounded. One
+   path means one subtract and nothing to accumulate.
 
-   The four custom properties below drive it, so one rule serves every control
-   and the numbers can change per breakpoint (`lg:[--notch-w:231px]`):
-
-     --notch-w / --notch-h   bite size   = control size + 2 x gap on the cut sides
-     --notch-r               inner corner = control radius + gap
-     --notch-f               fillet radius
-
-   The shape is assembled with mask-composite, bottom layer first:
-
-     carve  --subtract-->  fill    = the bite, with its rounded inner corner
-            --add------->  fillets = plus the two tangent arcs
-            --subtract-->  base    = the photo minus all of it
-
-   A browser without mask-composite unions the layers instead, which is fully
-   opaque — the photo then simply renders uncut. */
-.jh-notch-tr,
-.jh-notch-tl,
-.jh-notch-br {
-  --notch-f: 20px;
-  --notch-flat: linear-gradient(#000, #000);
+   A browser without `mask-composite` unions the layers instead, which is fully
+   opaque: the photo then simply renders uncut. */
+.jh-notch {
+  mask-image: linear-gradient(#000, #000), var(--notch-svg);
+  mask-size:
+    100% 100%,
+    var(--notch-size);
+  mask-position: center, var(--notch-pos);
   mask-repeat: no-repeat;
-  mask-composite: subtract, add, add, subtract, add;
+  mask-composite: subtract, add;
 }
 
-.jh-notch-tr {
-  --notch-fillet: radial-gradient(
-    circle var(--notch-f) at 0 100%,
-    #0000 0 var(--notch-f),
-    #000 var(--notch-f)
-  );
-  --notch-carve: radial-gradient(
-    circle var(--notch-r) at 100% 0,
-    #0000 0 var(--notch-r),
-    #000 var(--notch-r)
-  );
-  mask-size:
-    100% 100%,
-    calc(var(--notch-f) + 1px) var(--notch-f),
-    var(--notch-f) calc(var(--notch-f) + 1px),
-    var(--notch-w) var(--notch-h),
-    var(--notch-r) var(--notch-r);
-  mask-image:
-    var(--notch-flat), var(--notch-fillet), var(--notch-fillet), var(--notch-flat),
-    var(--notch-carve);
-  mask-position:
-    center,
-    right calc(var(--notch-w) - 1px) top 0,
-    right 0 top calc(var(--notch-h) - 1px),
-    right 0 top 0,
-    right calc(var(--notch-w) - var(--notch-r)) top calc(var(--notch-h) - var(--notch-r));
-}
-
-.jh-notch-tl {
-  --notch-fillet: radial-gradient(
-    circle var(--notch-f) at 100% 100%,
-    #0000 0 var(--notch-f),
-    #000 var(--notch-f)
-  );
-  --notch-carve: radial-gradient(
-    circle var(--notch-r) at 0 0,
-    #0000 0 var(--notch-r),
-    #000 var(--notch-r)
-  );
-  mask-size:
-    100% 100%,
-    calc(var(--notch-f) + 1px) var(--notch-f),
-    var(--notch-f) calc(var(--notch-f) + 1px),
-    var(--notch-w) var(--notch-h),
-    var(--notch-r) var(--notch-r);
-  mask-image:
-    var(--notch-flat), var(--notch-fillet), var(--notch-fillet), var(--notch-flat),
-    var(--notch-carve);
-  mask-position:
-    center,
-    left calc(var(--notch-w) - 1px) top 0,
-    left 0 top calc(var(--notch-h) - 1px),
-    left 0 top 0,
-    left calc(var(--notch-w) - var(--notch-r)) top calc(var(--notch-h) - var(--notch-r));
-}
-
-.jh-notch-br {
-  --notch-fillet: radial-gradient(
-    circle var(--notch-f) at 0 0,
-    #0000 0 var(--notch-f),
-    #000 var(--notch-f)
-  );
-  --notch-carve: radial-gradient(
-    circle var(--notch-r) at 100% 100%,
-    #0000 0 var(--notch-r),
-    #000 var(--notch-r)
-  );
-  mask-size:
-    100% 100%,
-    calc(var(--notch-f) + 1px) var(--notch-f),
-    var(--notch-f) calc(var(--notch-f) + 1px),
-    var(--notch-w) var(--notch-h),
-    var(--notch-r) var(--notch-r);
-  mask-image:
-    var(--notch-flat), var(--notch-fillet), var(--notch-fillet), var(--notch-flat),
-    var(--notch-carve);
-  mask-position:
-    center,
-    right calc(var(--notch-w) - 1px) bottom 0,
-    right 0 bottom calc(var(--notch-h) - 1px),
-    right 0 bottom 0,
-    right calc(var(--notch-w) - var(--notch-r)) bottom calc(var(--notch-h) - var(--notch-r));
-}
-
-@keyframes jh-slide-up {
-  from {
-    transform: translateY(40px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+/* `notchStyle()` sets the `-lg` pair only when the cut changes size at lg. */
+@media (width >= 64rem) {
+  .jh-notch {
+    mask-image: linear-gradient(#000, #000), var(--notch-svg-lg, var(--notch-svg));
+    mask-size:
+      100% 100%,
+      var(--notch-size-lg, var(--notch-size));
   }
 }
 
@@ -475,9 +379,6 @@
   }
 }
 
-/* Carousel timeline: the active segment fills across one slide's dwell time.
-   scaleX rather than width so it animates on the compositor, and it is paused
-   (not restarted) while the reader holds the carousel. */
 @keyframes jh-carousel-fill {
   from {
     transform: scaleX(0);

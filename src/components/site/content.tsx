@@ -6,6 +6,7 @@ import { SiteFooter } from "./SiteFooter";
 import { Eyebrow, PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
 import type { CSSProperties, ReactNode } from "react";
+import { notchStyle } from "./notch";
 
 /* The subpages are built from these blocks, and they speak the homepage's
    language: rounded cards on the content line, no hairline rules between
@@ -762,7 +763,10 @@ export function ListingRow({
         <div className="relative xl:col-span-3">
           {/* The notch is a mask on the frame, so the <img> is what scales —
               scaling the frame would drag the cut-out off the arrow button. */}
-          <div className="jh-notch-tr aspect-[4/3] w-full overflow-hidden rounded-image [--notch-h:50px] [--notch-r:30px] [--notch-w:50px] xl:aspect-[3/4]">
+          <div
+            className="jh-notch aspect-[4/3] w-full overflow-hidden rounded-image xl:aspect-[3/4]"
+            style={notchStyle("tr", { w: 50, h: 50, r: 30 })}
+          >
             <SmartImage
               src={image}
               alt={imageAlt ?? title}

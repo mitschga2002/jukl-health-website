@@ -1,5 +1,6 @@
 import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
+import { notchStyle } from "./notch";
 
 const julianPortrait = "/img/julian-portrait-1460.webp";
 
@@ -18,7 +19,8 @@ export function Credibility() {
               src={julianPortrait}
               alt="Julian Kleinheinz — Sportwissenschaftler & Gesundheitscoach"
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="jh-notch-tr aspect-[776/484] w-full rounded-image object-cover object-top [--notch-h:94px] [--notch-r:34px] [--notch-w:150px] lg:[--notch-h:114px] lg:[--notch-w:231px]"
+              className="jh-notch aspect-[776/484] w-full rounded-image object-cover object-top"
+              style={notchStyle("tr", { w: 150, h: 94, r: 34 }, { w: 231, h: 114, r: 34 })}
             />
             <div className="absolute right-0 top-0 flex h-[84px] w-[140px] flex-col items-center justify-center gap-1 rounded-card bg-primary p-2.5 lg:h-[104px] lg:w-[221px]">
               <p className="font-display text-[32px] leading-[1.25] text-primary-foreground lg:text-[42px]">
