@@ -84,7 +84,7 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
                       key={l.to + (hash ?? "") + l.label}
                       to={l.to}
                       hash={hash}
-                      className="text-base leading-[1.25] text-surface-foreground/80 hover:text-primary"
+                      className="text-base leading-[1.25] text-surface-foreground/80 hover:text-surface-foreground"
                     >
                       {l.label}
                     </Link>
@@ -100,17 +100,17 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
                 © {new Date().getFullYear()} JuklHealth Performance Club · Dornbirn, AT
               </p>
               <div className="flex flex-wrap gap-6 text-base uppercase leading-[1.25] tracking-[0.05em] text-surface-muted-foreground lg:gap-8">
-                <Link to="/impressum" className="hover:text-primary text-sm">
+                <Link to="/impressum" className="text-sm hover:text-surface-foreground">
                   Impressum
                 </Link>
-                <Link to="/datenschutz" className="hover:text-primary text-sm">
+                <Link to="/datenschutz" className="text-sm hover:text-surface-foreground">
                   Datenschutz
                 </Link>
                 <a
                   href="https://www.instagram.com/juklhealth_clubs/"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-primary text-sm"
+                  className="text-sm hover:text-surface-foreground"
                 >
                   Instagram
                 </a>

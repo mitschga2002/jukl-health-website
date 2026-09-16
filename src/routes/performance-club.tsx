@@ -1,12 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  BulletList,
-  CTAButton,
-  QuoteSlab,
-} from "@/components/site/content";
+import { PageShell, PageHero, Section, BulletList, QuoteSlab } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
+import { LocationMap } from "@/components/site/LocationMap";
 
 const pcBanner = "/img/pc-banner-1386.webp";
 
@@ -41,25 +36,58 @@ function PerformanceClub() {
         image={pcBanner}
       />
 
-      <Section eyebrow="DORNBIRN" title="Performance Club Dornbirn">
+      <Section
+        alt
+        eyebrow="ANGEBOT"
+        title="Personal Training, Athletik & Kurse"
+        action={
+          <PillLink to="/kontakt" variant="outlineOnDark">
+            Termin vereinbaren
+          </PillLink>
+        }
+      >
         <p>
           Im Performance Club trainierst du in einer modernen Umgebung mit persönlicher Betreuung.
           Unser Angebot reicht von Personal Training über Gruppen- und Athletiktraining bis hin zu
           betreuten Kleingruppenkursen.
         </p>
         <BulletList
-          title="Allgemeine Informationen"
+          alt
           items={[
-            "3. Stock der Bildgasse 10, Dornbirn",
-            "Wenn möglich bitte die Treppe benutzen",
-            "Umkleiden / Duschen im 2. Stock",
-            "Toiletten im 3. Stock",
-            "Training nur mit Terminvereinbarung",
+            "Personal Training & Athletik",
+            "Kurse in Kleingruppen",
+            "Mobility · Movement · Strength · Burn",
           ]}
         />
-        <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
       </Section>
 
+      <Section eyebrow="STANDORT" title="Bildgasse 10 · 3. Stock · A-6850 Dornbirn">
+        {/* The address is the section heading, so the map belongs beside the
+            practical notes rather than under them. */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-16">
+          <BulletList
+            title="Gut zu wissen"
+            items={[
+              "140 m² Trainingsfläche",
+              "Wenn möglich bitte die Treppe benutzen",
+              "Umkleiden & Duschen im 2. Stock",
+              "Toiletten im 3. Stock",
+              "Training nur mit Terminvereinbarung",
+            ]}
+          />
+          <LocationMap
+            name="Performance Club Dornbirn"
+            lines={["Bildgasse 10, 3. Stock", "A-6850 Dornbirn"]}
+            lat={47.4151713}
+            lon={9.7330917}
+            destination="Bildgasse 10, 6850 Dornbirn, Österreich"
+          />
+        </div>
+      </Section>
+
+      {/* The one module the other two clubs have no counterpart for: these
+          testimonials exist for this club only, and repeating the same three
+          quotes on all three pages would be worse than the asymmetry. */}
       <QuoteSlab
         seamless
         eyebrow="Kundenstimmen"

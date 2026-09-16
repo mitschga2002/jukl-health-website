@@ -38,14 +38,14 @@ function Impressum() {
           <Row k="UID-Nummer">ATU82407824</Row>
           <Row k="E-Mail">
             <a
-              className="underline hover:text-primary transition-colors duration-300 ease-out"
+              className="underline transition-colors duration-300 ease-out hover:text-foreground"
               href="mailto:julian@juklhealth.com"
             >
               julian@juklhealth.com
             </a>
             <br />
             <a
-              className="underline hover:text-primary transition-colors duration-300 ease-out"
+              className="underline transition-colors duration-300 ease-out hover:text-foreground"
               href="mailto:florian@juklhealth.com"
             >
               florian@juklhealth.com
@@ -55,7 +55,7 @@ function Impressum() {
           <Row k="Berufsrecht">
             Gewerbeordnung:{" "}
             <a
-              className="underline hover:text-primary transition-colors duration-300 ease-out"
+              className="underline transition-colors duration-300 ease-out hover:text-foreground"
               href="https://www.ris.bka.gv.at/"
               target="_blank"
               rel="noreferrer"

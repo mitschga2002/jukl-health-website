@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { submitContact } from "@/lib/contact.functions";
-import { MapEmbed } from "@/components/site/MapEmbed";
+import { LocationMap } from "@/components/site/LocationMap";
 import { Eyebrow, PillButton } from "@/components/site/Pill";
 
 const teamBanner = "/img/team-banner-1824.webp";
@@ -10,6 +10,12 @@ const teamBanner = "/img/team-banner-1824.webp";
 type Search = { trainer?: string };
 
 const CONTACT_EMAIL = "julian@juklhealth.com";
+
+/* The form now sits on the dark slab, where `border-border` — a light-theme
+   token — all but disappears. One declaration for all five controls, so they
+   cannot drift apart again. */
+const FIELD =
+  "w-full rounded-image border border-surface-foreground/25 bg-transparent px-4 py-3 text-surface-foreground transition-colors duration-300 ease-out focus:border-primary focus:outline-none";
 
 export const Route = createFileRoute("/kontakt")({
   validateSearch: (s: Record<string, unknown>): Search => ({
@@ -68,7 +74,7 @@ function Kontakt() {
   }
 
   return (
-    <PageShell>
+    <PageShell seamlessFooter>
       <PageHero
         eyebrow="KONTAKT"
         title="Schreib uns."
@@ -82,28 +88,32 @@ function Kontakt() {
         ratio="natural"
       />
 
-      <Section eyebrow="KONTAKT" title="So erreichst du uns">
-        <div className="grid md:grid-cols-2 gap-10 not-prose">
+      {/* The homepage's dark slab, run seamless into the footer: contact is the
+          last thing on the page and the footer is already this surface, so the
+          two read as one block instead of a card with a stripe of background
+          caught above the footer. */}
+      <Section alt seamless eyebrow="KONTAKT" title="So erreichst du uns">
+        <div className="not-prose grid gap-10 md:grid-cols-2 lg:gap-16">
           <div className="space-y-6">
             <div>
-              <Eyebrow className="mb-1 text-xs text-primary">E-Mail</Eyebrow>
+              <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">E-Mail</Eyebrow>
               <a
                 href="mailto:julian@juklhealth.com"
-                className="font-display text-2xl lg:text-3xl hover:text-primary break-all transition-colors duration-300 ease-out"
+                className="font-display break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-surface-foreground/70 lg:text-3xl"
               >
                 julian@juklhealth.com
               </a>
               <br />
               <a
                 href="mailto:florian@juklhealth.com"
-                className="font-display text-2xl lg:text-3xl hover:text-primary break-all transition-colors duration-300 ease-out"
+                className="font-display break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-surface-foreground/70 lg:text-3xl"
               >
                 florian@juklhealth.com
               </a>
             </div>
             <div>
-              <Eyebrow className="mb-1 text-xs text-primary">Adresse</Eyebrow>
-              <div className="text-lg leading-snug">
+              <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">Adresse</Eyebrow>
+              <div className="text-lg leading-snug text-surface-foreground">
                 Bildgasse 10
                 <br />
                 A-6850 Dornbirn
@@ -112,26 +122,32 @@ function Kontakt() {
               </div>
             </div>
             <div>
-              <Eyebrow className="mb-1 text-xs text-primary">Social</Eyebrow>
+              <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">Social</Eyebrow>
               <a
                 href="https://www.instagram.com/juklhealth_clubs/"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-primary underline transition-colors duration-300 ease-out"
+                className="text-surface-foreground underline transition-colors duration-300 ease-out hover:text-surface-foreground/70"
               >
                 @juklhealth_clubs (Instagram)
               </a>
             </div>
 
-            <MapEmbed />
+            <LocationMap
+              name="JuklHealth Clubs"
+              lines={["Bildgasse 10", "A-6850 Dornbirn"]}
+              lat={47.4151713}
+              lon={9.7330917}
+              destination="Bildgasse 10, 6850 Dornbirn, Österreich"
+            />
           </div>
 
           <form
             onSubmit={onSubmit}
-            className="space-y-5 rounded-card border border-border bg-card p-6 lg:p-8"
+            className="space-y-5 rounded-card bg-surface-elevated p-6 lg:p-8"
           >
             {search.trainer ? (
-              <div className="rounded-image bg-muted px-3 py-2 text-sm">
+              <div className="rounded-image bg-surface-foreground/10 px-3 py-2 text-sm text-surface-foreground">
                 Termin-Anfrage für <strong>{search.trainer}</strong>
               </div>
             ) : null}
@@ -141,7 +157,7 @@ function Kontakt() {
                 name="topic"
                 required
                 defaultValue=""
-                className="w-full rounded-image border border-border bg-background px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
+                className={`${FIELD} bg-surface-elevated`}
               >
                 <option value="" disabled>
                   Bitte auswählen …
@@ -157,13 +173,7 @@ function Kontakt() {
               </select>
             </Field>
             <Field id="name" label="Name" required>
-              <input
-                id="name"
-                name="name"
-                required
-                maxLength={200}
-                className="w-full rounded-image border border-border bg-transparent px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
-              />
+              <input id="name" name="name" required maxLength={200} className={FIELD} />
             </Field>
             <Field id="email" label="E-Mail" required>
               <input
@@ -172,17 +182,11 @@ function Kontakt() {
                 type="email"
                 required
                 maxLength={320}
-                className="w-full rounded-image border border-border bg-transparent px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
+                className={FIELD}
               />
             </Field>
             <Field id="phone" label="Telefon (optional)">
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                maxLength={60}
-                className="w-full rounded-image border border-border bg-transparent px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
-              />
+              <input id="phone" name="phone" type="tel" maxLength={60} className={FIELD} />
             </Field>
             <Field id="message" label="Nachricht" required>
               <textarea
@@ -191,7 +195,7 @@ function Kontakt() {
                 required
                 rows={5}
                 maxLength={5000}
-                className="w-full rounded-image border border-border bg-transparent px-4 py-3 transition-colors duration-300 ease-out focus:border-primary focus:outline-none"
+                className={FIELD}
               />
             </Field>
 
@@ -209,7 +213,7 @@ function Kontakt() {
             ) : null}
 
             {state === "error" ? (
-              <p role="alert" className="text-sm text-destructive font-semibold">
+              <p role="alert" className="text-sm font-semibold text-red-400">
                 {error} Du erreichst uns auch direkt unter{" "}
                 <a href={`mailto:${CONTACT_EMAIL}`} className="underline">
                   {CONTACT_EMAIL}
@@ -218,13 +222,13 @@ function Kontakt() {
               </p>
             ) : null}
 
-            <p className="text-[11px] text-muted-foreground">
+            <p className="text-[11px] text-surface-foreground/60">
               Mit dem Absenden akzeptierst du unsere{" "}
               <a
                 href="/datenschutz"
                 target="_blank"
                 rel="noreferrer"
-                className="underline hover:text-primary transition-colors duration-300 ease-out"
+                className="underline transition-colors duration-300 ease-out hover:text-surface-foreground/80"
               >
                 Datenschutzerklärung
               </a>
@@ -252,7 +256,7 @@ function Field({
     <div>
       <label
         htmlFor={id}
-        className="mb-1 block text-xs font-light uppercase leading-tight tracking-wider text-primary"
+        className="mb-1 block text-xs font-light uppercase leading-tight tracking-wider text-surface-foreground/70"
       >
         {label}
         {required ? <span aria-hidden> *</span> : null}
