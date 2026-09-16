@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, useSearch } from "@tanstack/react-router";
+import { ChevronDown } from "lucide-react";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { submitContact } from "@/lib/contact.functions";
 import { LocationMap } from "@/components/site/LocationMap";
@@ -162,25 +163,39 @@ function Kontakt() {
               </div>
             ) : null}
             <Field id="topic" label="Anliegen" required>
-              <select
-                id="topic"
-                name="topic"
-                required
-                defaultValue=""
-                className={`${FIELD} bg-surface-elevated`}
-              >
-                <option value="" disabled>
-                  Bitte auswählen …
-                </option>
-                <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
-                <option value="Personal Training">Personal Training</option>
-                <option value="Athletiktraining">Athletiktraining</option>
-                <option value="Gruppentraining">Gruppentraining</option>
-                <option value="Physiotherapie">Physiotherapie</option>
-                <option value="Trainingstherapie">Trainingstherapie</option>
-                <option value="Analysen">Analysen</option>
-                <option value="Performance Club">Performance Club</option>
-              </select>
+              {/* A native `<select>` draws its chevron against the right edge
+                  of the border box, where the field's `px-4` never reaches it:
+                  the arrow sat flush against the border while the text inside
+                  kept its gutter. `appearance-none` drops the UA control, and
+                  the chevron below is ours — positioned like any other element,
+                  sized like the one in the nav, and `pointer-events-none` so
+                  clicking it still opens the menu. `pr-11` keeps a long option
+                  from running under it. */}
+              <div className="relative">
+                <select
+                  id="topic"
+                  name="topic"
+                  required
+                  defaultValue=""
+                  className={`${FIELD} appearance-none bg-surface-elevated pr-11`}
+                >
+                  <option value="" disabled>
+                    Bitte auswählen …
+                  </option>
+                  <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+                  <option value="Personal Training">Personal Training</option>
+                  <option value="Athletiktraining">Athletiktraining</option>
+                  <option value="Gruppentraining">Gruppentraining</option>
+                  <option value="Physiotherapie">Physiotherapie</option>
+                  <option value="Trainingstherapie">Trainingstherapie</option>
+                  <option value="Analysen">Analysen</option>
+                  <option value="Performance Club">Performance Club</option>
+                </select>
+                <ChevronDown
+                  aria-hidden
+                  className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-surface-foreground/70"
+                />
+              </div>
             </Field>
             <Field id="name" label="Name" required>
               <input id="name" name="name" required maxLength={200} className={FIELD} />
