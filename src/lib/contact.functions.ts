@@ -19,6 +19,10 @@ const schema = z.object({
   message: z.string().trim().min(1, "Nachricht ist erforderlich").max(5000),
   trainer: z.string().trim().max(60).optional().or(z.literal("")),
   topic: z.enum(TOPICS).optional().or(z.literal("")),
+  /* Checked in the browser too, but the browser is not where this is decided:
+     the form can be posted without ever rendering, so consent is a condition
+     of the request rather than a tick the UI is trusted to have collected. */
+  consent: z.literal(true, { message: "Einwilligung ist erforderlich" }),
 });
 
 export const submitContact = createServerFn({ method: "POST" })
