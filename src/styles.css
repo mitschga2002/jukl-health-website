@@ -183,7 +183,9 @@
     font-weight: 700;
     letter-spacing: -0.01em;
     text-transform: none;
-    /* Long German compounds must not force the page wider than the viewport. */
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    hyphenate-limit-chars: 10 4 4;
     overflow-wrap: break-word;
   }
 

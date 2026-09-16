@@ -20,10 +20,10 @@ const clubLinks = [
 
 const trainingLinks = [
   { to: "/training-physio", label: "Übersicht" },
-  { to: "/physiotherapie", label: "Physiotherapie" },
   { to: "/personaltraining", label: "Personal Training" },
   { to: "/gruppentraining", label: "Gruppentraining" },
   { to: "/athletiktraining", label: "Athletiktraining" },
+  { to: "/physiotherapie", label: "Physiotherapie" },
   { to: "/trainingstherapie", label: "Trainingstherapie" },
 ] as const;
 
