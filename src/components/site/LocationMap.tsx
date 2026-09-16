@@ -76,6 +76,10 @@ export function LocationMap({
         attributionControl: true,
       });
 
+      // Leaflet prefixes the credit with its own flag and link. Only the
+      // OpenStreetMap credit is required, so the prefix goes.
+      map.attributionControl.setPrefix(false);
+
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         // ODbL requires the credit, and it is the one piece of OSM's own
