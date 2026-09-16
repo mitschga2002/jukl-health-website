@@ -27,6 +27,19 @@ export type NotchCorner = "tr" | "tl" | "br";
 const FILLET = 20;
 
 /**
+ * How far the cut overhangs the photo's own edges.
+ *
+ * The bite's outer sides sit exactly on the element's border, so the shape's
+ * antialiased boundary lands on the same device row as the photo's last row.
+ * Whenever layout puts that row on a half pixel — which browser zoom does
+ * constantly; 1.75x was enough — the mask only clears it partially and a 1px
+ * line of photo survives along the edge. Pushing the shape a couple of pixels
+ * past the element moves that soft boundary outside the visible area, where
+ * there is nothing left to show through.
+ */
+const BLEED = 2;
+
+/**
  * Builds a `url("data:image/svg+xml,…")` mask image for one corner.
  *
  * @param corner which corner of the photo the control sits in
@@ -36,36 +49,44 @@ const FILLET = 20;
  */
 export function notchMask(corner: NotchCorner, w: number, h: number, r: number): string {
   const f = FILLET;
+  const b = BLEED;
   const W = w + f;
   const H = h + f;
+  const TW = W + b;
+  const TH = H + b;
 
-  // Traced for the top-right corner, then mirrored for the others. Sweep flags
-  // read in screen space (y down): 1 turns clockwise.
-  //   (0,0)         where the cut meets the photo's top edge
-  //   arc f         concave fillet down to the bite's left edge
-  //   line          down the bite's left edge
-  //   arc r         the bite's rounded inner corner, bulging into the bite
-  //   line          along the bite's bottom edge
-  //   arc f         concave fillet out to the photo's right edge
+  // Traced for the top-right corner, then mirrored for the others. The photo's
+  // top edge sits at y = b and its right edge at x = W, so the fillets stay
+  // tangent to them exactly as designed; the last three points carry the shape
+  // out past both, into the bleed that never gets painted.
+  //   (0,b)  where the cut meets the photo's top edge
+  //   arc f  concave fillet down to the bite's left edge
+  //   line   down the bite's left edge
+  //   arc r  the bite's rounded inner corner, bulging into the bite
+  //   line   along the bite's bottom edge
+  //   arc f  concave fillet out to the photo's right edge
+  //   then   out to TW, up to y = 0, and back along the top
   const d = [
-    "M0,0",
-    `A${f},${f} 0 0 1 ${f},${f}`,
-    `L${f},${h - r}`,
-    `A${r},${r} 0 0 0 ${f + r},${h}`,
-    `L${W - f},${h}`,
-    `A${f},${f} 0 0 1 ${W},${H}`,
-    `L${W},0`,
+    `M0,${b}`,
+    `A${f},${f} 0 0 1 ${f},${f + b}`,
+    `L${f},${h - r + b}`,
+    `A${r},${r} 0 0 0 ${f + r},${h + b}`,
+    `L${W - f},${h + b}`,
+    `A${f},${f} 0 0 1 ${W},${H + b}`,
+    `L${TW},${H + b}`,
+    `L${TW},0`,
+    "L0,0",
     "Z",
   ].join("");
 
   const transform = {
     tr: "",
-    tl: `scale(-1,1) translate(${-W},0)`,
-    br: `scale(1,-1) translate(0,${-H})`,
+    tl: `scale(-1,1) translate(${-TW},0)`,
+    br: `scale(1,-1) translate(0,${-TH})`,
   }[corner];
 
   const svg =
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">` +
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${TW}" height="${TH}" viewBox="0 0 ${TW} ${TH}">` +
     `<path d="${d}" fill="#000"${transform ? ` transform="${transform}"` : ""}/>` +
     `</svg>`;
 
@@ -74,12 +95,17 @@ export function notchMask(corner: NotchCorner, w: number, h: number, r: number):
 
 /** Where the cut sits, matching the corner the shape was built for. */
 export function notchPosition(corner: NotchCorner): string {
-  return { tr: "right top", tl: "left top", br: "right bottom" }[corner];
+  const o = `${-BLEED}px`;
+  return {
+    tr: `right ${o} top ${o}`,
+    tl: `left ${o} top ${o}`,
+    br: `right ${o} bottom ${o}`,
+  }[corner];
 }
 
 /** Size of the mask tile: the bite plus the fillet bleed on two sides. */
 export function notchSize(w: number, h: number): string {
-  return `${w + FILLET}px ${h + FILLET}px`;
+  return `${w + FILLET + BLEED}px ${h + FILLET + BLEED}px`;
 }
 
 /**

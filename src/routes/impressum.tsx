@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero, Section } from "@/components/site/content";
+import { SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/impressum")({
   head: () => ({
@@ -33,23 +34,19 @@ function Impressum() {
         <dl className="grid md:grid-cols-2 gap-x-10 gap-y-3 text-base not-prose">
           <Row k="Inhaber">Julian Kleinheinz, BSc & Florian Winder, BSc</Row>
           <Row k="Firma">Juklhealth OG</Row>
-          <Row k="Adresse">Bildgasse 10, 6850 Dornbirn, Österreich</Row>
+          <Row k="Adresse">{SITE.address.inline}</Row>
           <Row k="Unternehmensgegenstand">Fitness und Gesundheit</Row>
           <Row k="UID-Nummer">ATU82407824</Row>
           <Row k="E-Mail">
-            <a
-              className="underline transition-colors duration-300 ease-out hover:text-foreground"
-              href="mailto:julian@juklhealth.com"
-            >
-              julian@juklhealth.com
-            </a>
-            <br />
-            <a
-              className="underline transition-colors duration-300 ease-out hover:text-foreground"
-              href="mailto:florian@juklhealth.com"
-            >
-              florian@juklhealth.com
-            </a>
+            {SITE.emails.all.map((email) => (
+              <a
+                key={email}
+                className="block underline transition-colors duration-300 ease-out hover:text-foreground"
+                href={`mailto:${email}`}
+              >
+                {email}
+              </a>
+            ))}
           </Row>
           <Row k="Mitglied bei">WKO</Row>
           <Row k="Berufsrecht">
