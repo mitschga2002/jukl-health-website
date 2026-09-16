@@ -59,15 +59,21 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
         <div className="pb-8 pt-16 lg:pt-24">
           <div className="grid grid-cols-1 gap-8 min-[380px]:grid-cols-2 xl:grid-cols-12 xl:gap-8">
             <div className="flex flex-col items-start gap-8 min-[380px]:col-span-2 xl:col-span-4">
-              <img
-                src={logoWhite}
-                alt="JuklHealth"
-                width={1552}
-                height={303}
-                loading="lazy"
-                decoding="async"
-                className="h-[34px] w-auto lg:h-[41px]"
-              />
+              <Link
+                to="/"
+                className="flex shrink-0 items-center"
+                aria-label="JuklHealth Startseite"
+              >
+                <img
+                  src={logoWhite}
+                  alt="JuklHealth"
+                  width={1552}
+                  height={303}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-[34px] w-auto lg:h-[41px]"
+                />
+              </Link>
               <address className="flex flex-col gap-1 text-base not-italic leading-[1.25] text-surface-foreground/80">
                 {SITE.address.lines.map((line) => (
                   <span key={line}>{line}</span>
