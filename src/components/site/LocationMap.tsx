@@ -57,6 +57,7 @@ export function LocationMap({
 
   useEffect(() => {
     let map: LeafletMap | undefined;
+    let resize: ResizeObserver | undefined;
     let cancelled = false;
 
     // Leaflet reaches for `window` as it initialises, so it is pulled in here
@@ -95,10 +96,20 @@ export function LocationMap({
       }).addTo(map);
 
       setTimeout(() => map?.invalidateSize(), 0);
+
+      // The card is `aspect-video` above a 380px floor, so its height changes
+      // as the viewport crosses that threshold. Leaflet measures itself once at
+      // init, so without this it keeps the old size and leaves a band of
+      // unrendered tiles.
+      if (host.current) {
+        resize = new ResizeObserver(() => map?.invalidateSize());
+        resize.observe(host.current);
+      }
     });
 
     return () => {
       cancelled = true;
+      resize?.disconnect();
       map?.remove();
     };
   }, [lat, lon]);
@@ -112,7 +123,7 @@ export function LocationMap({
          opening a stacking context. `isolation: isolate` opens one, so those
          numbers only ever compete with each other inside this card. */
       className={cn(
-        "relative isolate aspect-video w-full overflow-hidden rounded-card bg-surface",
+        "relative isolate aspect-video min-h-[380px] w-full overflow-hidden rounded-card bg-surface",
         className,
       )}
     >

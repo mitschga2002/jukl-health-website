@@ -315,24 +315,30 @@ export function ProfisportBlock() {
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
         >
-          <div className="jh-notch-br overflow-hidden rounded-image [--notch-h:50px] [--notch-r:30px] [--notch-w:118px] lg:[--notch-w:166px]">
-            <div
-              className="jh-notch-tl relative aspect-[776/484] w-full bg-muted [--notch-h:90px] [--notch-r:34px] [--notch-w:160px] lg:[--notch-h:102px] lg:[--notch-w:182px]"
-              aria-roledescription="Karussell"
-              aria-label="Unsere Clubs"
-            >
-              {profisportSlides.map((s, i) => (
-                <SmartImage
-                  key={s.src}
-                  src={s.src}
-                  alt={s.alt}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  aria-hidden={i !== slide}
-                  className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${
-                    i === slide ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              ))}
+          {/* The rounding/clipping and the mask sit on separate elements on
+              purpose: an element that is both clipped by a rounded rect and
+              masked gets rasterised as two layers, and the join between them
+              can show as a hairline outline around the picture. */}
+          <div className="overflow-hidden rounded-image">
+            <div className="jh-notch-br [--notch-h:50px] [--notch-r:30px] [--notch-w:118px] lg:[--notch-w:166px]">
+              <div
+                className="jh-notch-tl relative aspect-[776/484] w-full bg-background [--notch-h:90px] [--notch-r:34px] [--notch-w:160px] lg:[--notch-h:102px] lg:[--notch-w:182px]"
+                aria-roledescription="Karussell"
+                aria-label="Unsere Clubs"
+              >
+                {profisportSlides.map((s, i) => (
+                  <SmartImage
+                    key={s.src}
+                    src={s.src}
+                    alt={s.alt}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    aria-hidden={i !== slide}
+                    className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${
+                      i === slide ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
