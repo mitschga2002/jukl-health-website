@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Hero } from "@/components/site/Hero";
+import { HERO_PRELOAD_LINKS } from "@/components/site/heroImage";
 import { DisciplineTicker } from "@/components/site/DisciplineTicker";
 import { Credibility } from "@/components/site/Credibility";
 import {
@@ -26,7 +27,7 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:url", content: "https://juklhealth.com/" },
     ],
-    links: [{ rel: "canonical", href: "https://juklhealth.com/" }],
+    links: [{ rel: "canonical", href: "https://juklhealth.com/" }, ...HERO_PRELOAD_LINKS],
     scripts: [
       {
         type: "application/ld+json",

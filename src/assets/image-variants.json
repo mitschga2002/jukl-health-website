@@ -213,6 +213,24 @@
         "url": "/img/hero-club-2560.webp",
         "width": 2560
       }
+    ],
+    "avif": [
+      {
+        "url": "/img/hero-club-1024.avif",
+        "width": 1024
+      },
+      {
+        "url": "/img/hero-club-1440.avif",
+        "width": 1440
+      },
+      {
+        "url": "/img/hero-club-1920.avif",
+        "width": 1920
+      },
+      {
+        "url": "/img/hero-club-2560.avif",
+        "width": 2560
+      }
     ]
   },
   "/img/hero-club-mobile-1920.webp": {
@@ -233,6 +251,24 @@
       },
       {
         "url": "/img/hero-club-mobile-1920.webp",
+        "width": 1920
+      }
+    ],
+    "avif": [
+      {
+        "url": "/img/hero-club-mobile-768.avif",
+        "width": 768
+      },
+      {
+        "url": "/img/hero-club-mobile-1080.avif",
+        "width": 1080
+      },
+      {
+        "url": "/img/hero-club-mobile-1440.avif",
+        "width": 1440
+      },
+      {
+        "url": "/img/hero-club-mobile-1920.avif",
         "width": 1920
       }
     ]

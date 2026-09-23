@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logoWhite from "@/assets/jukl-wordmark-white.png";
+import logoWhite from "@/assets/jukl-wordmark-white.webp";
 import { PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
 import { SITE } from "@/lib/site";
@@ -67,8 +67,8 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
                 <img
                   src={logoWhite}
                   alt="JuklHealth"
-                  width={1552}
-                  height={303}
+                  width={640}
+                  height={125}
                   loading="lazy"
                   decoding="async"
                   className="h-[34px] w-auto lg:h-[41px]"
