@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
-import logoBlack from "@/assets/jukl-wordmark-black.webp";
+/* The 384px rung, not the 624px master: the nav draws the wordmark 22px tall
+   (26px from `lg`), so 384px still covers a 3x screen, and this is an eager,
+   above-the-fold image competing with the hero for the first bytes. */
+import logoBlack from "@/assets/jukl-wordmark-black-384.webp";
 import { PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
 
@@ -240,8 +243,8 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
               <img
                 src={logoBlack}
                 alt="JuklHealth"
-                width={624}
-                height={133}
+                width={384}
+                height={82}
                 className="h-[22px] w-auto lg:h-[26px]"
               />
             </Link>

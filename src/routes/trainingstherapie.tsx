@@ -3,7 +3,7 @@ import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, StepList } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 
-const athletik = "/img/athletiktraining-1459.webp";
+const trainingstherapie = "/img/trainingstherapie-1600.webp";
 
 export const Route = createFileRoute("/trainingstherapie")({
   head: () => ({
@@ -33,7 +33,7 @@ function Reha() {
         eyebrow="Reha"
         title="Trainings­therapie"
         intro="Gezieltes aktives Aufbautraining nach Beschwerden oder Verletzungen. Progressive trainingstherapeutische Kräftigung, entsprechend deiner aktuellen Belastbarkeit."
-        image={athletik}
+        image={trainingstherapie}
       />
 
       {/* The page's only module, and its last, so the slab does not stop above

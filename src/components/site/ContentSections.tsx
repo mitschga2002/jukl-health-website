@@ -130,7 +130,12 @@ function ServiceRow({ service, index }: { service: (typeof services)[number]; in
           <SmartImage
             src={service.image}
             alt={service.imageAlt}
-            sizes="(min-width: 1280px) 368px, 100vw"
+            /* Not `100vw`: the row nests inside jh-edge, the slab's own
+               padding and the card's padding, which take 112px off the
+               viewport below lg and 160px from lg up. Left at 100vw the
+               browser sizes its request to the whole screen and picks a rung
+               too big for a 300px frame. */
+            sizes="(min-width: 1280px) 368px, (min-width: 1024px) calc(100vw - 160px), calc(100vw - 112px)"
             className={cn(
               "h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] motion-reduce:transform-none motion-reduce:transition-none",
               "imagePosition" in service ? service.imagePosition : undefined,
