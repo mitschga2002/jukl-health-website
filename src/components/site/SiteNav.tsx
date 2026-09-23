@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
-import logoBlack from "@/assets/jukl-wordmark-black.png";
+import logoBlack from "@/assets/jukl-wordmark-black.webp";
 import { PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
 

@@ -1,8 +1,14 @@
 import { SmartImage } from "./SmartImage";
 import { PillLink } from "./Pill";
-
-const heroAthlete = "/img/hero-club-2560.webp";
-const heroAthleteMobile = "/img/hero-club-mobile-1920.webp";
+import {
+  DESKTOP_MEDIA,
+  DESKTOP_SIZES,
+  HERO,
+  HERO_DESKTOP,
+  HERO_MOBILE,
+  MOBILE_SIZES,
+  srcSet,
+} from "./heroImage";
 
 /* Three member portraits, drawn as overlapping 48px discs followed by a "200+"
    counter disc. */
@@ -21,35 +27,39 @@ const members = [
 export function Hero() {
   return (
     <header className="relative flex min-h-[98dvh] w-full flex-col overflow-hidden rounded-b-card">
-      <SmartImage
-        src={heroAthlete}
-        alt="Trainer und Athletin beim Training im JuklHealth Performance Club"
-        className="lg:block absolute hidden inset-0 size-full object-cover"
-        /* `object-cover` normally scales this 1.57:1 photo to the viewport's
-           width, but in a window taller than it is wide (relative to that
-           ratio) it is the hero's height that drives the scale instead, and
-           the photo is then drawn wider than the viewport. `160vh` covers
-           that case so the browser still picks a variant large enough. */
-        sizes="max(100vw, 160vh)"
-        priority
-      />
-      {/* The landscape photo is scaled to the viewport's height on a phone, so
-          `object-position` cannot move it vertically. Instead it is drawn 40px
-          taller than the hero and hung 40px above it, which lifts the two faces
-          into the band between the floating nav and the eyebrow pill; without
-          the lift they sit exactly behind the pill and the headline. */}
-      <SmartImage
-        src={heroAthleteMobile}
-        alt="Trainer und Athletin beim Training im JuklHealth Performance Club"
-        className="absolute inset-x-0 -top-10 h-[calc(100%+2.5rem)] w-full object-cover lg:hidden"
-        /* On a phone the photo is always scaled to the hero's height, never
-           its width, so it is drawn far wider than the viewport: roughly
-           1.3 x (98dvh + 40px). Left at `100vw` the browser would size the
-           request to the phone's width and pick a variant about half the
-           resolution it actually paints. */
-        sizes="max(100vw, 130vh)"
-        priority
-      />
+      {/* On a phone the photo is drawn 40px taller than the hero and hung 40px
+          above it, which lifts the two faces into the band between the floating
+          nav and the eyebrow pill; without the lift they sit exactly behind the
+          pill and the headline. Because the photo is scaled to the hero's
+          height there, `object-position` cannot do it. From `lg` up the desktop
+          crop fills the hero flush instead. */}
+      <picture>
+        <source
+          media={DESKTOP_MEDIA}
+          type="image/avif"
+          srcSet={srcSet(HERO[HERO_DESKTOP].avif!)}
+          sizes={DESKTOP_SIZES}
+        />
+        <source
+          media={DESKTOP_MEDIA}
+          type="image/webp"
+          srcSet={srcSet(HERO[HERO_DESKTOP].variants)}
+          sizes={DESKTOP_SIZES}
+        />
+        <source type="image/avif" srcSet={srcSet(HERO[HERO_MOBILE].avif!)} sizes={MOBILE_SIZES} />
+        <img
+          src={HERO_MOBILE}
+          srcSet={srcSet(HERO[HERO_MOBILE].variants)}
+          sizes={MOBILE_SIZES}
+          alt="Trainer und Athletin beim Training im JuklHealth Performance Club"
+          width={HERO[HERO_MOBILE].width}
+          height={HERO[HERO_MOBILE].height}
+          className="absolute inset-x-0 -top-10 h-[calc(100%+2.5rem)] w-full object-cover lg:top-0 lg:h-full"
+          loading="eager"
+          fetchPriority="high"
+          decoding="sync"
+        />
+      </picture>
       <div
         aria-hidden
         className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.2)_100%)] lg:bg-[linear-gradient(to_left,rgba(0,0,0,0)_0%,rgba(0,0,0,0.1)_57.6%,rgba(0,0,0,0.5)_68.8%,rgba(0,0,0,0.8)_100%)]"
