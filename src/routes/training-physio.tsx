@@ -75,7 +75,6 @@ function TrainingPhysio() {
               title: "Nicht das Richtige dabei?",
               body: "Schreib uns – wir stellen dir ein individuelles Erstgespräch zusammen.",
               action: "Erstgespräch vereinbaren",
-              accent: true,
             },
           ]}
         />
