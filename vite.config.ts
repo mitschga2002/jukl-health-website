@@ -22,7 +22,17 @@ export default defineConfig(async ({ command, mode }): Promise<UserConfig> => {
       // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR
       // error wrapper). Nitro builds from this - wrangler.jsonc `main` alone is
       // not enough.
-      server: { entry: "server" },
+      server: {
+        entry: "server",
+        build: {
+          // The stylesheet is the only render-blocking request on the page and
+          // costs a full round trip before anything paints. Inlining it into
+          // the SSR response removes that request from the critical path; the
+          // route manifest still owns the CSS, so code-split sheets (the Leaflet
+          // one) keep loading as separate files.
+          inlineCss: true,
+        },
+      },
     }),
   ];
 

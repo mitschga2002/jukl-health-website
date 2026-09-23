@@ -233,42 +233,58 @@
       }
     ]
   },
-  "/img/hero-club-mobile-1920.webp": {
+  "/img/hero-club-phone-768.webp": {
+    "width": 768,
+    "height": 1482,
+    "variants": [
+      {
+        "url": "/img/hero-club-phone-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/hero-club-phone-768.webp",
+        "width": 768
+      }
+    ],
+    "avif": [
+      {
+        "url": "/img/hero-club-phone-480.avif",
+        "width": 480
+      },
+      {
+        "url": "/img/hero-club-phone-768.avif",
+        "width": 768
+      }
+    ]
+  },
+  "/img/hero-club-tablet-1920.webp": {
     "width": 1920,
     "height": 1482,
     "variants": [
       {
-        "url": "/img/hero-club-mobile-768.webp",
-        "width": 768
-      },
-      {
-        "url": "/img/hero-club-mobile-1080.webp",
+        "url": "/img/hero-club-tablet-1080.webp",
         "width": 1080
       },
       {
-        "url": "/img/hero-club-mobile-1440.webp",
+        "url": "/img/hero-club-tablet-1440.webp",
         "width": 1440
       },
       {
-        "url": "/img/hero-club-mobile-1920.webp",
+        "url": "/img/hero-club-tablet-1920.webp",
         "width": 1920
       }
     ],
     "avif": [
       {
-        "url": "/img/hero-club-mobile-768.avif",
-        "width": 768
-      },
-      {
-        "url": "/img/hero-club-mobile-1080.avif",
+        "url": "/img/hero-club-tablet-1080.avif",
         "width": 1080
       },
       {
-        "url": "/img/hero-club-mobile-1440.avif",
+        "url": "/img/hero-club-tablet-1440.avif",
         "width": 1440
       },
       {
-        "url": "/img/hero-club-mobile-1920.avif",
+        "url": "/img/hero-club-tablet-1920.avif",
         "width": 1920
       }
     ]
@@ -616,6 +632,28 @@
       {
         "url": "/img/training-mit-kunde-1672.webp",
         "width": 1672
+      }
+    ]
+  },
+  "/img/trainingstherapie-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/trainingstherapie-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/trainingstherapie-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/trainingstherapie-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/trainingstherapie-1600.webp",
+        "width": 1600
       }
     ]
   },

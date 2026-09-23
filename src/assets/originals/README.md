@@ -20,27 +20,47 @@ pixel dimensions recorded there:
 
     magick <master> -resize <W>x<H>! -quality 85 -define webp:method=6 public/img/<stem>-<W>.webp
 
-The hero uses `hero-club` (desktop) and `hero-club-mobile` (phones and
-tablets), two crops of one frame. That frame is the only one behind this
-directory that did not come from the CDN — it is a 7081x4723 camera original
-delivered by the photographer over WeTransfer as `5D4A6817.jpg`, and it is
-**not stored in this repo** (21 MB). Ask for it again before regenerating
-these two stems:
+The hero uses three crops of one frame — `hero-club` (desktop), then
+`hero-club-tablet` and `hero-club-phone` below `lg`. That frame is the only
+one behind this directory that did not come from the CDN — it is a 7081x4723
+camera original delivered by the photographer over WeTransfer as
+`5D4A6817.jpg`, and it is **not stored in this repo** (21 MB). Ask for it
+again before regenerating these three stems:
 
     magick 5D4A6817.jpg -crop 5134x3267+0+0 +repage -resize <W>x<H>! -strip rung.png
     magick 5D4A6817.jpg -crop 6120x4723+0+0 +repage -resize <W>x<H>! -strip rung.png
+    magick 5D4A6817.jpg -crop 2448x4723+1836+0 +repage -resize <W>x<H>! -strip rung.png
+
+Three, because the hero box is 98dvh tall and full width, so its shape runs
+from about 0.49 wide/tall on an upright phone through about 0.74 on an upright
+tablet to well over 1 in landscape, and `object-cover` cuts whichever axis
+overflows. `hero-club-tablet` is the landscape crop (formerly
+`hero-club-mobile`) and keeps the subjects' heads in frame everywhere that is
+not an upright phone; on an upright phone it was scaled to the box height and
+painted about three times the screen width, so two thirds of every byte was
+discarded — a 1920px rung downloaded to paint about 720px of it.
+`hero-club-phone` is exactly that painted centre band, which is why its top
+rung is 768x1482 and why `PHONE_SIZES` is a plain `100vw`: at the hero's own
+shape the viewport drives the scale. `Hero.tsx` picks between them with
+`<source media>`; `heroImage.ts` owns the media queries, and the three preload
+hints there have to partition the viewport the same way or a browser preloads
+one crop and paints another.
+
+`hero-club-tablet` keeps the 1080/1440/1920 rungs of the old stem (the 768 one
+went: nothing in the 768px-and-up range ever selects it). The `hero-club-phone`
+rungs were cut from the last `hero-club-mobile-1920.webp` rather than from the
+master, which was not to hand; recut them from `5D4A6817.jpg` when it is.
 
 The hero is the only stem that ships AVIF next to WebP, and the only one not
-encoded at quality 85. It is the page's LCP element and it is painted at
-roughly three times a phone's width, so it is the largest download on the
-site; both rungs come off the same intermediate PNG:
+encoded at quality 85. It is the page's LCP element and the largest download
+on the site; both rungs come off the same intermediate PNG:
 
     magick rung.png -quality 78 -define webp:method=6 public/img/<stem>-<W>.webp
     avifenc -q 55 -s 4 --min 0 --max 63 rung.png public/img/<stem>-<W>.avif
 
 At these settings AVIF is about half the size of the WebP the hero shipped at
-quality 85 and is indistinguishable from it at 1:1, let alone at the 1.75x
-downscale a phone paints it at. The AVIF ladder is listed under `avif` in
+quality 85 and is indistinguishable from it at 1:1, let alone at the downscale
+a phone paints it at. The AVIF ladder is listed under `avif` in
 `image-variants.json`; `Hero.tsx` renders it through `<picture>` and the WebP
 ladder stays as the fallback for browsers that cannot decode AVIF.
 
@@ -54,3 +74,9 @@ directory is the last copy of these images. It can go too.
 
 Four stems have no master here (`angebot`, `lucas-vidal`, `profisport`,
 `rico-andriessen`); they postdate the last deploy and exist only as variants.
+
+`trainingstherapie.jpg` is the exception to the CDN provenance above: it is a
+2400x1601 downscale of an 8011x5343 camera original delivered as
+`Unbenannt 090.jpg`, which is **not stored in this repo** (23 MB). The master
+kept here is large enough to regenerate the whole ladder, whose top rung is
+1600 px — wider than the CDN-derived stems can reach.

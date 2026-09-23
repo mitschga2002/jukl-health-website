@@ -5,8 +5,11 @@ import {
   DESKTOP_SIZES,
   HERO,
   HERO_DESKTOP,
-  HERO_MOBILE,
-  MOBILE_SIZES,
+  HERO_PHONE,
+  HERO_TABLET,
+  PHONE_SIZES,
+  TABLET_MEDIA,
+  TABLET_SIZES,
   srcSet,
 } from "./heroImage";
 
@@ -32,7 +35,13 @@ export function Hero() {
           nav and the eyebrow pill; without the lift they sit exactly behind the
           pill and the headline. Because the photo is scaled to the hero's
           height there, `object-position` cannot do it. From `lg` up the desktop
-          crop fills the hero flush instead. */}
+          crop fills the hero flush instead.
+
+          `<source>` is first-match-wins, so the three crops are listed widest
+          box first: desktop, then everything that is not an upright phone
+          (tablets below `lg`, and anything in landscape), then the upright
+          phone as the fallback on the `<img>` itself. See `heroImage.ts` for
+          why one crop cannot serve all three. */}
       <picture>
         <source
           media={DESKTOP_MEDIA}
@@ -46,14 +55,26 @@ export function Hero() {
           srcSet={srcSet(HERO[HERO_DESKTOP].variants)}
           sizes={DESKTOP_SIZES}
         />
-        <source type="image/avif" srcSet={srcSet(HERO[HERO_MOBILE].avif!)} sizes={MOBILE_SIZES} />
+        <source
+          media={TABLET_MEDIA}
+          type="image/avif"
+          srcSet={srcSet(HERO[HERO_TABLET].avif!)}
+          sizes={TABLET_SIZES}
+        />
+        <source
+          media={TABLET_MEDIA}
+          type="image/webp"
+          srcSet={srcSet(HERO[HERO_TABLET].variants)}
+          sizes={TABLET_SIZES}
+        />
+        <source type="image/avif" srcSet={srcSet(HERO[HERO_PHONE].avif!)} sizes={PHONE_SIZES} />
         <img
-          src={HERO_MOBILE}
-          srcSet={srcSet(HERO[HERO_MOBILE].variants)}
-          sizes={MOBILE_SIZES}
+          src={HERO_PHONE}
+          srcSet={srcSet(HERO[HERO_PHONE].variants)}
+          sizes={PHONE_SIZES}
           alt="Trainer und Athletin beim Training im JuklHealth Performance Club"
-          width={HERO[HERO_MOBILE].width}
-          height={HERO[HERO_MOBILE].height}
+          width={HERO[HERO_PHONE].width}
+          height={HERO[HERO_PHONE].height}
           className="absolute inset-x-0 -top-10 h-[calc(100%+2.5rem)] w-full object-cover lg:top-0 lg:h-full"
           loading="eager"
           fetchPriority="high"

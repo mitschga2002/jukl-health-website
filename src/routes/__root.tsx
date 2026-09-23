@@ -8,7 +8,11 @@ import {
 } from "@tanstack/react-router";
 
 import { PillAnchor, PillButton, PillLink } from "@/components/site/Pill";
-import appCss from "../styles.css?url";
+/* Imported for its side effect, not for a URL: this puts the stylesheet into
+   the root route's chunk, so the build manifest owns it. That is what lets
+   `server.build.inlineCss` in vite.config.ts ship it as an inline <style> in
+   the SSR response instead of a render-blocking <link>. */
+import "../styles.css";
 
 const LOCAL_BUSINESS_JSONLD = {
   "@context": "https://schema.org",
@@ -123,7 +127,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", href: "/favicon-96x96.png", sizes: "96x96" },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "shortcut icon", href: "/favicon.ico" },
