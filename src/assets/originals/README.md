@@ -20,13 +20,26 @@ pixel dimensions recorded there:
 
     magick <master> -resize <W>x<H>! -quality 85 -define webp:method=6 public/img/<stem>-<W>.webp
 
-`hero-athlete` is the one stem with a crop step before the resize. Its variants
-are cut to the largest region centred on the two people, so that the hero can
-hold them in the middle of the frame at any viewport with a plain
-`object-position: center`:
+The hero uses `hero-club` (desktop) and `hero-club-mobile` (phones and
+tablets), two crops of one frame. That frame is the only one behind this
+directory that did not come from the CDN — it is a 7081x4723 camera original
+delivered by the photographer over WeTransfer as `5D4A6817.jpg`, and it is
+**not stored in this repo** (21 MB). Ask for it again before regenerating
+these two stems:
 
-    magick hero-athlete.jpg -crop 1320x910+0+13 +repage -resize <W>x<H>! \
-      -quality 85 -define webp:method=6 public/img/hero-athlete-<W>.webp
+    magick 5D4A6817.jpg -crop 5134x3267+0+0 +repage -resize <W>x<H>! \
+      -quality 85 -define webp:method=6 public/img/hero-club-<W>.webp
+
+    magick 5D4A6817.jpg -crop 6120x4723+0+0 +repage -resize <W>x<H>! \
+      -quality 85 -define webp:method=6 public/img/hero-club-mobile-<W>.webp
+
+Both crops are anchored at the frame's top-left corner and trim only the right
+edge (and, for the desktop crop, the floor at the bottom); they reproduce the
+framing of the placeholder `test.png`/`test-mobile.png` they replaced.
+
+`hero-athlete.jpg` is the earlier hero photo. Its variants have been deleted
+and nothing references it any more; the master is kept only because this
+directory is the last copy of these images. It can go too.
 
 Four stems have no master here (`angebot`, `lucas-vidal`, `profisport`,
 `rico-andriessen`); they postdate the last deploy and exist only as variants.

@@ -1,8 +1,8 @@
 import { SmartImage } from "./SmartImage";
 import { PillLink } from "./Pill";
 
-const heroAthlete = "/img/test.png";
-const heroAthleteMobile = "/img/test-mobile.png";
+const heroAthlete = "/img/hero-club-2560.webp";
+const heroAthleteMobile = "/img/hero-club-mobile-1920.webp";
 
 /* Three member portraits, drawn as overlapping 48px discs followed by a "200+"
    counter disc. */
@@ -25,7 +25,12 @@ export function Hero() {
         src={heroAthlete}
         alt="Trainer und Athletin beim Training im JuklHealth Performance Club"
         className="lg:block absolute hidden inset-0 size-full object-cover"
-        sizes="100vw"
+        /* `object-cover` normally scales this 1.57:1 photo to the viewport's
+           width, but in a window taller than it is wide (relative to that
+           ratio) it is the hero's height that drives the scale instead, and
+           the photo is then drawn wider than the viewport. `160vh` covers
+           that case so the browser still picks a variant large enough. */
+        sizes="max(100vw, 160vh)"
         priority
       />
       {/* The landscape photo is scaled to the viewport's height on a phone, so
@@ -37,7 +42,12 @@ export function Hero() {
         src={heroAthleteMobile}
         alt="Trainer und Athletin beim Training im JuklHealth Performance Club"
         className="absolute inset-x-0 -top-10 h-[calc(100%+2.5rem)] w-full object-cover lg:hidden"
-        sizes="100vw"
+        /* On a phone the photo is always scaled to the hero's height, never
+           its width, so it is drawn far wider than the viewport: roughly
+           1.3 x (98dvh + 40px). Left at `100vw` the browser would size the
+           request to the phone's width and pick a variant about half the
+           resolution it actually paints. */
+        sizes="max(100vw, 130vh)"
         priority
       />
       <div
