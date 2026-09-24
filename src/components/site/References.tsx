@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { X } from "lucide-react";
 import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
 import { SECTION_Y } from "./rhythm";
 import { stories, type Story } from "@/lib/stories";
+import { SnapRow } from "./SnapRow";
 
 /* Client stories: the data and the tiles, shared by /referenzen (full grid)
    and the homepage teaser (carousel), so a story added once shows up in both. */
@@ -181,40 +182,10 @@ export function StoryCard({ story }: { story: Story }) {
 }
 
 /**
- * Homepage teaser: the same tiles as /referenzen, on a horizontal scroll-snap
- * track. Native scrolling does the carousel work — swipe on touch, trackpad
- * on desktop — and the arrows only nudge it one tile at a time, greying out
- * at either end.
+ * Homepage teaser: the same tiles as /referenzen on the site's shared slider,
+ * kept a carousel on desktop too since it holds more stories than fit.
  */
 export function ReferencesTeaser() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
-
-  const sync = useCallback(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    setAtStart(el.scrollLeft <= 4);
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
-  }, []);
-
-  useEffect(() => {
-    sync();
-    window.addEventListener("resize", sync);
-    return () => window.removeEventListener("resize", sync);
-  }, [sync]);
-
-  const step = (dir: 1 | -1) => {
-    const el = trackRef.current;
-    const tile = el?.firstElementChild as HTMLElement | null;
-    if (!el || !tile) return;
-    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
-    el.scrollBy({ left: dir * (tile.offsetWidth + gap), behavior: "smooth" });
-  };
-
-  const arrow =
-    "grid size-12 place-items-center rounded-full border border-border text-foreground transition-colors duration-300 ease-out hover:border-foreground disabled:pointer-events-none disabled:opacity-30";
-
   return (
     <section className="jh-container jh-gutter">
       <div className={cn("flex flex-col gap-10 lg:gap-12", SECTION_Y)}>
@@ -225,47 +196,22 @@ export function ReferencesTeaser() {
               Was unsere Klienten sagen
             </h2>
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              className={arrow}
-              onClick={() => step(-1)}
-              disabled={atStart}
-              aria-label="Vorherige Referenz"
-            >
-              <ChevronLeft className="size-5" aria-hidden />
-            </button>
-            <button
-              type="button"
-              className={arrow}
-              onClick={() => step(1)}
-              disabled={atEnd}
-              aria-label="Nächste Referenz"
-            >
-              <ChevronRight className="size-5" aria-hidden />
-            </button>
-            <PillLink to="/referenzen" variant="outlineOnLight" className="ml-2">
+          <div className="flex">
+            <PillLink to="/referenzen" variant="outlineOnLight">
               Alle Referenzen
             </PillLink>
           </div>
         </div>
 
-        <div
-          ref={trackRef}
-          onScroll={sync}
-          aria-roledescription="Karussell"
-          aria-label="Referenzen"
-          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 [scrollbar-width:none] lg:mx-0 lg:scroll-px-0 lg:gap-5 lg:px-0 [&::-webkit-scrollbar]:hidden"
-        >
-          {stories.map((story) => (
-            <div
-              key={story.name}
-              className="shrink-0 basis-[85%] snap-start sm:basis-[calc((100%-16px)/2)] lg:basis-[calc((100%-40px)/3)]"
-            >
-              <StoryCard story={story} />
-            </div>
-          ))}
-        </div>
+        <SnapRow
+          carousel
+          tone="light"
+          label="Referenz"
+          items={stories.map((story) => ({
+            key: story.name,
+            node: <StoryCard story={story} />,
+          }))}
+        />
       </div>
     </section>
   );
