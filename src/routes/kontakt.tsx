@@ -36,14 +36,14 @@ export const Route = createFileRoute("/kontakt")({
   }),
   head: () => ({
     meta: [
-      { title: "Kontakt – JuklHealth Performance Club Dornbirn" },
+      { title: "Kontakt – JuklHealth Clubs" },
       {
         name: "description",
         content:
-          "Kontaktiere JuklHealth in Dornbirn. Bildgasse 10, 6850 Dornbirn, julian@juklhealth.com.",
+          "Kontaktiere JuklHealth – Clubs in Dornbirn und Widnau. Bildgasse 10, 6850 Dornbirn, julian@juklhealth.com.",
       },
       { property: "og:title", content: "Kontakt – JuklHealth" },
-      { property: "og:description", content: "Julian Kleinheinz · Dornbirn." },
+      { property: "og:description", content: "Julian Kleinheinz · Dornbirn & Widnau." },
       { property: "og:url", content: "https://juklhealth.com/kontakt" },
     ],
     links: [{ rel: "canonical", href: "https://juklhealth.com/kontakt" }],

@@ -8,7 +8,7 @@ const trainingstherapie = "/img/trainingstherapie-1600.webp";
 export const Route = createFileRoute("/trainingstherapie")({
   head: () => ({
     meta: [
-      { title: "Trainingstherapie Dornbirn – JuklHealth" },
+      { title: "Trainingstherapie – JuklHealth" },
       {
         name: "description",
         content:

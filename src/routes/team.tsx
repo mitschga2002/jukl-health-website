@@ -21,11 +21,11 @@ const aminElghazzali = "/img/amin-elghazzali-1460.webp";
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Team – JuklHealth Performance Club Dornbirn" },
+      { title: "Team – JuklHealth Clubs" },
       {
         name: "description",
         content:
-          "Das Team von JuklHealth: Sportwissenschaft, Physiotherapie, Coaching, Personal Training und Marketing – vereint in Dornbirn.",
+          "Das Team von JuklHealth: Sportwissenschaft, Physiotherapie, Coaching, Personal Training und Marketing – ein Team, ein System, mehrere Standorte.",
       },
       { property: "og:title", content: "Team – JuklHealth" },
       {
@@ -148,7 +148,7 @@ function Team() {
         title="Unser Team – Experten für Performance & Gesundheit"
         intro="Freude verspüren und Lebensqualität steigern. Das ist unser Antrieb, als Team aus Sportwissenschaft, Physiotherapie, Coaching und Marketing."
         image={teamBanner}
-        imageAlt="Das Team von JuklHealth im Performance Club Dornbirn"
+        imageAlt="Das Team von JuklHealth"
         banner
       />
 

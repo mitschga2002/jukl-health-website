@@ -8,14 +8,17 @@ const physio = "/img/physiotherapie-1460.webp";
 export const Route = createFileRoute("/physiotherapie")({
   head: () => ({
     meta: [
-      { title: "Physiotherapie Dornbirn – JuklHealth" },
+      { title: "Physiotherapie – JuklHealth" },
       {
         name: "description",
         content:
-          "Klinische Physiotherapie in Dornbirn. Ursache finden, gezielt behandeln, aktiv zurück in schmerzfreie Bewegung.",
+          "Klinische Physiotherapie nach dem JuklHealth System. Ursache finden, gezielt behandeln, aktiv zurück in schmerzfreie Bewegung.",
       },
       { property: "og:title", content: "Physiotherapie – JuklHealth" },
-      { property: "og:description", content: "Klinische Physiotherapie in Dornbirn." },
+      {
+        property: "og:description",
+        content: "Klinische Physiotherapie nach dem JuklHealth System.",
+      },
       { property: "og:url", content: "https://juklhealth.com/physiotherapie" },
     ],
     links: [{ rel: "canonical", href: "https://juklhealth.com/physiotherapie" }],

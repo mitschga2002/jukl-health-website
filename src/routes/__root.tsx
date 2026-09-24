@@ -101,18 +101,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#008c00" },
-      { title: "JuklHealth Clubs - Training & Physio Dornbirn" },
+      { title: "JuklHealth Clubs - Training & Physio in Dornbirn & Widnau" },
       {
         name: "description",
         content:
-          "Performance Training, Athletik Coaching und klinische Physiotherapie in Dornbirn. Wissenschaftlich fundiert, individuell betreut, messbare Resultate.",
+          "Das JuklHealth System: Performance Training, Athletik Coaching und klinische Physiotherapie an mehreren Standorten in Dornbirn und Widnau. Wissenschaftlich fundiert, individuell betreut, messbare Resultate.",
       },
       { name: "author", content: "JuklHealth" },
       { name: "apple-mobile-web-app-title", content: "JUKL Health" },
       { property: "og:title", content: "Jukl Health Clubs" },
       {
         property: "og:description",
-        content: "Performance Training und Physiotherapie auf höchstem Niveau in Dornbirn.",
+        content:
+          "Ein Trainingssystem, mehrere Standorte: Performance Training und Physiotherapie auf höchstem Niveau in Dornbirn und Widnau.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "de_AT" },
@@ -122,14 +123,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image:height", content: "630" },
       {
         property: "og:image:alt",
-        content: "Trainerin und Trainer beim Athletiktraining im JuklHealth Performance Club",
+        content: "Trainerin und Trainer beim Athletiktraining in einem JuklHealth Club",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: "https://juklhealth.com/og-image.jpg" },
       { name: "twitter:title", content: "Jukl Health Clubs" },
       {
         name: "twitter:description",
-        content: "Performance Training und Physiotherapie auf höchstem Niveau in Dornbirn.",
+        content:
+          "Ein Trainingssystem, mehrere Standorte: Performance Training und Physiotherapie auf höchstem Niveau in Dornbirn und Widnau.",
       },
     ],
     links: [

@@ -692,5 +692,33 @@
         "width": 1080
       }
     ]
+  },
+  "/img/noah-bischof-1200.webp": {
+    "width": 1200,
+    "height": 1500,
+    "variants": [
+      {
+        "url": "/img/noah-bischof-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/noah-bischof-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/noah-bischof-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "/img/sebastian-santin-476.webp": {
+    "width": 476,
+    "height": 595,
+    "variants": [
+      {
+        "url": "/img/sebastian-santin-476.webp",
+        "width": 476
+      }
+    ]
   }
 }

@@ -21,6 +21,7 @@ const sitemap = [
       { to: "/personaltraining", label: "Personal Training" },
       { to: "/gruppentraining", label: "Gruppentraining" },
       { to: "/athletiktraining", label: "Athletiktraining" },
+      { to: "/trainingsplanung", label: "Trainingsplanung" },
       { to: "/physiotherapie", label: "Physiotherapie" },
       { to: "/trainingstherapie", label: "Trainingstherapie" },
     ],
@@ -30,6 +31,7 @@ const sitemap = [
     links: [
       { to: "/analysen", label: "Übersicht" },
       { to: "/analysen", hash: "fms", label: "Bewegungsanalyse" },
+      { to: "/analysen", hash: "performance-screening", label: "Performance Screening" },
       { to: "/analysen", hash: "stoffwechsel", label: "Stoffwechselanalyse" },
       { to: "/analysen", hash: "leistung", label: "Leistungsanalyse" },
       { to: "/analysen", hash: "physio", label: "Physioanalyse" },
@@ -39,8 +41,9 @@ const sitemap = [
   {
     heading: "Mehr",
     links: [
+      { to: "/referenzen", label: "Referenzen" },
       { to: "/team", label: "Team" },
-      { to: "/meine-person", label: "Über uns" },
+      { to: "/meine-person", label: "Julian Kleinheinz" },
       { to: "/vortraege", label: "Vorträge" },
       { to: "/kontakt", label: "Kontakt" },
     ],
@@ -115,7 +118,7 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
           <div className="mt-8 border-t border-surface-foreground/15 pt-6 lg:mt-14">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <p className="text-base leading-[1.25] text-surface-muted-foreground">
-                © {new Date().getFullYear()} JuklHealth Performance Club · Dornbirn, AT
+                © {new Date().getFullYear()} JuklHealth Clubs · Dornbirn (AT) · Widnau (CH)
               </p>
               <div className="flex flex-wrap gap-6 text-base uppercase leading-[1.25] tracking-[0.05em] text-surface-muted-foreground lg:gap-8">
                 <Link to="/impressum" className="text-sm hover:text-surface-foreground">

@@ -16,6 +16,7 @@ const leistungsanalyse = "/img/leistungsanalyse-1217.webp";
 const gesundheitscoaching = "/img/gesundheitscoaching-1400.webp";
 const athletiktraining = "/img/athletiktraining-1459.webp";
 const physiotherapie = "/img/physiotherapie-1460.webp";
+const performanceScreening = "/img/profisport-1824.webp";
 
 export const Route = createFileRoute("/analysen")({
   head: () => ({
@@ -24,7 +25,7 @@ export const Route = createFileRoute("/analysen")({
       {
         name: "description",
         content:
-          "FMS Bewegungsscreening, Stoffwechselanalyse, Leistungsanalyse, Physioanalyse und Gesundheitscoaching bei JuklHealth.",
+          "FMS Bewegungsscreening, Performance Screening, Stoffwechselanalyse, Leistungsanalyse, Physioanalyse und Gesundheitscoaching bei JuklHealth.",
       },
       { property: "og:title", content: "Analysen — JuklHealth" },
       { property: "og:description", content: "Datenbasis für nachhaltige Leistung & Gesundheit." },
@@ -71,9 +72,34 @@ function Analysen() {
           </p>
         </ListingRow>
 
-        <Anchor id="stoffwechsel" />
+        <Anchor id="performance-screening" />
         <ListingRow
           index={2}
+          {...contactFormLink("Analysen")}
+          title="Performance Screening"
+          image={performanceScreening}
+          imageAlt="Performance Screening · sportartspezifische Testung"
+        >
+          <p>
+            Das Performance Screening ist eine Testbatterie, angepasst auf deine Sportart. Wir
+            erfassen die Fähigkeiten, die in deinem Sport den Unterschied machen – und zeigen, wo
+            dein größtes Potenzial liegt.
+          </p>
+          <BulletList
+            items={[
+              "Sprungdiagnostik & Reaktivkraft",
+              "Schnelligkeit & Richtungswechsel",
+              "Maximal- und Schnellkraft",
+              "Links/Rechts-Symmetrie",
+              "Beweglichkeit & Stabilität",
+              "Auswertung mit konkreten Trainingsempfehlungen",
+            ]}
+          />
+        </ListingRow>
+
+        <Anchor id="stoffwechsel" />
+        <ListingRow
+          index={3}
           {...contactFormLink("Analysen")}
           title="Stoffwechsel­analyse"
           image={stoffwechsel}
@@ -93,7 +119,7 @@ function Analysen() {
 
         <Anchor id="leistung" />
         <ListingRow
-          index={3}
+          index={4}
           {...contactFormLink("Analysen")}
           title="Leistungs­analyse"
           image={leistungsanalyse}
@@ -121,7 +147,7 @@ function Analysen() {
 
         <Anchor id="physio" />
         <ListingRow
-          index={4}
+          index={5}
           {...contactFormLink("Analysen")}
           title="Physio­analyse"
           image={physiotherapie}
@@ -145,7 +171,7 @@ function Analysen() {
 
         <Anchor id="coaching" />
         <ListingRow
-          index={5}
+          index={6}
           {...contactFormLink("Analysen")}
           title="Gesundheits­coaching"
           image={gesundheitscoaching}
