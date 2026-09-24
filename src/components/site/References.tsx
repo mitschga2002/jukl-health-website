@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
+import { SECTION_Y } from "./rhythm";
 import { stories, type Story } from "@/lib/stories";
 
 /* Client stories: the data and the tiles, shared by /referenzen (full grid)
@@ -166,7 +167,7 @@ export function ReferencesTeaser() {
 
   return (
     <section className="jh-container jh-gutter">
-      <div className="flex flex-col gap-10 py-16 lg:gap-12 lg:py-24">
+      <div className={cn("flex flex-col gap-10 lg:gap-12", SECTION_Y)}>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex flex-col gap-3">
             <Eyebrow>Referenzen</Eyebrow>

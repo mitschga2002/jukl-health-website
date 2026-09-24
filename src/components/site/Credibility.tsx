@@ -1,6 +1,8 @@
 import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
 import { NotchFrame } from "./NotchFrame";
+import { cn } from "@/lib/utils";
+import { MODULE_TOP } from "./rhythm";
 
 const julianPortrait = "/img/julian-portrait-1460.webp";
 
@@ -11,7 +13,7 @@ const julianPortrait = "/img/julian-portrait-1460.webp";
  */
 export function Credibility() {
   return (
-    <section className="mt-16 rounded-t-card bg-surface lg:mt-24">
+    <section className={cn(MODULE_TOP, "rounded-t-card bg-surface")}>
       <div className="jh-container jh-gutter">
         <div className="grid grid-cols-1 gap-12 pb-8 pt-16 lg:grid-cols-2 lg:gap-16 lg:pt-24">
           <div className="relative">

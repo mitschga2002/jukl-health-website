@@ -196,7 +196,7 @@ export function ExpertSlab({
 }) {
   const m = member(slug);
   return (
-    <section className="jh-container jh-edge">
+    <section className={cn("jh-container jh-edge", SECTION_Y)}>
       <div className="grid grid-cols-1 gap-10 rounded-card bg-surface p-4 lg:grid-cols-12 lg:gap-16 lg:p-8">
         {m.image && (
           <div className="relative aspect-[4/5] overflow-hidden rounded-image lg:col-span-5">

@@ -15,7 +15,7 @@ const stoffwechsel = "/img/stoffwechsel-1065.webp";
 const leistungsanalyse = "/img/leistungsanalyse-1217.webp";
 const gesundheitscoaching = "/img/gesundheitscoaching-1400.webp";
 const athletiktraining = "/img/athletiktraining-1459.webp";
-const physiotherapie = "/img/physiotherapie-1460.webp";
+const physioanalyse = "/img/physio-knie-1600.webp";
 const performanceScreening = "/img/profisport-1824.webp";
 
 export const Route = createFileRoute("/analysen")({
@@ -150,8 +150,8 @@ function Analysen() {
           index={5}
           {...contactFormLink("Analysen")}
           title="Physio­analyse"
-          image={physiotherapie}
-          imageAlt="Physioanalyse"
+          image={physioanalyse}
+          imageAlt="Physioanalyse: Beinachse und Kniekontrolle bei einer Übung mit Miniband"
         >
           <p>
             Dein Körper ist dein Werkzeug. In der Physioanalyse finden wir die Ursache hinter

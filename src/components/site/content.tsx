@@ -7,6 +7,7 @@ import { Eyebrow, PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
 import type { CSSProperties, ReactNode } from "react";
 import { NotchFrame } from "./NotchFrame";
+import { SECTION_Y, MODULE_TOP } from "./rhythm";
 
 /* The subpages are built from these blocks, and they speak the homepage's
    language: rounded cards on the content line, no hairline rules between
@@ -15,14 +16,9 @@ import { NotchFrame } from "./NotchFrame";
    rule the homepage keeps is that vertical rhythm comes from spacing, never
    from a border — so nothing here draws a divider. */
 
-/* Vertical rhythm. A subpage stacks far more modules than the homepage does —
-   analysen runs six in a row — so each one contributes less than a homepage
-   module: two adjacent sections come to 80px on a phone and 128px on desktop,
-   instead of the homepage's 128px / 192px. The homepage can afford the wider
-   figure because its big padding is mostly card interior — the dark slab, the
-   ticker — so the eye reads it as one block's breathing room. A subpage sets
-   short flat modules side by side, where the same figure reads as a hole. */
-export const SECTION_Y = "py-10 lg:py-16";
+/* Vertical rhythm lives in `./rhythm`: one gap between any two modules on
+   every page, homepage included. */
+export { SECTION_Y, MODULE_TOP } from "./rhythm";
 
 /** Section padding, shared so every module stacks on the same rhythm. */
 const SECTION_STACK = `flex flex-col gap-10 ${SECTION_Y} lg:gap-16`;
@@ -258,7 +254,7 @@ export function Section({
 
   if (alt && seamless) {
     return (
-      <section className="mt-5 rounded-t-card bg-surface">
+      <section className={cn(MODULE_TOP, "rounded-t-card bg-surface")}>
         <div className="jh-container jh-gutter">
           <div className="flex flex-col gap-8 pb-24 pt-12 lg:gap-10 lg:pb-32 lg:pt-24">
             {header}
@@ -271,7 +267,7 @@ export function Section({
 
   if (alt) {
     return (
-      <section className="jh-container jh-edge">
+      <section className={cn("jh-container jh-edge", SECTION_Y)}>
         <div className="flex flex-col gap-8 rounded-card bg-surface px-4 py-12 lg:gap-10 lg:px-8 lg:py-24">
           {header}
           {body}
@@ -555,7 +551,7 @@ export function QuoteSlab({
   // reads as the next thing rather than as their continuation.
   if (seamless) {
     return (
-      <section className="mt-5 rounded-t-card bg-surface">
+      <section className={cn(MODULE_TOP, "rounded-t-card bg-surface")}>
         <div className="jh-container jh-gutter">
           <div className="flex flex-col gap-10 pb-24 pt-12 lg:gap-16 lg:pb-32 lg:pt-24">{body}</div>
         </div>
@@ -564,7 +560,7 @@ export function QuoteSlab({
   }
 
   return (
-    <section className="jh-container jh-edge">
+    <section className={cn("jh-container jh-edge", SECTION_Y)}>
       <div className="flex flex-col gap-10 rounded-card bg-surface px-4 py-12 lg:gap-16 lg:px-8 lg:py-24">
         {body}
       </div>
