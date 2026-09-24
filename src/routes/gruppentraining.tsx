@@ -1,3 +1,4 @@
+import { CalendarDays, UserCheck, UserPlus, Users } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
@@ -39,18 +40,22 @@ export const Route = createFileRoute("/gruppentraining")({
 
 const pillars = [
   {
+    icon: Users,
     title: "Gemeinsamer Antrieb",
     body: "In der Gruppe fällt dranbleiben leichter – ihr pusht euch gegenseitig zu mehr.",
   },
   {
+    icon: UserCheck,
     title: "Individuelle Korrektur",
     body: "Kleine Gruppen, damit der Coach jeden sieht und jede Übung sauber ausgeführt wird.",
   },
   {
+    icon: CalendarDays,
     title: "Feste Kurse",
     body: "HYROX, Mobility, Strength und Burn – melde dich an und trainiere regelmäßig mit.",
   },
   {
+    icon: UserPlus,
     title: "Oder eure eigene Gruppe",
     body: "Trainingspartner, Kollegen oder ganze Mannschaft – ihr bringt die Gruppe, wir den Plan.",
   },
