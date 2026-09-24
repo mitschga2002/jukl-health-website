@@ -136,13 +136,13 @@ export function Hero() {
                 />
               ))}
               <span className="flex size-12 items-center justify-center rounded-full border-2 border-white bg-[#e7e7e7] text-xs font-light text-foreground">
-                200+
+                10k+
               </span>
             </div>
             <p className="text-xs font-light leading-[1.25] text-foreground">
               zufriedene JUKL
               <br />
-              Health Mitglieder
+              Health Kunden
             </p>
           </div>
         </div>
