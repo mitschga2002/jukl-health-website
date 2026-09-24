@@ -1,9 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
-import { PageShell, PageHero, Section, StepList } from "@/components/site/content";
+import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
+import {
+  ClosingCta,
+  ExpertGrid,
+  OfferCards,
+  Pillars,
+  ProcessSplit,
+  StoriesSection,
+  type OfferCard,
+} from "@/components/site/ServicePage";
 
-const trainingstherapie = "/img/trainingstherapie-1600.webp";
+const heroImg = "/img/tt-belastung-1200.webp";
+const processImg = "/img/tt-uebung-1600.webp";
 
 export const Route = createFileRoute("/trainingstherapie")({
   head: () => ({
@@ -12,7 +22,7 @@ export const Route = createFileRoute("/trainingstherapie")({
       {
         name: "description",
         content:
-          "Aktives Aufbautraining nach Verletzungen. Schmerzadaptiert, progressiv, wissenschaftlich fundiert.",
+          "Aktives Aufbautraining nach Verletzung, Operation oder bei chronischen Beschwerden – schmerzadaptiert, progressiv und eng abgestimmt mit unserer Physiotherapie.",
       },
       { property: "og:title", content: "Trainingstherapie – JuklHealth" },
       {
@@ -23,43 +33,123 @@ export const Route = createFileRoute("/trainingstherapie")({
     ],
     links: [{ rel: "canonical", href: "https://juklhealth.com/trainingstherapie" }],
   }),
-  component: Reha,
+  component: Trainingstherapie,
 });
 
-function Reha() {
+const pillars = [
+  {
+    title: "Schmerzadaptiert",
+    body: "Der Einstieg richtet sich nach deinen Beschwerden – nie gegen, immer mit deinem Körper.",
+  },
+  {
+    title: "Progressiv",
+    body: "Belastung steigt nach dem Prinzip „Load to Tolerance“ – so viel, wie dein Gewebe gerade verträgt.",
+  },
+  {
+    title: "Messbar",
+    body: "RPE, Tempo und Schmerzskala machen deinen Fortschritt sichtbar und steuern das Training.",
+  },
+  {
+    title: "Hand in Hand mit der Physio",
+    body: "Enge Abstimmung mit Physiotherapie und Sportmedizin – ein Team, ein Plan.",
+  },
+];
+
+const cases: OfferCard[] = [
+  {
+    title: "Nach Verletzung & OP",
+    body: "Strukturierter Wiederaufbau von Kraft und Beweglichkeit, abgestimmt auf die Heilungsphase.",
+    image: "/img/tt-op-1600.webp",
+    imageAlt: "Coach begleitet einen Klienten bei einer Übung auf der Behandlungsbank",
+    imagePosition: "object-[center_40%]",
+    link: contactFormLink("Trainingstherapie"),
+  },
+  {
+    title: "Chronische Beschwerden",
+    body: "Rücken, Schulter oder Knie: Mit gezieltem Training wieder belastbar und schmerzfrei im Alltag.",
+    image: "/img/tt-chronisch-1600.webp",
+    imageAlt: "Coach sichert eine Klientin bei einer Übung mit der Langhantel",
+    imagePosition: "object-[center_35%]",
+    link: contactFormLink("Trainingstherapie"),
+  },
+  {
+    title: "Return to Sport",
+    body: "Vom Aufbautraining zurück in den Sport – mit Tests, die zeigen, dass du bereit bist.",
+    image: "/img/trainingstherapie-1600.webp",
+    imageAlt: "Athlet beim Y-Balance-Test im Performance Club",
+    link: { to: "/athletiktraining" },
+  },
+];
+
+const steps = [
+  {
+    title: "Schmerzadaptierter Einstieg",
+    body: "Wir starten dort, wo du schmerzfrei trainieren kannst, und bauen von da aus auf.",
+  },
+  {
+    title: "Progressive Kräftigung",
+    body: "Die Belastung steigt entsprechend deiner Belastbarkeit – Schritt für Schritt, ohne Rückschläge.",
+  },
+  {
+    title: "Technik-Coaching",
+    body: "Saubere Bewegungsmuster für Alltag und Sport, damit die Beschwerden nicht zurückkommen.",
+  },
+  {
+    title: "Monitoring & Abstimmung",
+    body: "RPE, Tempo und Schmerzskala im Blick – und enge Abstimmung mit Physiotherapie und Sportmedizin.",
+  },
+];
+
+function Trainingstherapie() {
   return (
     <PageShell seamlessFooter>
       <PageHero
-        eyebrow="Reha"
-        title="Trainings­therapie"
-        intro="Gezieltes aktives Aufbautraining nach Beschwerden oder Verletzungen. Progressive trainingstherapeutische Kräftigung, entsprechend deiner aktuellen Belastbarkeit."
-        image={trainingstherapie}
+        eyebrow="TRAININGSTHERAPIE"
+        title="Aktiv zurück zu voller Belastbarkeit."
+        intro="Gezieltes Aufbautraining nach Verletzung, Operation oder bei chronischen Beschwerden: progressive Kräftigung, abgestimmt auf deine aktuelle Belastbarkeit – und eng verzahnt mit unserer Physiotherapie."
+        image={heroImg}
+        imageAlt="Coach begleitet eine Klientin beim Kreuzheben mit der Langhantel"
+        objectPosition="50% 40%"
       />
 
-      {/* The page's only module, and its last, so the slab does not stop above
-          the footer and leave a stripe of background between two dark blocks —
-          it runs full bleed and the footer continues the same surface. */}
-      <Section
-        alt
-        seamless
-        eyebrow="AUFBAU"
-        title="Progressive Belastungssteuerung"
+      <Pillars items={pillars} />
+
+      <OfferCards
+        eyebrow="WANN"
+        title="Wofür Trainingstherapie hilft"
         action={
-          <PillLink {...contactFormLink("Trainingstherapie")} variant="outlineOnDark">
+          <PillLink {...contactFormLink("Trainingstherapie")} variant="outlineOnLight">
             Termin vereinbaren
           </PillLink>
         }
-      >
-        <StepList
-          steps={[
-            "Schmerzadaptierter Einstieg",
-            "Progressive Kräftigung entsprechend deiner Belastbarkeit („Load to Tolerance“)",
-            "Technik-Coaching für Alltag und Sport",
-            "Monitoring (RPE, Tempo, Schmerzskala)",
-            "Enge Abstimmung mit Physiotherapie und Sportmedizin",
-          ]}
-        />
-      </Section>
+        items={cases}
+      />
+
+      <ProcessSplit
+        title="Progressive Belastungssteuerung"
+        image={processImg}
+        imageAlt="Coach korrigiert einen Klienten bei einer Übung am Boden"
+        imagePosition="object-[40%_center]"
+        steps={steps}
+      />
+
+      <ExpertGrid
+        eyebrow="DAS TEAM"
+        title="Unsere Trainingstherapeuten"
+        slugs={["julian-kleinheinz", "florian-winder", "caroline-fritsch"]}
+        topic="Trainingstherapie"
+      />
+
+      <StoriesSection
+        title="Zurück im Alltag – und im Sport"
+        names={["Noah Bischof", "Selina Madlener", "Ina Ludwig"]}
+      />
+
+      <ClosingCta
+        title="Bereit für den nächsten Schritt?"
+        body="Schreib uns, was passiert ist und wo du gerade stehst – wir melden uns mit einem Terminvorschlag."
+        topic="Trainingstherapie"
+      />
     </PageShell>
   );
 }
