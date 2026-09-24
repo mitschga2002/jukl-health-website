@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import logoWhite from "@/assets/jukl-wordmark-white.webp";
 import { PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
+import { MODULE_TOP } from "./rhythm";
 import { SITE } from "@/lib/site";
 
 const sitemap = [
@@ -57,7 +58,7 @@ const sitemap = [
  */
 export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
   return (
-    <footer className={cn("bg-surface", !seamless && "mt-16 rounded-t-card lg:mt-24")}>
+    <footer className={cn("bg-surface", !seamless && cn(MODULE_TOP, "rounded-t-card"))}>
       <div className="jh-container jh-gutter">
         <div className="pb-8 pt-16 lg:pt-24">
           <div className="grid grid-cols-1 gap-8 min-[380px]:grid-cols-2 xl:grid-cols-12 xl:gap-8">

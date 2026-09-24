@@ -5,6 +5,7 @@ import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
 import { ConnectedCards } from "./ConnectedCards";
 import { cn } from "@/lib/utils";
+import { SECTION_Y } from "./rhythm";
 import { NotchFrame } from "./NotchFrame";
 
 const services = [
@@ -173,7 +174,7 @@ function ServiceRow({ service, index }: { service: (typeof services)[number]; in
 
 export function SystemBlock() {
   return (
-    <section className="jh-container jh-edge">
+    <section className={cn("jh-container jh-edge", SECTION_Y)}>
       <div className="flex flex-col gap-10 rounded-card bg-surface px-4 py-16 lg:gap-16 lg:px-8 lg:py-24">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-8">
           <div className="flex flex-col gap-3 lg:w-[1088px] lg:max-w-[65%]">
@@ -243,7 +244,7 @@ const locations = [
 export function LocationsBlock() {
   return (
     <section className="jh-container jh-gutter">
-      <div className="flex flex-col gap-10 py-16 lg:gap-16 lg:py-24">
+      <div className={cn("flex flex-col gap-10 lg:gap-16", SECTION_Y)}>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-8">
           <div className="flex flex-col gap-3 lg:w-[1088px] lg:max-w-[65%]">
             <Eyebrow>Standorte</Eyebrow>
@@ -304,7 +305,7 @@ export function ProfisportBlock() {
 
   return (
     <section className="jh-container jh-gutter">
-      <div className="grid grid-cols-1 gap-16 py-16 lg:grid-cols-2 lg:py-24">
+      <div className={cn("grid grid-cols-1 gap-16 lg:grid-cols-2", SECTION_Y)}>
         <div className="flex flex-col justify-center gap-6">
           <div className="flex flex-col gap-3">
             <Eyebrow>Profisport</Eyebrow>

@@ -27,9 +27,11 @@ function Track({ ariaHidden = false }: { ariaHidden?: boolean }) {
 export function DisciplineTicker() {
   // Render enough copies so the -50% marquee translate fills even ultra-wide screens.
   return (
+    // Tighter below than the site rhythm: the ruled band already reads as a
+    // break, and the full gap left it floating between hero and slab.
     <section
       aria-label="Trainingsdisziplinen"
-      className="mb-16 mt-12 overflow-hidden whitespace-nowrap border-y border-border py-8 lg:mb-24 lg:mt-16"
+      className="mb-4 mt-10 overflow-hidden whitespace-nowrap border-y border-border py-8 lg:mb-8 lg:mt-16"
     >
       <div className="flex w-max animate-ticker">
         <Track />
