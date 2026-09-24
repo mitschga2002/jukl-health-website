@@ -44,7 +44,7 @@ const sitemap = [
     links: [
       { to: "/referenzen", label: "Referenzen" },
       { to: "/team", label: "Team" },
-      { to: "/meine-person", label: "Julian Kleinheinz" },
+      { to: "/julian-kleinheinz", label: "Julian Kleinheinz" },
       { to: "/vortraege", label: "Vorträge" },
       { to: "/kontakt", label: "Kontakt" },
     ],

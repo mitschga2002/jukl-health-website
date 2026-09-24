@@ -23,7 +23,7 @@ export const members: Member[] = [
     role: "Sportwissenschaftler · Personal Trainer · Athletiktrainer · Gruppentrainer · Gesundheitscoach",
     quote:
       "Ich habe den Drang jeden Tag etwas Neues zu lernen. Dadurch bin ich in einem stetigen Lern- und Verbesserungsprozess und immer dabei, mein Wissen und meinen Körper auf eine andere, unbekannte Art zu fordern und weiterzuentwickeln. Meine Philosophie besteht darin, in jeder Disziplin etwas zu lernen und Bewegungsabläufe sowie motorische Grundeigenschaften auf eine selbstentwickelte Art erfolgreich zu schulen.",
-    learnMore: "/meine-person",
+    learnMore: "/julian-kleinheinz",
   },
   {
     name: "Florian Winder",

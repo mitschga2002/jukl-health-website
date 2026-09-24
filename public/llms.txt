@@ -21,7 +21,7 @@ JuklHealth ist ein Trainings- und Gesundheitssystem mit mehreren Clubs in Dornbi
 - [Analysen](/analysen): Diagnostik und Analysen – Bewegung, Performance Screening (sportartspezifisch), Stoffwechsel, Leistung, Physio, Gesundheitscoaching.
 - [Referenzen](/referenzen): Was unsere Klienten sagen – Stimmen aus Profisport, Freizeitsport und Gesundheit.
 - [Team](/team): Unser Team aus Sportwissenschaft und Physiotherapie.
-- [Meine Person](/meine-person): Über Julian Kleinheinz, Gründer.
+- [Julian Kleinheinz](/julian-kleinheinz): Über Julian Kleinheinz, Gründer.
 - [Vorträge](/vortraege): Vorträge und Webinare.
 - [Kontakt](/kontakt): Kontakt und Terminanfrage.
 
