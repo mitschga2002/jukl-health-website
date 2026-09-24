@@ -49,6 +49,8 @@ export const members: Member[] = [
   {
     name: "Biljana Kleinheinz, MMSc",
     slug: "biljana-kleinheinz",
+    short:
+      "Mit Einfühlungsvermögen und wissenschaftlich fundierten mentalen Methoden helfe ich, innere Hürden zu überwinden.",
     image: "/img/biljana-kleinheinz-1458.webp",
     role: "Coach · Marketing",
     reverse: true,
@@ -58,6 +60,8 @@ export const members: Member[] = [
   {
     name: "Amin Elghazzali, B.A.",
     slug: "amin-elghazzali",
+    short:
+      "Mit Aufmerksamkeit, Ehrlichkeit und einem offenen Blick versuche ich Inhalte zu schaffen, die nicht nur konsumiert, sondern gefühlt werden.",
     image: "/img/amin-elghazzali-1460.webp",
     role: "Brand Manager · Marketing",
     quote:
