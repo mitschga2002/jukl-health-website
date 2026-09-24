@@ -12,47 +12,13 @@ import { contactFormLink, type ContactTopic } from "@/lib/contact-topics";
 import { cn } from "@/lib/utils";
 
 /*
- * The modules every service page is built from, in page order: pillars →
- * offer cards → process beside a photo → the people → stories → closing CTA.
+ * The modules every service page is built from, in page order: offer
+ * cards → process beside a photo → the people → stories → closing CTA.
  * One set, so a visitor moving between Physio, Personal Training and the rest
  * recognises the same page shape each time.
  */
 
 const EASE_PREMIUM = "duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]";
-
-/**
- * The four claims under the hero, on a dark band: the hero is light type on a
- * light page beside a photo, so the claims switch surface entirely instead of
- * repeating that shape with a second headline. Four columns on desktop with
- * hairlines only between them; stacked below lg with rules between rows.
- */
-export function Pillars({ items }: { items: readonly { title: string; body: string }[] }) {
-  return (
-    <section className={cn("jh-container jh-edge", "pb-10 pt-6 lg:pb-16 lg:pt-8")}>
-      <div className="grid grid-cols-1 divide-y divide-surface-foreground/15 rounded-card bg-surface px-6 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x lg:px-0">
-        {items.map((p, i) => (
-          <div
-            key={p.title}
-            className={cn(
-              "flex flex-col gap-2 py-6 sm:px-4 sm:py-8 lg:px-8 lg:py-10",
-              // Two across on a tablet: a rule between the rows and between
-              // the columns, drawn per cell since `divide` cannot do both.
-              i < 2 && "sm:border-b sm:border-surface-foreground/15 lg:border-b-0",
-              i % 2 === 0 && "sm:border-r sm:border-surface-foreground/15 lg:border-r-0",
-            )}
-          >
-            <h2 className="font-display text-[20px] leading-[1.25] text-surface-foreground lg:text-[22px]">
-              {p.title}
-            </h2>
-            <p className="text-sm font-light leading-[1.5] text-surface-foreground/70 lg:text-base">
-              {p.body}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 export type OfferCard = {
   title: string;

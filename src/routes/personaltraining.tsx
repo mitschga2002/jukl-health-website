@@ -6,7 +6,6 @@ import {
   ClosingCta,
   ExpertGrid,
   OfferCards,
-  Pillars,
   ProcessSplit,
   StoriesSection,
   type OfferCard,
@@ -35,25 +34,6 @@ export const Route = createFileRoute("/personaltraining")({
   }),
   component: PersonalTraining,
 });
-
-const pillars = [
-  {
-    title: "Volle Aufmerksamkeit",
-    body: "Ein Coach, nur du – jede Wiederholung wird gesehen und korrigiert.",
-  },
-  {
-    title: "Wissenschaftlich fundiert",
-    body: "Anamnese und Bewegungsanalyse zu Beginn, Training nach aktuellem Stand der Sportwissenschaft.",
-  },
-  {
-    title: "Messbare Fortschritte",
-    body: "Jede Einheit wird geplant, ausgewertet und baut auf der letzten auf – Fortschritt, den du siehst.",
-  },
-  {
-    title: "Dornbirn & Widnau",
-    body: "Personal Training an unseren Standorten in Vorarlberg und im St. Galler Rheintal.",
-  },
-];
 
 const goals: OfferCard[] = [
   {
@@ -110,8 +90,6 @@ function PersonalTraining() {
         imageAlt="Coach korrigiert eine Kundin bei einer Ausfallschritt-Übung im Performance Club"
         objectPosition="55% 50%"
       />
-
-      <Pillars items={pillars} />
 
       <OfferCards
         eyebrow="ZIELE"

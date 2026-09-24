@@ -7,7 +7,6 @@ import {
   CourseGrid,
   ExpertGrid,
   OfferCards,
-  Pillars,
   ProcessSplit,
   StoriesSection,
   type OfferCard,
@@ -36,25 +35,6 @@ export const Route = createFileRoute("/gruppentraining")({
   }),
   component: Gruppentraining,
 });
-
-const pillars = [
-  {
-    title: "Gemeinsamer Antrieb",
-    body: "In der Gruppe fällt dranbleiben leichter – ihr pusht euch gegenseitig zu mehr.",
-  },
-  {
-    title: "Individuelle Korrektur",
-    body: "Kleine Gruppen, damit der Coach jeden sieht und jede Übung sauber ausgeführt wird.",
-  },
-  {
-    title: "Feste Kurse",
-    body: "HYROX, Mobility, Strength und Burn – melde dich an und trainiere regelmäßig mit.",
-  },
-  {
-    title: "Oder eure eigene Gruppe",
-    body: "Trainingspartner, Kollegen oder ganze Mannschaft – ihr bringt die Gruppe, wir den Plan.",
-  },
-];
 
 const courses = [
   {
@@ -132,8 +112,6 @@ function Gruppentraining() {
         image={heroImg}
         imageAlt="Gruppentraining mit Gymnastikbällen im Performance Club"
       />
-
-      <Pillars items={pillars} />
 
       <OfferCards
         eyebrow="EIGENE GRUPPE"

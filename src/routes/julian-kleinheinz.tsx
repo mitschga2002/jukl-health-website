@@ -81,8 +81,9 @@ function MeinePerson() {
         eyebrow="MEINE PERSON"
         title="Über Julian Kleinheinz"
         intro="Julian Kleinheinz — Sportwissenschaftler, Athletik- und Gesundheitscoach aus Dornbirn."
-        image={banner}
-        objectPosition="30% 50%"
+        image={julianPortrait}
+        imageAlt="Julian Kleinheinz"
+        imagePosition="top"
       />
 
       {/* The philosophy beside his portrait: it is written in the first
@@ -91,10 +92,10 @@ function MeinePerson() {
         <div className={cn("grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16", SECTION_Y)}>
           <div className="relative aspect-[4/5] overflow-hidden rounded-card bg-muted lg:col-span-5">
             <SmartImage
-              src={julianPortrait}
+              src={banner}
               alt="Julian Kleinheinz"
               sizes="(min-width: 1024px) 40vw, 100vw"
-              className="absolute inset-0 size-full object-cover object-top"
+              className="absolute inset-0 size-full object-cover object-[30%_50%]"
             />
           </div>
           <div className="flex flex-col justify-center gap-6 lg:col-span-7">

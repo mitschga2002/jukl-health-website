@@ -4,7 +4,6 @@ import { PillLink } from "@/components/site/Pill";
 import {
   ClosingCta,
   OfferCards,
-  Pillars,
   StoriesSection,
   type OfferCard,
 } from "@/components/site/ServicePage";
@@ -29,25 +28,6 @@ export const Route = createFileRoute("/training-physio")({
   }),
   component: TrainingPhysio,
 });
-
-const pillars = [
-  {
-    title: "Ein System",
-    body: "Training, Therapie und Analyse greifen ineinander – statt nebeneinander herzulaufen.",
-  },
-  {
-    title: "Ein Team",
-    body: "Sportwissenschaft und Physiotherapie unter einem Dach, eng abgestimmt auf dich.",
-  },
-  {
-    title: "Evidenzbasiert",
-    body: "Methoden nach aktuellem Stand der Wissenschaft – und Fortschritt, der messbar ist.",
-  },
-  {
-    title: "Vom Alltag bis zum Profisport",
-    body: "Ob schmerzfrei durch den Tag oder bereit für die nächste Saison – wir holen dich ab.",
-  },
-];
 
 /* Same photo per service as its own page opens with, so a visitor recognises
    where a card leads. */
@@ -110,8 +90,6 @@ function TrainingPhysio() {
         title="Trainings- & Physio­angebote"
         intro="Von der Diagnose bis zur Performance: ein durchgängiges System aus Trainingswissenschaft und klinischer Physiotherapie – für jedes Ziel das passende Angebot."
       />
-
-      <Pillars items={pillars} />
 
       <OfferCards
         eyebrow="TRAINING"

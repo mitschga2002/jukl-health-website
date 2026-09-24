@@ -54,6 +54,14 @@ function useActiveMatcher() {
   };
 }
 
+/** True when the current page is one of the section's pages, hash ignored:
+ *  the dropdown's label marks the section you are in (the "active trail"),
+ *  even while the item itself is hidden in the closed menu. */
+function useSectionActive(items: ReadonlyArray<{ to: string }>) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  return items.some((i) => i.to === pathname);
+}
+
 function Dropdown({
   label,
   items,
@@ -62,9 +70,15 @@ function Dropdown({
   items: ReadonlyArray<{ to: string; hash?: string; label: string }>;
 }) {
   const isActive = useActiveMatcher();
+  const sectionActive = useSectionActive(items);
   return (
     <div className="group relative">
-      <button className="flex items-center gap-0.5 text-base text-muted-foreground hover:text-foreground">
+      <button
+        className={cn(
+          "flex items-center gap-0.5 text-base hover:text-foreground",
+          sectionActive ? "text-primary" : "text-muted-foreground",
+        )}
+      >
         {label}
         <ChevronDown
           className="size-4 shrink-0 transition-transform duration-300 ease-out group-hover:rotate-180 motion-reduce:transform-none motion-reduce:transition-none"

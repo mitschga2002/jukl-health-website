@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Listing, ListingRow, BulletList } from "@/components/site/content";
-import { ClosingCta, Pillars, StoriesSection } from "@/components/site/ServicePage";
+import { ClosingCta, StoriesSection } from "@/components/site/ServicePage";
 
 const heroImg = "/img/an-spiro-1200.webp";
 const fms = "/img/an-fms-1600.webp";
@@ -43,27 +43,6 @@ function Analysen() {
         image={heroImg}
         imageAlt="Coach legt einem Athleten die Atemmaske für die Leistungsdiagnostik an"
         objectPosition="50% 30%"
-      />
-
-      <Pillars
-        items={[
-          {
-            title: "Objektiv",
-            body: "Messwerte statt Bauchgefühl – du siehst schwarz auf weiß, wo du stehst.",
-          },
-          {
-            title: "Individuell",
-            body: "Zonen, Schwellen und Empfehlungen, die für deinen Körper gelten, nicht für den Durchschnitt.",
-          },
-          {
-            title: "Verständlich erklärt",
-            body: "Jede Analyse endet mit einem Gespräch, in dem wir die Ergebnisse gemeinsam durchgehen.",
-          },
-          {
-            title: "Direkt umsetzbar",
-            body: "Die Ergebnisse fließen in dein Training, deine Therapie oder deinen Plan ein.",
-          },
-        ]}
       />
 
       <Listing>
