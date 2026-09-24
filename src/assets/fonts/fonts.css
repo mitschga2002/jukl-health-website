@@ -1,125 +1,25 @@
-/* Self-hosted Google Fonts: Inter Tight + Hind, latin & latin-ext subsets.
-   Generated from the Google Fonts CSS API; replaces the remote stylesheet. */
+/* Self-hosted Inter, latin & latin-ext subsets. Generated from the Google
+   Fonts CSS API; replaces the remote stylesheet.
 
-/* latin-ext */
-@font-face {
-  font-family: "Hind";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(./hind-300-latin-ext.woff2) format("woff2");
-  unicode-range:
-    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
-    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
-    U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: "Hind";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(./hind-300-latin.woff2) format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: "Hind";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(./hind-400-latin-ext.woff2) format("woff2");
-  unicode-range:
-    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
-    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
-    U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: "Hind";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(./hind-400-latin.woff2) format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: "Hind";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(./hind-500-latin-ext.woff2) format("woff2");
-  unicode-range:
-    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
-    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
-    U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: "Hind";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(./hind-500-latin.woff2) format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: "Hind";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(./hind-600-latin-ext.woff2) format("woff2");
-  unicode-range:
-    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
-    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
-    U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: "Hind";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(./hind-600-latin.woff2) format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: "Inter Tight";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url(./inter-tight-latin-ext.woff2) format("woff2");
-  unicode-range:
-    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
-    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
-    U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: "Inter Tight";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url(./inter-tight-latin.woff2) format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
+   Inter is the only webfont the design uses — `body`, `.font-display` and
+   `.font-mono` in styles.css all name it first — so it is the only one
+   declared here. Anything else would be dead weight: this file is inlined
+   into every SSR response (see `inlineCss` in vite.config.ts), so an unused
+   @font-face costs bytes on the critical path of every page view, not just
+   in the build output.
 
-/* Inter — the typeface the design is drawn in. Variable 200–700 with a real
-   italic file, so the hero can pair extra-light with bold italic without the
-   browser faking either. */
+   Both files are preloaded from the root route's head (`src/routes/__root.tsx`).
+   Without that hint the browser cannot discover them until it has parsed the
+   body and laid out the first text, which put them a full round trip behind
+   the document.
+
+   The weight axes are clipped to what the site actually sets: the upright is
+   variable 200-700, the italic is a single instance at 700. Every italic run
+   on the site is bold — the hero headline, "Besten", "made" — so the axis was
+   costing 41 KB on the critical path to describe weights nothing asks for.
+   If a lighter italic is ever needed, regenerate the italic files with the
+   axis restored rather than letting the browser synthesise an oblique. */
+
 /* latin-ext */
 @font-face {
   font-family: "Inter";
@@ -143,13 +43,17 @@
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/* The italic file holds one weight, but the descriptor still claims 200-700 so
+   that an italic set at any weight resolves to it. Narrowing the descriptor to
+   700 would make the browser fall back to the upright and slant it by hand. */
 /* latin-ext */
 @font-face {
   font-family: "Inter";
   font-style: italic;
   font-weight: 200 700;
   font-display: swap;
-  src: url(./inter-italic-200-700-latin-ext.woff2) format("woff2");
+  src: url(./inter-italic-700-latin-ext.woff2) format("woff2");
   unicode-range:
     U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
     U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
@@ -161,7 +65,7 @@
   font-style: italic;
   font-weight: 200 700;
   font-display: swap;
-  src: url(./inter-italic-200-700-latin.woff2) format("woff2");
+  src: url(./inter-italic-700-latin.woff2) format("woff2");
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
