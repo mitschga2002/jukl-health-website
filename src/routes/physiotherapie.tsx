@@ -1,16 +1,19 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
-import { stories } from "@/lib/stories";
-import { PageShell, PageHero, Section, TopicCards, SECTION_Y } from "@/components/site/content";
-import { Eyebrow, PillLink } from "@/components/site/Pill";
-import { SmartImage } from "@/components/site/SmartImage";
-import { StoryCard } from "@/components/site/References";
-import { cn } from "@/lib/utils";
+import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
+import {
+  ClosingCta,
+  ExpertSlab,
+  OfferCards,
+  Pillars,
+  ProcessSplit,
+  StoriesSection,
+  type OfferCard,
+} from "@/components/site/ServicePage";
 
 const heroImg = "/img/physio-behandlung-1600.webp";
 const clubImg = "/img/physio-club-1200.webp";
-const florianImg = "/img/florian-winder-1460.webp";
 
 export const Route = createFileRoute("/physiotherapie")({
   head: () => ({
@@ -52,7 +55,7 @@ const pillars = [
   },
 ] as const;
 
-const services = [
+const services: OfferCard[] = [
   {
     title: "Aktive Physiotherapie",
     body: "Schmerzen reduzieren und Beweglichkeit zurückgewinnen – mit gezielter Behandlung und Übungen, die du in deinen Alltag mitnimmst.",
@@ -74,7 +77,7 @@ const services = [
     imageAlt: "Athletiktraining zur Verletzungsprävention",
     link: { to: "/athletiktraining" },
   },
-] as const;
+];
 
 const steps = [
   {
@@ -95,11 +98,6 @@ const steps = [
   },
 ] as const;
 
-/* The two stories that are about therapy: Noah's comeback names Florian, and
-   Selina's is the back-pain case. Picked by name so reordering the reference
-   list cannot swap in an unrelated quote. */
-const physioStories = stories.filter((s) => ["Noah Bischof", "Selina Madlener"].includes(s.name));
-
 function Physio() {
   return (
     <PageShell seamlessFooter>
@@ -112,23 +110,9 @@ function Physio() {
         objectPosition="30% 50%"
       />
 
-      {/* Four short claims rather than a paragraph: they are what a visitor
-          weighs before booking, so they get scanned, not read. */}
-      <section className="jh-container jh-gutter">
-        <div className="grid grid-cols-1 gap-8 border-t border-border pt-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-          {pillars.map((p, i) => (
-            <div key={p.title} className="flex flex-col gap-3">
-              <span className="font-display text-[20px] leading-none text-primary">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h2 className="font-display text-[22px] leading-[1.25] text-foreground">{p.title}</h2>
-              <p className="text-base font-light leading-[1.5] text-muted-foreground">{p.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Pillars items={pillars} />
 
-      <Section
+      <OfferCards
         eyebrow="LEISTUNGEN"
         title="Was wir für dich tun"
         action={
@@ -136,38 +120,8 @@ function Physio() {
             Termin vereinbaren
           </PillLink>
         }
-      >
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
-          {services.map((s) => (
-            <Link
-              key={s.title}
-              {...s.link}
-              className="group flex flex-col overflow-hidden rounded-card bg-muted"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <SmartImage
-                  src={s.image}
-                  alt={s.imageAlt}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  className="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05] motion-reduce:transform-none motion-reduce:transition-none"
-                />
-              </div>
-              <div className="flex flex-1 flex-col gap-3 p-6 lg:p-8">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-display text-[24px] leading-[1.25] text-foreground lg:text-[28px]">
-                    {s.title}
-                  </h3>
-                  <ArrowUpRight
-                    className="mt-1 size-5 shrink-0 text-foreground/40 transition-colors duration-300 group-hover:text-primary"
-                    aria-hidden
-                  />
-                </div>
-                <p className="text-base font-light leading-[1.5] text-muted-foreground">{s.body}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </Section>
+        items={services}
+      />
 
       <Section alt eyebrow="SCHWERPUNKTE" title="Worauf wir spezialisiert sind">
         <TopicCards
@@ -204,129 +158,36 @@ function Physio() {
         />
       </Section>
 
-      {/* The Ablauf beside the one portrait-format photo on the page: the
-          session in the club shows the steps happening, not a stock gesture. */}
-      <section id="ablauf" className="jh-container jh-gutter scroll-mt-24">
-        <div className={cn("grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16", SECTION_Y)}>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-card bg-muted lg:aspect-auto">
-            <SmartImage
-              src={clubImg}
-              alt="Physiotherapeutische Übung auf dem Balance-Board im Performance Club"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="absolute inset-0 size-full object-cover object-[center_60%]"
-            />
-          </div>
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-3">
-              <Eyebrow>ABLAUF</Eyebrow>
-              <h2 className="font-display text-balance text-[32px] leading-[1.25] lg:text-[42px]">
-                In vier Schritten zurück zu voller Belastbarkeit
-              </h2>
-            </div>
-            <ol className="flex flex-col">
-              {steps.map((step, i) => (
-                <li
-                  key={step.title}
-                  className="flex gap-6 border-t border-border py-6 last:border-b lg:gap-8"
-                >
-                  <span className="font-display shrink-0 text-[22px] leading-[1.25] text-primary lg:text-[26px]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="font-display text-[22px] leading-[1.25] text-foreground lg:text-[24px]">
-                      {step.title}
-                    </h3>
-                    <p className="text-base font-light leading-[1.5] text-muted-foreground">
-                      {step.body}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section>
+      <ProcessSplit
+        id="ablauf"
+        title="In vier Schritten zurück zu voller Belastbarkeit"
+        image={clubImg}
+        imageAlt="Physiotherapeutische Übung auf dem Balance-Board im Performance Club"
+        imagePosition="object-[center_60%]"
+        steps={steps}
+      />
 
       {/* The therapist gets a module of his own: the portrait moved out of the
           hero, where it stood for the discipline, to where it stands for him. */}
-      <section className="jh-container jh-edge">
-        <div className="grid grid-cols-1 gap-10 rounded-card bg-surface p-4 lg:grid-cols-12 lg:gap-16 lg:p-8">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-image lg:col-span-5">
-            <SmartImage
-              src={florianImg}
-              alt="Florian Winder, Physiotherapeut bei JuklHealth"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              className="absolute inset-0 size-full object-cover object-top"
-            />
-          </div>
-          <div className="flex flex-col justify-center gap-8 px-2 pb-8 lg:col-span-7 lg:px-0 lg:py-12 lg:pr-8">
-            <div className="flex flex-col gap-3">
-              <Eyebrow className="text-surface-muted-foreground">DEIN PHYSIOTHERAPEUT</Eyebrow>
-              <h2 className="font-display text-[32px] leading-[1.25] text-surface-foreground lg:text-[48px]">
-                Florian Winder
-              </h2>
-              <p className="text-xs font-light uppercase tracking-[0.05em] text-surface-foreground/60">
-                Physiotherapeut · Athletiktrainer · Personal- & Gruppentrainer
-              </p>
-            </div>
-            <blockquote className="flex flex-col gap-4">
-              <span className="font-display text-[48px] leading-[0.5] text-primary" aria-hidden>
-                „
-              </span>
-              <p className="font-display text-balance text-[20px] leading-[1.45] text-surface-foreground lg:text-[24px]">
-                Mein Ziel ist es, dich Schritt für Schritt zurück in deinen Sport und deinen Alltag
-                zu begleiten. Durch eine klar strukturierte Rehabilitation entwickeln wir gemeinsam
-                den schnellsten und sichersten Weg zu deinem Comeback.
-              </p>
-            </blockquote>
-            <div className="flex flex-wrap gap-3">
-              <PillLink
-                to="/kontakt"
-                search={{ topic: "Physiotherapie", trainer: "Florian Winder" }}
-                variant="outlineOnDark"
-              >
-                Termin bei Florian
-              </PillLink>
-              <PillLink to="/team" variant="quiet">
-                Zum ganzen Team
-              </PillLink>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ExpertSlab
+        slug="florian-winder"
+        eyebrow="DEIN PHYSIOTHERAPEUT"
+        quote="Mein Ziel ist es, dich Schritt für Schritt zurück in deinen Sport und deinen Alltag zu begleiten. Durch eine klar strukturierte Rehabilitation entwickeln wir gemeinsam den schnellsten und sichersten Weg zu deinem Comeback."
+        topic="Physiotherapie"
+        bookLabel="Termin bei Florian"
+      />
 
-      <Section
-        eyebrow="STIMMEN"
+      {/* Noah's comeback names Florian; Selina's is the back-pain case. */}
+      <StoriesSection
         title="Zurück auf dem Platz – und im Alltag"
-        action={
-          <PillLink to="/referenzen" variant="outlineOnLight">
-            Alle Referenzen
-          </PillLink>
-        }
-      >
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
-          {physioStories.map((story) => (
-            <StoryCard key={story.name} story={story} />
-          ))}
-        </div>
-      </Section>
+        names={["Noah Bischof", "Selina Madlener"]}
+      />
 
-      <Section
-        alt
-        seamless
-        eyebrow="TERMIN"
+      <ClosingCta
         title="Bereit für dein Comeback?"
-        action={
-          <PillLink {...contactFormLink("Physiotherapie")} variant="outlineOnDark">
-            Termin vereinbaren
-          </PillLink>
-        }
-      >
-        <p className="max-w-[640px]">
-          Schreib uns kurz, worum es geht – wir melden uns mit einem Terminvorschlag und klären
-          alles Weitere im Erstgespräch.
-        </p>
-      </Section>
+        body="Schreib uns kurz, worum es geht – wir melden uns mit einem Terminvorschlag und klären alles Weitere im Erstgespräch."
+        topic="Physiotherapie"
+      />
     </PageShell>
   );
 }

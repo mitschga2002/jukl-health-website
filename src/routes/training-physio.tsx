@@ -32,10 +32,10 @@ const services = [
     desc: "1:1 Betreuung mit voller Aufmerksamkeit.",
   },
   {
-    to: "/gruppentraining",
-    label: "Gruppentraining",
-    num: "02",
-    desc: "Kleine Gruppen, gemeinsamer Antrieb.",
+    to: "/physiotherapie",
+    label: "Physiotherapie",
+    num: "05",
+    desc: "Ursache finden, schmerzfrei werden.",
   },
   {
     to: "/athletiktraining",
@@ -50,16 +50,16 @@ const services = [
     desc: "Individuell periodisiert, exakt auf dich abgestimmt.",
   },
   {
-    to: "/physiotherapie",
-    label: "Physiotherapie",
-    num: "05",
-    desc: "Ursache finden, schmerzfrei werden.",
-  },
-  {
     to: "/trainingstherapie",
     label: "Trainingstherapie",
     num: "06",
     desc: "Aktives Aufbautraining nach Verletzungen.",
+  },
+  {
+    to: "/gruppentraining",
+    label: "Gruppentraining",
+    num: "02",
+    desc: "Kleine Gruppen, gemeinsamer Antrieb.",
   },
 ] as const;
 

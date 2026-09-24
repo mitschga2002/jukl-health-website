@@ -804,5 +804,111 @@
         "width": 1200
       }
     ]
+  },
+  "/img/pt-coaching-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/pt-coaching-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pt-coaching-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pt-coaching-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pt-coaching-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/pt-kraft-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/pt-kraft-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pt-kraft-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pt-kraft-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pt-kraft-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/pt-gesundheit-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/pt-gesundheit-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pt-gesundheit-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pt-gesundheit-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pt-gesundheit-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/pt-comeback-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/pt-comeback-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pt-comeback-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pt-comeback-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pt-comeback-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/pt-motivation-1200.webp": {
+    "width": 1200,
+    "height": 1799,
+    "variants": [
+      {
+        "url": "/img/pt-motivation-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pt-motivation-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pt-motivation-1200.webp",
+        "width": 1200
+      }
+    ]
   }
 }
