@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, type LucideIcon } from "lucide-react";
 import { Section, SECTION_Y } from "./content";
 import { Eyebrow, PillLink } from "./Pill";
 import { SmartImage } from "./SmartImage";
@@ -21,27 +21,31 @@ import { cn } from "@/lib/utils";
 const EASE_PREMIUM = "duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]";
 
 /**
- * Four short claims under the hero: scanned before booking, not read. No
- * cards and no frame — hairlines between the claims, and the green number
- * as the only accent.
- * Carries its own bottom padding like every light module.
+ * Four short claims under the hero: scanned before booking, not read. Each
+ * gets a line icon in a soft green disc above its title — no numbers (they
+ * implied an order the claims do not have) and no rules between them.
+ * A lighter top than the site rhythm: the claims read as the hero's footnote,
+ * so they sit a little closer to it than one full gap (64px / 96px in all).
  */
-export function Pillars({ items }: { items: readonly { title: string; body: string }[] }) {
+export function Pillars({
+  items,
+}: {
+  items: readonly { icon: LucideIcon; title: string; body: string }[];
+}) {
   return (
-    <section className="jh-container jh-gutter pb-10 lg:pb-16">
-      {/* Hairlines only *between* claims: a column rule on desktop, a row
-          rule when they stack — never one in front of the first. */}
-      <div className="grid grid-cols-1 divide-y divide-border lg:grid-cols-4 lg:divide-x lg:divide-y-0">
-        {items.map((p, i) => (
-          <div
-            key={p.title}
-            className="flex flex-col gap-2 py-6 first:pt-0 last:pb-0 lg:px-8 lg:py-0 lg:first:pl-0 lg:last:pr-0"
-          >
-            <span className="text-sm text-primary">{String(i + 1).padStart(2, "0")}</span>
-            <h2 className="font-display text-balance text-[22px] leading-[1.25] text-foreground">
-              {p.title}
-            </h2>
-            <p className="text-base font-light leading-[1.5] text-muted-foreground">{p.body}</p>
+    <section className="jh-container jh-gutter pb-10 pt-6 lg:pb-16 lg:pt-8">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+        {items.map(({ icon: Icon, title, body }) => (
+          <div key={title} className="flex flex-col gap-4">
+            <span className="grid size-12 place-items-center rounded-full bg-primary/10 text-primary">
+              <Icon className="size-5" strokeWidth={1.75} aria-hidden />
+            </span>
+            <div className="flex flex-col gap-2">
+              <h2 className="font-display text-balance text-[22px] leading-[1.25] text-foreground">
+                {title}
+              </h2>
+              <p className="text-base font-light leading-[1.5] text-muted-foreground">{body}</p>
+            </div>
           </div>
         ))}
       </div>

@@ -1,3 +1,4 @@
+import { CalendarRange, ChartLine, RefreshCw, Target } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
@@ -38,18 +39,22 @@ export const Route = createFileRoute("/trainingsplanung")({
 
 const pillars = [
   {
+    icon: Target,
     title: "Exakt auf dich abgestimmt",
     body: "Kein Plan von der Stange – Übungen, Umfang und Intensität passen zu deinem Status quo.",
   },
   {
+    icon: CalendarRange,
     title: "Periodisiert",
     body: "Aufbau, Belastung und Erholung sind über Wochen und Monate sinnvoll geplant.",
   },
   {
+    icon: ChartLine,
     title: "Datenbasiert",
     body: "Screenings und Analysen bilden den Ausgangspunkt – Fortschritt wird messbar.",
   },
   {
+    icon: RefreshCw,
     title: "Laufend angepasst",
     body: "Re-Checks zeigen, wo du stehst, und der Plan entwickelt sich mit dir weiter.",
   },
