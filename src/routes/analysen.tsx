@@ -1,4 +1,3 @@
-import { Fingerprint, Gauge, MessageCircle, Zap } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Listing, ListingRow, BulletList } from "@/components/site/content";
@@ -49,22 +48,18 @@ function Analysen() {
       <Pillars
         items={[
           {
-            icon: Gauge,
             title: "Objektiv",
             body: "Messwerte statt Bauchgefühl – du siehst schwarz auf weiß, wo du stehst.",
           },
           {
-            icon: Fingerprint,
             title: "Individuell",
             body: "Zonen, Schwellen und Empfehlungen, die für deinen Körper gelten, nicht für den Durchschnitt.",
           },
           {
-            icon: MessageCircle,
             title: "Verständlich erklärt",
             body: "Jede Analyse endet mit einem Gespräch, in dem wir die Ergebnisse gemeinsam durchgehen.",
           },
           {
-            icon: Zap,
             title: "Direkt umsetzbar",
             body: "Die Ergebnisse fließen in dein Training, deine Therapie oder deinen Plan ein.",
           },
