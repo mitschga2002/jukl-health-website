@@ -1,21 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
-import { PageShell, PageHero, Section, BulletList, StepList } from "@/components/site/content";
+import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
+import {
+  ClosingCta,
+  CourseGrid,
+  ExpertGrid,
+  OfferCards,
+  Pillars,
+  ProcessSplit,
+  StoriesSection,
+  type OfferCard,
+} from "@/components/site/ServicePage";
 
-const gruppentraining = "/img/gruppentraining-1032.webp";
+const heroImg = "/img/gruppentraining-1032.webp";
+const processImg = "/img/gt-drills-1600.webp";
 
 export const Route = createFileRoute("/gruppentraining")({
   head: () => ({
     meta: [
-      { title: "Gruppentraining — JuklHealth" },
+      { title: "Gruppentraining – JuklHealth" },
       {
         name: "description",
         content:
-          "Training mit Kollegen, Mannschaft oder Partner. Kleine Gruppen, individuelle Korrektur, gemeinsamer Antrieb.",
+          "Gruppenkurse in Kleingruppen – HYROX, Mobility, Strength und Burn – sowie Gruppentraining für Freunde, Firmenteams und Mannschaften. Individuelle Korrektur nach dem JuklHealth System.",
       },
-      { property: "og:title", content: "Gruppentraining — JuklHealth" },
-      { property: "og:description", content: "Training in der Gruppe — Energie, Spaß, Erfolg." },
+      { property: "og:title", content: "Gruppentraining – JuklHealth" },
+      {
+        property: "og:description",
+        content: "Gemeinsam trainieren – mit individueller Betreuung für jeden in der Gruppe.",
+      },
       { property: "og:url", content: "https://juklhealth.com/gruppentraining" },
     ],
     links: [{ rel: "canonical", href: "https://juklhealth.com/gruppentraining" }],
@@ -23,60 +37,149 @@ export const Route = createFileRoute("/gruppentraining")({
   component: Gruppentraining,
 });
 
+const pillars = [
+  {
+    title: "Gemeinsamer Antrieb",
+    body: "In der Gruppe fällt dranbleiben leichter – ihr pusht euch gegenseitig zu mehr.",
+  },
+  {
+    title: "Individuelle Korrektur",
+    body: "Kleine Gruppen, damit der Coach jeden sieht und jede Übung sauber ausgeführt wird.",
+  },
+  {
+    title: "Feste Kurse",
+    body: "HYROX, Mobility, Strength und Burn – melde dich an und trainiere regelmäßig mit.",
+  },
+  {
+    title: "Oder eure eigene Gruppe",
+    body: "Trainingspartner, Kollegen oder ganze Mannschaft – ihr bringt die Gruppe, wir den Plan.",
+  },
+];
+
+const courses = [
+  {
+    name: "HYROX",
+    body: "Laufen trifft funktionelle Stationen – gezielte Vorbereitung auf das Fitness-Rennformat.",
+    tags: ["Ausdauer", "Functional"],
+  },
+  {
+    name: "Mobility",
+    body: "Beweglichkeit und Gelenkkontrolle verbessern – für einen schmerzfreien Alltag und besseres Training.",
+    tags: ["Beweglichkeit", "Prävention"],
+  },
+  {
+    name: "Strength",
+    body: "Kraft mit sauberer Technik aufbauen – strukturiert, progressiv und individuell korrigiert.",
+    tags: ["Kraft", "Technik"],
+  },
+  {
+    name: "Burn",
+    body: "Intensives Ganzkörpertraining, das Kondition und Energie auf ein neues Level bringt.",
+    tags: ["Kondition", "Intensität"],
+  },
+] as const;
+
+const formats: OfferCard[] = [
+  {
+    title: "Private Kleingruppen",
+    body: "Mit Partner, Freunden oder Familie trainieren – persönlich betreut und mit gemeinsamen Zielen.",
+    image: "/img/gt-partner-1600.webp",
+    imageAlt: "Zwei Trainingspartner bei einer Partnerübung",
+    link: contactFormLink("Gruppentraining"),
+  },
+  {
+    title: "Firmenteams",
+    body: "Bewegung, die im Arbeitsalltag ankommt – für mehr Energie, weniger Beschwerden und ein starkes Team.",
+    image: "/img/gt-firma-1600.webp",
+    imageAlt: "Coach trainiert mit zwei Teilnehmern im Performance Club",
+    link: contactFormLink("Gruppentraining"),
+  },
+  {
+    title: "Vereine & Mannschaften",
+    body: "Athletik für euer Team – in der Vorbereitung, der Übergangsphase oder während der Saison.",
+    image: "/img/angebot-1508.webp",
+    imageAlt: "Mannschaft bei einer Mobility-Einheit auf dem Sportplatz",
+    link: { to: "/athletiktraining" },
+  },
+];
+
+const steps = [
+  {
+    title: "Kurs wählen oder Gruppe anfragen",
+    body: "Melde dich zu einem unserer Kurse an – oder schreib uns, wenn ihr als eigene Gruppe trainieren wollt.",
+  },
+  {
+    title: "Einstieg auf deinem Niveau",
+    body: "Wir holen jeden dort ab, wo er steht – Übungen werden an deine aktuelle Leistungsfähigkeit angepasst.",
+  },
+  {
+    title: "Geplante Einheiten",
+    body: "Jedes Training wird vorbereitet, ausgewertet und baut auf dem vorherigen auf.",
+  },
+  {
+    title: "Coaching für jeden",
+    body: "Korrekturen zu Haltung, Ausführung und Atmung – individuell, auch mitten in der Gruppe.",
+  },
+];
+
 function Gruppentraining() {
   return (
-    <PageShell>
+    <PageShell seamlessFooter>
       <PageHero
-        eyebrow="Gruppe"
-        title="Gruppen­training"
-        intro="Gemeinsam erreichen wir deine sportlichen Ziele – mit individuell abgestimmtem Gruppentraining."
-        image={gruppentraining}
-        imageAlt="Gruppentraining im JuklHealth Performance Club"
+        eyebrow="GRUPPENTRAINING"
+        title="Gemeinsam stärker."
+        intro="In unseren Kleingruppenkursen oder mit deiner eigenen Gruppe: Du trainierst gemeinsam mit anderen – und hast trotzdem einen Coach, der dich im Blick hat und jede Übung korrigiert."
+        image={heroImg}
+        imageAlt="Gruppentraining mit Gymnastikbällen im Performance Club"
       />
 
-      {/* The dark slab, as on the other service pages: the process module is
-          the one that carries weight, and it is the same block each time. */}
-      <Section
-        alt
-        eyebrow="ABLAUF"
-        title="So läuft ein Gruppentraining"
+      <Pillars items={pillars} />
+
+      <CourseGrid
+        eyebrow="GRUPPENKURSE"
+        title="Individuelle Kleingruppenkurse"
+        intro="Feste Kurse, zu denen du dich anmeldest – in kleinen Gruppen, damit jeder individuell betreut wird."
+        topic="Gruppentraining"
+        items={courses}
+      />
+
+      <OfferCards
+        eyebrow="EIGENE GRUPPE"
+        title="Ihr bringt die Gruppe, wir den Plan"
         action={
-          <PillLink {...contactFormLink("Gruppentraining")} variant="outlineOnDark">
-            Jetzt anfragen
+          <PillLink {...contactFormLink("Gruppentraining")} variant="outlineOnLight">
+            Gruppe anfragen
           </PillLink>
         }
-      >
-        <StepList
-          steps={[
-            "Aufnahme der aktuellen Verfassung aller Teilnehmer",
-            "Gemeinsame Definition der Trainingsziele und Inhalte",
-            "Abstimmung des Trainingsplans auf Bedürfnisse der Gruppe",
-            "Die ersten Trainingseinheiten werden an die aktuelle Leistungsfähigkeit angepasst",
-            "Jede Trainingseinheit wird sorgfältig geplant und ausgewertet",
-            "Jedes Training baut auf den vorherigen Einheiten auf",
-            "Kontinuierliches Coaching zu Haltung, Atmung & Konzentration",
-            "Erste Fortschritte sind oft bereits nach wenigen Trainingseinheiten spürbar",
-            "Training im Fitnessstudio oder draußen in der Natur",
-          ]}
-        />
-      </Section>
+        items={formats}
+      />
 
-      <Section eyebrow="FORMATE" title="Sport- & Firmen­gruppen">
-        <p>
-          Wir betreuen Vereine, Mannschaften und Firmenteams. Das Training eignet sich ideal als
-          Ergänzung in der Saisonvorbereitung, während der Übergangsphase oder im laufenden
-          Spielbetrieb. Es unterstützt die Leistungsfähigkeit und kann das Verletzungsrisiko
-          reduzieren.
-        </p>
-        <BulletList
-          items={[
-            "Mannschaftsathletik (Fußball, Hockey, Volleyball)",
-            "Firmenfitness & Active Lunch",
-            "Private Kleingruppen 2–6 Personen",
-            "Outdoor- und Indoor-Setups",
-          ]}
-        />
-      </Section>
+      <ProcessSplit
+        title="So läuft euer Gruppentraining"
+        image={processImg}
+        imageAlt="Koordinationsübung auf der Trainingsfläche im Performance Club"
+        imagePosition="object-[40%_center]"
+        steps={steps}
+      />
+
+      <ExpertGrid
+        eyebrow="DAS TEAM"
+        title="Unsere Gruppentrainer"
+        slugs={["julian-kleinheinz", "florian-winder", "caroline-fritsch"]}
+        topic="Gruppentraining"
+      />
+
+      <StoriesSection
+        title="Was unsere Kunden sagen"
+        names={["Alexander Konzett", "Dario Clasadonte"]}
+      />
+
+      <ClosingCta
+        title="Bereit, gemeinsam loszulegen?"
+        body="Melde dich für einen Kurs an oder schreib uns, wer ihr als Gruppe seid – wir melden uns mit den nächsten Terminen."
+        topic="Gruppentraining"
+        label="Anmelden oder anfragen"
+      />
     </PageShell>
   );
 }
