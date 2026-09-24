@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
@@ -34,61 +34,70 @@ export function LeadCard() {
 }
 
 /** Past this many characters the full quote is clamped with a toggle. */
-const LONG_QUOTE = 180;
+const LONG_QUOTE = 140;
 
 /*
- * Photo and quote no longer share one surface. Over a full-bleed photo every
- * extra line of quote buried more of the picture, so the photo gets its own
- * band on top and the quote sits beneath it on the dark card — any length
- * reads, and the face stays in frame. The card leads with a short verbatim
- * highlight; the full quote follows in body type, clamped once it gets long.
+ * The photo is the card's background again, not a band above the text: a
+ * band plus quote made every card very tall. What keeps the photo readable
+ * now is how little text sits on it — a short verbatim highlight, the full
+ * quote clamped to four lines, and the name. The gradient is heavy only in
+ * the lower half where that text sits, so the face stays clear.
+ *
+ * "Weiterlesen" does not grow the card — that shifted the whole row. The full
+ * quote opens as a panel laid over this card instead, same size, scrolling
+ * inside itself if a quote is ever longer than the card.
  */
 export function StoryCard({ story }: { story: Story }) {
   const [open, setOpen] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const openRef = useRef<HTMLButtonElement>(null);
   const long = story.quote.length > LONG_QUOTE;
+
+  // Keyboard users land on the close button when the panel opens and back on
+  // "Weiterlesen" when it closes, instead of on a control that just vanished.
+  const wasOpen = useRef(false);
+  useEffect(() => {
+    if (open) closeRef.current?.focus();
+    else if (wasOpen.current) openRef.current?.focus();
+    wasOpen.current = open;
+  }, [open]);
   const quoteId = `quote-${story.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
-  const chip = (
-    <span className="rounded-image bg-surface/70 px-2.5 py-1.5 text-xs font-light uppercase tracking-[0.05em] text-surface-foreground/90 backdrop-blur-md">
-      {story.category}
-    </span>
-  );
-
   return (
-    <figure className="group relative flex h-full flex-col overflow-hidden rounded-card bg-surface text-surface-foreground">
+    <figure className="group relative flex h-full min-h-[480px] flex-col justify-between overflow-hidden rounded-card bg-surface p-6 text-surface-foreground lg:min-h-[540px] lg:p-8">
       {story.image ? (
-        <div className="relative aspect-[5/4] overflow-hidden">
+        <>
           <SmartImage
             src={story.image}
             alt={story.name}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 85vw"
             className={cn(
-              "h-full w-full object-cover transition-transform group-hover:scale-[1.05] motion-reduce:transform-none motion-reduce:transition-none",
+              "absolute inset-0 size-full object-cover transition-transform group-hover:scale-[1.05] motion-reduce:transform-none motion-reduce:transition-none",
               story.imagePosition ?? "object-center",
               EASE_PREMIUM,
             )}
           />
-          {/* A short fade into the card so the band ends in the surface
-              colour instead of on a hard photo edge. */}
           <div
             aria-hidden
-            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 via-45% to-black/0"
           />
-          <div className="absolute left-4 top-4 lg:left-6 lg:top-6">{chip}</div>
-        </div>
-      ) : (
-        <>
-          {/* No photo: a faint green glow in the corner keeps the card from
-              reading as an empty slot next to the photo cards. */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-primary/20 blur-3xl"
-          />
-          <div className="relative px-6 pt-6 lg:px-8 lg:pt-8">{chip}</div>
         </>
+      ) : (
+        /* No photo: a faint green glow keeps the dark card from reading as an
+           empty slot next to the photo cards. */
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-primary/20 blur-3xl"
+        />
       )}
 
-      <div className="relative flex flex-1 flex-col gap-5 p-6 lg:p-8">
+      <div className="relative">
+        <span className="rounded-image bg-black/35 px-2.5 py-1.5 text-xs font-light uppercase tracking-[0.05em] text-white/90 backdrop-blur-md">
+          {story.category}
+        </span>
+      </div>
+
+      <div className="relative flex flex-col gap-4">
         <span className="font-display text-[48px] leading-[0.5] text-primary" aria-hidden>
           „
         </span>
@@ -99,33 +108,74 @@ export function StoryCard({ story }: { story: Story }) {
         )}
         <div className="flex flex-col items-start gap-2">
           <blockquote
-            id={quoteId}
             className={cn(
-              "text-base font-light leading-[1.5] text-surface-foreground/75",
-              long && !open && "line-clamp-5",
+              "text-base font-light leading-[1.5] text-surface-foreground/80",
+              long && "line-clamp-4",
             )}
           >
             {story.quote}
           </blockquote>
           {long && (
             <button
+              ref={openRef}
               type="button"
-              onClick={() => setOpen((o) => !o)}
+              onClick={() => setOpen(true)}
               aria-expanded={open}
               aria-controls={quoteId}
               className="text-sm text-primary transition-colors duration-300 ease-out hover:text-surface-foreground"
             >
-              {open ? "Weniger anzeigen" : "Weiterlesen"}
+              Weiterlesen
             </button>
           )}
         </div>
-        <figcaption className="mt-auto flex flex-col gap-1 border-t border-surface-foreground/15 pt-5">
+        <figcaption className="flex flex-col gap-1 border-t border-surface-foreground/20 pt-4">
           <span className="text-base leading-[1.25]">{story.name}</span>
           <span className="text-xs font-light uppercase tracking-[0.05em] text-surface-foreground/60">
             {story.role}
           </span>
         </figcaption>
       </div>
+
+      {long && (
+        <div
+          id={quoteId}
+          role="region"
+          aria-label={`Zitat von ${story.name}`}
+          aria-hidden={!open}
+          inert={!open}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setOpen(false);
+          }}
+          className={cn(
+            "absolute inset-0 z-10 flex flex-col gap-5 overflow-y-auto bg-surface/95 p-6 backdrop-blur-sm transition-opacity duration-300 ease-out lg:p-8",
+            open ? "opacity-100" : "pointer-events-none opacity-0",
+          )}
+        >
+          <div className="flex items-start justify-between gap-4">
+            <span className="font-display text-[48px] leading-[0.5] text-primary" aria-hidden>
+              „
+            </span>
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Zitat schließen"
+              className="grid size-10 shrink-0 place-items-center rounded-full border border-surface-foreground/30 text-surface-foreground transition-colors duration-300 ease-out hover:border-surface-foreground"
+            >
+              <X className="size-4" aria-hidden />
+            </button>
+          </div>
+          <p className="text-base font-light leading-[1.6] text-surface-foreground lg:text-[17px]">
+            {story.quote}
+          </p>
+          <div className="mt-auto flex flex-col gap-1 border-t border-surface-foreground/20 pt-4">
+            <span className="text-base leading-[1.25]">{story.name}</span>
+            <span className="text-xs font-light uppercase tracking-[0.05em] text-surface-foreground/60">
+              {story.role}
+            </span>
+          </div>
+        </div>
+      )}
     </figure>
   );
 }

@@ -19,19 +19,27 @@ import { cn } from "@/lib/utils";
 
 const EASE_PREMIUM = "duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]";
 
-/** Four short claims under the hero: scanned before booking, not read.
- *  Carries its own bottom padding like every light module, so a dark slab
- *  directly below it does not butt up against the text. */
+/**
+ * Four short claims under the hero: scanned before booking, not read. No
+ * cards and no frame — hairlines between the claims, and the green number
+ * as the only accent.
+ * Carries its own bottom padding like every light module.
+ */
 export function Pillars({ items }: { items: readonly { title: string; body: string }[] }) {
   return (
     <section className="jh-container jh-gutter pb-10 lg:pb-16">
-      <div className="grid grid-cols-1 gap-8 border-t border-border pt-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+      {/* Hairlines only *between* claims: a column rule on desktop, a row
+          rule when they stack — never one in front of the first. */}
+      <div className="grid grid-cols-1 divide-y divide-border lg:grid-cols-4 lg:divide-x lg:divide-y-0">
         {items.map((p, i) => (
-          <div key={p.title} className="flex flex-col gap-3">
-            <span className="font-display text-[20px] leading-none text-primary">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h2 className="font-display text-[22px] leading-[1.25] text-foreground">{p.title}</h2>
+          <div
+            key={p.title}
+            className="flex flex-col gap-2 py-6 first:pt-0 last:pb-0 lg:px-8 lg:py-0 lg:first:pl-0 lg:last:pr-0"
+          >
+            <span className="text-sm text-primary">{String(i + 1).padStart(2, "0")}</span>
+            <h2 className="font-display text-balance text-[22px] leading-[1.25] text-foreground">
+              {p.title}
+            </h2>
             <p className="text-base font-light leading-[1.5] text-muted-foreground">{p.body}</p>
           </div>
         ))}
@@ -241,20 +249,20 @@ export function ExpertSlab({
 }
 
 /**
- * Several practitioners side by side on the dark slab — the team behind a
- * service. Visitors do not pick a person here (the studio assigns the coach),
- * so there is one enquiry pill for the whole module, not one per card.
+ * A row of cards that is a plain grid from lg up and, below that, a swipeable
+ * scroll-snap track: the next card peeks in, and a progress bar plus arrows
+ * make it read as scrollable on a tablet, where there is no scrollbar and no
+ * swipe hint. `tone` matches the controls to the surface the row sits on.
  */
-export function ExpertGrid({
-  eyebrow,
-  title,
-  slugs,
-  topic,
+function SnapRow({
+  items,
+  tone,
+  label,
 }: {
-  eyebrow: string;
-  title: string;
-  slugs: readonly string[];
-  topic: ContactTopic;
+  items: readonly { key: string; node: ReactNode }[];
+  tone: "light" | "dark";
+  /** Names one item, for the arrows' labels ("Vorheriger …"). */
+  label: string;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   // Visible share of the track and how far it has scrolled, both 0–1. They
@@ -287,9 +295,96 @@ export function ExpertGrid({
     el.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: "smooth" });
   };
 
-  const arrow =
-    "grid size-11 place-items-center rounded-full border border-surface-foreground/30 text-surface-foreground transition-colors duration-300 ease-out hover:border-surface-foreground disabled:pointer-events-none disabled:opacity-30";
+  const dark = tone === "dark";
+  const arrow = cn(
+    "grid size-11 place-items-center rounded-full border transition-colors duration-300 ease-out disabled:pointer-events-none disabled:opacity-30",
+    dark
+      ? "border-surface-foreground/30 text-surface-foreground hover:border-surface-foreground"
+      : "border-border text-foreground hover:border-foreground",
+  );
 
+  return (
+    <div className="flex flex-col gap-6">
+      <div
+        ref={trackRef}
+        onScroll={sync}
+        className={cn(
+          "-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:gap-5 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden",
+          items.length > 2 ? "lg:grid-cols-3" : "lg:grid-cols-2",
+        )}
+      >
+        {items.map((it) => (
+          <div
+            key={it.key}
+            className="flex min-w-0 shrink-0 basis-[85%] snap-start flex-col sm:basis-[44%] lg:basis-auto"
+          >
+            {it.node}
+          </div>
+        ))}
+      </div>
+      {!fits && (
+        <div className="flex items-center gap-4 lg:hidden">
+          <div
+            className={cn(
+              "relative h-[3px] flex-1 overflow-hidden rounded-full",
+              dark ? "bg-surface-foreground/15" : "bg-foreground/15",
+            )}
+          >
+            {/* No CSS transition: the bar follows the track's own scroll events,
+                which already animate during a smooth scroll. Easing on top of
+                them makes the thumb trail behind the cards. `transform` in
+                thumb-widths keeps it off layout. */}
+            <div
+              className={cn(
+                "absolute inset-y-0 left-0 rounded-full will-change-transform",
+                dark ? "bg-surface-foreground" : "bg-foreground",
+              )}
+              style={{
+                width: `${view.size * 100}%`,
+                transform: `translateX(${(view.pos * (1 - view.size) * 100) / view.size}%)`,
+              }}
+            />
+          </div>
+          <button
+            type="button"
+            className={arrow}
+            onClick={() => step(-1)}
+            disabled={view.pos <= 0.01}
+            aria-label={`Vorherige ${label}`}
+          >
+            <ChevronLeft className="size-5" aria-hidden />
+          </button>
+          <button
+            type="button"
+            className={arrow}
+            onClick={() => step(1)}
+            disabled={view.pos >= 0.99}
+            aria-label={`Nächste ${label}`}
+          >
+            <ChevronRight className="size-5" aria-hidden />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Several practitioners side by side on the dark slab — the team behind a
+ * service. Visitors do not pick a person here (the studio assigns the coach),
+ * so there is one enquiry pill for the whole module, not one per card.
+ */
+export function ExpertGrid({
+  eyebrow,
+  title,
+  slugs,
+  topic,
+}: {
+  eyebrow: string;
+  title: string;
+  slugs: readonly string[];
+  topic: ContactTopic;
+}) {
   return (
     <Section
       alt
@@ -301,21 +396,13 @@ export function ExpertGrid({
         </PillLink>
       }
     >
-      {/* Three portrait cards need about 1000px. Below lg they would squeeze
-          into slivers, so the row becomes a swipeable scroll-snap track with
-          the next card peeking in, plus a progress bar and arrows so it reads
-          as scrollable on a tablet too; from lg up it is a plain grid. */}
-      <div
-        ref={trackRef}
-        onScroll={sync}
-        className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden"
-      >
-        {slugs.map(member).map((m) => {
-          return (
-            <div
-              key={m.slug}
-              className="group flex min-w-0 shrink-0 basis-[80%] snap-start flex-col overflow-hidden rounded-card bg-surface-elevated sm:basis-[44%] lg:basis-auto"
-            >
+      <SnapRow
+        tone="dark"
+        label="Person"
+        items={slugs.map(member).map((m) => ({
+          key: m.slug,
+          node: (
+            <div className="group flex h-full flex-col overflow-hidden rounded-card bg-surface-elevated">
               {m.image && (
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <SmartImage
@@ -345,44 +432,9 @@ export function ExpertGrid({
                 )}
               </div>
             </div>
-          );
-        })}
-      </div>
-      {!fits && (
-        <div className="flex items-center gap-4 lg:hidden">
-          <div className="relative h-[3px] flex-1 overflow-hidden rounded-full bg-surface-foreground/15">
-            {/* No CSS transition: the bar follows the track's own scroll events,
-                which already animate during a smooth scroll. Easing on top of
-                them makes the thumb trail behind the cards. `transform` in
-                thumb-widths keeps it off layout. */}
-            <div
-              className="absolute inset-y-0 left-0 rounded-full bg-surface-foreground will-change-transform"
-              style={{
-                width: `${view.size * 100}%`,
-                transform: `translateX(${(view.pos * (1 - view.size) * 100) / view.size}%)`,
-              }}
-            />
-          </div>
-          <button
-            type="button"
-            className={arrow}
-            onClick={() => step(-1)}
-            disabled={view.pos <= 0.01}
-            aria-label="Vorheriger Trainer"
-          >
-            <ChevronLeft className="size-5" aria-hidden />
-          </button>
-          <button
-            type="button"
-            className={arrow}
-            onClick={() => step(1)}
-            disabled={view.pos >= 0.99}
-            aria-label="Nächster Trainer"
-          >
-            <ChevronRight className="size-5" aria-hidden />
-          </button>
-        </div>
-      )}
+          ),
+        }))}
+      />
     </Section>
   );
 }
@@ -403,16 +455,14 @@ export function StoriesSection({ title, names }: { title: string; names: readonl
         </PillLink>
       }
     >
-      <div
-        className={cn(
-          "grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5",
-          picked.length > 2 && "lg:grid-cols-3",
-        )}
-      >
-        {picked.map((story) => (
-          <StoryCard key={story.name} story={story} />
-        ))}
-      </div>
+      <SnapRow
+        tone="light"
+        label="Stimme"
+        items={picked.map((story) => ({
+          key: story.name,
+          node: <StoryCard story={story} />,
+        }))}
+      />
     </Section>
   );
 }

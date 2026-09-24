@@ -56,10 +56,15 @@ export function PageHero({
   imagePosition = "center",
   objectPosition,
   banner = false,
+  facts,
 }: {
   eyebrow: string;
   title: string;
   intro?: string;
+  /** Key facts as small labelled chips under the intro (the club pages:
+   *  area, access, format). Part of the header rather than a module of its
+   *  own, because four short facts do not carry a section. */
+  facts?: readonly { label: string; value: string }[];
   ratio?: "tall" | "wide" | "natural";
   image?: string;
   imageAlt?: string;
@@ -100,6 +105,21 @@ export function PageHero({
         <p className="max-w-[600px] text-pretty pt-2 text-base font-light leading-[1.45] text-muted-foreground lg:text-lg">
           {intro}
         </p>
+      ) : null}
+      {facts?.length ? (
+        <ul className="flex flex-wrap gap-2 pt-3">
+          {facts.map((f) => (
+            <li
+              key={f.label}
+              className="flex items-baseline gap-2 rounded-full border border-border px-4 py-2 text-sm leading-none"
+            >
+              <span className="text-xs uppercase tracking-[0.05em] text-muted-foreground">
+                {f.label}
+              </span>
+              <span className="text-foreground">{f.value}</span>
+            </li>
+          ))}
+        </ul>
       ) : null}
     </div>
   );
