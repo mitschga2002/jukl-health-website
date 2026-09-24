@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { createFileRoute, useSearch } from "@tanstack/react-router";
-import { ChevronDown } from "lucide-react";
+import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { submitContact } from "@/lib/contact.functions";
-import { LocationMap } from "@/components/site/LocationMap";
 import { Eyebrow, PillButton } from "@/components/site/Pill";
 import { SITE } from "@/lib/site";
 import {
@@ -13,7 +12,25 @@ import {
   type ContactTopic,
 } from "@/lib/contact-topics";
 
-const teamBanner = "/img/team-banner-1824.webp";
+/* The three clubs, for the "Standorte" block beside the form. Each links to
+   its own page, which carries the map and the practical notes. */
+const locations = [
+  {
+    name: "Performance Club",
+    lines: ["Bildgasse 10, 3. Stock", "A-6850 Dornbirn"],
+    to: "/performance-club",
+  },
+  {
+    name: "Strength Club",
+    lines: ["Bildgasse 10, Erdgeschoss", "A-6850 Dornbirn"],
+    to: "/strength-club",
+  },
+  {
+    name: "Training Club Widnau",
+    lines: ["Schützenstrasse 13", "CH-9443 Widnau"],
+    to: "/training-club-widnau",
+  },
+] as const;
 
 /* `topic` is what a service page's CTA hands over so the form opens on the
    right "Anliegen"; anything not on the list is dropped rather than shown.
@@ -89,81 +106,31 @@ function Kontakt() {
 
   return (
     <PageShell seamlessFooter>
+      {/* Text only: the form is what this page is for, so it follows the
+          headline directly instead of sitting below a full-width photo. */}
       <PageHero
         eyebrow="KONTAKT"
         title="Schreib uns."
-        intro="Julian Kleinheinz, BSc · Bildgasse 10 · A-6850 Dornbirn"
-        image={teamBanner}
-        imageAlt="Team von JuklHealth"
-        ratio="natural"
+        intro="Ob Training, Therapie, Analyse oder eine Frage zu unseren Clubs in Dornbirn und Widnau – schreib uns kurz, worum es geht. Wir melden uns persönlich bei dir."
       />
 
       {/* The homepage's dark slab, run seamless into the footer: contact is the
           last thing on the page and the footer is already this surface, so the
           two read as one block instead of a card with a stripe of background
           caught above the footer. */}
-      <Section alt seamless eyebrow="KONTAKT" title="So erreichst du uns">
-        {/* `grid-cols-1` is not redundant with the implicit single column below
-            `md`: an implicit track is `auto`, and an auto track takes its
-            minimum from the max-content width of what is in it. The map card
-            is `aspect-video` over a 380px floor, so its intrinsic width is
-            380 × 16/9 ≈ 676px — which blew the column, and the page with it,
-            past the viewport on a phone. `grid-cols-1` is `minmax(0, 1fr)`,
-            which caps that minimum at 0 and lets the card take the column's
-            width instead of setting it. The club pages already spell it out
-            for the same reason. */}
+      <Section alt seamless eyebrow="ANFRAGE" title="Wie können wir dir helfen?">
+        {/* The form is first in the markup, so it leads on a phone; from md up
+            the order classes put it in the right column, with the ways to
+            reach us on the left. `grid-cols-1` (minmax(0, 1fr)) rather than the implicit auto
+            track, so a long e-mail address cannot widen the column past the
+            viewport on a phone. */}
         <div className="not-prose grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-16">
-          <div className="space-y-6">
-            <div>
-              <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">E-Mail</Eyebrow>
-              {SITE.emails.all.map((email) => (
-                <a
-                  key={email}
-                  href={`mailto:${email}`}
-                  className="font-display w-fit block break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-surface-foreground/70 lg:text-3xl"
-                >
-                  {email}
-                </a>
-              ))}
-            </div>
-            <div>
-              <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">Adresse</Eyebrow>
-              <div className="text-lg leading-snug text-surface-foreground">
-                {SITE.address.lines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-                {SITE.address.country}
-              </div>
-            </div>
-            <div>
-              <Eyebrow className="mb-1 text-xs text-surface-muted-foreground">Social</Eyebrow>
-              <a
-                href="https://www.instagram.com/juklhealth_clubs/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-surface-foreground underline transition-colors duration-300 ease-out hover:text-surface-foreground/70"
-              >
-                @juklhealth_clubs (Instagram)
-              </a>
-            </div>
-
-            <LocationMap
-              name="JuklHealth Clubs"
-              lines={[...SITE.address.lines]}
-              lat={47.4151713}
-              lon={9.7330917}
-              destination="Bildgasse 10, 6850 Dornbirn, Österreich"
-            />
-          </div>
-
           {/* `scroll-mt-24` clears the floating nav when a CTA lands here by
               hash; the same margin the analysis anchors use. */}
           <form
             id={CONTACT_FORM_ID}
             onSubmit={onSubmit}
-            className="scroll-mt-24 space-y-5 rounded-card bg-surface-elevated p-6 lg:p-8"
+            className="scroll-mt-24 space-y-5 rounded-card bg-surface-elevated p-6 md:order-2 lg:p-8"
           >
             <Field id="topic" label="Anliegen" required>
               {/* A native `<select>` draws its chevron against the right edge
@@ -289,6 +256,65 @@ function Kontakt() {
               </p>
             ) : null}
           </form>
+
+          <div className="flex flex-col gap-10 md:order-1">
+            <div className="flex flex-col gap-2">
+              <Eyebrow className="text-xs text-surface-muted-foreground">E-Mail</Eyebrow>
+              {SITE.emails.all.map((email) => (
+                <a
+                  key={email}
+                  href={`mailto:${email}`}
+                  className="font-display w-fit break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-primary lg:text-3xl"
+                >
+                  {email}
+                </a>
+              ))}
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <Eyebrow className="text-xs text-surface-muted-foreground">Standorte</Eyebrow>
+              <ul className="flex flex-col gap-3">
+                {locations.map((l) => (
+                  <li key={l.name}>
+                    <Link
+                      to={l.to}
+                      className="group flex items-start justify-between gap-4 rounded-card bg-surface-elevated p-5 transition-colors duration-300 ease-out hover:bg-surface-foreground/10"
+                    >
+                      <div className="flex flex-col gap-1">
+                        <span className="font-display text-[20px] leading-[1.25] text-surface-foreground">
+                          {l.name}
+                        </span>
+                        {l.lines.map((line) => (
+                          <span
+                            key={line}
+                            className="text-sm font-light text-surface-foreground/70"
+                          >
+                            {line}
+                          </span>
+                        ))}
+                      </div>
+                      <ArrowUpRight
+                        className="mt-1 size-5 shrink-0 text-surface-foreground/40 transition-colors duration-300 group-hover:text-primary"
+                        aria-hidden
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Eyebrow className="text-xs text-surface-muted-foreground">Social</Eyebrow>
+              <a
+                href={SITE.instagram.url}
+                target="_blank"
+                rel="noreferrer"
+                className="w-fit text-surface-foreground underline transition-colors duration-300 ease-out hover:text-primary"
+              >
+                {SITE.instagram.handle} (Instagram)
+              </a>
+            </div>
+          </div>
         </div>
       </Section>
     </PageShell>

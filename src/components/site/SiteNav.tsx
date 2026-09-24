@@ -12,7 +12,7 @@ const mainLinks = [{ to: "/referenzen", label: "Referenzen" }] as const;
 
 const aboutLinks = [
   { to: "/team", label: "Team" },
-  { to: "/meine-person", label: "Julian Kleinheinz" },
+  { to: "/julian-kleinheinz", label: "Julian Kleinheinz" },
   { to: "/vortraege", label: "Vorträge" },
 ] as const;
 

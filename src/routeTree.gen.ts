@@ -16,6 +16,7 @@ import { Route as ClubsRouteImport } from './routes/clubs'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as GruppentrainingRouteImport } from './routes/gruppentraining'
 import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as JulianKleinheinzRouteImport } from './routes/julian-kleinheinz'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as MeinePersonRouteImport } from './routes/meine-person'
 import { Route as PerformanceClubRouteImport } from './routes/performance-club'
@@ -64,6 +65,11 @@ const GruppentrainingRoute = GruppentrainingRouteImport.update({
 const ImpressumRoute = ImpressumRouteImport.update({
   id: '/impressum',
   path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JulianKleinheinzRoute = JulianKleinheinzRouteImport.update({
+  id: '/julian-kleinheinz',
+  path: '/julian-kleinheinz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KontaktRoute = KontaktRouteImport.update({
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/datenschutz': typeof DatenschutzRoute
   '/gruppentraining': typeof GruppentrainingRoute
   '/impressum': typeof ImpressumRoute
+  '/julian-kleinheinz': typeof JulianKleinheinzRoute
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
   '/performance-club': typeof PerformanceClubRoute
@@ -168,6 +175,7 @@ export interface FileRoutesByTo {
   '/datenschutz': typeof DatenschutzRoute
   '/gruppentraining': typeof GruppentrainingRoute
   '/impressum': typeof ImpressumRoute
+  '/julian-kleinheinz': typeof JulianKleinheinzRoute
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
   '/performance-club': typeof PerformanceClubRoute
@@ -192,6 +200,7 @@ export interface FileRoutesById {
   '/datenschutz': typeof DatenschutzRoute
   '/gruppentraining': typeof GruppentrainingRoute
   '/impressum': typeof ImpressumRoute
+  '/julian-kleinheinz': typeof JulianKleinheinzRoute
   '/kontakt': typeof KontaktRoute
   '/meine-person': typeof MeinePersonRoute
   '/performance-club': typeof PerformanceClubRoute
@@ -217,6 +226,7 @@ export interface FileRouteTypes {
     | '/datenschutz'
     | '/gruppentraining'
     | '/impressum'
+    | '/julian-kleinheinz'
     | '/kontakt'
     | '/meine-person'
     | '/performance-club'
@@ -240,6 +250,7 @@ export interface FileRouteTypes {
     | '/datenschutz'
     | '/gruppentraining'
     | '/impressum'
+    | '/julian-kleinheinz'
     | '/kontakt'
     | '/meine-person'
     | '/performance-club'
@@ -263,6 +274,7 @@ export interface FileRouteTypes {
     | '/datenschutz'
     | '/gruppentraining'
     | '/impressum'
+    | '/julian-kleinheinz'
     | '/kontakt'
     | '/meine-person'
     | '/performance-club'
@@ -287,6 +299,7 @@ export interface RootRouteChildren {
   DatenschutzRoute: typeof DatenschutzRoute
   GruppentrainingRoute: typeof GruppentrainingRoute
   ImpressumRoute: typeof ImpressumRoute
+  JulianKleinheinzRoute: typeof JulianKleinheinzRoute
   KontaktRoute: typeof KontaktRoute
   MeinePersonRoute: typeof MeinePersonRoute
   PerformanceClubRoute: typeof PerformanceClubRoute
@@ -352,6 +365,13 @@ declare module '@tanstack/react-router' {
       path: '/impressum'
       fullPath: '/impressum'
       preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/julian-kleinheinz': {
+      id: '/julian-kleinheinz'
+      path: '/julian-kleinheinz'
+      fullPath: '/julian-kleinheinz'
+      preLoaderRoute: typeof JulianKleinheinzRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kontakt': {
@@ -463,6 +483,7 @@ const rootRouteChildren: RootRouteChildren = {
   DatenschutzRoute: DatenschutzRoute,
   GruppentrainingRoute: GruppentrainingRoute,
   ImpressumRoute: ImpressumRoute,
+  JulianKleinheinzRoute: JulianKleinheinzRoute,
   KontaktRoute: KontaktRoute,
   MeinePersonRoute: MeinePersonRoute,
   PerformanceClubRoute: PerformanceClubRoute,
