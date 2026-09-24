@@ -720,5 +720,89 @@
         "width": 476
       }
     ]
+  },
+  "/img/physio-knie-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/physio-knie-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/physio-knie-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/physio-knie-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/physio-knie-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/physio-sprunggelenk-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/physio-sprunggelenk-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/physio-sprunggelenk-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/physio-sprunggelenk-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/physio-sprunggelenk-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/physio-behandlung-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/physio-behandlung-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/physio-behandlung-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/physio-behandlung-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/physio-behandlung-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/physio-club-1200.webp": {
+    "width": 1200,
+    "height": 1799,
+    "variants": [
+      {
+        "url": "/img/physio-club-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/physio-club-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/physio-club-1200.webp",
+        "width": 1200
+      }
+    ]
   }
 }
