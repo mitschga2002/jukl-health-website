@@ -6,7 +6,6 @@ import {
   ClosingCta,
   ExpertGrid,
   OfferCards,
-  Pillars,
   ProcessSplit,
   StoriesSection,
   type OfferCard,
@@ -35,25 +34,6 @@ export const Route = createFileRoute("/trainingstherapie")({
   }),
   component: Trainingstherapie,
 });
-
-const pillars = [
-  {
-    title: "Schmerzadaptiert",
-    body: "Der Einstieg richtet sich nach deinen Beschwerden – nie gegen, immer mit deinem Körper.",
-  },
-  {
-    title: "Progressiv",
-    body: "Belastung steigt nach dem Prinzip „Load to Tolerance“ – so viel, wie dein Gewebe gerade verträgt.",
-  },
-  {
-    title: "Messbar",
-    body: "RPE, Tempo und Schmerzskala machen deinen Fortschritt sichtbar und steuern das Training.",
-  },
-  {
-    title: "Hand in Hand mit der Physio",
-    body: "Enge Abstimmung mit Physiotherapie und Sportmedizin – ein Team, ein Plan.",
-  },
-];
 
 const cases: OfferCard[] = [
   {
@@ -111,8 +91,6 @@ function Trainingstherapie() {
         imageAlt="Coach begleitet eine Klientin beim Kreuzheben mit der Langhantel"
         objectPosition="50% 40%"
       />
-
-      <Pillars items={pillars} />
 
       <OfferCards
         eyebrow="WANN"

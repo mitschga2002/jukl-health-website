@@ -7,7 +7,6 @@ import {
   CareerTimeline,
   ExpertGrid,
   OfferCards,
-  Pillars,
   ProcessSplit,
   StoriesSection,
   type OfferCard,
@@ -36,25 +35,6 @@ export const Route = createFileRoute("/athletiktraining")({
   }),
   component: Athletik,
 });
-
-const pillars = [
-  {
-    title: "Know-how aus dem Profifußball",
-    body: "Erfahrung aus Bundesliga, Super League und Nachwuchsleistungszentrum – für jedes Leistungsniveau.",
-  },
-  {
-    title: "Periodisiert",
-    body: "Vorbereitung, Übergangsphase oder laufende Saison: Das Training folgt deinem Kalender.",
-  },
-  {
-    title: "Verletzungsprävention",
-    body: "Stabilität, Belastbarkeit und saubere Bewegungsmuster senken das Verletzungsrisiko.",
-  },
-  {
-    title: "Messbar",
-    body: "Screenings zu Beginn und im Verlauf zeigen, wo du stehst und was sich verbessert.",
-  },
-];
 
 const clubs = [
   { name: "Hella DSV", period: "2019", detail: "Athletiktraining · Vorarlbergliga" },
@@ -121,8 +101,6 @@ function Athletik() {
         image={heroImg}
         imageAlt="Mannschaft bei einer Mobility-Einheit auf dem Sportplatz"
       />
-
-      <Pillars items={pillars} />
 
       <CareerTimeline eyebrow="ERFAHRUNG" title="Hier haben wir gearbeitet" items={clubs} />
 

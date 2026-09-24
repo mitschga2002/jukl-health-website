@@ -106,12 +106,16 @@ function Kontakt() {
 
   return (
     <PageShell seamlessFooter>
-      {/* Text only: the form is what this page is for, so it follows the
-          headline directly instead of sitting below a full-width photo. */}
+      {/* The team photo as the header band, at the 3:1 crop the team page
+          uses (measured to keep the lettering and the faces clear) rather
+          than at its natural height, so the form still follows closely. */}
       <PageHero
         eyebrow="KONTAKT"
         title="Schreib uns."
         intro="Ob Training, Therapie, Analyse oder eine Frage zu unseren Clubs in Dornbirn und Widnau – schreib uns kurz, worum es geht. Wir melden uns persönlich bei dir."
+        image="/img/team-banner-1824.webp"
+        imageAlt="Das Team von JuklHealth"
+        banner
       />
 
       {/* The homepage's dark slab, run seamless into the footer: contact is the

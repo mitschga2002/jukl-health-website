@@ -6,7 +6,6 @@ import {
   ClosingCta,
   ExpertSlab,
   OfferCards,
-  Pillars,
   ProcessSplit,
   StoriesSection,
   type OfferCard,
@@ -35,25 +34,6 @@ export const Route = createFileRoute("/physiotherapie")({
   }),
   component: Physio,
 });
-
-const pillars = [
-  {
-    title: "Know-how aus dem Profisport",
-    body: "Wir betreuen Profis und Vereine – dieselben Standards gelten für jeden, der zu uns kommt.",
-  },
-  {
-    title: "Evidenzbasiert",
-    body: "Diagnostik und Therapie nach aktuellem Stand der Wissenschaft, messbar statt nach Gefühl.",
-  },
-  {
-    title: "Aktive Therapie",
-    body: "Manuelle Techniken, wo sie helfen – im Zentrum steht, was du selbst an Belastbarkeit aufbaust.",
-  },
-  {
-    title: "Physio & Training aus einer Hand",
-    body: "Therapie, Trainingstherapie und Athletik greifen nahtlos ineinander – ein System, ein Team.",
-  },
-] as const;
 
 const services: OfferCard[] = [
   {
@@ -109,8 +89,6 @@ function Physio() {
         imageAlt="Physiotherapeut Florian Winder bei der Behandlung am Knie"
         objectPosition="30% 50%"
       />
-
-      <Pillars items={pillars} />
 
       <OfferCards
         eyebrow="LEISTUNGEN"

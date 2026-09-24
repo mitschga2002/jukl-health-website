@@ -6,7 +6,6 @@ import {
   ClosingCta,
   ExpertGrid,
   OfferCards,
-  Pillars,
   ProcessSplit,
   StoriesSection,
   type OfferCard,
@@ -35,25 +34,6 @@ export const Route = createFileRoute("/trainingsplanung")({
   }),
   component: Trainingsplanung,
 });
-
-const pillars = [
-  {
-    title: "Exakt auf dich abgestimmt",
-    body: "Kein Plan von der Stange – Übungen, Umfang und Intensität passen zu deinem Status quo.",
-  },
-  {
-    title: "Periodisiert",
-    body: "Aufbau, Belastung und Erholung sind über Wochen und Monate sinnvoll geplant.",
-  },
-  {
-    title: "Datenbasiert",
-    body: "Screenings und Analysen bilden den Ausgangspunkt – Fortschritt wird messbar.",
-  },
-  {
-    title: "Laufend angepasst",
-    body: "Re-Checks zeigen, wo du stehst, und der Plan entwickelt sich mit dir weiter.",
-  },
-];
 
 const audiences: OfferCard[] = [
   {
@@ -109,8 +89,6 @@ function Trainingsplanung() {
         imageAlt="Coach und Athlet planen das Training am Tablet"
         objectPosition="40% 50%"
       />
-
-      <Pillars items={pillars} />
 
       <OfferCards
         eyebrow="FÜR WEN"

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
-import { ClosingCta, Pillars } from "@/components/site/ServicePage";
+import { ClosingCta } from "@/components/site/ServicePage";
 import { ClubCards, type ClubCard } from "@/components/site/ClubPage";
 
 export const Route = createFileRoute("/clubs")({
@@ -63,27 +63,6 @@ function Clubs() {
         eyebrow="STANDORTE"
         title="Drei Clubs. Ein System."
         intro="Performance, Strength und Training Club – in Dornbirn und Widnau. Jeder Club mit eigenem Charakter, alle nach dem JuklHealth System."
-      />
-
-      <Pillars
-        items={[
-          {
-            title: "Ein System",
-            body: "Gleiche Methoden, gleiche Standards – egal, in welchem Club du trainierst.",
-          },
-          {
-            title: "Zwei Länder",
-            body: "Dornbirn in Vorarlberg und Widnau im St. Galler Rheintal.",
-          },
-          {
-            title: "Drei Charaktere",
-            body: "Funktionell und betreut, 24/7 und exklusiv, oder ganz privat im 1:1.",
-          },
-          {
-            title: "Ein Team",
-            body: "Unsere Coaches und Therapeuten kennen dich – an jedem Standort.",
-          },
-        ]}
       />
 
       <Section
