@@ -81,7 +81,9 @@ export function ClubLocation({
 export type ClubCard = {
   name: string;
   area: string;
-  address: string;
+  /** Street and town on their own lines: every card then has a two-line
+   *  address, so the rule under it sits at the same height in all three. */
+  address: readonly [string, string];
   image: string;
   imageAlt: string;
   points: readonly string[];
@@ -96,7 +98,11 @@ export function ClubCards({ items }: { items: readonly ClubCard[] }) {
         <Link
           key={c.name}
           {...c.link}
-          className="group flex flex-col overflow-hidden rounded-card bg-muted"
+          // From md up each card spans three rows of the parent grid and
+          // adopts them (`subgrid`): photo, heading, list. The heading row is
+          // as tall as the tallest heading, so the rule above each list sits
+          // at the same height in all cards, even when a name wraps.
+          className="group flex flex-col overflow-hidden rounded-card bg-muted md:row-span-3 md:grid md:grid-rows-subgrid md:gap-0"
         >
           <div className="relative aspect-[4/3] overflow-hidden">
             <SmartImage
@@ -112,30 +118,34 @@ export function ClubCards({ items }: { items: readonly ClubCard[] }) {
               {c.area}
             </span>
           </div>
-          <div className="flex flex-1 flex-col gap-4 p-6 lg:p-8">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex flex-col gap-1.5">
-                <h3 className="font-display text-[24px] leading-[1.25] text-foreground lg:text-[28px]">
-                  {c.name}
-                </h3>
-                <p className="text-sm font-light text-muted-foreground">{c.address}</p>
-              </div>
-              <ArrowUpRight
-                className="mt-1 size-5 shrink-0 text-foreground/40 transition-colors duration-300 group-hover:text-primary"
-                aria-hidden
-              />
-            </div>
-            <ul className="flex flex-col gap-2 border-t border-border pt-4">
-              {c.points.map((p) => (
-                <li key={p} className="flex gap-3 text-base font-light leading-[1.45]">
-                  <span className="shrink-0 text-primary" aria-hidden>
-                    →
+          <div className="flex items-start justify-between gap-4 px-6 pb-4 pt-6 lg:px-8 lg:pt-8">
+            <div className="flex flex-col gap-1.5">
+              <h3 className="font-display text-[24px] leading-[1.25] text-foreground lg:text-[28px]">
+                {c.name}
+              </h3>
+              <p className="text-sm font-light text-muted-foreground">
+                {c.address.map((line) => (
+                  <span key={line} className="block whitespace-nowrap">
+                    {line}
                   </span>
-                  <span>{p}</span>
-                </li>
-              ))}
-            </ul>
+                ))}
+              </p>
+            </div>
+            <ArrowUpRight
+              className="mt-1 size-5 shrink-0 text-foreground/40 transition-colors duration-300 group-hover:text-primary"
+              aria-hidden
+            />
           </div>
+          <ul className="mx-6 flex flex-col gap-2 border-t border-border pb-6 pt-4 lg:mx-8 lg:pb-8">
+            {c.points.map((p) => (
+              <li key={p} className="flex gap-3 text-base font-light leading-[1.45]">
+                <span className="shrink-0 text-primary" aria-hidden>
+                  →
+                </span>
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
         </Link>
       ))}
     </div>
