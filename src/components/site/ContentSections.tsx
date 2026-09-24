@@ -49,7 +49,7 @@ const services = [
     body: "Evidenzbasierte, strukturierte Programmierungen, die exakt zu deinem Status quo passen.",
     tags: ["Programming", "Periodisierung"],
     to: "/trainingsplanung",
-    image: "/img/gesundheitscoaching-1400.webp",
+    image: "/img/tp-planung-1600.webp",
     imageAlt: "Trainingsplanung am Tablet gemeinsam mit dem Athleten",
     imagePosition: "object-[center_20%]",
   },

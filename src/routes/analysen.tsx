@@ -1,22 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
-import {
-  PageShell,
-  PageHero,
-  Listing,
-  ListingRow,
-  BulletList,
-  QuoteSlab,
-  Section,
-} from "@/components/site/content";
+import { PageShell, PageHero, Listing, ListingRow, BulletList } from "@/components/site/content";
+import { ClosingCta, Pillars, StoriesSection } from "@/components/site/ServicePage";
 
-const analysenHero = "/img/analysen-hero-1446.webp";
-const stoffwechsel = "/img/stoffwechsel-1065.webp";
+const heroImg = "/img/an-spiro-1200.webp";
+const fms = "/img/an-fms-1600.webp";
+const performanceScreening = "/img/analysen-hero-1446.webp";
+const stoffwechsel = "/img/an-ruheumsatz-1600.webp";
 const leistungsanalyse = "/img/leistungsanalyse-1217.webp";
-const gesundheitscoaching = "/img/gesundheitscoaching-1400.webp";
-const athletiktraining = "/img/athletiktraining-1459.webp";
 const physioanalyse = "/img/physio-knie-1600.webp";
-const performanceScreening = "/img/profisport-1824.webp";
+const gesundheitscoaching = "/img/an-coaching-1600.webp";
 
 export const Route = createFileRoute("/analysen")({
   head: () => ({
@@ -46,8 +39,31 @@ function Analysen() {
       <PageHero
         eyebrow="DATEN & DIAGNOSTIK"
         title="Analysen"
-        intro="Living a healthy life is your choice — wir liefern die Daten dazu. Vom FMS bis zum Gesundheitscoaching."
-        image={analysenHero}
+        intro="Living a healthy life is your choice – wir liefern die Daten dazu. Vom Bewegungsscreening über Stoffwechsel- und Leistungsanalyse bis zum Gesundheitscoaching: objektive Werte als Basis für dein Training."
+        image={heroImg}
+        imageAlt="Coach legt einem Athleten die Atemmaske für die Leistungsdiagnostik an"
+        objectPosition="50% 30%"
+      />
+
+      <Pillars
+        items={[
+          {
+            title: "Objektiv",
+            body: "Messwerte statt Bauchgefühl – du siehst schwarz auf weiß, wo du stehst.",
+          },
+          {
+            title: "Individuell",
+            body: "Zonen, Schwellen und Empfehlungen, die für deinen Körper gelten, nicht für den Durchschnitt.",
+          },
+          {
+            title: "Verständlich erklärt",
+            body: "Jede Analyse endet mit einem Gespräch, in dem wir die Ergebnisse gemeinsam durchgehen.",
+          },
+          {
+            title: "Direkt umsetzbar",
+            body: "Die Ergebnisse fließen in dein Training, deine Therapie oder deinen Plan ein.",
+          },
+        ]}
       />
 
       <Listing>
@@ -56,8 +72,8 @@ function Analysen() {
           index={1}
           {...contactFormLink("Analysen")}
           title="FMS-Bewegungs­screening"
-          image={athletiktraining}
-          imageAlt="FMS · Functional Movement Screen"
+          image={fms}
+          imageAlt="FMS · Functional Movement Screen mit Messstab"
         >
           <p>
             Der Functional Movement Screen (FMS) ist ein standardisiertes Screeningverfahren, das
@@ -78,7 +94,7 @@ function Analysen() {
           {...contactFormLink("Analysen")}
           title="Performance Screening"
           image={performanceScreening}
-          imageAlt="Performance Screening · sportartspezifische Testung"
+          imageAlt="Performance Screening · Y-Balance-Test mit Coach"
         >
           <p>
             Das Performance Screening ist eine Testbatterie, angepasst auf deine Sportart. Wir
@@ -103,7 +119,7 @@ function Analysen() {
           {...contactFormLink("Analysen")}
           title="Stoffwechsel­analyse"
           image={stoffwechsel}
-          imageAlt="Stoffwechselanalyse"
+          imageAlt="Stoffwechselanalyse: Messung des Ruheumsatzes mit Atemmaske"
         >
           <p>
             Abnehmen, Muskeln aufbauen, den Körper formen oder die Leistung steigern? Mit unseren
@@ -175,7 +191,7 @@ function Analysen() {
           {...contactFormLink("Analysen")}
           title="Gesundheits­coaching"
           image={gesundheitscoaching}
-          imageAlt="Gesundheitscoaching"
+          imageAlt="Gesundheitscoaching im Performance Club"
         >
           <p>
             Are you ready to upgrade yourself? Wir streben eine Steigerung deiner Energie,
@@ -188,24 +204,15 @@ function Analysen() {
         </ListingRow>
       </Listing>
 
-      <QuoteSlab
-        seamless
-        eyebrow="Kundenstimmen"
+      <StoriesSection
         title="Stimmen aus der Praxis"
-        quotes={[
-          {
-            quote:
-              "Julian setzt sich mit mir und meiner Krankheit auseinander und wendet speziell auf mich angepasste Trainingsmethoden an. Vielfältig und mit viel Spaß.",
-            name: "Ina Ludwig",
-            role: "Privatperson",
-          },
-          {
-            quote:
-              "Top motivierter Athletiktrainer mit ausgeprägtem Fachwissen. Athletisch wie konditionell konnte ich enorm zulegen.",
-            name: "Dario Clasadonte",
-            role: "Mittelfeld · FC St. Gallen",
-          },
-        ]}
+        names={["Ina Ludwig", "Dario Clasadonte", "Noah Bischof"]}
+      />
+
+      <ClosingCta
+        title="Welche Analyse passt zu dir?"
+        body="Schreib uns dein Ziel – wir empfehlen dir die passende Analyse und melden uns mit einem Termin."
+        topic="Analysen"
       />
     </PageShell>
   );
