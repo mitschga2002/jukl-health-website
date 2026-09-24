@@ -3,7 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
-import { ConnectedCards } from "./ConnectedCards";
+import { ClubCards } from "./ClubPage";
+import { clubs } from "@/lib/clubs";
 import { cn } from "@/lib/utils";
 import { SECTION_Y } from "./rhythm";
 import { NotchFrame } from "./NotchFrame";
@@ -202,45 +203,6 @@ export function SystemBlock() {
   );
 }
 
-const locations = [
-  {
-    name: "Performance Club Dornbirn",
-    area: "140 m²",
-    address: "Bildgasse 10, 3. Stock · A-6850 Dornbirn",
-    points: [
-      "Personal Training & Athletik",
-      "Kurse in Kleingruppen",
-      "Mobility · Movement · Strength · Burn",
-      "Nur mit Terminvereinbarung",
-    ],
-    to: "/performance-club",
-  },
-  {
-    name: "Strength Club Dornbirn",
-    area: "160 m²",
-    address: "Bildgasse 10, Erdgeschoss · A-6850 Dornbirn",
-    points: [
-      "24 h / 7 Tage Zugang",
-      "Max. 100 Mitglieder",
-      "1 Jahr Betreuungssystem",
-      "Exklusives Trainingsambiente",
-    ],
-    to: "/strength-club",
-  },
-  {
-    name: "Training Club Widnau (CH)",
-    area: "50 m²",
-    address: "Schützenstrasse 13 · CH-9443 Widnau",
-    points: [
-      "1:1 Personal Training",
-      "Trainingstherapie",
-      "Privates Ambiente",
-      "15 Jahre Erfahrung",
-    ],
-    to: "/training-club-widnau",
-  },
-] as const;
-
 export function LocationsBlock() {
   return (
     <section className="jh-container jh-gutter">
@@ -257,25 +219,19 @@ export function LocationsBlock() {
           </div>
         </div>
 
-        <ConnectedCards
-          items={locations.map((l) => ({
-            to: l.to,
-            title: l.name,
-            meta: l.area,
-            detail: l.address,
-            points: l.points,
-          }))}
-        />
+        <ClubCards items={clubs} />
       </div>
     </section>
   );
 }
 
-/** One photo per club, in the same order the Standorte cards list them. */
+/* Athletes at work, for the "Trainiere wie die Besten" claim. The clubs have
+   their own photos in the Standorte block right below, so they are not
+   repeated here. */
 const profisportSlides = [
-  { src: "/img/pc-hero-1386.webp", alt: "Trainingsfläche im Performance Club Dornbirn" },
-  { src: "/img/strength-club-1824.webp", alt: "Trainingsfläche im Strength Club Dornbirn" },
-  { src: "/img/widnau-club-1080.webp", alt: "Trainingsfläche im Training Club Widnau" },
+  { src: "/img/ath-testing-1600.webp", alt: "Athlet beim Y-Balance-Test im Performance Club" },
+  { src: "/img/tp-saison-1600.webp", alt: "Athlet beim Sprint auf der Trainingsfläche" },
+  { src: "/img/pc-agility-1600.webp", alt: "Koordinationstraining mit Coach" },
 ];
 
 const SLIDE_MS = 3200;
@@ -352,7 +308,7 @@ export function ProfisportBlock() {
             <div
               className="relative size-full bg-background"
               aria-roledescription="Karussell"
-              aria-label="Unsere Clubs"
+              aria-label="Athleten im Training"
             >
               {profisportSlides.map((s, i) => (
                 <SmartImage
