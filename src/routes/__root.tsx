@@ -13,6 +13,12 @@ import { PillAnchor, PillButton, PillLink } from "@/components/site/Pill";
    `server.build.inlineCss` in vite.config.ts ship it as an inline <style> in
    the SSR response instead of a render-blocking <link>. */
 import "../styles.css";
+/* The hashed URLs of the two font files the first paint needs. Imported rather
+   than hard-coded because the build fingerprints them; Vite emits one asset per
+   file, so these resolve to the very URLs the inlined @font-face rules point
+   at, and the preload is a hint for a request the browser makes anyway. */
+import interLatinUrl from "../assets/fonts/inter-200-700-latin.woff2?url";
+import interItalicLatinUrl from "../assets/fonts/inter-italic-700-latin.woff2?url";
 
 const LOCAL_BUSINESS_JSONLD = {
   "@context": "https://schema.org",
@@ -127,6 +133,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     links: [
+      /* Inter is discovered late without these. The stylesheet is inlined into
+         the SSR response, so the @font-face rules arrive with the document —
+         but a browser only fetches a face once it has laid out text that needs
+         it, which is after the whole body is parsed. That put both files a
+         round trip behind the document; Lighthouse measured the critical path
+         at 839 ms with the fonts as its tail. Preloading moves the request to
+         head-parse time, alongside the body download.
+
+         Only the latin subsets are hinted: the copy is German, which lives
+         entirely in U+0000-00FF, so the latin-ext files stay lazy and are
+         never fetched in practice. `crossOrigin` is required even though the
+         fonts are same-origin — fonts are always fetched in CORS mode, and a
+         preload whose mode does not match the real request is downloaded
+         twice.
+
+         These land ahead of the homepage's hero-image preload in the emitted
+         head no matter where they are written: React hoists font preloads
+         above image preloads by design. That is why the two files were
+         instanced down to the weights the site actually uses (see
+         assets/fonts/fonts.css) — at 107 KB together they now share the first
+         round trip with an LCP photo of about the same size instead of
+         crowding it out. */
+      {
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: interLatinUrl,
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: interItalicLatinUrl,
+        crossOrigin: "anonymous",
+      },
       { rel: "icon", type: "image/png", href: "/favicon-96x96.png", sizes: "96x96" },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "shortcut icon", href: "/favicon.ico" },
