@@ -22,9 +22,9 @@ const services = [
     body: "Klinische Physiotherapie: Ursache finden, gezielt behandeln, zurück in schmerzfreie Bewegung.",
     tags: ["Physiotherapie", "Diagnostik"],
     to: "/physiotherapie",
-    image: "/img/physiotherapie-1460.webp",
-    imageAlt: "Physiotherapeutische Behandlung bei JuklHealth",
-    imagePosition: "object-[center_30%]",
+    image: "/img/physio-behandlung-1600.webp",
+    imageAlt: "Physiotherapeut bei der Behandlung am Knie",
+    imagePosition: "object-[30%_center]",
   },
   {
     title: "Strength Club Abo",
