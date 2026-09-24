@@ -1034,5 +1034,115 @@
         "width": 1200
       }
     ]
+  },
+  "/img/tp-planung-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/tp-planung-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/tp-planung-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/tp-planung-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/tp-planung-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/tp-app-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/tp-app-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/tp-app-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/tp-app-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/tp-app-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/tp-saison-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/tp-saison-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/tp-saison-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/tp-saison-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/tp-saison-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/tp-wiedereinstieg-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/tp-wiedereinstieg-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/tp-wiedereinstieg-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/tp-wiedereinstieg-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/tp-wiedereinstieg-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/tp-coach-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/tp-coach-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/tp-coach-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/tp-coach-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/tp-coach-1600.webp",
+        "width": 1600
+      }
+    ]
   }
 }
