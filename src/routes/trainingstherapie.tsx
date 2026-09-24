@@ -1,4 +1,3 @@
-import { Gauge, Handshake, HeartPulse, TrendingUp } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
@@ -39,22 +38,18 @@ export const Route = createFileRoute("/trainingstherapie")({
 
 const pillars = [
   {
-    icon: HeartPulse,
     title: "Schmerzadaptiert",
     body: "Der Einstieg richtet sich nach deinen Beschwerden – nie gegen, immer mit deinem Körper.",
   },
   {
-    icon: TrendingUp,
     title: "Progressiv",
     body: "Belastung steigt nach dem Prinzip „Load to Tolerance“ – so viel, wie dein Gewebe gerade verträgt.",
   },
   {
-    icon: Gauge,
     title: "Messbar",
     body: "RPE, Tempo und Schmerzskala machen deinen Fortschritt sichtbar und steuern das Training.",
   },
   {
-    icon: Handshake,
     title: "Hand in Hand mit der Physio",
     body: "Enge Abstimmung mit Physiotherapie und Sportmedizin – ein Team, ein Plan.",
   },

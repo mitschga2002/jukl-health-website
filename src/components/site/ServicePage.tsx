@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowUpRight, type LucideIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Section, SECTION_Y } from "./content";
 import { Eyebrow, PillLink } from "./Pill";
 import { SmartImage } from "./SmartImage";
@@ -21,31 +21,32 @@ import { cn } from "@/lib/utils";
 const EASE_PREMIUM = "duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]";
 
 /**
- * Four short claims under the hero: scanned before booking, not read. Each
- * gets a line icon in a soft green disc above its title — no numbers (they
- * implied an order the claims do not have) and no rules between them.
- * A lighter top than the site rhythm: the claims read as the hero's footnote,
- * so they sit a little closer to it than one full gap (64px / 96px in all).
+ * The four claims under the hero, on a dark band: the hero is light type on a
+ * light page beside a photo, so the claims switch surface entirely instead of
+ * repeating that shape with a second headline. Four columns on desktop with
+ * hairlines only between them; stacked below lg with rules between rows.
  */
-export function Pillars({
-  items,
-}: {
-  items: readonly { icon: LucideIcon; title: string; body: string }[];
-}) {
+export function Pillars({ items }: { items: readonly { title: string; body: string }[] }) {
   return (
-    <section className="jh-container jh-gutter pb-10 pt-6 lg:pb-16 lg:pt-8">
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-        {items.map(({ icon: Icon, title, body }) => (
-          <div key={title} className="flex flex-col gap-4">
-            <span className="grid size-12 place-items-center rounded-full bg-primary/10 text-primary">
-              <Icon className="size-5" strokeWidth={1.75} aria-hidden />
-            </span>
-            <div className="flex flex-col gap-2">
-              <h2 className="font-display text-balance text-[22px] leading-[1.25] text-foreground">
-                {title}
-              </h2>
-              <p className="text-base font-light leading-[1.5] text-muted-foreground">{body}</p>
-            </div>
+    <section className={cn("jh-container jh-edge", "pb-10 pt-6 lg:pb-16 lg:pt-8")}>
+      <div className="grid grid-cols-1 divide-y divide-surface-foreground/15 rounded-card bg-surface px-6 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x lg:px-0">
+        {items.map((p, i) => (
+          <div
+            key={p.title}
+            className={cn(
+              "flex flex-col gap-2 py-6 sm:px-4 sm:py-8 lg:px-8 lg:py-10",
+              // Two across on a tablet: a rule between the rows and between
+              // the columns, drawn per cell since `divide` cannot do both.
+              i < 2 && "sm:border-b sm:border-surface-foreground/15 lg:border-b-0",
+              i % 2 === 0 && "sm:border-r sm:border-surface-foreground/15 lg:border-r-0",
+            )}
+          >
+            <h2 className="font-display text-[20px] leading-[1.25] text-surface-foreground lg:text-[22px]">
+              {p.title}
+            </h2>
+            <p className="text-sm font-light leading-[1.5] text-surface-foreground/70 lg:text-base">
+              {p.body}
+            </p>
           </div>
         ))}
       </div>
@@ -382,32 +383,79 @@ export function ClosingCta({
 }
 
 /**
- * Where the team has worked, as a quiet row of names. Text rather than club
- * crests: logos need each club's permission, a name only needs to be true.
+ * Stations as a timeline, oldest on the left. On desktop a soft wave runs
+ * behind the row — one smooth curve through a dot per station, alternating
+ * high and low — so the career reads as a path rather than four boxes in a
+ * line. It fades out at both ends and stays in the background: a hairline
+ * stroke at low opacity. Stacked below lg, where a wave has no width to swing
+ * in, it becomes a quiet vertical rail.
  */
-export function CredentialStrip({
+export function CareerTimeline({
   eyebrow,
   title,
   items,
 }: {
   eyebrow: string;
   title: string;
-  items: readonly { name: string; detail: string }[];
+  /** Oldest first. */
+  items: readonly { name: string; period: string; detail: string }[];
 }) {
+  // Dot heights on the 120-unit-tall wave; the path below passes through
+  // exactly these points at each column's centre.
+  const dotY = [30, 90, 30, 90];
   return (
     <Section eyebrow={eyebrow} title={title}>
-      <div className="grid grid-cols-1 border-t border-border sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((c) => (
-          <div
-            key={c.name}
-            className="flex flex-col gap-1.5 border-b border-border py-6 sm:pr-6 lg:border-b-0 lg:py-8"
-          >
-            <span className="font-display text-[26px] leading-[1.2] text-foreground lg:text-[30px]">
-              {c.name}
-            </span>
-            <span className="text-sm font-light text-muted-foreground">{c.detail}</span>
-          </div>
-        ))}
+      <div className="relative">
+        {/* The wave: stretched to the row's width (`preserveAspectRatio`),
+            with a non-scaling stroke so the hairline stays a hairline. */}
+        <svg
+          aria-hidden
+          viewBox="0 0 1000 120"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute inset-x-0 top-0 hidden h-[120px] w-full lg:block"
+        >
+          <defs>
+            <linearGradient id="career-wave" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" style={{ stopColor: "var(--primary)", stopOpacity: 0 }} />
+              <stop offset="0.12" style={{ stopColor: "var(--primary)", stopOpacity: 0.45 }} />
+              <stop offset="0.88" style={{ stopColor: "var(--primary)", stopOpacity: 0.45 }} />
+              <stop offset="1" style={{ stopColor: "var(--primary)", stopOpacity: 0 }} />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0 60 C60 40 90 30 125 30 C210 30 290 90 375 90 C460 90 540 30 625 30 C710 30 790 90 875 90 C920 90 960 75 1000 60"
+            fill="none"
+            stroke="url(#career-wave)"
+            strokeWidth="1.5"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+
+        <ol className="relative grid grid-cols-1 gap-8 border-l border-border pl-8 lg:grid-cols-4 lg:gap-6 lg:border-l-0 lg:pl-0">
+          {items.map((c, i) => (
+            <li key={c.name} className="relative flex flex-col lg:items-center lg:text-center">
+              {/* Desktop: the dot sits on the wave at this column's height. */}
+              <div className="relative hidden h-[120px] w-full lg:block" aria-hidden>
+                <span
+                  className="absolute left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary ring-4 ring-background"
+                  style={{ top: dotY[i % dotY.length] }}
+                />
+              </div>
+              {/* Stacked: the dot sits on the rail. */}
+              <span
+                aria-hidden
+                className="absolute -left-8 top-[0.4em] size-2.5 -translate-x-1/2 rounded-full bg-primary ring-4 ring-background lg:hidden"
+              />
+              <span className="text-sm text-primary">{c.period}</span>
+              <span className="font-display mt-1 text-[24px] leading-[1.2] text-foreground lg:text-[28px]">
+                {c.name}
+              </span>
+              <span className="mt-1.5 max-w-[240px] text-sm font-light text-muted-foreground">
+                {c.detail}
+              </span>
+            </li>
+          ))}
+        </ol>
       </div>
     </Section>
   );

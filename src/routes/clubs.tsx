@@ -1,4 +1,3 @@
-import { Dumbbell, MapPin, Network, Users } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -69,22 +68,18 @@ function Clubs() {
       <Pillars
         items={[
           {
-            icon: Network,
             title: "Ein System",
             body: "Gleiche Methoden, gleiche Standards – egal, in welchem Club du trainierst.",
           },
           {
-            icon: MapPin,
             title: "Zwei Länder",
             body: "Dornbirn in Vorarlberg und Widnau im St. Galler Rheintal.",
           },
           {
-            icon: Dumbbell,
             title: "Drei Charaktere",
             body: "Funktionell und betreut, 24/7 und exklusiv, oder ganz privat im 1:1.",
           },
           {
-            icon: Users,
             title: "Ein Team",
             body: "Unsere Coaches und Therapeuten kennen dich – an jedem Standort.",
           },

@@ -1,4 +1,3 @@
-import { FlaskConical, Focus, MapPin, TrendingUp } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
@@ -39,22 +38,18 @@ export const Route = createFileRoute("/personaltraining")({
 
 const pillars = [
   {
-    icon: Focus,
     title: "Volle Aufmerksamkeit",
     body: "Ein Coach, nur du – jede Wiederholung wird gesehen und korrigiert.",
   },
   {
-    icon: FlaskConical,
     title: "Wissenschaftlich fundiert",
     body: "Anamnese und Bewegungsanalyse zu Beginn, Training nach aktuellem Stand der Sportwissenschaft.",
   },
   {
-    icon: TrendingUp,
     title: "Messbare Fortschritte",
     body: "Jede Einheit wird geplant, ausgewertet und baut auf der letzten auf – Fortschritt, den du siehst.",
   },
   {
-    icon: MapPin,
     title: "Dornbirn & Widnau",
     body: "Personal Training an unseren Standorten in Vorarlberg und im St. Galler Rheintal.",
   },

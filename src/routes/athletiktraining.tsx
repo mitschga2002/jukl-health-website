@@ -1,11 +1,10 @@
-import { CalendarRange, Gauge, ShieldCheck, Trophy } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 import {
   ClosingCta,
-  CredentialStrip,
+  CareerTimeline,
   ExpertGrid,
   OfferCards,
   Pillars,
@@ -40,32 +39,32 @@ export const Route = createFileRoute("/athletiktraining")({
 
 const pillars = [
   {
-    icon: Trophy,
     title: "Know-how aus dem Profifußball",
     body: "Erfahrung aus Bundesliga, Super League und Nachwuchsleistungszentrum – für jedes Leistungsniveau.",
   },
   {
-    icon: CalendarRange,
     title: "Periodisiert",
     body: "Vorbereitung, Übergangsphase oder laufende Saison: Das Training folgt deinem Kalender.",
   },
   {
-    icon: ShieldCheck,
     title: "Verletzungsprävention",
     body: "Stabilität, Belastbarkeit und saubere Bewegungsmuster senken das Verletzungsrisiko.",
   },
   {
-    icon: Gauge,
     title: "Messbar",
     body: "Screenings zu Beginn und im Verlauf zeigen, wo du stehst und was sich verbessert.",
   },
 ];
 
 const clubs = [
-  { name: "FC St. Gallen", detail: "Leitung Athletik Nachwuchs · Mitarbeit Super League" },
-  { name: "SCR Altach", detail: "Athletiktraining · 1. Bundesliga" },
-  { name: "FC Dornbirn", detail: "Athletiktraining · 2. Liga" },
-  { name: "Hella DSV", detail: "Athletiktraining · Vorarlbergliga" },
+  { name: "Hella DSV", period: "2019", detail: "Athletiktraining · Vorarlbergliga" },
+  { name: "FC Dornbirn", period: "2019–2021", detail: "Athletiktraining · 2. Liga" },
+  { name: "SCR Altach", period: "2021–2023", detail: "Athletiktraining · 1. Bundesliga" },
+  {
+    name: "FC St. Gallen",
+    period: "2023–2026",
+    detail: "Leitung Athletik Nachwuchs · Mitarbeit Super League",
+  },
 ];
 
 const audiences: OfferCard[] = [
@@ -125,7 +124,7 @@ function Athletik() {
 
       <Pillars items={pillars} />
 
-      <CredentialStrip eyebrow="ERFAHRUNG" title="Hier haben wir gearbeitet" items={clubs} />
+      <CareerTimeline eyebrow="ERFAHRUNG" title="Hier haben wir gearbeitet" items={clubs} />
 
       <OfferCards
         eyebrow="FÜR WEN"

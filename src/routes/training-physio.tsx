@@ -1,4 +1,3 @@
-import { FlaskConical, Medal, Network, Users } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -33,22 +32,18 @@ export const Route = createFileRoute("/training-physio")({
 
 const pillars = [
   {
-    icon: Network,
     title: "Ein System",
     body: "Training, Therapie und Analyse greifen ineinander – statt nebeneinander herzulaufen.",
   },
   {
-    icon: Users,
     title: "Ein Team",
     body: "Sportwissenschaft und Physiotherapie unter einem Dach, eng abgestimmt auf dich.",
   },
   {
-    icon: FlaskConical,
     title: "Evidenzbasiert",
     body: "Methoden nach aktuellem Stand der Wissenschaft – und Fortschritt, der messbar ist.",
   },
   {
-    icon: Medal,
     title: "Vom Alltag bis zum Profisport",
     body: "Ob schmerzfrei durch den Tag oder bereit für die nächste Saison – wir holen dich ab.",
   },

@@ -1,4 +1,3 @@
-import { Activity, FlaskConical, Handshake, Trophy } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
@@ -39,22 +38,18 @@ export const Route = createFileRoute("/physiotherapie")({
 
 const pillars = [
   {
-    icon: Trophy,
     title: "Know-how aus dem Profisport",
     body: "Wir betreuen Profis und Vereine – dieselben Standards gelten für jeden, der zu uns kommt.",
   },
   {
-    icon: FlaskConical,
     title: "Evidenzbasiert",
     body: "Diagnostik und Therapie nach aktuellem Stand der Wissenschaft, messbar statt nach Gefühl.",
   },
   {
-    icon: Activity,
     title: "Aktive Therapie",
     body: "Manuelle Techniken, wo sie helfen – im Zentrum steht, was du selbst an Belastbarkeit aufbaust.",
   },
   {
-    icon: Handshake,
     title: "Physio & Training aus einer Hand",
     body: "Therapie, Trainingstherapie und Athletik greifen nahtlos ineinander – ein System, ein Team.",
   },

@@ -7,7 +7,7 @@ import {
   StatRow,
   TopicCards,
 } from "@/components/site/content";
-import { ClosingCta, CredentialStrip } from "@/components/site/ServicePage";
+import { CareerTimeline, ClosingCta } from "@/components/site/ServicePage";
 import { cn } from "@/lib/utils";
 import { SmartImage } from "@/components/site/SmartImage";
 import { Eyebrow } from "@/components/site/Pill";
@@ -137,14 +137,18 @@ function MeinePerson() {
         ]}
       />
 
-      <CredentialStrip
+      <CareerTimeline
         eyebrow="PROFISPORT"
         title="Stationen als Athletiktrainer"
         items={[
-          { name: "FC St. Gallen", detail: "Leitung Athletik Nachwuchs · Mitarbeit Super League" },
-          { name: "SCR Altach", detail: "Athletiktraining · 1. Bundesliga" },
-          { name: "FC Dornbirn", detail: "Athletiktraining · 2. Liga" },
-          { name: "Hella DSV", detail: "Athletiktraining · Vorarlbergliga" },
+          { name: "Hella DSV", period: "2019", detail: "Athletiktraining · Vorarlbergliga" },
+          { name: "FC Dornbirn", period: "2019–2021", detail: "Athletiktraining · 2. Liga" },
+          { name: "SCR Altach", period: "2021–2023", detail: "Athletiktraining · 1. Bundesliga" },
+          {
+            name: "FC St. Gallen",
+            period: "2023–2026",
+            detail: "Leitung Athletik Nachwuchs · Mitarbeit Super League",
+          },
         ]}
       />
 
