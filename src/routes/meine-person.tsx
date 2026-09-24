@@ -3,12 +3,15 @@ import {
   PageShell,
   PageHero,
   Section,
-  BulletList,
-  SplitBlock,
   CTAButton,
   StatRow,
+  TopicCards,
 } from "@/components/site/content";
+import { ClosingCta, CredentialStrip } from "@/components/site/ServicePage";
 import { cn } from "@/lib/utils";
+import { SmartImage } from "@/components/site/SmartImage";
+import { Eyebrow } from "@/components/site/Pill";
+import { SECTION_Y } from "@/components/site/rhythm";
 
 const banner = "/img/meine-person-banner-1920.webp";
 const julianPortrait = "/img/julian-portrait-1460.webp";
@@ -73,7 +76,7 @@ const stationen = [
 
 function MeinePerson() {
   return (
-    <PageShell>
+    <PageShell seamlessFooter>
       <PageHero
         eyebrow="MEINE PERSON"
         title="Über Julian Kleinheinz"
@@ -82,24 +85,48 @@ function MeinePerson() {
         objectPosition="30% 50%"
       />
 
-      <Section eyebrow="PHILOSOPHIE" title="Stetiger Lern- und Verbesserungsprozess">
-        <p>
-          Ich habe den Drang jeden Tag etwas Neues zu lernen. Dadurch bin ich in einem stetigen
-          Lern- und Verbesserungsprozess und immer dabei, mein Wissen und meinen Körper auf eine
-          andere, unbekannte Art zu fordern und weiterzuentwickeln.
-        </p>
-        <p>
-          Meine Philosophie besteht darin, in jeder Disziplin etwas zu lernen und Bewegungsabläufe
-          sowie motorische Grundeigenschaften auf eine selbstentwickelte Art erfolgreich zu schulen.
-          So erreichen Büroathleten und Athleten mit meinem Fachwissen, Enthusiasmus und der
-          richtigen Motivation ihre Ziele.
-        </p>
-        <p>
-          Es gibt mir sehr viel Energie, den Prozess zu begleiten und die Weiterentwicklung und
-          Fortschritte zu sehen, die uns Step by Step den Zielen näher bringen.
-        </p>
-        <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
-      </Section>
+      {/* The philosophy beside his portrait: it is written in the first
+          person, so it reads as him speaking rather than as page copy. */}
+      <section className="jh-container jh-gutter">
+        <div className={cn("grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16", SECTION_Y)}>
+          <div className="relative aspect-[4/5] overflow-hidden rounded-card bg-muted lg:col-span-5">
+            <SmartImage
+              src={julianPortrait}
+              alt="Julian Kleinheinz"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="absolute inset-0 size-full object-cover object-top"
+            />
+          </div>
+          <div className="flex flex-col justify-center gap-6 lg:col-span-7">
+            <div className="flex flex-col gap-3">
+              <Eyebrow>PHILOSOPHIE</Eyebrow>
+              <h2 className="font-display text-balance text-[32px] leading-[1.25] lg:text-[42px]">
+                Stetiger Lern- und Verbesserungsprozess
+              </h2>
+            </div>
+            <div className="space-y-4 text-base font-light leading-[1.6] text-muted-foreground lg:text-lg">
+              <p>
+                Ich habe den Drang jeden Tag etwas Neues zu lernen. Dadurch bin ich in einem
+                stetigen Lern- und Verbesserungsprozess und immer dabei, mein Wissen und meinen
+                Körper auf eine andere, unbekannte Art zu fordern und weiterzuentwickeln.
+              </p>
+              <p>
+                Meine Philosophie besteht darin, in jeder Disziplin etwas zu lernen und
+                Bewegungsabläufe sowie motorische Grundeigenschaften auf eine selbstentwickelte Art
+                erfolgreich zu schulen. So erreichen Büroathleten und Athleten mit meinem
+                Fachwissen, Enthusiasmus und der richtigen Motivation ihre Ziele.
+              </p>
+              <p>
+                Es gibt mir sehr viel Energie, den Prozess zu begleiten und die Weiterentwicklung
+                und Fortschritte zu sehen, die uns Step by Step den Zielen näher bringen.
+              </p>
+            </div>
+            <div className="flex pt-2">
+              <CTAButton to="/kontakt">Termin vereinbaren</CTAButton>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <StatRow
         items={[
@@ -110,24 +137,53 @@ function MeinePerson() {
         ]}
       />
 
-      <SplitBlock
-        eyebrow="STATIONEN"
-        title="Lebenslauf"
-        imageLabel="Portrait · Julian Kleinheinz"
-        image={julianPortrait}
-      >
-        <p>
-          Über 15 Jahre Praxis in Spitzensport, Athletik, Physiotherapie-Schnittstelle und
-          Gesundheitscoaching — auf höchstem Niveau und im Alltag von Büroathleten.
-        </p>
-      </SplitBlock>
+      <CredentialStrip
+        eyebrow="PROFISPORT"
+        title="Stationen als Athletiktrainer"
+        items={[
+          { name: "FC St. Gallen", detail: "Leitung Athletik Nachwuchs · Mitarbeit Super League" },
+          { name: "SCR Altach", detail: "Athletiktraining · 1. Bundesliga" },
+          { name: "FC Dornbirn", detail: "Athletiktraining · 2. Liga" },
+          { name: "Hella DSV", detail: "Athletiktraining · Vorarlbergliga" },
+        ]}
+      />
+
+      {/* Qualifications on the dark slab sit between the two light modules,
+          not at the end, where they would run straight into the dark closing
+          CTA. */}
+      <Section alt eyebrow="QUALIFIKATIONEN" title="Ausbildung & Zertifikate">
+        <TopicCards
+          alt
+          items={[
+            {
+              eyebrow: "Studium",
+              title: "Sportwissenschaft",
+              points: ["Sportwissenschaftler (BSc, Universität Innsbruck)"],
+            },
+            {
+              eyebrow: "Zertifikate",
+              title: "Screening & Therapie",
+              points: [
+                "FMSpro Experte · Functional Movement Screen",
+                "Os Coach — Ortho & Sport",
+                "Five Rücken- und Gelenks-Konzept Master",
+              ],
+            },
+            {
+              eyebrow: "Autor",
+              title: "Upgrade Yourself",
+              points: ["Buch „Upgrade Yourself“ mit Dailymed"],
+            },
+          ]}
+        />
+      </Section>
 
       <Section eyebrow="LEBEN" title="Werdegang">
         {/* 22 bordered rows read as a wall, and the hairline between every one
             of them is the divider the rest of the site never draws. A rail
             instead: one line down the page, a marker per year, and the years
             themselves in display type doing the structuring. */}
-        <ol className="relative flex flex-col gap-8 pl-8 lg:gap-10 lg:pl-0 mb-12 lg:mb-16">
+        <ol className="relative flex flex-col gap-8 pl-8 lg:gap-10 lg:pl-0">
           {stationen.map(([year, entries], i) => (
             <li
               key={year}
@@ -177,17 +233,13 @@ function MeinePerson() {
             </li>
           ))}
         </ol>
-        <BulletList
-          title="Qualifikationen"
-          items={[
-            "Sportwissenschaftler (BSc, Universität Innsbruck)",
-            "FMSpro Experte · Functional Movement Screen",
-            "Os Coach — Ortho & Sport",
-            "Five Rücken- und Gelenks-Konzept Master",
-            "Autor „Upgrade Yourself“ (Dailymed)",
-          ]}
-        />
       </Section>
+
+      <ClosingCta
+        title="Lass uns sprechen."
+        body="Ob Training, Athletik oder ein Vortrag für dein Team – schreib mir, und wir finden gemeinsam den richtigen Weg."
+        topic="Allgemeine Anfrage"
+      />
     </PageShell>
   );
 }

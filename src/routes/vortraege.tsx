@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
+import { Lightbulb, MapPin, Rocket, Sparkles } from "lucide-react";
 import { PageShell, PageHero, Section, TopicCards, SECTION_Y } from "@/components/site/content";
+import { ClosingCta, Pillars } from "@/components/site/ServicePage";
 import { Eyebrow, PillLink } from "@/components/site/Pill";
 import { cn } from "@/lib/utils";
 
@@ -62,13 +64,38 @@ const jahre = Object.entries(
 
 function Vortraege() {
   return (
-    <PageShell>
+    <PageShell seamlessFooter>
       <PageHero
         eyebrow="KEYNOTES & WORKSHOPS"
         title="Are you ready to upgrade yourself?"
         intro="Wir bringen Wissenschaft in deinen Alltag — praxisnah, motivierend und sofort umsetzbar."
         image={banner}
         objectPosition="50% 40%"
+      />
+
+      <Pillars
+        items={[
+          {
+            icon: Lightbulb,
+            title: "Wissenschaftlich fundiert",
+            body: "Aktuelle Erkenntnisse aus Sportwissenschaft und Gesundheit – verständlich aufbereitet.",
+          },
+          {
+            icon: Rocket,
+            title: "Sofort umsetzbar",
+            body: "Konkrete Routinen und Tools, die dein Team am nächsten Tag anwenden kann.",
+          },
+          {
+            icon: Sparkles,
+            title: "Motivierend",
+            body: "Mit Energie und Praxisbeispielen aus dem Profisport – kein trockener Frontalvortrag.",
+          },
+          {
+            icon: MapPin,
+            title: "On-Site oder Online",
+            body: "Keynote, Impuls, Lunch & Learn oder Webinar-Reihe – bei euch vor Ort oder digital.",
+          },
+        ]}
       />
 
       {/* The homepage's dark slab: the two audiences are the page's core claim,
@@ -165,6 +192,13 @@ function Vortraege() {
           ))}
         </div>
       </Section>
+
+      <ClosingCta
+        title="Ein Vortrag für dein Team?"
+        body="Schreib uns Thema, Zielgruppe und Wunschtermin – wir melden uns mit einem Vorschlag für Format und Inhalt."
+        topic="Vorträge & Workshops"
+        label="Anfrage senden"
+      />
     </PageShell>
   );
 }

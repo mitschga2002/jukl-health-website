@@ -1,14 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { contactFormLink } from "@/lib/contact-topics";
-import {
-  PageShell,
-  PageHero,
-  Section,
-  CTAButton,
-  ImagePlaceholder,
-  SECTION_Y,
-} from "@/components/site/content";
+import { PageShell, PageHero, ImagePlaceholder, SECTION_Y } from "@/components/site/content";
 import { Eyebrow, PillAnchor, PillLink } from "@/components/site/Pill";
+import { ClosingCta } from "@/components/site/ServicePage";
+import { ClubGallery } from "@/components/site/ClubPage";
 import { cn } from "@/lib/utils";
 import { members, type Member } from "@/lib/team";
 
@@ -82,9 +76,9 @@ function MemberBlock({ m }: { m: Member }) {
 
 function Team() {
   return (
-    <PageShell>
+    <PageShell seamlessFooter>
       <PageHero
-        eyebrow="Unsere Vision"
+        eyebrow="UNSERE VISION"
         title="Unser Team – Experten für Performance & Gesundheit"
         intro="Freude verspüren und Lebensqualität steigern. Das ist unser Antrieb, als Team aus Sportwissenschaft, Physiotherapie, Coaching und Marketing."
         image={teamBanner}
@@ -96,13 +90,24 @@ function Team() {
         <MemberBlock key={m.slug} m={m} />
       ))}
 
-      <Section eyebrow="Karriere" title="Werde Teil des Teams.">
-        <p>
-          Du brennst für Bewegung, Sportwissenschaft oder Physiotherapie? Schreib uns – wir freuen
-          uns über initiative Bewerbungen.
-        </p>
-        <CTAButton {...contactFormLink("Bewerbung")}>Bewerben</CTAButton>
-      </Section>
+      <ClubGallery
+        eyebrow="EINBLICKE"
+        title="Das Team in Aktion"
+        images={[
+          { src: "/img/team-coach-1600.webp", alt: "Coach im Gespräch auf der Trainingsfläche" },
+          { src: "/img/team-rope-1600.webp", alt: "Coach beim Training mit dem Schlingentrainer" },
+          { src: "/img/team-bike-1600.webp", alt: "Coach auf dem Bike vor der Kletterwand" },
+          { src: "/img/team-window-1600.webp", alt: "Coach am Fenster mit Blick über Dornbirn" },
+          { src: "/img/team-rings-1600.webp", alt: "Coach sichert eine Übung an den Ringen" },
+        ]}
+      />
+
+      <ClosingCta
+        title="Werde Teil des Teams."
+        body="Du brennst für Bewegung, Sportwissenschaft oder Physiotherapie? Schreib uns – wir freuen uns über initiative Bewerbungen."
+        topic="Bewerbung"
+        label="Bewerben"
+      />
     </PageShell>
   );
 }
