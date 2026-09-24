@@ -19,11 +19,11 @@ const sitemap = [
     links: [
       { to: "/training-physio", label: "Übersicht" },
       { to: "/personaltraining", label: "Personal Training" },
-      { to: "/gruppentraining", label: "Gruppentraining" },
+      { to: "/physiotherapie", label: "Physiotherapie" },
       { to: "/athletiktraining", label: "Athletiktraining" },
       { to: "/trainingsplanung", label: "Trainingsplanung" },
-      { to: "/physiotherapie", label: "Physiotherapie" },
       { to: "/trainingstherapie", label: "Trainingstherapie" },
+      { to: "/gruppentraining", label: "Gruppentraining" },
     ],
   },
   {
