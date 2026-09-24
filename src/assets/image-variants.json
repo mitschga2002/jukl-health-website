@@ -910,5 +910,129 @@
         "width": 1200
       }
     ]
+  },
+  "/img/gt-partner-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/gt-partner-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/gt-partner-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/gt-partner-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/gt-partner-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/gt-firma-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/gt-firma-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/gt-firma-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/gt-firma-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/gt-firma-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/gt-drills-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/gt-drills-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/gt-drills-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/gt-drills-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/gt-drills-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/ath-einzel-1200.webp": {
+    "width": 1200,
+    "height": 1799,
+    "variants": [
+      {
+        "url": "/img/ath-einzel-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/ath-einzel-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/ath-einzel-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "/img/ath-testing-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/ath-testing-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/ath-testing-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/ath-testing-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/ath-testing-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/ath-screening-1200.webp": {
+    "width": 1200,
+    "height": 1799,
+    "variants": [
+      {
+        "url": "/img/ath-screening-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/ath-screening-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/ath-screening-1200.webp",
+        "width": 1200
+      }
+    ]
   }
 }

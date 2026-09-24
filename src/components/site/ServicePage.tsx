@@ -19,10 +19,12 @@ import { cn } from "@/lib/utils";
 
 const EASE_PREMIUM = "duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]";
 
-/** Four short claims under the hero: scanned before booking, not read. */
+/** Four short claims under the hero: scanned before booking, not read.
+ *  Carries its own bottom padding like every light module, so a dark slab
+ *  directly below it does not butt up against the text. */
 export function Pillars({ items }: { items: readonly { title: string; body: string }[] }) {
   return (
-    <section className="jh-container jh-gutter">
+    <section className="jh-container jh-gutter pb-10 lg:pb-16">
       <div className="grid grid-cols-1 gap-8 border-t border-border pt-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
         {items.map((p, i) => (
           <div key={p.title} className="flex flex-col gap-3">
@@ -441,6 +443,100 @@ export function ClosingCta({
       }
     >
       <p className="max-w-[640px]">{body}</p>
+    </Section>
+  );
+}
+
+/**
+ * Where the team has worked, as a quiet row of names. Text rather than club
+ * crests: logos need each club's permission, a name only needs to be true.
+ */
+export function CredentialStrip({
+  eyebrow,
+  title,
+  items,
+}: {
+  eyebrow: string;
+  title: string;
+  items: readonly { name: string; detail: string }[];
+}) {
+  return (
+    <Section eyebrow={eyebrow} title={title}>
+      <div className="grid grid-cols-1 border-t border-border sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((c) => (
+          <div
+            key={c.name}
+            className="flex flex-col gap-1.5 border-b border-border py-6 sm:pr-6 lg:border-b-0 lg:py-8"
+          >
+            <span className="font-display text-[26px] leading-[1.2] text-foreground lg:text-[30px]">
+              {c.name}
+            </span>
+            <span className="text-sm font-light text-muted-foreground">{c.detail}</span>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/**
+ * Fixed classes a visitor signs up for, on the dark slab: four across on
+ * desktop, the name set large because it is what people recognise from the
+ * schedule. Each card leads to the same enquiry form, on the class's topic.
+ */
+export function CourseGrid({
+  eyebrow,
+  title,
+  intro,
+  topic,
+  items,
+}: {
+  eyebrow: string;
+  title: string;
+  intro?: string;
+  topic: ContactTopic;
+  items: readonly { name: string; body: string; tags: readonly string[] }[];
+}) {
+  return (
+    <Section
+      alt
+      eyebrow={eyebrow}
+      title={title}
+      action={
+        <PillLink {...contactFormLink(topic)} variant="outlineOnDark">
+          Zum Kurs anmelden
+        </PillLink>
+      }
+    >
+      {intro ? <p className="max-w-[640px]">{intro}</p> : null}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        {items.map((c, i) => (
+          <div
+            key={c.name}
+            className="relative flex flex-col gap-5 overflow-hidden rounded-card bg-surface-elevated p-6 lg:p-8"
+          >
+            <span className="font-display text-[20px] leading-none text-primary">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h3 className="font-display text-[34px] font-bold uppercase leading-none tracking-tight text-surface-foreground lg:text-[38px]">
+              {c.name}
+            </h3>
+            <p className="text-base font-light leading-[1.5] text-surface-foreground/80">
+              {c.body}
+            </p>
+            <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+              {c.tags.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-image bg-surface-foreground/10 p-2 text-xs font-light uppercase leading-[1.25] text-surface-foreground/90"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </Section>
   );
 }
