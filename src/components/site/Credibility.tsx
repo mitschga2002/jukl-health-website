@@ -50,8 +50,8 @@ export function Credibility() {
             <div className="flex flex-col gap-4 text-base leading-[1.45] text-surface-foreground/80">
               <p>
                 Geleitet von Experten aus den Bereichen Sportwissenschaft und Physiotherapie, bietet
-                der JuklHealth Performance Club eine ruhige, klinische Umgebung für nachhaltige
-                Entwicklung.
+                das JuklHealth System an jedem Standort eine ruhige, klinische Umgebung für
+                nachhaltige Entwicklung.
               </p>
               <p>
                 Wir arbeiten mit evidenzbasierten Methoden und modernem Equipment, um Ihre Ziele

@@ -21,11 +21,13 @@ import { Route as MeinePersonRouteImport } from './routes/meine-person'
 import { Route as PerformanceClubRouteImport } from './routes/performance-club'
 import { Route as PersonaltrainingRouteImport } from './routes/personaltraining'
 import { Route as PhysiotherapieRouteImport } from './routes/physiotherapie'
+import { Route as ReferenzenRouteImport } from './routes/referenzen'
 import { Route as StartRouteImport } from './routes/start'
 import { Route as StrengthClubRouteImport } from './routes/strength-club'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as TrainingClubWidnauRouteImport } from './routes/training-club-widnau'
 import { Route as TrainingPhysioRouteImport } from './routes/training-physio'
+import { Route as TrainingsplanungRouteImport } from './routes/trainingsplanung'
 import { Route as TrainingstherapieRouteImport } from './routes/trainingstherapie'
 import { Route as VortraegeRouteImport } from './routes/vortraege'
 
@@ -89,6 +91,11 @@ const PhysiotherapieRoute = PhysiotherapieRouteImport.update({
   path: '/physiotherapie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReferenzenRoute = ReferenzenRouteImport.update({
+  id: '/referenzen',
+  path: '/referenzen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StartRoute = StartRouteImport.update({
   id: '/start',
   path: '/start',
@@ -112,6 +119,11 @@ const TrainingClubWidnauRoute = TrainingClubWidnauRouteImport.update({
 const TrainingPhysioRoute = TrainingPhysioRouteImport.update({
   id: '/training-physio',
   path: '/training-physio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrainingsplanungRoute = TrainingsplanungRouteImport.update({
+  id: '/trainingsplanung',
+  path: '/trainingsplanung',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrainingstherapieRoute = TrainingstherapieRouteImport.update({
@@ -138,11 +150,13 @@ export interface FileRoutesByFullPath {
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
+  '/referenzen': typeof ReferenzenRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
   '/team': typeof TeamRoute
   '/training-club-widnau': typeof TrainingClubWidnauRoute
   '/training-physio': typeof TrainingPhysioRoute
+  '/trainingsplanung': typeof TrainingsplanungRoute
   '/trainingstherapie': typeof TrainingstherapieRoute
   '/vortraege': typeof VortraegeRoute
 }
@@ -159,11 +173,13 @@ export interface FileRoutesByTo {
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
+  '/referenzen': typeof ReferenzenRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
   '/team': typeof TeamRoute
   '/training-club-widnau': typeof TrainingClubWidnauRoute
   '/training-physio': typeof TrainingPhysioRoute
+  '/trainingsplanung': typeof TrainingsplanungRoute
   '/trainingstherapie': typeof TrainingstherapieRoute
   '/vortraege': typeof VortraegeRoute
 }
@@ -181,11 +197,13 @@ export interface FileRoutesById {
   '/performance-club': typeof PerformanceClubRoute
   '/personaltraining': typeof PersonaltrainingRoute
   '/physiotherapie': typeof PhysiotherapieRoute
+  '/referenzen': typeof ReferenzenRoute
   '/start': typeof StartRoute
   '/strength-club': typeof StrengthClubRoute
   '/team': typeof TeamRoute
   '/training-club-widnau': typeof TrainingClubWidnauRoute
   '/training-physio': typeof TrainingPhysioRoute
+  '/trainingsplanung': typeof TrainingsplanungRoute
   '/trainingstherapie': typeof TrainingstherapieRoute
   '/vortraege': typeof VortraegeRoute
 }
@@ -204,11 +222,13 @@ export interface FileRouteTypes {
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
+    | '/referenzen'
     | '/start'
     | '/strength-club'
     | '/team'
     | '/training-club-widnau'
     | '/training-physio'
+    | '/trainingsplanung'
     | '/trainingstherapie'
     | '/vortraege'
   fileRoutesByTo: FileRoutesByTo
@@ -225,11 +245,13 @@ export interface FileRouteTypes {
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
+    | '/referenzen'
     | '/start'
     | '/strength-club'
     | '/team'
     | '/training-club-widnau'
     | '/training-physio'
+    | '/trainingsplanung'
     | '/trainingstherapie'
     | '/vortraege'
   id:
@@ -246,11 +268,13 @@ export interface FileRouteTypes {
     | '/performance-club'
     | '/personaltraining'
     | '/physiotherapie'
+    | '/referenzen'
     | '/start'
     | '/strength-club'
     | '/team'
     | '/training-club-widnau'
     | '/training-physio'
+    | '/trainingsplanung'
     | '/trainingstherapie'
     | '/vortraege'
   fileRoutesById: FileRoutesById
@@ -268,11 +292,13 @@ export interface RootRouteChildren {
   PerformanceClubRoute: typeof PerformanceClubRoute
   PersonaltrainingRoute: typeof PersonaltrainingRoute
   PhysiotherapieRoute: typeof PhysiotherapieRoute
+  ReferenzenRoute: typeof ReferenzenRoute
   StartRoute: typeof StartRoute
   StrengthClubRoute: typeof StrengthClubRoute
   TeamRoute: typeof TeamRoute
   TrainingClubWidnauRoute: typeof TrainingClubWidnauRoute
   TrainingPhysioRoute: typeof TrainingPhysioRoute
+  TrainingsplanungRoute: typeof TrainingsplanungRoute
   TrainingstherapieRoute: typeof TrainingstherapieRoute
   VortraegeRoute: typeof VortraegeRoute
 }
@@ -363,6 +389,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhysiotherapieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/referenzen': {
+      id: '/referenzen'
+      path: '/referenzen'
+      fullPath: '/referenzen'
+      preLoaderRoute: typeof ReferenzenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/start': {
       id: '/start'
       path: '/start'
@@ -398,6 +431,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainingPhysioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/trainingsplanung': {
+      id: '/trainingsplanung'
+      path: '/trainingsplanung'
+      fullPath: '/trainingsplanung'
+      preLoaderRoute: typeof TrainingsplanungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/trainingstherapie': {
       id: '/trainingstherapie'
       path: '/trainingstherapie'
@@ -428,11 +468,13 @@ const rootRouteChildren: RootRouteChildren = {
   PerformanceClubRoute: PerformanceClubRoute,
   PersonaltrainingRoute: PersonaltrainingRoute,
   PhysiotherapieRoute: PhysiotherapieRoute,
+  ReferenzenRoute: ReferenzenRoute,
   StartRoute: StartRoute,
   StrengthClubRoute: StrengthClubRoute,
   TeamRoute: TeamRoute,
   TrainingClubWidnauRoute: TrainingClubWidnauRoute,
   TrainingPhysioRoute: TrainingPhysioRoute,
+  TrainingsplanungRoute: TrainingsplanungRoute,
   TrainingstherapieRoute: TrainingstherapieRoute,
   VortraegeRoute: VortraegeRoute,
 }

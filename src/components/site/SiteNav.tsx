@@ -8,9 +8,11 @@ import logoBlack from "@/assets/jukl-wordmark-black-384.webp";
 import { PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
 
-const mainLinks = [
+const mainLinks = [{ to: "/referenzen", label: "Referenzen" }] as const;
+
+const aboutLinks = [
   { to: "/team", label: "Team" },
-  { to: "/meine-person", label: "Über Uns" },
+  { to: "/meine-person", label: "Julian Kleinheinz" },
   { to: "/vortraege", label: "Vorträge" },
 ] as const;
 
@@ -26,6 +28,7 @@ const trainingLinks = [
   { to: "/personaltraining", label: "Personal Training" },
   { to: "/gruppentraining", label: "Gruppentraining" },
   { to: "/athletiktraining", label: "Athletiktraining" },
+  { to: "/trainingsplanung", label: "Trainingsplanung" },
   { to: "/physiotherapie", label: "Physiotherapie" },
   { to: "/trainingstherapie", label: "Trainingstherapie" },
 ] as const;
@@ -34,6 +37,7 @@ const trainingLinks = [
 const analysenLinks = [
   { to: "/analysen", label: "Übersicht" },
   { to: "/analysen", hash: "fms", label: "Bewegungsanalyse" },
+  { to: "/analysen", hash: "performance-screening", label: "Performance Screening" },
   { to: "/analysen", hash: "stoffwechsel", label: "Stoffwechselanalyse" },
   { to: "/analysen", hash: "leistung", label: "Leistungsanalyse" },
   { to: "/analysen", hash: "physio", label: "Physioanalyse" },
@@ -264,6 +268,7 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
                   {l.label}
                 </Link>
               ))}
+              <Dropdown label="Über uns" items={aboutLinks} />
             </div>
 
             <div className="flex shrink-0 items-center gap-2">
@@ -325,6 +330,9 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
                     </li>
                   ))}
                 </ul>
+              </div>
+              <div className="border-t border-border pt-6">
+                <MobileGroup label="Über uns" items={aboutLinks} onNavigate={close} />
               </div>
 
               <PillLink to="/kontakt" className="w-full" onClick={close}>

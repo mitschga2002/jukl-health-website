@@ -14,43 +14,16 @@ const services = [
     tags: ["1 : 1", "Personal Training", "Athletik"],
     to: "/personaltraining",
     image: "/img/training-banner-1588.webp",
-    imageAlt: "Personal Training mit Battle Ropes im Performance Club",
+    imageAlt: "Personal Training mit Battle Ropes bei JuklHealth",
     imagePosition: "object-[center_15%]",
   },
   {
-    title: "Gruppen­training",
-    body: "Strukturierte Kleingruppen mit individueller Korrektur und konsequenter Intensität.",
-    tags: ["Kleingruppe", "Functional"],
-    to: "/gruppentraining",
-    image: "/img/gruppentraining-1032.webp",
-    imageAlt: "Gruppentraining im JuklHealth Performance Club",
-    imagePosition: "object-[center_45%]",
-  },
-  {
-    title: "Individuelle Trainings­planung",
-    body: "Evidenzbasierte, strukturierte Programmierungen, die exakt zu deinem Status quo passen.",
-    tags: ["Programming", "Periodisierung"],
-    to: "/athletiktraining",
-    image: "/img/gesundheitscoaching-1400.webp",
-    imageAlt: "Trainingsplanung am Tablet gemeinsam mit dem Athleten",
-    imagePosition: "object-[center_20%]",
-  },
-  {
-    title: "Rehabili­tation & Verletzungs­prävention",
-    body: "Klinische Physiotherapie und Trainingstherapie zur sicheren Rückkehr und Prävention.",
-    tags: ["Physiotherapie", "Therapie"],
+    title: "Physio­therapie",
+    body: "Klinische Physiotherapie: Ursache finden, gezielt behandeln, zurück in schmerzfreie Bewegung.",
+    tags: ["Physiotherapie", "Diagnostik"],
     to: "/physiotherapie",
-    image: "/img/analysen-hero-1446.webp",
-    imageAlt: "Bewegungsanalyse zur Verletzungsprävention",
-    imagePosition: "object-[center_20%]",
-  },
-  {
-    title: "Mikronährstoff- & Körper­analysen",
-    body: "Datengestützte Leistungs-, Stoffwechsel- und Bewegungsanalysen als objektiver Status quo.",
-    tags: ["Leistung", "Stoffwechsel"],
-    to: "/analysen",
-    image: "/img/leistungsanalyse-1217.webp",
-    imageAlt: "Leistungsdiagnostik mit Atemmaske auf dem Ergometer",
+    image: "/img/physiotherapie-1460.webp",
+    imageAlt: "Physiotherapeutische Behandlung bei JuklHealth",
     imagePosition: "object-[center_30%]",
   },
   {
@@ -60,6 +33,42 @@ const services = [
     to: "/strength-club",
     image: "/img/strength-club-1824.webp",
     imageAlt: "Trainingsfläche im Strength Club Dornbirn",
+  },
+  {
+    title: "Rehabili­tation & Verletzungs­prävention",
+    body: "Trainingstherapie als aktives Aufbautraining – für die sichere Rückkehr und nachhaltige Prävention.",
+    tags: ["Trainingstherapie", "Prävention"],
+    to: "/trainingstherapie",
+    image: "/img/analysen-hero-1446.webp",
+    imageAlt: "Bewegungsanalyse zur Verletzungsprävention",
+    imagePosition: "object-[center_20%]",
+  },
+  {
+    title: "Individuelle Trainings­planung & Periodisierung",
+    body: "Evidenzbasierte, strukturierte Programmierungen, die exakt zu deinem Status quo passen.",
+    tags: ["Programming", "Periodisierung"],
+    to: "/trainingsplanung",
+    image: "/img/gesundheitscoaching-1400.webp",
+    imageAlt: "Trainingsplanung am Tablet gemeinsam mit dem Athleten",
+    imagePosition: "object-[center_20%]",
+  },
+  {
+    title: "Körper- & Leistungs­analysen",
+    body: "Datengestützte Leistungs-, Stoffwechsel- und Bewegungsanalysen als objektiver Status quo.",
+    tags: ["Stoffwechsel", "Screening", "Gesundheitscoaching"],
+    to: "/analysen",
+    image: "/img/leistungsanalyse-1217.webp",
+    imageAlt: "Leistungsdiagnostik mit Atemmaske auf dem Ergometer",
+    imagePosition: "object-[center_30%]",
+  },
+  {
+    title: "Gruppen­training",
+    body: "Strukturierte Kleingruppen mit individueller Korrektur und konsequenter Intensität.",
+    tags: ["Kleingruppe", "Functional"],
+    to: "/gruppentraining",
+    image: "/img/gruppentraining-1032.webp",
+    imageAlt: "Gruppentraining bei JuklHealth",
+    imagePosition: "object-[center_45%]",
   },
 ] as const;
 
@@ -162,22 +171,22 @@ function ServiceRow({ service, index }: { service: (typeof services)[number]; in
   );
 }
 
-export function PerformanceClubBlock() {
+export function SystemBlock() {
   return (
     <section className="jh-container jh-edge">
       <div className="flex flex-col gap-10 rounded-card bg-surface px-4 py-16 lg:gap-16 lg:px-8 lg:py-24">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-8">
           <div className="flex flex-col gap-3 lg:w-[1088px] lg:max-w-[65%]">
-            <Eyebrow className="text-surface-muted-foreground">Performance Club</Eyebrow>
+            <Eyebrow className="text-surface-muted-foreground">JuklHealth System</Eyebrow>
             <h2 className="font-display text-[28px] leading-[1.25] text-surface-foreground lg:text-[42px]">
-              Willkommen im JuklHealth Performance Club in Dornbirn. Funktionelles Training,
-              erstklassige Physiotherapie und interdisziplinäre Expertise aus Sportwissenschaft und
-              Therapie.
+              Ein Trainingssystem, mehrere Standorte. Funktionelles Training, erstklassige
+              Physiotherapie und interdisziplinäre Expertise aus Sportwissenschaft und Therapie – in
+              Dornbirn und Widnau.
             </h2>
           </div>
           <div className="flex flex-1 justify-start lg:justify-end">
-            <PillLink to="/performance-club" variant="outlineOnDark">
-              Mehr erfahren
+            <PillLink to="/training-physio" variant="outlineOnDark">
+              Angebot entdecken
             </PillLink>
           </div>
         </div>

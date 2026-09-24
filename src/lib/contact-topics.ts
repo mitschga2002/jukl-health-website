@@ -6,6 +6,7 @@ export const CONTACT_TOPICS = [
   "Allgemeine Anfrage",
   "Personal Training",
   "Athletiktraining",
+  "Trainingsplanung",
   "Gruppentraining",
   "Physiotherapie",
   "Trainingstherapie",

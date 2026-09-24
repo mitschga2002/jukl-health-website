@@ -153,6 +153,14 @@
     font-size: 16px;
   }
 
+  /* Tailwind v4 dropped the pointer from buttons; every button here is a
+     control (carousel arrows, filters, nav dropdowns), so it comes back
+     site-wide rather than button by button. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

@@ -107,8 +107,8 @@ export function Hero() {
 
           <p className="max-w-[570px] text-base font-light leading-[1.45] text-background/90">
             Das JuklHealth System verbindet klinische Physiotherapie mit individuell abgestimmtem
-            Training – in einem ruhigen, exklusiven Setting in Dornbirn. Plus Trainingsmöglichkeiten
-            24/7, Leistungs- und Bewegungsanalyse.
+            Training – ein Trainingssystem, mehrere Standorte in Dornbirn und Widnau. Plus
+            Trainingsmöglichkeiten 24/7, Leistungs- und Bewegungsanalyse.
           </p>
 
           <div className="flex flex-wrap items-stretch gap-4">

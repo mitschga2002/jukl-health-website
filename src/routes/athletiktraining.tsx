@@ -9,7 +9,7 @@ const mannschaftMobility = "/img/angebot-1508.webp";
 export const Route = createFileRoute("/athletiktraining")({
   head: () => ({
     meta: [
-      { title: "Athletiktraining Dornbirn – JuklHealth" },
+      { title: "Athletiktraining – JuklHealth" },
       {
         name: "description",
         content:

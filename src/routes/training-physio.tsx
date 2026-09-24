@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero, Section, BulletList } from "@/components/site/content";
+import { PillLink } from "@/components/site/Pill";
 import { ConnectedCards } from "@/components/site/ConnectedCards";
 
 export const Route = createFileRoute("/training-physio")({
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/training-physio")({
       {
         name: "description",
         content:
-          "Personal Training, Gruppen-, Athletiktraining, Physiotherapie und Trainingstherapie: alle Leistungen im Überblick.",
+          "Personal Training, Gruppen-, Athletiktraining, Trainingsplanung, Physiotherapie und Trainingstherapie: alle Leistungen im Überblick.",
       },
       { property: "og:title", content: "Training & Physio – JuklHealth" },
       {
@@ -43,15 +44,21 @@ const services = [
     desc: "Periodisierte Athletik für Mannschaften.",
   },
   {
+    to: "/trainingsplanung",
+    label: "Trainingsplanung",
+    num: "04",
+    desc: "Individuell periodisiert, exakt auf dich abgestimmt.",
+  },
+  {
     to: "/physiotherapie",
     label: "Physiotherapie",
-    num: "04",
+    num: "05",
     desc: "Ursache finden, schmerzfrei werden.",
   },
   {
     to: "/trainingstherapie",
     label: "Trainingstherapie",
-    num: "05",
+    num: "06",
     desc: "Aktives Aufbautraining nach Verletzungen.",
   },
 ] as const;
@@ -65,18 +72,16 @@ function TrainingPhysio() {
         intro="Von der Diagnose bis zur Performance: ein durchgängiges System aus Trainingswissenschaft und klinischer Physiotherapie."
       />
 
-      <Section eyebrow="ÜBERSICHT" title="Alle Trainingsformate">
+      {/* Six formats fill both rows of the three-column slab on their own, so
+          the "Nicht das Richtige dabei?" card that used to close the second row
+          moves up beside the heading as a pill. */}
+      <Section
+        eyebrow="ÜBERSICHT"
+        title="Alle Trainingsformate"
+        action={<PillLink to="/kontakt">Erstgespräch vereinbaren</PillLink>}
+      >
         <ConnectedCards
-          items={[
-            ...services.map((svc) => ({ to: svc.to, title: svc.label, body: svc.desc })),
-            // Closes the second row, so the slab never ends on an empty cell.
-            {
-              to: "/kontakt",
-              title: "Nicht das Richtige dabei?",
-              body: "Schreib uns – wir stellen dir ein individuelles Erstgespräch zusammen.",
-              action: "Erstgespräch vereinbaren",
-            },
-          ]}
+          items={services.map((svc) => ({ to: svc.to, title: svc.label, body: svc.desc }))}
         />
       </Section>
 

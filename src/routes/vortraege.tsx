@@ -147,7 +147,7 @@ function Vortraege() {
         </div>
       </section>
 
-      <Section eyebrow="REFERENZEN" title="Bisherige Auftritte">
+      <Section eyebrow="AUFTRITTE" title="Ein Ausschnitt aus vielen Auftritten">
         {/* Grouped by year and flowed into columns: 22 bordered rows made a
             wall, and the year repeated on most of them. */}
         <div className="columns-1 gap-8 sm:columns-2 lg:columns-3">

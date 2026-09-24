@@ -1,8 +1,8 @@
-# JuklHealth Performance Club
+# JuklHealth Clubs
 
-> Performance Training, Athletik Coaching und klinische Physiotherapie in Dornbirn – wissenschaftlich fundiert, individuell betreut, mit messbaren Resultaten.
+> Performance Training, Athletik Coaching und klinische Physiotherapie – ein Trainingssystem, mehrere Standorte in Dornbirn (AT) und Widnau (CH). Wissenschaftlich fundiert, individuell betreut, mit messbaren Resultaten.
 
-JuklHealth Performance Club ist ein Trainings- und Gesundheitsstudio in Dornbirn (Vorarlberg). Das Team aus Sportwissenschaft, Physiotherapie und Coaching betreut Freizeit- und Profisportler:innen sowie Menschen mit gesundheitlichen Zielen. Standorte: Performance Club Dornbirn, Strength Club und Training Club Widnau.
+JuklHealth ist ein Trainings- und Gesundheitssystem mit mehreren Clubs in Dornbirn (Vorarlberg, AT) und Widnau (St. Gallen, CH). Alle Standorte arbeiten nach demselben JuklHealth System. Das Team aus Sportwissenschaft, Physiotherapie und Coaching betreut Freizeit- und Profisportler:innen sowie Menschen mit gesundheitlichen Zielen. Standorte: Performance Club Dornbirn, Strength Club Dornbirn und Training Club Widnau.
 
 ## Pages
 
@@ -15,9 +15,11 @@ JuklHealth Performance Club ist ein Trainings- und Gesundheitsstudio in Dornbirn
 - [Personal Training](/personaltraining): 1:1 Betreuung.
 - [Gruppentraining](/gruppentraining): Training in kleinen Gruppen.
 - [Athletiktraining](/athletiktraining): Leistungs- und Vereinssport.
+- [Trainingsplanung](/trainingsplanung): Individuelle Trainingsplanung & Periodisierung.
 - [Physiotherapie](/physiotherapie): Klinische Physiotherapie.
 - [Trainingstherapie](/trainingstherapie): Rehabilitation durch Training.
-- [Analysen](/analysen): Diagnostik und Analysen – Bewegung, Stoffwechsel, Leistung, Physio, Gesundheitscoaching.
+- [Analysen](/analysen): Diagnostik und Analysen – Bewegung, Performance Screening (sportartspezifisch), Stoffwechsel, Leistung, Physio, Gesundheitscoaching.
+- [Referenzen](/referenzen): Was unsere Klienten sagen – Stimmen aus Profisport, Freizeitsport und Gesundheit.
 - [Team](/team): Unser Team aus Sportwissenschaft und Physiotherapie.
 - [Meine Person](/meine-person): Über Julian Kleinheinz, Gründer.
 - [Vorträge](/vortraege): Vorträge und Webinare.

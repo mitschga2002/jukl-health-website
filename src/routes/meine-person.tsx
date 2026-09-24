@@ -105,7 +105,7 @@ function MeinePerson() {
         items={[
           { value: "15+", label: "Jahre Erfahrung" },
           { value: "1.Liga", label: "Athletiktrainer Erfahrung" },
-          { value: "3", label: "Clubs Vorarlberg / Widnau" },
+          { value: "3", label: "Clubs, ein System" },
           { value: "∞", label: "Disziplinen" },
         ]}
       />
