@@ -1228,5 +1228,93 @@
         "width": 1600
       }
     ]
+  },
+  "/img/pc-coaching-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/pc-coaching-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pc-coaching-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pc-coaching-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pc-coaching-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/pc-ball-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/pc-ball-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pc-ball-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pc-ball-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pc-ball-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/pc-agility-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/pc-agility-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pc-agility-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pc-agility-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pc-agility-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/pc-koordination-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/pc-koordination-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/pc-koordination-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/pc-koordination-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/pc-koordination-1600.webp",
+        "width": 1600
+      }
+    ]
   }
 }

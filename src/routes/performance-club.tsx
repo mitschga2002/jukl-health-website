@@ -1,10 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { contactFormLink } from "@/lib/contact-topics";
-import { PageShell, PageHero, Section, BulletList, QuoteSlab } from "@/components/site/content";
+import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
-import { LocationMap } from "@/components/site/LocationMap";
+import {
+  ClosingCta,
+  OfferCards,
+  StoriesSection,
+  type OfferCard,
+} from "@/components/site/ServicePage";
+import { ClubGallery, ClubLocation } from "@/components/site/ClubPage";
 
-const pcBanner = "/img/pc-banner-1386.webp";
+const heroImg = "/img/pc-banner-1386.webp";
 
 export const Route = createFileRoute("/performance-club")({
   head: () => ({
@@ -27,92 +33,104 @@ export const Route = createFileRoute("/performance-club")({
   component: PerformanceClub,
 });
 
+const offers: OfferCard[] = [
+  {
+    title: "Personal Training",
+    body: "1:1 mit voller Aufmerksamkeit – von der Bewegungsanalyse bis zum messbaren Fortschritt.",
+    image: "/img/pt-coaching-1600.webp",
+    imageAlt: "Coach korrigiert eine Kundin bei einer Ausfallschritt-Übung",
+    link: { to: "/personaltraining" },
+  },
+  {
+    title: "Gruppenkurse",
+    body: "HYROX, Mobility, Strength und Burn in Kleingruppen – oder eure eigene Gruppe.",
+    image: "/img/gruppentraining-1032.webp",
+    imageAlt: "Gruppentraining mit Gymnastikbällen im Performance Club",
+    link: { to: "/gruppentraining" },
+  },
+  {
+    title: "Physio & Therapie",
+    body: "Physiotherapie und Trainingstherapie unter einem Dach mit deinem Training.",
+    image: "/img/physio-behandlung-1600.webp",
+    imageAlt: "Physiotherapeut bei der Behandlung am Knie",
+    imagePosition: "object-[30%_center]",
+    link: { to: "/physiotherapie" },
+  },
+];
+
 function PerformanceClub() {
   return (
     <PageShell seamlessFooter>
       <PageHero
         eyebrow="PERFORMANCE CLUB"
-        title="Dein Zentrum für funktionelles Training"
-        intro="Performance Club Dornbirn — 140 m² Trainingsfläche, top ausgebildete Coaches, klare Trainingsstruktur."
-        image={pcBanner}
+        title="Dein Zentrum für funktionelles Training."
+        intro="140 m² Trainingsfläche mitten in Dornbirn, top ausgebildete Coaches und eine klare Trainingsstruktur – hier treffen Personal Training, Kleingruppenkurse, Athletik und Physio aufeinander."
+        image={heroImg}
+        imageAlt="Trainingsfläche im Performance Club Dornbirn"
+        facts={[
+          { label: "Fläche", value: "140 m²" },
+          { label: "Lage", value: "Bildgasse 10, 3. Stock" },
+          { label: "Training", value: "1:1 & Kleingruppen" },
+          { label: "Zugang", value: "Mit Termin" },
+        ]}
       />
 
-      <Section
-        alt
+      <ClubGallery
+        eyebrow="EINBLICKE"
+        title="So trainierst du im Performance Club"
+        images={[
+          {
+            src: "/img/pc-coaching-1600.webp",
+            alt: "Coach erklärt einem Kunden eine Übung vor der Performance-Club-Wand",
+          },
+          { src: "/img/pc-ball-1600.webp", alt: "Kundin bei einer Übung mit Medizinball" },
+          { src: "/img/pc-agility-1600.webp", alt: "Koordinationstraining mit Coach" },
+          {
+            src: "/img/pc-koordination-1600.webp",
+            alt: "Koordinationsleiter auf der Trainingsfläche",
+          },
+          { src: "/img/gt-drills-1600.webp", alt: "Laufübung auf dem Kunstrasen" },
+        ]}
+      />
+
+      <OfferCards
         eyebrow="ANGEBOT"
-        title="Personal Training, Athletik & Kurse"
+        title="Was du hier trainieren kannst"
         action={
-          <PillLink {...contactFormLink("Performance Club")} variant="outlineOnDark">
+          <PillLink {...contactFormLink("Performance Club")} variant="outlineOnLight">
             Termin vereinbaren
           </PillLink>
         }
-      >
-        <p>
-          Im Performance Club trainierst du in einer modernen Umgebung mit persönlicher Betreuung.
-          Unser Angebot reicht von Personal Training über Gruppen- und Athletiktraining bis hin zu
-          betreuten Kleingruppenkursen.
-        </p>
-        <BulletList
-          alt
-          items={[
-            "Personal Training & Athletik",
-            "Kurse in Kleingruppen",
-            "Mobility · Movement · Strength · Burn",
-          ]}
-        />
-      </Section>
+        items={offers}
+      />
 
-      <Section eyebrow="STANDORT" title="Bildgasse 10 · 3. Stock · A-6850 Dornbirn">
-        {/* The address is the section heading, so the map belongs beside the
-            practical notes rather than under them. */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-16">
-          <BulletList
-            title="Gut zu wissen"
-            items={[
-              "140 m² Trainingsfläche",
-              "Wenn möglich bitte die Treppe benutzen",
-              "Umkleiden & Duschen im 2. Stock",
-              "Toiletten im 3. Stock",
-              "Training nur mit Terminvereinbarung",
-            ]}
-          />
-          <LocationMap
-            name="Performance Club Dornbirn"
-            lines={["Bildgasse 10, 3. Stock", "A-6850 Dornbirn"]}
-            lat={47.4151713}
-            lon={9.7330917}
-            destination="Bildgasse 10, 6850 Dornbirn, Österreich"
-          />
-        </div>
-      </Section>
-
-      {/* The one module the other two clubs have no counterpart for: these
-          testimonials exist for this club only, and repeating the same three
-          quotes on all three pages would be worse than the asymmetry. */}
-      <QuoteSlab
-        seamless
-        eyebrow="Kundenstimmen"
-        title="Was unsere Members sagen"
-        quotes={[
-          {
-            quote:
-              "Ich genieße das professionelle Training in der Gruppe. Mir gefällt die ganzheitliche Art — die gute Betreuung sorgt dafür, dass ich die Übungen richtig mache.",
-            name: "Alexander Konzett",
-            role: "Privatperson",
-          },
-          {
-            quote:
-              "Nach jahrelangen Rückenschmerzen war ich nach wenigen Trainingseinheiten schmerzfrei. Julian hat ein unglaubliches Gespür für den Körper. Best Trainer ever!",
-            name: "Selina Madlener",
-            role: "Privatperson",
-          },
-          {
-            quote:
-              "Durch das maßgeschneiderte Training mit den vielen Inputs hat sich meine Lebensqualität nachhaltig verbessert. Viel mehr als ein Coach.",
-            name: "Angelina Natter",
-            role: "Privatperson",
-          },
+      <ClubLocation
+        title="Bildgasse 10 · 3. Stock · A-6850 Dornbirn"
+        notes={[
+          "140 m² Trainingsfläche",
+          "Wenn möglich bitte die Treppe benutzen",
+          "Umkleiden & Duschen im 2. Stock",
+          "Toiletten im 3. Stock",
+          "Training nur mit Terminvereinbarung",
         ]}
+        map={{
+          name: "Performance Club Dornbirn",
+          lines: ["Bildgasse 10, 3. Stock", "A-6850 Dornbirn"],
+          lat: 47.4151713,
+          lon: 9.7330917,
+          destination: "Bildgasse 10, 6850 Dornbirn, Österreich",
+        }}
+      />
+
+      <StoriesSection
+        title="Was unsere Kunden sagen"
+        names={["Alexander Konzett", "Selina Madlener", "Angelina Natter"]}
+      />
+
+      <ClosingCta
+        title="Komm vorbei."
+        body="Schreib uns, was du vorhast – wir melden uns mit einem Termin für dein erstes Training im Performance Club."
+        topic="Performance Club"
       />
     </PageShell>
   );
