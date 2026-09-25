@@ -41,7 +41,16 @@ export function Hero() {
           box first: desktop, then everything that is not an upright phone
           (tablets below `lg`, and anything in landscape), then the upright
           phone as the fallback on the `<img>` itself. See `heroImage.ts` for
-          why one crop cannot serve all three. */}
+          why one crop cannot serve all three.
+
+          Below `lg` the photo is anchored to its top edge. Between an upright
+          phone and a tablet (roughly 480–767px wide) the hero box is wider
+          than the phone crop's 0.52 ratio, so the photo is scaled to the
+          width and overflows vertically; centred, that overflow is trimmed
+          off the top too and takes the heads with it. Anchored at the top,
+          only the floor at the bottom is lost. Where the box is narrower than
+          the crop the vertical position has no effect, so phones are
+          unchanged. */}
       <picture>
         <source
           media={DESKTOP_MEDIA}
@@ -75,7 +84,7 @@ export function Hero() {
           alt="Trainer und Athletin beim Training im JuklHealth Performance Club"
           width={HERO[HERO_PHONE].width}
           height={HERO[HERO_PHONE].height}
-          className="absolute inset-x-0 -top-10 h-[calc(100%+2.5rem)] w-full object-cover lg:top-0 lg:h-full"
+          className="absolute inset-x-0 -top-10 h-[calc(100%+2.5rem)] w-full object-cover object-top lg:top-0 lg:object-center lg:h-full"
           loading="eager"
           fetchPriority="high"
           decoding="sync"
