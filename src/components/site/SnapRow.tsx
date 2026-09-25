@@ -78,7 +78,7 @@ export function SnapRow({
           <div
             key={it.key}
             className={cn(
-              "flex min-w-0 shrink-0 basis-[95%] snap-start flex-col sm:basis-[44%]",
+              "flex min-w-0 shrink-0 basis-[95%] snap-start flex-col sm:basis-[60%]",
               carousel ? "lg:basis-[calc((100%-40px)/3)]" : "lg:basis-auto",
             )}
           >
