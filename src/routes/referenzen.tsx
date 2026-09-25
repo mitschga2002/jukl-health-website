@@ -72,7 +72,7 @@ function Referenzen() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-            <LeadCard />
+            {!filter && <LeadCard />}
             {visible.map((story) => (
               <StoryCard key={story.name} story={story} />
             ))}
