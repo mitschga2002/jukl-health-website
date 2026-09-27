@@ -136,6 +136,18 @@ function Kontakt() {
             onSubmit={onSubmit}
             className="scroll-mt-24 space-y-5 rounded-card bg-surface-elevated p-6 md:order-2 lg:p-8"
           >
+            {/* Most enquiries used to arrive by plain e-mail, without the
+                topic or a phone number. This line says the form is the
+                direct way in, before the first field. */}
+            <div className="flex flex-col gap-1.5">
+              <p className="font-display text-[22px] leading-[1.25] text-surface-foreground lg:text-[26px]">
+                Schreib uns direkt hier.
+              </p>
+              <p className="text-sm font-light leading-[1.5] text-surface-foreground/70">
+                Füll einfach das Formular aus – deine Nachricht kommt direkt bei uns an und wir
+                melden uns persönlich bei dir.
+              </p>
+            </div>
             <Field id="topic" label="Anliegen" required>
               {/* A native `<select>` draws its chevron against the right edge
                   of the border box, where the field's `px-4` never reaches it:
@@ -262,19 +274,6 @@ function Kontakt() {
           </form>
 
           <div className="flex flex-col gap-10 md:order-1">
-            <div className="flex flex-col gap-2">
-              <Eyebrow className="text-xs text-surface-muted-foreground">E-Mail</Eyebrow>
-              {SITE.emails.all.map((email) => (
-                <a
-                  key={email}
-                  href={`mailto:${email}`}
-                  className="font-display w-fit break-all text-2xl text-surface-foreground transition-colors duration-300 ease-out hover:text-primary lg:text-3xl"
-                >
-                  {email}
-                </a>
-              ))}
-            </div>
-
             <div className="flex flex-col gap-3">
               <Eyebrow className="text-xs text-surface-muted-foreground">Standorte</Eyebrow>
               <ul className="flex flex-col gap-3">
@@ -305,6 +304,21 @@ function Kontakt() {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              {/* Kept, but quiet: the form is the way we want enquiries to
+                  come in, so the addresses no longer compete with it. */}
+              <Eyebrow className="text-xs text-surface-muted-foreground">Oder per E-Mail</Eyebrow>
+              {SITE.emails.all.map((email) => (
+                <a
+                  key={email}
+                  href={`mailto:${email}`}
+                  className="w-fit break-all text-base font-light text-surface-foreground/70 transition-colors duration-300 ease-out hover:text-primary"
+                >
+                  {email}
+                </a>
+              ))}
             </div>
 
             <div className="flex flex-col gap-2">
