@@ -9,6 +9,7 @@ import {
   OfferCards,
   ProcessSplit,
   StoriesSection,
+  type Course,
   type OfferCard,
 } from "@/components/site/ServicePage";
 
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/gruppentraining")({
       {
         name: "description",
         content:
-          "Gruppenkurse in Kleingruppen – HYROX, Mobility, Strength und Burn – sowie Gruppentraining für Freunde, Firmenteams und Mannschaften. Individuelle Korrektur nach dem JuklHealth System.",
+          "Gruppenkurse in Kleingruppen – Krafttraining für Frauen, Highrocks, Burn, Mobility und Strength – sowie Gruppentraining für Freunde, Firmenteams und Mannschaften. Individuelle Korrektur nach dem JuklHealth System.",
       },
       { property: "og:title", content: "Gruppentraining – JuklHealth" },
       {
@@ -36,28 +37,44 @@ export const Route = createFileRoute("/gruppentraining")({
   component: Gruppentraining,
 });
 
-const courses = [
+/* The weekly course plan, in the order the courses run. */
+const courses: Course[] = [
   {
-    name: "HYROX",
+    name: "Krafttraining für Frauen",
+    day: "Montag",
+    time: "17:00",
+    body: "Kraft gezielt aufbauen – in einer Gruppe nur für Frauen, mit sauberer Technik und individueller Korrektur.",
+    tags: ["Kraft", "Frauen"],
+  },
+  {
+    name: "Highrocks",
+    day: "Montag",
+    time: "18:00",
     body: "Laufen trifft funktionelle Stationen – gezielte Vorbereitung auf das Fitness-Rennformat.",
-    tags: ["Ausdauer", "Functional"],
-  },
-  {
-    name: "Mobility",
-    body: "Beweglichkeit und Gelenkkontrolle verbessern – für einen schmerzfreien Alltag und besseres Training.",
-    tags: ["Beweglichkeit", "Prävention"],
-  },
-  {
-    name: "Strength",
-    body: "Kraft mit sauberer Technik aufbauen – strukturiert, progressiv und individuell korrigiert.",
-    tags: ["Kraft", "Technik"],
+    tags: ["Kraftausdauer", "Functional"],
   },
   {
     name: "Burn",
+    day: "Montag",
+    time: "19:00",
     body: "Intensives Ganzkörpertraining, das Kondition und Energie auf ein neues Level bringt.",
-    tags: ["Kondition", "Intensität"],
+    tags: ["Kraftausdauer", "Intensität"],
   },
-] as const;
+  {
+    name: "Mobility",
+    day: "Mittwoch",
+    time: "18:00",
+    body: "Haltungstraining, das Verspannungen löst und die Beweglichkeit verbessert – für einen schmerzfreien Alltag und besseres Training.",
+    tags: ["Haltung", "Beweglichkeit"],
+  },
+  {
+    name: "Strength",
+    day: "Mittwoch",
+    time: "19:00",
+    body: "Kraft mit sauberer Technik aufbauen – strukturiert, progressiv und individuell korrigiert.",
+    tags: ["Kraft", "Technik"],
+  },
+];
 
 const formats: OfferCard[] = [
   {

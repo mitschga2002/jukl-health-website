@@ -432,6 +432,16 @@ export function CareerTimeline({
  * desktop, the name set large because it is what people recognise from the
  * schedule. Each card leads to the same enquiry form, on the class's topic.
  */
+/** A weekly group course. `day` is the weekday it runs ("Montag"), `time`
+ *  its start ("17:00"). */
+export type Course = {
+  name: string;
+  day: string;
+  time: string;
+  body: string;
+  tags: readonly string[];
+};
+
 export function CourseGrid({
   eyebrow,
   title,
@@ -443,8 +453,11 @@ export function CourseGrid({
   title: string;
   intro?: string;
   topic: ContactTopic;
-  items: readonly { name: string; body: string; tags: readonly string[] }[];
+  items: readonly Course[];
 }) {
+  // One row per weekday, in the order the days first appear in `items`.
+  const days = [...new Set(items.map((c) => c.day))];
+
   return (
     <Section
       alt
@@ -457,30 +470,41 @@ export function CourseGrid({
       }
     >
       {intro ? <p className="max-w-[640px]">{intro}</p> : null}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-        {items.map((c, i) => (
-          <div
-            key={c.name}
-            className="relative flex flex-col gap-5 overflow-hidden rounded-card bg-surface-elevated p-6 lg:p-8"
-          >
-            <span className="font-display text-[20px] leading-none text-primary">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3 className="font-display text-[34px] font-bold uppercase leading-none tracking-tight text-surface-foreground lg:text-[38px]">
-              {c.name}
+      <div className="flex flex-col gap-10 lg:gap-12">
+        {days.map((day) => (
+          <div key={day} className="flex flex-col gap-4 lg:gap-5">
+            <h3 className="font-display text-[24px] leading-none text-surface-foreground lg:text-[28px]">
+              {day}
             </h3>
-            <p className="text-base font-light leading-[1.5] text-surface-foreground/80">
-              {c.body}
-            </p>
-            <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
-              {c.tags.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-image bg-surface-foreground/10 p-2 text-xs font-light uppercase leading-[1.25] text-surface-foreground/90"
-                >
-                  {t}
-                </span>
-              ))}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+              {items
+                .filter((c) => c.day === day)
+                .map((c) => (
+                  <div
+                    key={c.name}
+                    className="relative flex flex-col gap-5 overflow-hidden rounded-card bg-surface-elevated p-6 lg:p-8"
+                  >
+                    <span className="font-display text-[20px] leading-none text-primary">
+                      <time>{c.time}</time> Uhr
+                    </span>
+                    <h4 className="font-display text-[30px] font-bold uppercase leading-none tracking-tight text-surface-foreground lg:text-[34px]">
+                      {c.name}
+                    </h4>
+                    <p className="text-base font-light leading-[1.5] text-surface-foreground/80">
+                      {c.body}
+                    </p>
+                    <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+                      {c.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="rounded-image bg-surface-foreground/10 p-2 text-xs font-light uppercase leading-[1.25] text-surface-foreground/90"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
         ))}
