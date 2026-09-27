@@ -124,7 +124,7 @@ function PerformanceClub() {
 
       <StoriesSection
         title="Was unsere Kunden sagen"
-        names={["Alexander Konzett", "Jayden Makwaya", "Dr. Martin von Sontagh"]}
+        names={["Alexander Konzett", "Jayden Makwaya", "Selina Madlener"]}
       />
 
       <ClosingCta

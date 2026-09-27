@@ -105,7 +105,7 @@ function Widnau() {
 
       <StoriesSection
         title="Was unsere Kunden sagen"
-        names={["Urs Bühler", "Dario Clasadonte", "Sandro Wolfinger"]}
+        names={["Urs Bühler", "Dario Clasadonte", "Alexander Konzett"]}
       />
 
       <ClosingCta

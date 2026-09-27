@@ -181,8 +181,8 @@ export function StoryCard({ story }: { story: Story }) {
   );
 }
 
-/** How many stories the homepage teaser shows: the first ones in `stories`,
- *  which lead with the strongest photos. The rest are one click away. */
+/** How many stories the homepage teaser shows: the first ones with a photo
+ *  in `stories`, which lead with the strongest. The rest are one click away. */
 const TEASER_COUNT = 6;
 
 /**
@@ -211,10 +211,13 @@ export function ReferencesTeaser() {
           carousel
           tone="light"
           label="Referenz"
-          items={stories.slice(0, TEASER_COUNT).map((story) => ({
-            key: story.name,
-            node: <StoryCard story={story} />,
-          }))}
+          items={stories
+            .filter((story) => story.image)
+            .slice(0, TEASER_COUNT)
+            .map((story) => ({
+              key: story.name,
+              node: <StoryCard story={story} />,
+            }))}
         />
       </div>
     </section>
