@@ -118,7 +118,7 @@ function Trainingsplanung() {
 
       <StoriesSection
         title="Was unsere Kunden sagen"
-        names={["Sebastian Santin", "Angelina Natter", "Dario Clasadonte"]}
+        names={["Noah Bischof", "Tom Zimmerschied", "Sebastian Santin"]}
       />
 
       <ClosingCta

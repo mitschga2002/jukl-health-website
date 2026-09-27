@@ -185,7 +185,7 @@ function Analysen() {
 
       <StoriesSection
         title="Stimmen aus der Praxis"
-        names={["Ina Ludwig", "Dario Clasadonte", "Noah Bischof"]}
+        names={["Jayden Makwaya", "Ina Ludwig", "Dario Clasadonte"]}
       />
 
       <ClosingCta

@@ -181,6 +181,10 @@ export function StoryCard({ story }: { story: Story }) {
   );
 }
 
+/** How many stories the homepage teaser shows: the first ones in `stories`,
+ *  which lead with the strongest photos. The rest are one click away. */
+const TEASER_COUNT = 6;
+
 /**
  * Homepage teaser: the same tiles as /referenzen on the site's shared slider,
  * kept a carousel on desktop too since it holds more stories than fit.
@@ -207,7 +211,7 @@ export function ReferencesTeaser() {
           carousel
           tone="light"
           label="Referenz"
-          items={stories.map((story) => ({
+          items={stories.slice(0, TEASER_COUNT).map((story) => ({
             key: story.name,
             node: <StoryCard story={story} />,
           }))}

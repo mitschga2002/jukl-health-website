@@ -13,7 +13,7 @@ export const Route = createFileRoute("/referenzen")({
       {
         name: "description",
         content:
-          "Stimmen von Profisportler:innen, Freizeitsportler:innen und Menschen mit gesundheitlichen Zielen, die mit dem JuklHealth System trainieren.",
+          "Stimmen von Profisportler:innen, Vereinen, Privatpersonen und Unternehmer:innen, die mit dem JuklHealth System trainieren.",
       },
       { property: "og:title", content: "Referenzen – JuklHealth" },
       { property: "og:description", content: "Was unsere Klienten sagen." },
@@ -40,7 +40,9 @@ function Referenzen() {
       <PageHero
         eyebrow="REFERENZEN"
         title="Was unsere Klienten sagen"
-        intro="Profisportler, Freizeitsportler und Menschen mit gesundheitlichen Zielen – ein System, viele Geschichten."
+        intro="Profisportler, Vereine, Privatpersonen und Unternehmer – ein System, viele Geschichten."
+        image="/img/referenzen-hero-1600.webp"
+        imageAlt="Julian Kleinheinz und Alessandro Hämmerle beim Handschlag nach dem Training"
       />
 
       <Section

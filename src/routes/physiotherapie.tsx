@@ -155,11 +155,11 @@ function Physio() {
         bookLabel="Termin bei Florian"
       />
 
-      {/* Noah's comeback names Florian, Selina's is the back-pain case and
-          Sebastian's stands for prevention: years without injury. */}
+      {/* Noah's comeback names Florian, Matheus is back to playing without
+          pain, and Selina's is the back-pain case from everyday life. */}
       <StoriesSection
         title="Zurück auf dem Platz – und im Alltag"
-        names={["Noah Bischof", "Selina Madlener", "Sebastian Santin"]}
+        names={["Noah Bischof", "Matheus Favali", "Selina Madlener"]}
       />
 
       <ClosingCta

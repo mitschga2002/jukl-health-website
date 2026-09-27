@@ -145,7 +145,7 @@ function TrainingPhysio() {
 
       <StoriesSection
         title="Was unsere Kunden sagen"
-        names={["Noah Bischof", "Sebastian Santin", "Selina Madlener"]}
+        names={["Noah Bischof", "Selina Madlener", "Alexander Konzett"]}
       />
 
       <ClosingCta
