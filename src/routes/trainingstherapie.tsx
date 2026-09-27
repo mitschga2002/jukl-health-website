@@ -120,7 +120,7 @@ function Trainingstherapie() {
 
       <StoriesSection
         title="Zurück im Alltag – und im Sport"
-        names={["Noah Bischof", "Selina Madlener", "Ina Ludwig"]}
+        names={["Daniel Ratz-Michal", "Ina Ludwig", "Sandro Wolfinger"]}
       />
 
       <ClosingCta

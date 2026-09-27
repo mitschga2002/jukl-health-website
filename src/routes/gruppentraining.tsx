@@ -166,7 +166,7 @@ function Gruppentraining() {
 
       <StoriesSection
         title="Was unsere Kunden sagen"
-        names={["Alexander Konzett", "Ina Ludwig", "Dario Clasadonte"]}
+        names={["Alexander Konzett", "Thomas Wiedemann", "Daniel Ratz-Michal"]}
       />
 
       <ClosingCta

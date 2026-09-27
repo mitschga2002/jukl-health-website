@@ -103,7 +103,7 @@ function StrengthClub() {
 
       <StoriesSection
         title="Was unsere Kunden sagen"
-        names={["Angelina Natter", "Sebastian Santin", "Alexander Konzett"]}
+        names={["Sebastian Santin", "Angelina Natter", "Sandro Wolfinger"]}
       />
 
       <ClosingCta

@@ -119,7 +119,7 @@ function PersonalTraining() {
 
       <StoriesSection
         title="Was unsere Kunden sagen"
-        names={["Angelina Natter", "Sebastian Santin", "Ina Ludwig"]}
+        names={["Urs Bühler", "Angelina Natter", "Beate Schuster"]}
       />
 
       <ClosingCta

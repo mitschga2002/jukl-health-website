@@ -1528,5 +1528,225 @@
         "width": 1200
       }
     ]
+  },
+  "/img/selina-madlener-1200.webp": {
+    "width": 1200,
+    "height": 1500,
+    "variants": [
+      {
+        "url": "/img/selina-madlener-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/selina-madlener-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/selina-madlener-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "/img/dario-clasadonte-544.webp": {
+    "width": 544,
+    "height": 680,
+    "variants": [
+      {
+        "url": "/img/dario-clasadonte-544.webp",
+        "width": 544
+      }
+    ]
+  },
+  "/img/angelina-natter-388.webp": {
+    "width": 388,
+    "height": 485,
+    "variants": [
+      {
+        "url": "/img/angelina-natter-388.webp",
+        "width": 388
+      }
+    ]
+  },
+  "/img/alexander-konzett-1200.webp": {
+    "width": 1200,
+    "height": 1500,
+    "variants": [
+      {
+        "url": "/img/alexander-konzett-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/alexander-konzett-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/alexander-konzett-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "/img/ina-ludwig-484.webp": {
+    "width": 484,
+    "height": 605,
+    "variants": [
+      {
+        "url": "/img/ina-ludwig-484.webp",
+        "width": 484
+      }
+    ]
+  },
+  "/img/leonie-salzgeber-636.webp": {
+    "width": 636,
+    "height": 795,
+    "variants": [
+      {
+        "url": "/img/leonie-salzgeber-636.webp",
+        "width": 636
+      }
+    ]
+  },
+  "/img/urs-buehler-640.webp": {
+    "width": 640,
+    "height": 800,
+    "variants": [
+      {
+        "url": "/img/urs-buehler-640.webp",
+        "width": 640
+      }
+    ]
+  },
+  "/img/samuel-oum-gouet-576.webp": {
+    "width": 576,
+    "height": 720,
+    "variants": [
+      {
+        "url": "/img/samuel-oum-gouet-576.webp",
+        "width": 576
+      }
+    ]
+  },
+  "/img/yago-gomez-432.webp": {
+    "width": 432,
+    "height": 540,
+    "variants": [
+      {
+        "url": "/img/yago-gomez-432.webp",
+        "width": 432
+      }
+    ]
+  },
+  "/img/tom-zimmerschied-878.webp": {
+    "width": 878,
+    "height": 1098,
+    "variants": [
+      {
+        "url": "/img/tom-zimmerschied-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/tom-zimmerschied-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/tom-zimmerschied-878.webp",
+        "width": 878
+      }
+    ]
+  },
+  "/img/jayden-makwaya-1100.webp": {
+    "width": 1100,
+    "height": 1375,
+    "variants": [
+      {
+        "url": "/img/jayden-makwaya-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/jayden-makwaya-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/jayden-makwaya-1100.webp",
+        "width": 1100
+      }
+    ]
+  },
+  "/img/matheus-favali-1092.webp": {
+    "width": 1092,
+    "height": 1365,
+    "variants": [
+      {
+        "url": "/img/matheus-favali-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/matheus-favali-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/matheus-favali-1092.webp",
+        "width": 1092
+      }
+    ]
+  },
+  "/img/anes-omerovic-427.webp": {
+    "width": 427,
+    "height": 534,
+    "variants": [
+      {
+        "url": "/img/anes-omerovic-427.webp",
+        "width": 427
+      }
+    ]
+  },
+  "/img/andreas-genser-372.webp": {
+    "width": 372,
+    "height": 465,
+    "variants": [
+      {
+        "url": "/img/andreas-genser-372.webp",
+        "width": 372
+      }
+    ]
+  },
+  "/img/beate-schuster-900.webp": {
+    "width": 900,
+    "height": 1125,
+    "variants": [
+      {
+        "url": "/img/beate-schuster-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/beate-schuster-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/beate-schuster-900.webp",
+        "width": 900
+      }
+    ]
+  },
+  "/img/referenzen-hero-1600.webp": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "url": "/img/referenzen-hero-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/referenzen-hero-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/referenzen-hero-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/referenzen-hero-1600.webp",
+        "width": 1600
+      }
+    ]
   }
 }

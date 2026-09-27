@@ -155,7 +155,7 @@ function Athletik() {
 
       <StoriesSection
         title="Stimmen aus dem Profisport"
-        names={["Sebastian Santin", "Noah Bischof", "Dario Clasadonte"]}
+        names={["Leonie Salzgeber", "Samuel Oum Gouet", "Andreas Genser"]}
       />
 
       <ClosingCta
