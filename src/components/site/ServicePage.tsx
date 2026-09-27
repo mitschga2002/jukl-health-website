@@ -291,11 +291,12 @@ export function ExpertGrid({
 }
 
 /** Client stories picked by name, so reordering the reference list cannot
- *  swap an unrelated quote onto a service page. */
+ *  swap an unrelated quote onto a service page. Stories without a photo are
+ *  skipped: in a row of three, the photo cards are what carry the teaser. */
 export function StoriesSection({ title, names }: { title: string; names: readonly string[] }) {
   const picked = names
     .map((n) => stories.find((s) => s.name === n))
-    .filter((s): s is NonNullable<typeof s> => Boolean(s));
+    .filter((s): s is NonNullable<typeof s> => Boolean(s?.image));
   return (
     <Section
       eyebrow="STIMMEN"
