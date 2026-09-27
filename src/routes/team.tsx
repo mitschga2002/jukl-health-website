@@ -90,7 +90,8 @@ function Team() {
         <MemberBlock key={m.slug} m={m} />
       ))}
 
-      <ClubGallery
+      {/* TODO: Enable when we have images from other coaches */}
+      {/* <ClubGallery
         eyebrow="EINBLICKE"
         title="Das Team in Aktion"
         images={[
@@ -100,7 +101,7 @@ function Team() {
           { src: "/img/team-window-1600.webp", alt: "Coach am Fenster mit Blick über Dornbirn" },
           { src: "/img/team-rings-1600.webp", alt: "Coach sichert eine Übung an den Ringen" },
         ]}
-      />
+      /> */}
 
       <ClosingCta
         title="Werde Teil des Teams."
