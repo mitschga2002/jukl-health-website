@@ -11,7 +11,7 @@ export const clubs: ClubCard[] = [
     imageAlt: "Trainingsfläche im Performance Club Dornbirn",
     points: [
       "Personal Training & Athletik",
-      "Kleingruppenkurse: HYROX · Mobility · Strength · Burn",
+      "Kleingruppenkurse: Highrocks · Mobility · Strength · Burn",
       "Physio & Trainingstherapie",
     ],
     link: { to: "/performance-club" },

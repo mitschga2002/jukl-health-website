@@ -41,7 +41,7 @@ const training: OfferCard[] = [
   },
   {
     title: "Gruppentraining",
-    body: "Kleingruppenkurse wie HYROX, Mobility, Strength und Burn – oder eure eigene Gruppe.",
+    body: "Kleingruppenkurse wie Highrocks, Mobility, Strength und Burn – oder eure eigene Gruppe.",
     image: "/img/gt-partner-1600.webp",
     imageAlt: "Zwei Trainingspartner bei einer Partnerübung",
     link: { to: "/gruppentraining" },

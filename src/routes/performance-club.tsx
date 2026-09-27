@@ -43,7 +43,7 @@ const offers: OfferCard[] = [
   },
   {
     title: "Gruppenkurse",
-    body: "HYROX, Mobility, Strength und Burn in Kleingruppen – oder eure eigene Gruppe.",
+    body: "Krafttraining für Frauen, Highrocks, Burn, Mobility und Strength in Kleingruppen – oder eure eigene Gruppe.",
     image: "/img/gruppentraining-1032.webp",
     imageAlt: "Gruppentraining mit Gymnastikbällen im Performance Club",
     link: { to: "/gruppentraining" },
