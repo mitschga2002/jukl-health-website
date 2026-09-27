@@ -1510,5 +1510,23 @@
         "width": 1600
       }
     ]
+  },
+  "/img/daniel-ratz-michal-1200.webp": {
+    "width": 1200,
+    "height": 1500,
+    "variants": [
+      {
+        "url": "/img/daniel-ratz-michal-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/daniel-ratz-michal-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/daniel-ratz-michal-1200.webp",
+        "width": 1200
+      }
+    ]
   }
 }

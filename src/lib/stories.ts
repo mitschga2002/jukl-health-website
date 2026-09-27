@@ -51,6 +51,16 @@ export const stories: Story[] = [
     category: "Profisport",
   },
   {
+    name: "Daniel Ratz-Michal",
+    role: "Volleyballprofi · TSV Hartberg",
+    quote:
+      "Schon beim ersten Besuch wusste ich: Mit diesem Team möchte ich arbeiten. Ich wurde freundlich und respektvoll empfangen und habe mich sofort so wohlgefühlt, als wäre ich schon oft da gewesen. Die Zusammenarbeit ist wie in einer Familie: Man hat Spaß miteinander und bekommt gleichzeitig eine super Therapie und ein richtig gutes Training. Ich habe mich auf jede Einheit gefreut, weil dort nur coole Leute sind, die dir helfen wollen und es auch tun. Gekommen bin ich mit Knieschmerzen. Heute bin ich schmerzfrei und meine Performance hat sich gesteigert. Ich komme auf jeden Fall wieder.",
+    highlight: "Heute bin ich schmerzfrei",
+    category: "Profisport",
+    image: "/img/daniel-ratz-michal-1200.webp",
+    imagePosition: "object-top",
+  },
+  {
     name: "Selina Madlener",
     role: "Privatperson",
     quote:
