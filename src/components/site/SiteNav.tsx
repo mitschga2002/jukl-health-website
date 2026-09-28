@@ -242,7 +242,7 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
         overlay ? "h-0" : "mb-2 mt-2 lg:mt-4",
       )}
     >
-      <div className="jh-edge relative z-50">
+      <div className="jh-nav jh-edge relative z-50">
         <div className="relative rounded-image shadow-[0_2px_6px_rgba(0,0,0,0.04)]">
           {/* The bar's frosted surface lives on its own layer rather than on
               the bar element, so the bar does not become a Backdrop Root and

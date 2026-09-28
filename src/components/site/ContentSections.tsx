@@ -193,7 +193,7 @@ export function SystemBlock() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-8">
+        <div className="jh-stagger flex flex-col gap-8">
           {services.map((service, i) => (
             <ServiceRow key={service.title} service={service} index={i} />
           ))}

@@ -445,3 +445,261 @@ button {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 250ms;
 }
+
+/* ── Site-wide motion ──────────────────────────────────────────────────────
+   Native only: View Transitions for route changes, scroll-driven animations
+   for reveals. All of it sits behind `prefers-reduced-motion: no-preference`,
+   and browsers without support get the static page, never a hidden one.
+   One easing everywhere: the same expo-out curve the hover states use. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Page change (router `defaultViewTransition`): the old page fades back and
+     settles while the new one rises in. The nav bar is its own transition
+     group so it stays put instead of cross-fading with the page.
+     The name goes on the bar, not the <nav>: on the homepage the <nav> is
+     `h-0` (the bar overflows it), and a zero-size snapshot renders nothing,
+     so the nav vanished for the whole transition and then flashed back.
+     It is also only set while a transition runs: a named element is a
+     backdrop root, which would stop the dropdowns nested in the bar from
+     blurring the page behind them (see SiteNav). */
+  html:active-view-transition .jh-nav {
+    view-transition-name: jh-nav;
+  }
+
+  /* The bar looks the same on every page, so no cross-fade: the new snapshot
+     simply replaces the old one while the group glides between positions. */
+  ::view-transition-old(jh-nav) {
+    display: none;
+  }
+
+  ::view-transition-new(jh-nav) {
+    animation: none;
+  }
+
+  ::view-transition-group(jh-nav) {
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  ::view-transition-group(root) {
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  ::view-transition-old(root) {
+    animation: jh-page-out 0.3s cubic-bezier(0.4, 0, 1, 1) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: jh-page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+  }
+
+  /* Scroll reveal: every section below the hero eases up as its top edge comes
+     in, finishing by the time its top edge is a little above mid-screen. It is tied
+     to scroll position rather than a one-shot trigger, so anything already in
+     view on load (or reached by an anchor jump) simply renders in place. The
+     hero is not a <section>, so it keeps its own entrance. */
+  @supports (animation-timeline: view()) {
+    main section {
+      animation: jh-reveal cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 45vh;
+    }
+
+    /* Cards and list rows (`.jh-stagger` on their container) rise one by one
+       on their own timelines, so a vertical list follows the scroll row by
+       row. Items that share a row would arrive together, so each column
+       starts a little later (`--d`, patterned for the 3-up grids). The
+       offset is scroll distance, not time: the stagger plays out as you
+       scroll and reverses cleanly. */
+    .jh-stagger > * {
+      --d: 0;
+      animation: jh-rise cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: cover calc(var(--d) * 8vh) cover calc(45vh + var(--d) * 8vh);
+    }
+
+    .jh-stagger > :nth-child(3n + 2) {
+      --d: 1;
+    }
+
+    .jh-stagger > :nth-child(3n + 3) {
+      --d: 2;
+    }
+
+    /* 4-up rows (stat row, career timeline) need their own pattern: on the
+       3-up one the fourth item counts as a new row and lands together with
+       the first, so it seems not to animate at all. */
+    .jh-stagger-4 > :nth-child(4n + 1) {
+      --d: 0;
+    }
+
+    .jh-stagger-4 > :nth-child(4n + 2) {
+      --d: 1;
+    }
+
+    .jh-stagger-4 > :nth-child(4n + 3) {
+      --d: 2;
+    }
+
+    .jh-stagger-4 > :nth-child(4n + 4) {
+      --d: 3;
+    }
+
+    /* Photos settle: they come in slightly zoomed and ease back to 1:1 over
+       the first half of their pass through the screen, a light parallax.
+       Only cover-fitted photos, whose frames all clip, so the overscale never
+       shows. This animates `transform`, while the hover zooms use Tailwind's
+       separate `scale` property, so the two stack instead of fighting. */
+    main section img.object-cover {
+      animation: jh-settle linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 60%;
+    }
+  }
+}
+
+@keyframes jh-page-out {
+  to {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}
+
+@keyframes jh-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+@keyframes jh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(4rem) scale(0.96);
+  }
+}
+
+@keyframes jh-settle {
+  from {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes jh-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+}
+
+/* ── Stacking cards (Analysen listing) ─────────────────────────────────────
+   Only on wide, tall screens: there a row is one ~550px band that fits under
+   the nav. Below xl the rows stack vertically and outgrow the viewport, and a
+   sticky card taller than the screen gets covered before it has been read, so
+   narrower screens keep the plain list with its rise-in.
+
+   Each row wrapper is sticky, pinned a step lower than the one before so the
+   covered cards' top edges stay visible. Card i recedes (shrinks and fades
+   toward the page) while card i+1 travels up to its pinned spot. The sticky
+   wrappers can't carry that timeline themselves (once stuck their view
+   progress freezes), so a zero-height marker at each row's place in the flow
+   exposes `--jh-stack-<n>`, and `timeline-scope` on the list lets the sibling
+   card before it use it. The range runs from the marker entering at the
+   viewport bottom to reaching the pinned top (`100vh - top`), so a card has
+   fully settled exactly when the next one locks in place. The last row's
+   `--jh-stack-next` names no marker, so it simply never recedes.
+
+   `.jh-stack-hold` is runway after the last card: a sticky element can't
+   travel past its container's end, so without it the pile would leave the
+   moment the last card arrives, and that card would never land. */
+.jh-stack-hold {
+  display: none;
+}
+
+@media (min-width: 80rem) and (min-height: 46rem) {
+  .jh-stack {
+    --jh-stack-top: 6.5rem;
+    --jh-stack-step: 1rem;
+    timeline-scope: var(--jh-stack-scope);
+  }
+
+  .jh-stack .jh-stack-mark {
+    view-timeline-name: var(--jh-stack-name);
+  }
+
+  .jh-stack .jh-stack-item {
+    position: sticky;
+    top: calc(var(--jh-stack-top) + var(--i) * var(--jh-stack-step));
+  }
+
+  .jh-stack .jh-stack-hold {
+    display: block;
+    height: 20vh;
+  }
+
+  /* The pile is the entrance here; the list's row-by-row rise would fight the
+     pinning. */
+  .jh-stack.jh-stagger > * {
+    animation: none;
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .jh-stack .jh-stack-card,
+      .jh-stack .jh-stack-card::after {
+        animation-timeline: var(--jh-stack-next);
+        animation-range: cover 0%
+          cover calc(100vh - var(--jh-stack-top) - (var(--i) + 1) * var(--jh-stack-step));
+        /* Most of the change lands in the second half, while the next card is
+           actually overlapping this one. */
+        animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
+        animation-fill-mode: both;
+      }
+
+      .jh-stack .jh-stack-card {
+        position: relative;
+        transform-origin: 50% 0%;
+        will-change: transform;
+        animation-name: jh-stack-shrink;
+      }
+
+      /* The last card is never covered. Its `--jh-stack-next` names no
+         marker, and Chrome then runs the animation unlinked from scroll and
+         parks it on its end frame, which left the card veiled grey. */
+      .jh-stack .jh-stack-item:not(:has(~ .jh-stack-item)) .jh-stack-card,
+      .jh-stack .jh-stack-item:not(:has(~ .jh-stack-item)) .jh-stack-card::after {
+        animation: none;
+      }
+
+      /* A veil in the page colour rather than opacity on the card: a
+         translucent card would show the cards beneath through its content. */
+      .jh-stack .jh-stack-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: var(--background);
+        opacity: 0;
+        pointer-events: none;
+        animation-name: jh-stack-veil;
+      }
+    }
+  }
+}
+
+@keyframes jh-stack-shrink {
+  to {
+    /* Deeper in the stack = smaller, so the pile recedes. */
+    transform: scale(calc(1 - (var(--n) - 1 - var(--i)) * 0.03));
+  }
+}
+
+@keyframes jh-stack-veil {
+  to {
+    opacity: 0.6;
+  }
+}

@@ -9,6 +9,8 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
+    // Native View Transitions on route changes; the animation lives in styles.css.
+    defaultViewTransition: true,
     defaultPreloadStaleTime: 0,
   });
 

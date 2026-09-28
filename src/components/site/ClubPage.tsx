@@ -93,7 +93,7 @@ export type ClubCard = {
 /** The clubs overview: one photo card per club, facts under the name. */
 export function ClubCards({ items }: { items: readonly ClubCard[] }) {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
+    <div className="jh-stagger grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
       {items.map((c) => (
         <Link
           key={c.name}

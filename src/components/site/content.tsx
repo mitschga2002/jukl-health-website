@@ -5,7 +5,7 @@ import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
 import { Eyebrow, PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
-import type { CSSProperties, ReactNode } from "react";
+import { Children, isValidElement, type CSSProperties, type ReactNode } from "react";
 import { NotchFrame } from "./NotchFrame";
 import { SECTION_Y, MODULE_TOP } from "./rhythm";
 
@@ -610,7 +610,7 @@ export function TopicCards({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-4",
+        "jh-stagger grid grid-cols-1 gap-4",
         items.length > 2 ? "lg:grid-cols-3" : "lg:grid-cols-2",
       )}
     >
@@ -683,7 +683,7 @@ export function StepList({ steps }: { steps: readonly string[] }) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-3",
+        "jh-stagger flex flex-col gap-3",
         long &&
           "lg:grid lg:auto-cols-fr lg:grid-flow-col lg:[grid-template-rows:repeat(var(--step-rows),minmax(0,1fr))]",
       )}
@@ -720,11 +720,30 @@ export function StepList({ steps }: { steps: readonly string[] }) {
   );
 }
 
-/** The stack the listing rows sit in, on the same rhythm as any other module. */
+/** The stack the listing rows sit in, on the same rhythm as any other module.
+ *  On wide, tall screens the rows pile up as stacking cards (`.jh-stack` in
+ *  styles.css); below that they are a plain list that rises in row by row. */
 export function Listing({ children }: { children: ReactNode }) {
+  const rows = Children.toArray(children).filter(
+    (c) => isValidElement(c) && c.type === ListingRow,
+  ).length;
+
   return (
     <div className="jh-container jh-edge">
-      <div className={cn("flex flex-col gap-8", SECTION_Y)}>{children}</div>
+      <div
+        className={cn("jh-stack jh-stagger flex flex-col gap-8", SECTION_Y)}
+        style={
+          {
+            "--n": rows,
+            "--jh-stack-scope": Array.from({ length: rows }, (_, i) => `--jh-stack-${i + 1}`).join(
+              ", ",
+            ),
+          } as CSSProperties
+        }
+      >
+        {children}
+        <div aria-hidden className="jh-stack-hold" />
+      </div>
     </div>
   );
 }
@@ -759,73 +778,91 @@ export function ListingRow({
   children: ReactNode;
 }) {
   return (
-    <Link
-      to={to}
-      search={search}
-      hash={hash}
-      className={cn(
-        "group relative grid grid-cols-1 gap-6 rounded-card bg-muted p-6 transition-shadow xl:grid-cols-12 xl:items-start xl:gap-8 xl:p-10",
-        EASE_PREMIUM,
-        "hover:inset-ring-1 hover:inset-ring-foreground/15",
-      )}
-    >
-      {/* Its own layer rather than a `hover:bg-*` swap, so the wash sits on the
-          muted card instead of replacing it. */}
-      <span
+    <>
+      {/* Stacking-card plumbing, inert outside `.jh-stack`'s breakpoint: a
+          non-sticky marker at the row's place in the flow (the negative margin
+          cancels the list gap, so it adds no space) exposes the timeline the
+          row before this one recedes on. */}
+      <div
         aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-0 rounded-card bg-foreground/[0.04] opacity-0 transition-opacity group-hover:opacity-100",
-          EASE_PREMIUM,
-        )}
+        className="jh-stack-mark -mb-8 h-0"
+        style={{ "--jh-stack-name": `--jh-stack-${index}` } as CSSProperties}
       />
-
-      <Eyebrow
-        className={cn(
-          "relative transition-colors group-hover:text-foreground xl:col-span-1",
-          EASE_PREMIUM,
-        )}
-      >
-        {String(index).padStart(2, "0")}
-      </Eyebrow>
-      <h2 className="font-display relative text-balance text-[28px] leading-[1.25] lg:text-[36px] xl:col-span-3">
-        {title}
-      </h2>
-      <div className="relative flex flex-col gap-4 text-base font-light leading-[1.6] text-muted-foreground xl:col-span-5">
-        {children}
-      </div>
-      {image ? (
-        <div className="relative xl:col-span-3">
-          {/* The notch is a mask on the frame, so the <img> is what scales —
-              scaling the frame would drag the cut-out off the arrow button. */}
-          <NotchFrame
-            className="aspect-[4/3] w-full xl:aspect-[3/4]"
-            notch={{ corner: "tr", base: { w: 50, h: 50, r: 30 } }}
-          >
-            <SmartImage
-              src={image}
-              alt={imageAlt ?? title}
-              sizes="(min-width: 1280px) 380px, 100vw"
-              className="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] motion-reduce:transform-none motion-reduce:transition-none"
-            />
-          </NotchFrame>
-          <span
+      <div className="jh-stack-item" style={{ "--i": index - 1 } as CSSProperties}>
+        <div
+          className="jh-stack-card rounded-card"
+          style={{ "--jh-stack-next": `--jh-stack-${index + 1}` } as CSSProperties}
+        >
+          <Link
+            to={to}
+            search={search}
+            hash={hash}
             className={cn(
-              "absolute right-0 top-0 flex items-center justify-center rounded-full bg-background p-2.5 transition-colors group-hover:bg-primary",
+              "group relative grid grid-cols-1 gap-6 rounded-card bg-muted p-6 transition-shadow xl:grid-cols-12 xl:items-start xl:gap-8 xl:p-10",
               EASE_PREMIUM,
+              "hover:inset-ring-1 hover:inset-ring-foreground/15",
             )}
           >
-            <ArrowUpRight
+            {/* Its own layer rather than a `hover:bg-*` swap, so the wash sits on the
+          muted card instead of replacing it. */}
+            <span
+              aria-hidden
               className={cn(
-                "size-5 text-foreground transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary-foreground motion-reduce:transform-none motion-reduce:transition-none",
+                "pointer-events-none absolute inset-0 rounded-card bg-foreground/[0.04] opacity-0 transition-opacity group-hover:opacity-100",
                 EASE_PREMIUM,
               )}
-              strokeWidth={2}
-              aria-hidden
             />
-          </span>
+
+            <Eyebrow
+              className={cn(
+                "relative transition-colors group-hover:text-foreground xl:col-span-1",
+                EASE_PREMIUM,
+              )}
+            >
+              {String(index).padStart(2, "0")}
+            </Eyebrow>
+            <h2 className="font-display relative text-balance text-[28px] leading-[1.25] lg:text-[36px] xl:col-span-3">
+              {title}
+            </h2>
+            <div className="relative flex flex-col gap-4 text-base font-light leading-[1.6] text-muted-foreground xl:col-span-5">
+              {children}
+            </div>
+            {image ? (
+              <div className="relative xl:col-span-3">
+                {/* The notch is a mask on the frame, so the <img> is what scales —
+              scaling the frame would drag the cut-out off the arrow button. */}
+                <NotchFrame
+                  className="aspect-[4/3] w-full xl:aspect-[3/4]"
+                  notch={{ corner: "tr", base: { w: 50, h: 50, r: 30 } }}
+                >
+                  <SmartImage
+                    src={image}
+                    alt={imageAlt ?? title}
+                    sizes="(min-width: 1280px) 380px, 100vw"
+                    className="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] motion-reduce:transform-none motion-reduce:transition-none"
+                  />
+                </NotchFrame>
+                <span
+                  className={cn(
+                    "absolute right-0 top-0 flex items-center justify-center rounded-full bg-background p-2.5 transition-colors group-hover:bg-primary",
+                    EASE_PREMIUM,
+                  )}
+                >
+                  <ArrowUpRight
+                    className={cn(
+                      "size-5 text-foreground transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary-foreground motion-reduce:transform-none motion-reduce:transition-none",
+                      EASE_PREMIUM,
+                    )}
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                </span>
+              </div>
+            ) : null}
+          </Link>
         </div>
-      ) : null}
-    </Link>
+      </div>
+    </>
   );
 }
 
@@ -834,7 +871,7 @@ export function StatRow({ items }: { items: { value: string; label: string }[] }
   return (
     <section className="jh-container jh-gutter">
       <div className={SECTION_Y}>
-        <div className="grid grid-cols-2 rounded-card border border-border lg:grid-cols-4">
+        <div className="jh-stagger jh-stagger-4 grid grid-cols-2 rounded-card border border-border lg:grid-cols-4">
           {items.map((s, i) => (
             <div
               key={s.label}
