@@ -113,6 +113,9 @@ export function SnapRow({
       <div
         ref={trackRef}
         onScroll={onScroll}
+        // Sideways swipes stay native (the page's smooth scroll would eat
+        // them); vertical wheel over the row still scrolls the page.
+        data-lenis-prevent-horizontal
         aria-roledescription={carousel ? "Karussell" : undefined}
         className={cn(
           "-mx-4 flex snap-x snap-mandatory overscroll-x-contain scroll-px-4 gap-4 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:gap-5 lg:scroll-px-0 lg:px-0 [&::-webkit-scrollbar]:hidden",
