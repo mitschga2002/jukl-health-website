@@ -174,7 +174,11 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
     body.style.overflow = "hidden";
     return () => {
       Object.assign(body.style, previous);
-      window.scrollTo(0, scrollY);
+      // Instant, not the page's CSS `scroll-behavior: smooth`: when the menu
+      // closes because a link was tapped, a smooth restore keeps gliding back
+      // towards the old page's offset after the router has already reset the
+      // new page to the top, so the new page opened partway down.
+      window.scrollTo({ top: scrollY, behavior: "instant" });
     };
   }, [open]);
 
@@ -318,7 +322,10 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
           {/* No header of its own: the sheet opens *under* the floating bar,
               which keeps the logo and swaps the burger for the close icon.
               `pt-20` clears the bar (8px offset + ~46px tall). */}
-          <div className="jh-container flex-1 overflow-y-auto overscroll-contain px-8 pb-12 pt-24">
+          <div
+            data-lenis-prevent
+            className="jh-container flex-1 overflow-y-auto overscroll-contain px-8 pb-12 pt-24"
+          >
             <div className="space-y-6">
               <MobileGroup label="Clubs" items={clubLinks} onNavigate={close} />
               <div className="border-t border-border pt-6">

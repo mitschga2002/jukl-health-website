@@ -144,6 +144,8 @@ export function StoryCard({ story }: { story: Story }) {
           aria-label={`Zitat von ${story.name}`}
           aria-hidden={!open}
           inert={!open}
+          // Scrolls on its own; the page's smooth scroll would take the wheel.
+          data-lenis-prevent
           onKeyDown={(e) => {
             if (e.key === "Escape") setOpen(false);
           }}

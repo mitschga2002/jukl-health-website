@@ -9,6 +9,11 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
+    // styles.css turns on `scroll-behavior: smooth` for in-page anchors, which
+    // the router's scroll-to-top on navigation would otherwise inherit: the
+    // smooth scroll got cut short by the page swap, and a page reached from
+    // halfway down another one opened halfway down too.
+    scrollRestorationBehavior: "instant",
     // Native View Transitions on route changes; the animation lives in styles.css.
     defaultViewTransition: true,
     defaultPreloadStaleTime: 0,

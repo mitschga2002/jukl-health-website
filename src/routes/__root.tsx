@@ -6,6 +6,8 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { ReactLenis, useLenis } from "lenis/react";
 
 import { PillAnchor, PillButton, PillLink } from "@/components/site/Pill";
 /* Imported for its side effect, not for a URL: this puts the stylesheet into
@@ -204,11 +206,47 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* Lenis eases the wheel by animating the scroll position itself, frame by
+   frame, towards a target. Its own `stopInertiaOnNavigate` did not catch
+   router navigations reliably, so that glide carried on through a page change:
+   the router reset the new page to the top and on the very next frame Lenis
+   pulled it back to the old page's offset. Tied to the router instead: the
+   glide stops the moment a navigation starts, and once the router has placed
+   the new page (top, hash target or restored position) Lenis adopts that. */
+function LenisRouterSync() {
+  const router = useRouter();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (!lenis) return;
+    // An immediate scroll to where the page already is: sets Lenis' target to
+    // the real position and stops its animation, without moving anything.
+    const settle = () => lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+    const stopGlide = router.subscribe("onBeforeNavigate", settle);
+    const adopt = router.subscribe("onRendered", () => {
+      // Measure the new page first, or the scroll is clamped to the old one's
+      // height (a back navigation to far down a longer page).
+      lenis.resize();
+      settle();
+    });
+    return () => {
+      stopGlide();
+      adopt();
+    };
+  }, [router, lenis]);
+
+  return null;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* Eased wheel and trackpad scrolling, a touch slower than native. Touch
+          stays native (Lenis' default), and reduced motion turns it off. */}
+      <ReactLenis root options={{ lerp: 0.08, stopInertiaOnNavigate: true }} />
+      <LenisRouterSync />
       <Outlet />
     </QueryClientProvider>
   );

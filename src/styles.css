@@ -2,6 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 @import "./assets/fonts/fonts.css";
+@import "lenis/dist/lenis.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -503,10 +504,24 @@ button {
      view on load (or reached by an anchor jump) simply renders in place. The
      hero is not a <section>, so it keeps its own entrance. */
   @supports (animation-timeline: view()) {
+    /* Scroll-linked motion gets its own, gentler curve. The hover states'
+       expo-out does nearly all of its change in the first few pixels, which on
+       a scroll timeline reads as a snap at the bottom edge and then a crawl.
+       A plain ease-out spreads the change evenly across the scroll. */
+    :root {
+      --jh-scroll-ease: cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
     main section {
-      animation: jh-reveal cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: jh-reveal var(--jh-scroll-ease) both;
       animation-timeline: view();
-      animation-range: cover 0% cover 45vh;
+      animation-range: cover 0% cover 50vh;
+    }
+
+    /* Sections whose cards rise on their own only fade: moving both would
+       stack the two distances and make the cards travel twice as far. */
+    main section:has(.jh-stagger) {
+      animation-name: jh-reveal-fade;
     }
 
     /* Cards and list rows (`.jh-stagger` on their container) rise one by one
@@ -517,9 +532,9 @@ button {
        scroll and reverses cleanly. */
     .jh-stagger > * {
       --d: 0;
-      animation: jh-rise cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: jh-rise var(--jh-scroll-ease) both;
       animation-timeline: view();
-      animation-range: cover calc(var(--d) * 8vh) cover calc(45vh + var(--d) * 8vh);
+      animation-range: cover calc(var(--d) * 6vh) cover calc(55vh + var(--d) * 6vh);
     }
 
     .jh-stagger > :nth-child(3n + 2) {
@@ -555,9 +570,9 @@ button {
        shows. This animates `transform`, while the hover zooms use Tailwind's
        separate `scale` property, so the two stack instead of fighting. */
     main section img.object-cover {
-      animation: jh-settle linear both;
+      animation: jh-settle var(--jh-scroll-ease) both;
       animation-timeline: view();
-      animation-range: cover 0% cover 60%;
+      animation-range: cover 0% cover 70%;
     }
   }
 }
@@ -576,23 +591,40 @@ button {
   }
 }
 
+/* In all three reveals the opacity is done well before the movement: an
+   element still see-through while it is nearly in place reads as a lag. */
 @keyframes jh-rise {
   from {
     opacity: 0;
-    transform: translateY(4rem) scale(0.96);
+    transform: translateY(3rem) scale(0.98);
+  }
+  60% {
+    opacity: 1;
   }
 }
 
 @keyframes jh-settle {
   from {
-    transform: scale(1.2);
+    transform: scale(1.15);
   }
 }
 
 @keyframes jh-reveal {
   from {
     opacity: 0;
-    transform: translateY(5rem);
+    transform: translateY(2.5rem);
+  }
+  60% {
+    opacity: 1;
+  }
+}
+
+@keyframes jh-reveal-fade {
+  from {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
   }
 }
 
