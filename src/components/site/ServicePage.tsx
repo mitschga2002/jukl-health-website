@@ -45,7 +45,7 @@ export function OfferCards({
 }) {
   return (
     <Section eyebrow={eyebrow} title={title} action={action}>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
+      <div className="jh-stagger grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
         {items.map((s) => (
           <Link
             key={s.title}
@@ -398,7 +398,7 @@ export function CareerTimeline({
           />
         </svg>
 
-        <ol className="relative grid grid-cols-1 gap-8 border-l border-border pl-8 lg:grid-cols-4 lg:gap-6 lg:border-l-0 lg:pl-0">
+        <ol className="jh-stagger jh-stagger-4 relative grid grid-cols-1 gap-8 border-l border-border pl-8 lg:grid-cols-4 lg:gap-6 lg:border-l-0 lg:pl-0">
           {items.map((c, i) => (
             <li key={c.name} className="relative flex flex-col lg:items-center lg:text-center">
               {/* Desktop: the dot sits on the wave at this column's height. */}
@@ -471,7 +471,7 @@ export function CourseGrid({
       }
     >
       {intro ? <p className="max-w-[640px]">{intro}</p> : null}
-      <div className="flex flex-col gap-10 lg:gap-12">
+      <div className="jh-stagger flex flex-col gap-10 lg:gap-12">
         {days.map((day) => (
           <div key={day} className="flex flex-col gap-4 lg:gap-5">
             <h3 className="font-display text-[24px] leading-none text-surface-foreground lg:text-[28px]">
