@@ -30,6 +30,39 @@ export function SnapRow({
   const [view, setView] = useState({ size: 1, pos: 0 });
   const fits = view.size >= 0.999;
 
+  // The card the track rests on. Kept so a relayout can put it back: iOS
+  // Safari re-snaps a mandatory track whenever its size changes (photos and
+  // fonts arriving, hydration) and may pick a different card, so the row
+  // would open on the second story.
+  const indexRef = useRef(0);
+
+  // Exact scroll offset that snaps card `i` to the start, clamped to the
+  // track's range. Stepping by a measured card width instead drifts (the
+  // basis is a fractional %, offsetWidth rounds), and on iOS the drift makes a
+  // smooth scroll overshoot the start and bare the bleed as white space.
+  const offsetOf = useCallback((el: HTMLElement, i: number) => {
+    const card = el.children[i] as HTMLElement | undefined;
+    if (!card) return 0;
+    const pad = parseFloat(getComputedStyle(el).scrollPaddingLeft) || 0;
+    const left =
+      card.getBoundingClientRect().left - el.getBoundingClientRect().left + el.scrollLeft - pad;
+    return Math.min(Math.max(0, Math.round(left)), el.scrollWidth - el.clientWidth);
+  }, []);
+
+  const nearestIndex = useCallback(
+    (el: HTMLElement) => {
+      let best = 0;
+      for (let i = 1; i < el.children.length; i++) {
+        if (
+          Math.abs(offsetOf(el, i) - el.scrollLeft) < Math.abs(offsetOf(el, best) - el.scrollLeft)
+        )
+          best = i;
+      }
+      return best;
+    },
+    [offsetOf],
+  );
+
   const sync = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
@@ -40,18 +73,31 @@ export function SnapRow({
     });
   }, []);
 
-  useEffect(() => {
+  const onScroll = () => {
+    const el = trackRef.current;
+    if (el) indexRef.current = nearestIndex(el);
     sync();
-    window.addEventListener("resize", sync);
-    return () => window.removeEventListener("resize", sync);
-  }, [sync]);
+  };
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const realign = () => {
+      el.scrollTo({ left: offsetOf(el, indexRef.current), behavior: "instant" });
+      sync();
+    };
+    realign();
+    const ro = new ResizeObserver(realign);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [offsetOf, sync]);
 
   const step = (dir: 1 | -1) => {
     const el = trackRef.current;
-    const card = el?.firstElementChild as HTMLElement | null;
-    if (!el || !card) return;
-    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
-    el.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: "smooth" });
+    if (!el) return;
+    const i = Math.min(Math.max(0, nearestIndex(el) + dir), el.children.length - 1);
+    indexRef.current = i;
+    el.scrollTo({ left: offsetOf(el, i), behavior: "smooth" });
   };
 
   const dark = tone === "dark";
@@ -66,10 +112,10 @@ export function SnapRow({
     <div className="flex flex-col gap-6">
       <div
         ref={trackRef}
-        onScroll={sync}
+        onScroll={onScroll}
         aria-roledescription={carousel ? "Karussell" : undefined}
         className={cn(
-          "-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:gap-5 lg:scroll-px-0 lg:px-0 [&::-webkit-scrollbar]:hidden",
+          "-mx-4 flex snap-x snap-mandatory overscroll-x-contain scroll-px-4 gap-4 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:gap-5 lg:scroll-px-0 lg:px-0 [&::-webkit-scrollbar]:hidden",
           !carousel && "lg:grid lg:overflow-visible",
           !carousel && (items.length > 2 ? "lg:grid-cols-3" : "lg:grid-cols-2"),
         )}
