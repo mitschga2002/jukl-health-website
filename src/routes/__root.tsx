@@ -212,7 +212,17 @@ function RootShell({ children }: { children: React.ReactNode }) {
    the router reset the new page to the top and on the very next frame Lenis
    pulled it back to the old page's offset. Tied to the router instead: the
    glide stops the moment a navigation starts, and once the router has placed
-   the new page (top, hash target or restored position) Lenis adopts that. */
+   the new page (top, hash target or restored position) Lenis adopts that.
+
+   Hash targets get one correction first. The router scrolls them into view
+   with their rendered box, but every `main section` below the fold still sits
+   at the start of its scroll reveal (styles.css: translated down by 2.5rem),
+   so the form on /kontakt#anfrage was measured 40px too low, and once the
+   section had risen into place it sat that much higher than its scroll
+   margin, under the nav. Measured from layout instead, which ignores
+   transforms. A hash on the same page gets the glide back that the CSS
+   `scroll-behavior: smooth` used to give (Lenis takes over the animation
+   from native scrolling, so the router's instant jump is undone first). */
 function LenisRouterSync() {
   const router = useRouter();
   const lenis = useLenis();
@@ -222,12 +232,26 @@ function LenisRouterSync() {
     // An immediate scroll to where the page already is: sets Lenis' target to
     // the real position and stops its animation, without moving anything.
     const settle = () => lenis.scrollTo(window.scrollY, { immediate: true, force: true });
-    const stopGlide = router.subscribe("onBeforeNavigate", settle);
-    const adopt = router.subscribe("onRendered", () => {
+    let leftAt = 0;
+    const stopGlide = router.subscribe("onBeforeNavigate", () => {
+      leftAt = window.scrollY;
+      settle();
+    });
+    const adopt = router.subscribe("onRendered", (event) => {
       // Measure the new page first, or the scroll is clamped to the old one's
       // height (a back navigation to far down a longer page).
       lenis.resize();
-      settle();
+      const target = hashScrollTarget(event.toLocation.hash);
+      if (target === undefined) {
+        settle();
+      } else if (event.pathChanged) {
+        window.scrollTo({ top: target, behavior: "instant" });
+        settle();
+      } else {
+        window.scrollTo({ top: leftAt, behavior: "instant" });
+        settle();
+        lenis.scrollTo(target);
+      }
     });
     return () => {
       stopGlide();
@@ -236,6 +260,25 @@ function LenisRouterSync() {
   }, [router, lenis]);
 
   return null;
+}
+
+/** The scroll position that puts the hash target's scroll-margin edge at the
+    top of the viewport, taken from layout rather than from the rendered (and
+    possibly transformed) box. `undefined` unless the router has just scrolled
+    the element there: on a back/forward navigation it restores the previous
+    position instead, and that must stand. */
+function hashScrollTarget(hash: string | undefined): number | undefined {
+  const id = (hash ?? "").replace(/^#/, "");
+  if (!id) return undefined;
+  const el = document.getElementById(id);
+  if (!el) return undefined;
+  const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+  if (Math.abs(el.getBoundingClientRect().top - margin) > 1) return undefined;
+  let top = 0;
+  for (let n: HTMLElement | null = el; n; n = n.offsetParent as HTMLElement | null) {
+    top += n.offsetTop;
+  }
+  return Math.max(0, top - margin);
 }
 
 function RootComponent() {
