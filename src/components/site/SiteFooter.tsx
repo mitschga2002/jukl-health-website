@@ -129,6 +129,12 @@ export function SiteFooter({ seamless = false }: { seamless?: boolean }) {
                   Datenschutz
                 </Link>
                 <a
+                  href="https://app.juklhealth.com/privacy"
+                  className="text-sm hover:text-surface-foreground"
+                >
+                  Datenschutz App
+                </a>
+                <a
                   href={SITE.instagram.url}
                   target="_blank"
                   rel="noreferrer"
