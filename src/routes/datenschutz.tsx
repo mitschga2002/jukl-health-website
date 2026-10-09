@@ -113,6 +113,18 @@ function Datenschutz() {
         </p>
       </Section>
 
+      <Section compact eyebrow="HOSTING" title="Hosting & Server-Protokolle">
+        <p>
+          Diese Website wird bei Cloudflare, Inc. (USA) betrieben. Beim Aufruf verarbeitet
+          Cloudflare technische Zugriffsdaten (IP-Adresse, Zeitpunkt, aufgerufene Adresse, Browser-
+          und Betriebssystemkennung), um die Website auszuliefern und vor Angriffen zu schützen.
+          Anfragen werden im jeweils nächstgelegenen Rechenzentrum verarbeitet, bei Aufruf aus der
+          EU in der Regel innerhalb der EU. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (sicherer
+          und stabiler Betrieb). Für eine Übermittlung in die USA stützen wir uns auf das EU-US Data
+          Privacy Framework bzw. die Standardvertragsklauseln der Europäischen Kommission.
+        </p>
+      </Section>
+
       <Section compact eyebrow="SICHERHEIT" title="TLS-Verschlüsselung">
         <p>
           Wir verwenden HTTPS, um Daten abhörsicher im Internet zu übertragen. Die Verwendung
@@ -123,10 +135,11 @@ function Datenschutz() {
       <Section compact eyebrow="KOMMUNIKATION" title="Kontaktformular & E-Mail">
         <p>
           Wenn Sie uns per Kontaktformular oder E-Mail kontaktieren, werden die von Ihnen
-          übermittelten Daten (Name, E-Mail-Adresse, ggf. Telefonnummer und Ihre Nachricht) auf
-          unserem Server gespeichert und zur Bearbeitung Ihrer Anfrage verwendet. Die Daten werden
-          gelöscht, sobald der Geschäftsfall beendet wurde und gesetzliche Aufbewahrungsfristen
-          abgelaufen sind.
+          übermittelten Daten (Name, E-Mail-Adresse, ggf. Telefonnummer und Ihre Nachricht) zur
+          Bearbeitung Ihrer Anfrage verwendet. Nachrichten aus dem Kontaktformular werden uns per
+          E-Mail zugestellt; den Versand übernimmt Resend, Inc. (USA) als Auftragsverarbeiter. Die
+          Daten werden gelöscht, sobald der Geschäftsfall beendet wurde und gesetzliche
+          Aufbewahrungsfristen abgelaufen sind.
         </p>
         <p>
           Das Kontaktformular lässt sich nur mit einer ausdrücklichen Einwilligung absenden;
