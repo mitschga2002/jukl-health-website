@@ -9,9 +9,14 @@ import { cn } from "@/lib/utils";
  * with reduced motion it does not start on its own: the poster stands in.
  *
  * A play/pause button (and, with `sound`, a mute toggle) sits in the bottom
- * left corner, shown only on hover or keyboard focus. A video the viewer
- * paused stays paused when it scrolls back into view.
+ * left corner, shown only on hover or keyboard focus. Touch screens have no
+ * hover, so there a tap on the video shows them for a few seconds, the way
+ * phone video players do; while hidden they cannot be tapped by accident. A
+ * video the viewer paused stays paused when it scrolls back into view.
  */
+/** How long a tap keeps the controls up on touch screens. */
+const REVEAL_MS = 3000;
+
 export function ClubVideo({
   src,
   poster,
@@ -39,6 +44,17 @@ export function ClubVideo({
   const [wantsPlay, setWantsPlay] = useState<boolean | null>(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
+  const [revealed, setRevealed] = useState(false);
+  const pointerType = useRef("mouse");
+  const hideTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  /** Shows the controls on touch and (re)starts the countdown to hide them. */
+  const reveal = () => {
+    clearTimeout(hideTimer.current);
+    setRevealed(true);
+    hideTimer.current = setTimeout(() => setRevealed(false), REVEAL_MS);
+  };
+  useEffect(() => () => clearTimeout(hideTimer.current), []);
 
   useEffect(() => {
     const video = ref.current;
@@ -81,7 +97,25 @@ export function ClubVideo({
     "flex size-7 items-center justify-center rounded-image bg-background/85 text-foreground backdrop-blur-md transition-colors hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
   return (
-    <div className={cn("group/video relative size-full", className)}>
+    <div
+      className={cn("group/video relative size-full", className)}
+      onPointerDown={(e) => {
+        pointerType.current = e.pointerType;
+      }}
+      // A click rather than pointerup: by the time it fires the tap has been
+      // hit-tested, so the buttons it reveals cannot catch the same tap.
+      onClick={(e) => {
+        if (pointerType.current === "mouse") return;
+        if ((e.target as Element).closest("button")) {
+          reveal();
+        } else if (revealed) {
+          clearTimeout(hideTimer.current);
+          setRevealed(false);
+        } else {
+          reveal();
+        }
+      }}
+    >
       <video
         ref={ref}
         src={src}
@@ -95,7 +129,12 @@ export function ClubVideo({
         onPause={() => setPlaying(false)}
         className="size-full object-cover"
       />
-      <div className="absolute bottom-3 left-3 flex gap-1.5 opacity-0 transition-opacity duration-300 has-focus-visible:opacity-100 group-hover/video:opacity-100 motion-reduce:transition-none">
+      <div
+        className={cn(
+          "absolute bottom-3 left-3 flex gap-1.5 transition-opacity duration-300 has-focus-visible:opacity-100 group-hover/video:opacity-100 motion-reduce:transition-none",
+          revealed ? "opacity-100" : "opacity-0 [@media(hover:none)]:pointer-events-none",
+        )}
+      >
         <button
           type="button"
           className={button}
@@ -114,11 +153,7 @@ export function ClubVideo({
             className={button}
             aria-label={muted ? "Ton einschalten" : "Ton ausschalten"}
             aria-pressed={!muted}
-            onClick={() => {
-              setMuted(!muted);
-              // Turning the sound on is a request to hear it.
-              if (muted) setWantsPlay(true);
-            }}
+            onClick={() => setMuted(!muted)}
           >
             {muted ? (
               <VolumeX className="size-3.5" aria-hidden />
