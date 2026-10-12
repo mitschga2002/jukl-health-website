@@ -4,4 +4,7 @@
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "src/server.ts",
+  // Deploys from CI must not wipe variables set in the Cloudflare dashboard
+  // (e.g. RESEND_FROM). Secrets such as RESEND_API_KEY survive a deploy anyway.
+  "keep_vars": true,
 }
