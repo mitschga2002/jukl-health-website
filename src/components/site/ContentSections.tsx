@@ -244,7 +244,11 @@ export function LocationsBlock() {
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-16">
           <div className="hidden lg:block">
-            <div className="sticky top-[12vh] mx-auto aspect-[3/4] h-[min(76vh,720px)] overflow-hidden rounded-card bg-muted">
+            {/* Centred in the space the nav leaves: the bar ends 84px down
+                (16px offset + 68px bar), so the frame is that space minus a
+                32px margin top and bottom, capped at 720px, and its top sits
+                half the leftover below the bar. */}
+            <div className="sticky top-[calc(84px+(100vh-84px-min(100vh-84px-64px,720px))/2)] mx-auto aspect-[3/4] h-[min(100vh-84px-64px,720px)] overflow-hidden rounded-card bg-muted">
               {clubs.map((c, i) => (
                 <div
                   key={c.name}
