@@ -18,7 +18,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # Node 24 ships npm 11 (package.json pins npm@11). npm 10 rejects the
+          # lock file over miniflare, an optional peer resolved to v5 here.
+          node-version: 24
           cache: npm
 
       - run: npm ci
