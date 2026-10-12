@@ -208,23 +208,39 @@ export function SystemBlock() {
    whichever club crosses the middle of the viewport — so only one video ever
    plays. Below lg there is no room for a pinned column; each club then
    carries its own frame above its text, and plays only while on screen. */
+/** Where the sticky nav bar ends on desktop: 16px offset + 68px bar. The
+ *  pinned frame and the club texts are centred in the space below it. */
+const NAV_BOTTOM = 84;
+
 export function LocationsBlock() {
   const [active, setActive] = useState(0);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    // A one-pixel band across the middle of the viewport: the club crossing
-    // it is the one in focus.
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.index));
-        }
-      },
-      { rootMargin: "-50% 0px -50% 0px" },
-    );
-    for (const el of itemRefs.current) if (el) io.observe(el);
-    return () => io.disconnect();
+    // A one-pixel band through the pinned frame's centre, halfway between the
+    // nav bar's bottom edge and the viewport's: the club crossing it is the
+    // one in focus. rootMargin cannot mix % and px, so the band is set in px
+    // and rebuilt when the viewport height changes.
+    let io: IntersectionObserver | undefined;
+    const observe = () => {
+      io?.disconnect();
+      const centre = Math.round((window.innerHeight + NAV_BOTTOM) / 2);
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.index));
+          }
+        },
+        { rootMargin: `-${centre}px 0px -${window.innerHeight - centre - 1}px 0px` },
+      );
+      for (const el of itemRefs.current) if (el) io.observe(el);
+    };
+    observe();
+    window.addEventListener("resize", observe);
+    return () => {
+      window.removeEventListener("resize", observe);
+      io?.disconnect();
+    };
   }, []);
 
   return (
@@ -244,34 +260,41 @@ export function LocationsBlock() {
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-16">
           <div className="hidden lg:block">
-            {/* Centred in the space the nav leaves: the bar ends 84px down
-                (16px offset + 68px bar), so the frame is that space minus a
-                32px margin top and bottom, capped at 720px, and its top sits
-                half the leftover below the bar. */}
-            <div className="sticky top-[calc(84px+(100vh-84px-min(100vh-84px-64px,720px))/2)] mx-auto aspect-[3/4] h-[min(100vh-84px-64px,720px)] overflow-hidden rounded-card bg-muted">
-              {clubs.map((c, i) => (
-                <div
-                  key={c.name}
-                  // `inert` rather than aria-hidden: the faded layers sit on top
-                  // of the active one and must not take its clicks or focus.
-                  inert={i !== active}
-                  className={cn(
-                    "absolute inset-0 transition-opacity duration-700 ease-out motion-reduce:transition-none",
-                    i === active ? "opacity-100" : "opacity-0",
-                  )}
-                >
-                  <ClubMedia club={c} active={i === active} sizes="40vw" />
-                </div>
-              ))}
-              <span className="absolute left-4 top-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs uppercase tracking-[0.05em] text-foreground backdrop-blur-md">
-                {clubs[active].name}
-              </span>
-              <span className="absolute bottom-4 right-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs tabular-nums tracking-[0.05em] text-foreground backdrop-blur-md">
-                {String(active + 1).padStart(2, "0")} / {String(clubs.length).padStart(2, "0")}
-              </span>
+            {/* Pinned to the space the nav leaves (the bar ends 84px down:
+                16px offset + 68px bar) and centred in it. The frame takes its
+                size from its width, the smallest of the column, that space
+                minus a 32px margin top and bottom (at 3:4), and 540px (720px
+                tall). Sizing by height alone overflowed the narrow column on
+                tall tablet screens. */}
+            <div className="sticky top-[84px] flex h-[calc(100vh-84px)] items-center justify-center">
+              <div className="relative aspect-[3/4] w-[min(100%,(100vh-148px)*3/4,540px)] overflow-hidden rounded-card bg-muted">
+                {clubs.map((c, i) => (
+                  <div
+                    key={c.name}
+                    // `inert` rather than aria-hidden: the faded layers sit on top
+                    // of the active one and must not take its clicks or focus.
+                    inert={i !== active}
+                    className={cn(
+                      "absolute inset-0 transition-opacity duration-700 ease-out motion-reduce:transition-none",
+                      i === active ? "opacity-100" : "opacity-0",
+                    )}
+                  >
+                    <ClubMedia club={c} active={i === active} sizes="40vw" />
+                  </div>
+                ))}
+                <span className="absolute left-4 top-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs uppercase tracking-[0.05em] text-foreground backdrop-blur-md">
+                  {clubs[active].name}
+                </span>
+                <span className="absolute bottom-4 right-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs tabular-nums tracking-[0.05em] text-foreground backdrop-blur-md">
+                  {String(active + 1).padStart(2, "0")} / {String(clubs.length).padStart(2, "0")}
+                </span>
+              </div>
             </div>
           </div>
 
+          {/* On desktop each club is exactly as tall as the pinned box, so its
+              text sits centred beside the frame while that club is in focus,
+              from the first club to the last. */}
           <ol className="flex flex-col gap-16 lg:gap-0">
             {clubs.map((c, i) => (
               <li
@@ -281,7 +304,7 @@ export function LocationsBlock() {
                 }}
                 data-index={i}
                 className={cn(
-                  "flex flex-col gap-6 lg:min-h-[72vh] lg:justify-center lg:transition-opacity lg:duration-500 motion-reduce:transition-none",
+                  "flex flex-col gap-6 lg:min-h-[calc(100vh-84px)] lg:justify-center lg:transition-opacity lg:duration-500 motion-reduce:transition-none",
                   i === active ? "lg:opacity-100" : "lg:opacity-35",
                 )}
               >
