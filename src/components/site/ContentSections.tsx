@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { SmartImage } from "./SmartImage";
@@ -212,6 +212,15 @@ export function SystemBlock() {
  *  pinned frame and the club texts are centred in the space below it. */
 const NAV_BOTTOM = 84;
 
+/** The pinned club frame's size, 3:4 at the smallest of: its column (half the
+ *  grid container less the 64px gap), the space under the nav less a 32px
+ *  margin top and bottom, and 540 x 720px. Spelled out here rather than as
+ *  Tailwind arbitrary values to keep the calc() spacing exact. */
+const FRAME_VARS = {
+  "--frame-w": `min((100cqw - 64px) / 2, (100vh - ${NAV_BOTTOM + 64}px) * 3 / 4, 540px)`,
+  "--frame-h": "calc(var(--frame-w) * 4 / 3)",
+} as CSSProperties;
+
 export function LocationsBlock() {
   const [active, setActive] = useState(0);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
@@ -258,43 +267,48 @@ export function LocationsBlock() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-16">
+        {/* The grid is a size container so the frame's size can be worked out
+            from the column width (half the grid less the 64px gap) and shared
+            with the club texts beside it. */}
+        <div
+          className="@container grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-16"
+          style={FRAME_VARS}
+        >
           <div className="hidden lg:block">
-            {/* Pinned to the space the nav leaves (the bar ends 84px down:
-                16px offset + 68px bar) and centred in it. The frame takes its
-                size from its width, the smallest of the column, that space
-                minus a 32px margin top and bottom (at 3:4), and 540px (720px
-                tall). Sizing by height alone overflowed the narrow column on
-                tall tablet screens. */}
-            <div className="sticky top-[84px] flex h-[calc(100vh-84px)] items-center justify-center">
-              <div className="relative aspect-[3/4] w-[min(100%,(100vh-148px)*3/4,540px)] overflow-hidden rounded-card bg-muted">
-                {clubs.map((c, i) => (
-                  <div
-                    key={c.name}
-                    // `inert` rather than aria-hidden: the faded layers sit on top
-                    // of the active one and must not take its clicks or focus.
-                    inert={i !== active}
-                    className={cn(
-                      "absolute inset-0 transition-opacity duration-700 ease-out motion-reduce:transition-none",
-                      i === active ? "opacity-100" : "opacity-0",
-                    )}
-                  >
-                    <ClubMedia club={c} active={i === active} sizes="40vw" />
-                  </div>
-                ))}
-                <span className="absolute left-4 top-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs uppercase tracking-[0.05em] text-foreground backdrop-blur-md">
-                  {clubs[active].name}
-                </span>
-                <span className="absolute bottom-4 right-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs tabular-nums tracking-[0.05em] text-foreground backdrop-blur-md">
-                  {String(active + 1).padStart(2, "0")} / {String(clubs.length).padStart(2, "0")}
-                </span>
-              </div>
+            {/* Starts right under the heading like any module, then pins once
+                it reaches the middle of the space the nav leaves. */}
+            <div
+              className="sticky mx-auto aspect-[3/4] w-(--frame-w) overflow-hidden rounded-card bg-muted"
+              style={{
+                top: `calc(${NAV_BOTTOM}px + (100vh - ${NAV_BOTTOM}px - var(--frame-h)) / 2)`,
+              }}
+            >
+              {clubs.map((c, i) => (
+                <div
+                  key={c.name}
+                  // `inert` rather than aria-hidden: the faded layers sit on top
+                  // of the active one and must not take its clicks or focus.
+                  inert={i !== active}
+                  className={cn(
+                    "absolute inset-0 transition-opacity duration-700 ease-out motion-reduce:transition-none",
+                    i === active ? "opacity-100" : "opacity-0",
+                  )}
+                >
+                  <ClubMedia club={c} active={i === active} sizes="40vw" />
+                </div>
+              ))}
+              <span className="absolute left-4 top-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs uppercase tracking-[0.05em] text-foreground backdrop-blur-md">
+                {clubs[active].name}
+              </span>
+              <span className="absolute bottom-4 right-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs tabular-nums tracking-[0.05em] text-foreground backdrop-blur-md">
+                {String(active + 1).padStart(2, "0")} / {String(clubs.length).padStart(2, "0")}
+              </span>
             </div>
           </div>
 
-          {/* On desktop each club is exactly as tall as the pinned box, so its
-              text sits centred beside the frame while that club is in focus,
-              from the first club to the last. */}
+          {/* On desktop each club is exactly as tall as the frame: the first
+              sits beside it before anything pins, each later one centres on
+              it while pinned, and the last lines up with it as it unpins. */}
           <ol className="flex flex-col gap-16 lg:gap-0">
             {clubs.map((c, i) => (
               <li
@@ -304,7 +318,7 @@ export function LocationsBlock() {
                 }}
                 data-index={i}
                 className={cn(
-                  "flex flex-col gap-6 lg:min-h-[calc(100vh-84px)] lg:justify-center lg:transition-opacity lg:duration-500 motion-reduce:transition-none",
+                  "flex flex-col gap-6 lg:min-h-(--frame-h) lg:justify-center lg:transition-opacity lg:duration-500 motion-reduce:transition-none",
                   i === active ? "lg:opacity-100" : "lg:opacity-35",
                 )}
               >
