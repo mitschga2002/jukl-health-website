@@ -86,6 +86,9 @@ export type ClubCard = {
   address: readonly [string, string];
   image: string;
   imageAlt: string;
+  /** A portrait walk-through of the club, played in the homepage's Standorte
+   *  block in place of the photo. */
+  video?: { src: string; poster: string };
   points: readonly string[];
   link: Pick<LinkProps, "to">;
 };

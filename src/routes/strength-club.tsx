@@ -65,6 +65,7 @@ function StrengthClub() {
         title="Dein Club. Rund um die Uhr."
         intro="160 m² exklusives Trainingsambiente mitten in Dornbirn: 24/7 Zugang, auf 100 Mitglieder begrenzt und mit einem Betreuungssystem, das dich ein ganzes Jahr begleitet."
         image={heroImg}
+        video={{ src: "/video/strength-club.mp4", poster: "/video/strength-club-poster.webp" }}
         imageAlt="Trainingsfläche im Strength Club Dornbirn"
         facts={[
           { label: "Fläche", value: "160 m²" },

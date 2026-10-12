@@ -1,7 +1,8 @@
 import type { ClubCard } from "@/components/site/ClubPage";
 
 /* The three clubs as cards, shared by /clubs and the homepage's Standorte
-   block so the two always show the same photos and facts. */
+   block so the two always show the same photos and facts. The Standorte
+   block plays the videos in place of the photos. */
 export const clubs: ClubCard[] = [
   {
     name: "Performance Club",
@@ -9,6 +10,10 @@ export const clubs: ClubCard[] = [
     address: ["Bildgasse 10, 3. Stock", "A-6850 Dornbirn"],
     image: "/img/pc-hero-1386.webp",
     imageAlt: "Trainingsfläche im Performance Club Dornbirn",
+    video: {
+      src: "/video/performance-club.mp4",
+      poster: "/video/performance-club-poster.webp",
+    },
     points: [
       "Personal Training & Athletik",
       "Kleingruppenkurse: Highrocks · Mobility · Strength · Burn",
@@ -22,6 +27,7 @@ export const clubs: ClubCard[] = [
     address: ["Bildgasse 10, Erdgeschoss", "A-6850 Dornbirn"],
     image: "/img/strength-club-1824.webp",
     imageAlt: "Trainingsfläche im Strength Club Dornbirn",
+    video: { src: "/video/strength-club.mp4", poster: "/video/strength-club-poster.webp" },
     points: ["24/7 Zugang", "Max. 100 Mitglieder", "1 Jahr Betreuungssystem"],
     link: { to: "/strength-club" },
   },

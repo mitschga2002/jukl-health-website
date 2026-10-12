@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { SmartImage } from "./SmartImage";
+import { ClubVideo } from "./ClubVideo";
 import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
 import { Eyebrow, PillLink } from "./Pill";
@@ -56,6 +57,7 @@ export function PageHero({
   imagePosition = "center",
   objectPosition,
   banner = false,
+  video,
   facts,
 }: {
   eyebrow: string;
@@ -82,6 +84,9 @@ export function PageHero({
   /** Full-width image band under the text instead of a side panel. Keeps the
    *  photo's entire width visible, so wide group shots are never cut at the edges. */
   banner?: boolean;
+  /** A portrait clip shown in the side panel instead of the photo (the club
+   *  pages). The panel then turns portrait too, so the clip keeps its height. */
+  video?: { src: string; poster: string };
 }) {
   const positionCls = {
     center: "object-center",
@@ -182,22 +187,30 @@ export function PageHero({
         <div
           className={cn(
             "relative overflow-hidden rounded-card bg-muted",
-            ratio === "tall" && "min-h-[260px] sm:min-h-[380px] lg:min-h-[520px]",
-            ratio === "wide" && "min-h-[200px] sm:min-h-[280px] lg:min-h-[300px]",
+            video
+              ? "mx-auto aspect-[4/5] w-full max-w-[560px] lg:max-h-[78vh]"
+              : cn(
+                  ratio === "tall" && "min-h-[260px] sm:min-h-[380px] lg:min-h-[520px]",
+                  ratio === "wide" && "min-h-[200px] sm:min-h-[280px] lg:min-h-[300px]",
+                ),
           )}
         >
-          <SmartImage
-            src={image}
-            alt={imageAlt ?? title}
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className={cn(
-              ratio === "natural"
-                ? "block h-auto w-full"
-                : cn("absolute inset-0 size-full object-cover", positionCls),
-            )}
-            style={objectPosition ? { objectPosition } : undefined}
-          />
+          {video ? (
+            <ClubVideo src={video.src} poster={video.poster} label={imageAlt ?? title} />
+          ) : (
+            <SmartImage
+              src={image}
+              alt={imageAlt ?? title}
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className={cn(
+                ratio === "natural"
+                  ? "block h-auto w-full"
+                  : cn("absolute inset-0 size-full object-cover", positionCls),
+              )}
+              style={objectPosition ? { objectPosition } : undefined}
+            />
+          )}
         </div>
       </div>
     </header>

@@ -66,6 +66,10 @@ function PerformanceClub() {
         title="Dein Zentrum für funktionelles Training."
         intro="140 m² Trainingsfläche mitten in Dornbirn, top ausgebildete Coaches und eine klare Trainingsstruktur – hier treffen Personal Training, Kleingruppenkurse, Athletik und Physio aufeinander."
         image={heroImg}
+        video={{
+          src: "/video/performance-club.mp4",
+          poster: "/video/performance-club-poster.webp",
+        }}
         imageAlt="Trainingsfläche im Performance Club Dornbirn"
         facts={[
           { label: "Fläche", value: "140 m²" },

@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { SmartImage } from "./SmartImage";
 import { Eyebrow, PillLink } from "./Pill";
-import { ClubCards } from "./ClubPage";
+import { ClubVideo } from "./ClubVideo";
 import { clubs } from "@/lib/clubs";
 import { cn } from "@/lib/utils";
 import { SECTION_Y } from "./rhythm";
@@ -203,7 +203,30 @@ export function SystemBlock() {
   );
 }
 
+/* The clubs on the homepage: on desktop one media frame stays pinned on the
+   left while the three clubs scroll past on the right, and the frame fades to
+   whichever club crosses the middle of the viewport — so only one video ever
+   plays. Below lg there is no room for a pinned column; each club then
+   carries its own frame above its text, and plays only while on screen. */
 export function LocationsBlock() {
+  const [active, setActive] = useState(0);
+  const itemRefs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    // A one-pixel band across the middle of the viewport: the club crossing
+    // it is the one in focus.
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.index));
+        }
+      },
+      { rootMargin: "-50% 0px -50% 0px" },
+    );
+    for (const el of itemRefs.current) if (el) io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section className="jh-container jh-gutter">
       <div className={cn("flex flex-col gap-10 lg:gap-16", SECTION_Y)}>
@@ -219,9 +242,105 @@ export function LocationsBlock() {
           </div>
         </div>
 
-        <ClubCards items={clubs} />
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-16">
+          <div className="hidden lg:block">
+            <div className="sticky top-[12vh] mx-auto aspect-[3/4] h-[min(76vh,720px)] overflow-hidden rounded-card bg-muted">
+              {clubs.map((c, i) => (
+                <div
+                  key={c.name}
+                  aria-hidden={i !== active}
+                  className={cn(
+                    "absolute inset-0 transition-opacity duration-700 ease-out motion-reduce:transition-none",
+                    i === active ? "opacity-100" : "opacity-0",
+                  )}
+                >
+                  <ClubMedia club={c} active={i === active} sizes="40vw" />
+                </div>
+              ))}
+              <span className="absolute left-4 top-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs uppercase tracking-[0.05em] text-foreground backdrop-blur-md">
+                {clubs[active].name}
+              </span>
+              <span className="absolute bottom-4 right-4 rounded-image bg-background/85 px-2.5 py-1.5 text-xs tabular-nums tracking-[0.05em] text-foreground backdrop-blur-md">
+                {String(active + 1).padStart(2, "0")} / {String(clubs.length).padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
+          <ol className="flex flex-col gap-16 lg:gap-0">
+            {clubs.map((c, i) => (
+              <li
+                key={c.name}
+                ref={(el) => {
+                  itemRefs.current[i] = el;
+                }}
+                data-index={i}
+                className={cn(
+                  "flex flex-col gap-6 lg:min-h-[72vh] lg:justify-center lg:transition-opacity lg:duration-500 motion-reduce:transition-none",
+                  i === active ? "lg:opacity-100" : "lg:opacity-35",
+                )}
+              >
+                <div className="relative aspect-[4/5] overflow-hidden rounded-card bg-muted lg:hidden">
+                  <ClubMedia club={c} sizes="100vw" />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <span className="text-xs uppercase tracking-[0.05em] text-muted-foreground">
+                    {String(i + 1).padStart(2, "0")} · {c.area}
+                  </span>
+                  <h3 className="font-display text-[28px] leading-[1.25] text-foreground lg:text-[40px]">
+                    {c.name}
+                  </h3>
+                  <p className="text-sm font-light text-muted-foreground">
+                    {c.address.join(" · ")}
+                  </p>
+                </div>
+                <ul className="flex flex-col gap-2 border-t border-border pt-4">
+                  {c.points.map((p) => (
+                    <li key={p} className="flex gap-3 text-base font-light leading-[1.45]">
+                      <span className="shrink-0 text-primary" aria-hidden>
+                        →
+                      </span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex">
+                  <PillLink to={c.link.to ?? "/clubs"} variant="outlineOnLight">
+                    {c.name} entdecken
+                  </PillLink>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
+  );
+}
+
+/** A club's video where it has one, its photo otherwise. */
+function ClubMedia({
+  club,
+  active = true,
+  sizes,
+}: {
+  club: (typeof clubs)[number];
+  active?: boolean;
+  sizes: string;
+}) {
+  return club.video ? (
+    <ClubVideo
+      src={club.video.src}
+      poster={club.video.poster}
+      label={club.imageAlt}
+      active={active}
+    />
+  ) : (
+    <SmartImage
+      src={club.image}
+      alt={club.imageAlt}
+      sizes={sizes}
+      className="size-full object-cover"
+    />
   );
 }
 
