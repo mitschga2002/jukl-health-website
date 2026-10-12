@@ -24,7 +24,12 @@ export const getRouter = () => {
     // view transition's new-page snapshot is taken at the form as well.
     defaultHashScrollIntoView: { behavior: "instant", block: "start" },
     // Native View Transitions on route changes; the animation lives in styles.css.
-    defaultViewTransition: true,
+    // Only when the page itself changes: a jump within it ("Zum Kontaktformular"
+    // → #anfrage) faded the page out and back in to land on the same page.
+    // `false` skips the transition; an empty list keeps the untyped one.
+    defaultViewTransition: {
+      types: ({ pathChanged }) => (pathChanged ? [] : false),
+    },
     defaultPreloadStaleTime: 0,
   });
 

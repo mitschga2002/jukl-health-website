@@ -253,9 +253,35 @@ function LenisRouterSync() {
         lenis.scrollTo(target);
       }
     });
+    // A link to the hash the page is already on is no navigation, so the
+    // router stays put and a second click on "Zum Kontaktformular" went
+    // nowhere once you had scrolled away. Glide there ourselves, measured the
+    // same way. Runs after the router's own click handler, whatever it did.
+    const sameHash = (e: MouseEvent) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as Element | null)?.closest("a[href]");
+      if (!(a instanceof HTMLAnchorElement)) return;
+      const url = new URL(a.href);
+      const here = window.location;
+      if (
+        !url.hash ||
+        url.origin !== here.origin ||
+        url.pathname !== here.pathname ||
+        url.search !== here.search ||
+        url.hash !== here.hash
+      ) {
+        return;
+      }
+      const el = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+      if (!el) return;
+      e.preventDefault();
+      lenis.scrollTo(layoutScrollTop(el));
+    };
+    document.addEventListener("click", sameHash);
     return () => {
       stopGlide();
       adopt();
+      document.removeEventListener("click", sameHash);
     };
   }, [router, lenis]);
 
@@ -274,6 +300,13 @@ function hashScrollTarget(hash: string | undefined): number | undefined {
   if (!el) return undefined;
   const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
   if (Math.abs(el.getBoundingClientRect().top - margin) > 1) return undefined;
+  return layoutScrollTop(el);
+}
+
+/** The scroll position that puts `el`'s scroll-margin edge at the top of the
+    viewport, summed from offsets so a running scroll reveal cannot skew it. */
+function layoutScrollTop(el: HTMLElement): number {
+  const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
   let top = 0;
   for (let n: HTMLElement | null = el; n; n = n.offsetParent as HTMLElement | null) {
     top += n.offsetTop;

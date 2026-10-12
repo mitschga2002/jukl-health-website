@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -47,9 +47,16 @@ function PillBody({
   children,
 }: {
   variant: PillVariant;
-  arrow: boolean;
+  arrow: PillArrow;
   children: React.ReactNode;
 }) {
+  /* `down` is for jumps further down the same page: the arrow points where
+     the visitor goes and lifts off downward instead of up and out. */
+  const Arrow = arrow === "down" ? ArrowDown : ArrowUpRight;
+  const lift =
+    arrow === "down"
+      ? "group-hover/pill:translate-y-0.5"
+      : "group-hover/pill:-translate-y-0.5 group-hover/pill:translate-x-0.5";
   return (
     <>
       {/* `grow` only bites when the pill is stretched (e.g. `w-full` in the
@@ -59,37 +66,28 @@ function PillBody({
       <span className="grow text-center">{children}</span>
       {!arrow ? null : variant === "solid" ? (
         <span className="flex shrink-0 items-center justify-center rounded-full bg-background p-2.5">
-          <ArrowUpRight
-            className={cn(
-              "size-4 text-foreground",
-              arrowMotion,
-              "group-hover/pill:-translate-y-0.5 group-hover/pill:translate-x-0.5",
-            )}
+          <Arrow
+            className={cn("size-4 text-foreground", arrowMotion, lift)}
             strokeWidth={2}
             aria-hidden
           />
         </span>
       ) : (
-        <ArrowUpRight
-          className={cn(
-            "size-4 shrink-0",
-            arrowMotion,
-            "group-hover/pill:-translate-y-0.5 group-hover/pill:translate-x-0.5",
-          )}
-          strokeWidth={2}
-          aria-hidden
-        />
+        <Arrow className={cn("size-4 shrink-0", arrowMotion, lift)} strokeWidth={2} aria-hidden />
       )}
     </>
   );
 }
+
+/** `true` is the default up-right arrow; `"down"` points at a spot further down the page. */
+type PillArrow = boolean | "down";
 
 type PillBaseProps = {
   variant?: PillVariant;
   children: React.ReactNode;
   className?: string;
   /** Off for actions that stay on the page — a form submit, a consent button. */
-  arrow?: boolean;
+  arrow?: PillArrow;
 };
 
 type PillProps = PillBaseProps & {
@@ -98,6 +96,8 @@ type PillProps = PillBaseProps & {
   /** Router search params, e.g. the trainer preselected from the team page. */
   search?: Record<string, unknown>;
   onClick?: () => void;
+  /** Off for a jump within the page, which has no page change to animate. */
+  viewTransition?: boolean;
 };
 
 export function PillLink({
@@ -109,6 +109,7 @@ export function PillLink({
   arrow = true,
   className,
   onClick,
+  viewTransition,
 }: PillProps) {
   return (
     <Link
@@ -116,6 +117,7 @@ export function PillLink({
       hash={hash}
       search={search}
       onClick={onClick}
+      viewTransition={viewTransition}
       className={cn("group/pill", pillVariants({ variant }), className)}
     >
       <PillBody variant={variant} arrow={arrow}>

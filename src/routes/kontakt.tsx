@@ -3,7 +3,7 @@ import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { submitContact } from "@/lib/contact.functions";
-import { Eyebrow, PillButton } from "@/components/site/Pill";
+import { Eyebrow, PillButton, PillLink } from "@/components/site/Pill";
 import { SITE } from "@/lib/site";
 import {
   CONTACT_FORM_ID,
@@ -116,6 +116,22 @@ function Kontakt() {
         image="/img/team-banner-1824.webp"
         imageAlt="Das Team von JuklHealth"
         banner
+        action={
+          /* The banner pushes the form below the fold, so the hero points at
+             it. A router link rather than a bare `#anfrage`: the router path
+             (LenisRouterSync in __root) measures the form from layout, so the
+             glide stops on its top edge instead of 40px past it while the
+             section is still mid-reveal. `search` keeps a preselected topic. */
+          <PillLink
+            to="/kontakt"
+            search={search}
+            hash={CONTACT_FORM_ID}
+            viewTransition={false}
+            arrow="down"
+          >
+            Zum Kontaktformular
+          </PillLink>
+        }
       />
 
       {/* The homepage's dark slab, run seamless into the footer: contact is the

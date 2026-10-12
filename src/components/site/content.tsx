@@ -60,10 +60,14 @@ export function PageHero({
   video,
   videoSound = false,
   facts,
+  action,
 }: {
   eyebrow: string;
   title: string;
   intro?: string;
+  /** A call to action beside the copy: bottom-right of the header on wide
+   *  screens, under the intro on a phone (the contact page's jump to its form). */
+  action?: ReactNode;
   /** Key facts as small labelled chips under the intro (the club pages:
    *  area, access, format). Part of the header rather than a module of its
    *  own, because four short facts do not carry a section. */
@@ -132,11 +136,23 @@ export function PageHero({
     </div>
   );
 
+  /* The action sits apart from the copy rather than under it: bottom-right,
+     on the intro's last line, it is the last thing the eye reaches before the
+     photo. `shrink-0` keeps the pill whole when the intro runs long. */
+  const header = action ? (
+    <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+      {copy}
+      <div className="shrink-0">{action}</div>
+    </div>
+  ) : (
+    copy
+  );
+
   if (banner && image) {
     return (
       <header className="jh-container jh-gutter">
         <div className={SECTION_STACK}>
-          {copy}
+          {header}
           {/* Measured off the team photo: wall lettering 19-31%, head tops 40%,
               eye line 49%. A window starting between 19% and 31% slices the
               lettering, so 3:1 at 65% clears it at 32% and lands the heads in
@@ -170,7 +186,7 @@ export function PageHero({
   if (!image) {
     return (
       <header className="jh-container jh-gutter">
-        <div className={SECTION_STACK}>{copy}</div>
+        <div className={SECTION_STACK}>{header}</div>
       </header>
     );
   }
@@ -183,7 +199,7 @@ export function PageHero({
           SECTION_Y,
         )}
       >
-        {copy}
+        {header}
         {/* `natural` drops the fixed window: the photo keeps its own ratio and
             is shown whole, which is what a wide group shot needs. The other
             ratios crop to a portrait or landscape window on purpose. */}
