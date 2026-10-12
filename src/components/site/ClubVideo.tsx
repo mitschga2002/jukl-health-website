@@ -1,17 +1,23 @@
 import { useEffect, useRef, useState } from "react";
+import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * A muted, looping club walk-through that plays only while it is on screen
- * (at least a quarter of it), its tab is in front, and it is `active`.
- * Nothing is downloaded until it first plays (`preload="none"` plus the
- * poster), and with reduced motion it never starts: the poster stands in.
+ * A looping walk-through that plays muted while it is on screen (at least a
+ * quarter of it), its tab is in front, and it is `active`. Nothing is
+ * downloaded until it first plays (`preload="none"` plus the poster), and
+ * with reduced motion it does not start on its own: the poster stands in.
+ *
+ * A play/pause button (and, with `sound`, a mute toggle) sits in the bottom
+ * left corner, shown only on hover or keyboard focus. A video the viewer
+ * paused stays paused when it scrolls back into view.
  */
 export function ClubVideo({
   src,
   poster,
   label,
   active = true,
+  sound = false,
   className,
 }: {
   src: string;
@@ -20,12 +26,19 @@ export function ClubVideo({
   /** Set false to hold the video on its current frame, e.g. while another
    *  club is in focus. */
   active?: boolean;
+  /** The clip has an audio track worth hearing: adds a mute toggle. It still
+   *  starts muted, as browsers only autoplay muted video. */
+  sound?: boolean;
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
+  // null: the viewer has not touched the button, so autoplay decides.
+  const [wantsPlay, setWantsPlay] = useState<boolean | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
 
   useEffect(() => {
     const video = ref.current;
@@ -52,28 +65,69 @@ export function ClubVideo({
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    if (visible && active && !reduced && !tabHidden) {
-      // React does not reliably reflect `muted` to the property, and browsers
-      // only allow play() without a gesture on a muted video.
-      video.muted = true;
+    // React does not reliably reflect `muted` to the property, and browsers
+    // only allow play() without a gesture on a muted video.
+    video.muted = muted;
+    const wanted = wantsPlay ?? !reduced;
+    if (visible && active && !tabHidden && wanted) {
       // Autoplay can still be refused (e.g. power saving); the poster stays.
       video.play().catch(() => {});
     } else {
       video.pause();
     }
-  }, [visible, active, reduced, tabHidden]);
+  }, [visible, active, reduced, tabHidden, wantsPlay, muted]);
+
+  const button =
+    "flex size-7 items-center justify-center rounded-image bg-background/85 text-foreground backdrop-blur-md transition-colors hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
   return (
-    <video
-      ref={ref}
-      src={src}
-      poster={poster}
-      aria-label={label}
-      muted
-      loop
-      playsInline
-      preload="none"
-      className={cn("size-full object-cover", className)}
-    />
+    <div className={cn("group/video relative size-full", className)}>
+      <video
+        ref={ref}
+        src={src}
+        poster={poster}
+        aria-label={label}
+        muted
+        loop
+        playsInline
+        preload="none"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        className="size-full object-cover"
+      />
+      <div className="absolute bottom-3 left-3 flex gap-1.5 opacity-0 transition-opacity duration-300 has-focus-visible:opacity-100 group-hover/video:opacity-100 motion-reduce:transition-none">
+        <button
+          type="button"
+          className={button}
+          aria-label={playing ? "Video pausieren" : "Video abspielen"}
+          onClick={() => setWantsPlay(!playing)}
+        >
+          {playing ? (
+            <Pause className="size-3.5" aria-hidden />
+          ) : (
+            <Play className="size-3.5" aria-hidden />
+          )}
+        </button>
+        {sound ? (
+          <button
+            type="button"
+            className={button}
+            aria-label={muted ? "Ton einschalten" : "Ton ausschalten"}
+            aria-pressed={!muted}
+            onClick={() => {
+              setMuted(!muted);
+              // Turning the sound on is a request to hear it.
+              if (muted) setWantsPlay(true);
+            }}
+          >
+            {muted ? (
+              <VolumeX className="size-3.5" aria-hidden />
+            ) : (
+              <Volume2 className="size-3.5" aria-hidden />
+            )}
+          </button>
+        ) : null}
+      </div>
+    </div>
   );
 }

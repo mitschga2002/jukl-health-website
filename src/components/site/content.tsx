@@ -58,6 +58,7 @@ export function PageHero({
   objectPosition,
   banner = false,
   video,
+  videoSound = false,
   facts,
 }: {
   eyebrow: string;
@@ -87,6 +88,8 @@ export function PageHero({
   /** A portrait clip shown in the side panel instead of the photo (the club
    *  pages). The panel then turns portrait too, so the clip keeps its height. */
   video?: { src: string; poster: string };
+  /** The clip has sound worth hearing: offers a mute toggle (Vorträge). */
+  videoSound?: boolean;
 }) {
   const positionCls = {
     center: "object-center",
@@ -196,7 +199,12 @@ export function PageHero({
           )}
         >
           {video ? (
-            <ClubVideo src={video.src} poster={video.poster} label={imageAlt ?? title} />
+            <ClubVideo
+              src={video.src}
+              poster={video.poster}
+              label={imageAlt ?? title}
+              sound={videoSound}
+            />
           ) : (
             <SmartImage
               src={image}

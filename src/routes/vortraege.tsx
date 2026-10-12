@@ -3,10 +3,11 @@ import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, TopicCards, SECTION_Y } from "@/components/site/content";
 import { ClosingCta } from "@/components/site/ServicePage";
 import { Eyebrow, PillLink } from "@/components/site/Pill";
+import { SmartImage } from "@/components/site/SmartImage";
 import { cn } from "@/lib/utils";
 
 const banner = "/img/vortraege-banner-1080.webp";
-const video = "/img/vortraege-video.mp4";
+const video = { src: "/img/vortraege-video.mp4", poster: "/img/vortraege-video-poster.webp" };
 
 export const Route = createFileRoute("/vortraege")({
   head: () => ({
@@ -69,7 +70,9 @@ function Vortraege() {
         title="Are you ready to upgrade yourself?"
         intro="Wir bringen Wissenschaft in deinen Alltag — praxisnah, motivierend und sofort umsetzbar."
         image={banner}
-        objectPosition="50% 40%"
+        imageAlt="Julian Kleinheinz bei einem Vortrag"
+        video={video}
+        videoSound
       />
 
       {/* The homepage's dark slab: the two audiences are the page's core claim,
@@ -113,8 +116,8 @@ function Vortraege() {
         />
       </Section>
 
-      {/* The video had a section to itself with nothing beside it. Paired with
-          the formats line it becomes a block rather than a stray asset. */}
+      {/* The talk photo, paired with the formats line so it reads as a block
+          rather than a stray asset. The highlight reel opens the page instead. */}
       <section className="jh-container jh-gutter">
         <div
           className={cn(
@@ -122,13 +125,14 @@ function Vortraege() {
             SECTION_Y,
           )}
         >
-          <video
-            src={video}
-            controls
-            playsInline
-            preload="metadata"
-            className="aspect-[9/16] w-full max-w-[280px] rounded-card bg-foreground object-cover sm:max-w-sm lg:max-w-none"
-          />
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card bg-muted">
+            <SmartImage
+              src={banner}
+              alt="Julian Kleinheinz bei einem Vortrag"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="absolute inset-0 size-full object-cover object-[50%_40%]"
+            />
+          </div>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <Eyebrow>Einblick</Eyebrow>

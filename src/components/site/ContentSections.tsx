@@ -252,7 +252,9 @@ export function LocationsBlock() {
               {clubs.map((c, i) => (
                 <div
                   key={c.name}
-                  aria-hidden={i !== active}
+                  // `inert` rather than aria-hidden: the faded layers sit on top
+                  // of the active one and must not take its clicks or focus.
+                  inert={i !== active}
                   className={cn(
                     "absolute inset-0 transition-opacity duration-700 ease-out motion-reduce:transition-none",
                     i === active ? "opacity-100" : "opacity-0",
