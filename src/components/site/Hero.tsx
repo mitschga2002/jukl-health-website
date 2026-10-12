@@ -13,12 +13,14 @@ import {
   srcSet,
 } from "./heroImage";
 
-/* Three member portraits, drawn as overlapping 48px discs followed by a "200+"
-   counter disc. */
+/* Three client portraits, drawn as overlapping 48px discs followed by a
+   "10k+" counter disc. Real clients from the Referenzen page, cropped to the
+   face from their story photos. Decorative (the counter carries the claim), so
+   they stay unnamed for screen readers. */
 const members = [
-  { src: "/img/member-1-96.webp", alt: "" },
-  { src: "/img/member-2-96.webp", alt: "" },
-  { src: "/img/member-3-96.webp", alt: "" },
+  { src: "/img/avatar-alexander-konzett-96.webp", alt: "" },
+  { src: "/img/avatar-angelina-natter-96.webp", alt: "" },
+  { src: "/img/avatar-jayden-makwaya-96.webp", alt: "" },
 ];
 
 /**
