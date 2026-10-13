@@ -1,17 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero, Section } from "@/components/site/content";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle } from "@/lib/site";
 
 export const Route = createFileRoute("/impressum")({
   head: () => ({
     meta: [
-      { title: "Impressum – JuklHealth" },
+      { title: pageTitle("Impressum") },
       {
         name: "description",
         content:
           "Impressum · Juklhealth · Julian Kleinheinz · Bildgasse 10, 6850 Dornbirn, Österreich.",
       },
-      { property: "og:title", content: "Impressum – JuklHealth" },
+      { property: "og:title", content: pageTitle("Impressum") },
       { property: "og:description", content: "Rechtliche Informationen zu Juklhealth." },
       { name: "robots", content: "index, follow" },
       { property: "og:url", content: "https://juklhealth.com/impressum" },

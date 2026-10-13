@@ -103,14 +103,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#008c00" },
-      { title: "JuklHealth Clubs - Training & Physio in Dornbirn & Widnau" },
+      { title: "Jukl Health Clubs – Training & Physio in Dornbirn & Widnau" },
       {
         name: "description",
         content:
           "Das JuklHealth System: Performance Training, Athletik Coaching und klinische Physiotherapie an mehreren Standorten in Dornbirn und Widnau. Wissenschaftlich fundiert, individuell betreut, messbare Resultate.",
       },
-      { name: "author", content: "JuklHealth" },
-      { name: "apple-mobile-web-app-title", content: "JUKL Health" },
+      { name: "author", content: "Jukl Health" },
+      { name: "apple-mobile-web-app-title", content: "Jukl Health" },
       { property: "og:title", content: "Jukl Health Clubs" },
       {
         property: "og:description",

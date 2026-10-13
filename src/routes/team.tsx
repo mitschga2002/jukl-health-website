@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { PageShell, PageHero, ImagePlaceholder, SECTION_Y } from "@/components/site/content";
 import { Eyebrow, PillAnchor, PillLink } from "@/components/site/Pill";
 import { ClosingCta } from "@/components/site/ServicePage";
@@ -11,13 +12,13 @@ const teamBanner = "/img/team-banner-1824.webp";
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Team – JuklHealth Clubs" },
+      { title: pageTitle("Team") },
       {
         name: "description",
         content:
           "Das Team von JuklHealth: Sportwissenschaft, Physiotherapie, Coaching, Personal Training und Marketing – ein Team, ein System, mehrere Standorte.",
       },
-      { property: "og:title", content: "Team – JuklHealth" },
+      { property: "og:title", content: pageTitle("Team") },
       {
         property: "og:description",
         content: "Sportwissenschaft, Physiotherapie und Coaching aus einer Hand.",

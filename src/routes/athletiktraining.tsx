@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -18,13 +19,13 @@ const processImg = "/img/ath-screening-1200.webp";
 export const Route = createFileRoute("/athletiktraining")({
   head: () => ({
     meta: [
-      { title: "Athletiktraining – JuklHealth" },
+      { title: pageTitle("Athletiktraining") },
       {
         name: "description",
         content:
           "Periodisiertes Athletiktraining für Vereine, Mannschaften und Einzelathleten – mit Erfahrung aus dem Profifußball. Schnelligkeit, Kraft, Stabilität und Verletzungsprävention nach dem JuklHealth System.",
       },
-      { property: "og:title", content: "Athletiktraining – JuklHealth" },
+      { property: "og:title", content: pageTitle("Athletiktraining") },
       {
         property: "og:description",
         content: "Athletiktraining wie bei den Profis – individuell periodisiert.",

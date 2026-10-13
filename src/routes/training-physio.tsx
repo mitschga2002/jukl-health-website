@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 import {
@@ -11,13 +12,13 @@ import {
 export const Route = createFileRoute("/training-physio")({
   head: () => ({
     meta: [
-      { title: "Training & Physio – JuklHealth" },
+      { title: pageTitle("Training & Physio") },
       {
         name: "description",
         content:
           "Personal Training, Gruppentraining, Athletiktraining, Trainingsplanung, Physiotherapie und Trainingstherapie: alle Leistungen des JuklHealth Systems im Überblick.",
       },
-      { property: "og:title", content: "Training & Physio – JuklHealth" },
+      { property: "og:title", content: pageTitle("Training & Physio") },
       {
         property: "og:description",
         content: "Wissenschaftliches Training kombiniert mit klinischer Physiotherapie.",

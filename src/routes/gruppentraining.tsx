@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -19,13 +20,13 @@ const processImg = "/img/gt-drills-1600.webp";
 export const Route = createFileRoute("/gruppentraining")({
   head: () => ({
     meta: [
-      { title: "Gruppentraining – JuklHealth" },
+      { title: pageTitle("Gruppentraining") },
       {
         name: "description",
         content:
           "Gruppenkurse in Kleingruppen – Krafttraining für Frauen, Highrocks, Burn, Mobility und Strength – sowie Gruppentraining für Freunde, Firmenteams und Mannschaften. Individuelle Korrektur nach dem JuklHealth System.",
       },
-      { property: "og:title", content: "Gruppentraining – JuklHealth" },
+      { property: "og:title", content: pageTitle("Gruppentraining") },
       {
         property: "og:description",
         content: "Gemeinsam trainieren – mit individueller Betreuung für jeden in der Gruppe.",

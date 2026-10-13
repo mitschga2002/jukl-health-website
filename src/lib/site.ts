@@ -25,3 +25,12 @@ export const SITE = {
     url: "https://www.instagram.com/juklhealth_clubs/",
   },
 } as const;
+
+/** How the brand is written in titles and share previews. */
+export const BRAND = "Jukl Health";
+
+/** Every page title reads "<Page> – Jukl Health", so tabs, search results and
+ *  share previews look the same across the site. */
+export function pageTitle(page: string) {
+  return `${page} – ${BRAND}`;
+}

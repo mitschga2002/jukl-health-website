@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -17,13 +18,13 @@ const processImg = "/img/tp-coach-1600.webp";
 export const Route = createFileRoute("/trainingsplanung")({
   head: () => ({
     meta: [
-      { title: "Individuelle Trainingsplanung & Periodisierung – JuklHealth" },
+      { title: pageTitle("Trainingsplanung & Periodisierung") },
       {
         name: "description",
         content:
           "Evidenzbasierte, individuell periodisierte Trainingspläne nach dem JuklHealth System – abgestimmt auf deinen Status quo, deine Ziele und deinen Alltag.",
       },
-      { property: "og:title", content: "Individuelle Trainingsplanung – JuklHealth" },
+      { property: "og:title", content: pageTitle("Trainingsplanung") },
       {
         property: "og:description",
         content: "Periodisierte Trainingspläne, die exakt zu deinem Status quo passen.",

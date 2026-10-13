@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -15,13 +16,13 @@ const heroImg = "/img/widnau-club-1080.webp";
 export const Route = createFileRoute("/training-club-widnau")({
   head: () => ({
     meta: [
-      { title: "Training Club Widnau – JuklHealth (CH)" },
+      { title: pageTitle("Training Club Widnau (CH)") },
       {
         name: "description",
         content:
           "50 m² Personal Training, Athletiktraining und Trainingstherapie in Widnau (CH). 1:1 Setting, Termin auf Anfrage.",
       },
-      { property: "og:title", content: "Training Club Widnau – JuklHealth" },
+      { property: "og:title", content: pageTitle("Training Club Widnau") },
       {
         property: "og:description",
         content: "1:1 Personal Training in Widnau, Schweiz.",

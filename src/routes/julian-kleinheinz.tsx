@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import {
   PageShell,
   PageHero,
@@ -19,13 +20,13 @@ const julianPortrait = "/img/julian-portrait-1460.webp";
 export const Route = createFileRoute("/julian-kleinheinz")({
   head: () => ({
     meta: [
-      { title: "Julian Kleinheinz – Gründer | JuklHealth" },
+      { title: pageTitle("Julian Kleinheinz, Gründer") },
       {
         name: "description",
         content:
           "Julian Kleinheinz — Sportwissenschaftler, Athletiktrainer und Gründer von JuklHealth. Werdegang, Vision und Stationen.",
       },
-      { property: "og:title", content: "Julian Kleinheinz – JuklHealth" },
+      { property: "og:title", content: pageTitle("Julian Kleinheinz") },
       { property: "og:description", content: "Julian Kleinheinz — Werdegang & Vision." },
       { property: "og:url", content: "https://juklhealth.com/julian-kleinheinz" },
     ],

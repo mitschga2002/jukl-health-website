@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -15,13 +16,13 @@ const heroImg = "/img/strength-club-1824.webp";
 export const Route = createFileRoute("/strength-club")({
   head: () => ({
     meta: [
-      { title: "Strength Club Dornbirn — JuklHealth" },
+      { title: pageTitle("Strength Club Dornbirn") },
       {
         name: "description",
         content:
           "160 m² Strength Club in Dornbirn. 24/7 Zugang, max. 100 Members, exklusives Trainingsambiente mit persönlicher Betreuung.",
       },
-      { property: "og:title", content: "Strength Club Dornbirn — JuklHealth" },
+      { property: "og:title", content: pageTitle("Strength Club Dornbirn") },
       {
         property: "og:description",
         content: "160 m² · 24/7 Zugang · max. 100 Mitglieder.",

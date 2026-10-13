@@ -4,7 +4,7 @@ import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { submitContact } from "@/lib/contact.functions";
 import { Eyebrow, PillButton, PillLink } from "@/components/site/Pill";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle } from "@/lib/site";
 import {
   CONTACT_FORM_ID,
   CONTACT_TOPICS,
@@ -53,13 +53,13 @@ export const Route = createFileRoute("/kontakt")({
   }),
   head: () => ({
     meta: [
-      { title: "Kontakt – JuklHealth Clubs" },
+      { title: pageTitle("Kontakt") },
       {
         name: "description",
         content:
           "Kontaktiere JuklHealth – Clubs in Dornbirn und Widnau. Bildgasse 10, 6850 Dornbirn, julian@juklhealth.com.",
       },
-      { property: "og:title", content: "Kontakt – JuklHealth" },
+      { property: "og:title", content: pageTitle("Kontakt") },
       { property: "og:description", content: "Julian Kleinheinz · Dornbirn & Widnau." },
       { property: "og:url", content: "https://juklhealth.com/kontakt" },
     ],

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, TopicCards } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -17,13 +18,13 @@ const clubImg = "/img/physio-club-1200.webp";
 export const Route = createFileRoute("/physiotherapie")({
   head: () => ({
     meta: [
-      { title: "Physiotherapie – JuklHealth" },
+      { title: pageTitle("Physiotherapie") },
       {
         name: "description",
         content:
           "Aktive Physiotherapie und Sportphysiotherapie nach dem JuklHealth System: Ursache finden, gezielt behandeln und stärker zurück in Sport und Alltag – für Freizeit- und Profisportler.",
       },
-      { property: "og:title", content: "Physiotherapie – JuklHealth" },
+      { property: "og:title", content: pageTitle("Physiotherapie") },
       {
         property: "og:description",
         content: "Aktive Physiotherapie und Sportphysiotherapie nach dem JuklHealth System.",

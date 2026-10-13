@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -15,13 +16,13 @@ const heroImg = "/img/pc-banner-1386.webp";
 export const Route = createFileRoute("/performance-club")({
   head: () => ({
     meta: [
-      { title: "Performance Club Dornbirn — JuklHealth" },
+      { title: pageTitle("Performance Club Dornbirn") },
       {
         name: "description",
         content:
           "Dein Zentrum für funktionelles Training. Personal Training, Athletik & Kurse in Kleingruppen auf 140 m² mitten in Dornbirn.",
       },
-      { property: "og:title", content: "Performance Club — JuklHealth" },
+      { property: "og:title", content: pageTitle("Performance Club Dornbirn") },
       {
         property: "og:description",
         content: "Dein Zentrum für funktionelles Training in Dornbirn.",

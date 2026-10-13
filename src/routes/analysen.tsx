@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Listing, ListingRow, BulletList } from "@/components/site/content";
 import { ClosingCta, StoriesSection } from "@/components/site/ServicePage";
@@ -14,13 +15,13 @@ const gesundheitscoaching = "/img/an-coaching-1600.webp";
 export const Route = createFileRoute("/analysen")({
   head: () => ({
     meta: [
-      { title: "Analysen — FMS, Stoffwechsel, Leistung & Physio | JuklHealth" },
+      { title: pageTitle("FMS-, Stoffwechsel- & Leistungsanalysen") },
       {
         name: "description",
         content:
           "FMS Bewegungsscreening, Performance Screening, Stoffwechselanalyse, Leistungsanalyse, Physioanalyse und Gesundheitscoaching bei JuklHealth.",
       },
-      { property: "og:title", content: "Analysen — JuklHealth" },
+      { property: "og:title", content: pageTitle("Analysen") },
       { property: "og:description", content: "Datenbasis für nachhaltige Leistung & Gesundheit." },
       { property: "og:url", content: "https://juklhealth.com/analysen" },
     ],

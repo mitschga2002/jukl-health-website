@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 import { cn } from "@/lib/utils";
@@ -9,13 +10,13 @@ import { CATEGORIES, stories, type Category } from "@/lib/stories";
 export const Route = createFileRoute("/referenzen")({
   head: () => ({
     meta: [
-      { title: "Referenzen – Was unsere Klienten sagen | JuklHealth" },
+      { title: pageTitle("Referenzen & Klientenstimmen") },
       {
         name: "description",
         content:
           "Stimmen von Profisportler:innen, Vereinen, Privatpersonen und Unternehmer:innen, die mit dem JuklHealth System trainieren.",
       },
-      { property: "og:title", content: "Referenzen – JuklHealth" },
+      { property: "og:title", content: pageTitle("Referenzen") },
       { property: "og:description", content: "Was unsere Klienten sagen." },
       { property: "og:url", content: "https://juklhealth.com/referenzen" },
     ],

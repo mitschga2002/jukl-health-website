@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
 import { ClosingCta } from "@/components/site/ServicePage";
@@ -8,13 +9,13 @@ import { clubs } from "@/lib/clubs";
 export const Route = createFileRoute("/clubs")({
   head: () => ({
     meta: [
-      { title: "Clubs — Performance, Strength & Training Club | JuklHealth" },
+      { title: pageTitle("Performance, Strength & Training Clubs") },
       {
         name: "description",
         content:
           "Performance Club Dornbirn, Strength Club Dornbirn und Training Club Widnau — drei Standorte, ein System.",
       },
-      { property: "og:title", content: "Clubs — JuklHealth" },
+      { property: "og:title", content: pageTitle("Clubs") },
       { property: "og:description", content: "Unsere Performance Clubs in Dornbirn & Widnau." },
       { property: "og:url", content: "https://juklhealth.com/clubs" },
     ],

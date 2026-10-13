@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -17,13 +18,13 @@ const processImg = "/img/tt-uebung-1600.webp";
 export const Route = createFileRoute("/trainingstherapie")({
   head: () => ({
     meta: [
-      { title: "Trainingstherapie – JuklHealth" },
+      { title: pageTitle("Trainingstherapie") },
       {
         name: "description",
         content:
           "Aktives Aufbautraining nach Verletzung, Operation oder bei chronischen Beschwerden – schmerzadaptiert, progressiv und eng abgestimmt mit unserer Physiotherapie.",
       },
-      { property: "og:title", content: "Trainingstherapie – JuklHealth" },
+      { property: "og:title", content: pageTitle("Trainingstherapie") },
       {
         property: "og:description",
         content: "Aktives Aufbautraining nach Beschwerden oder Verletzungen.",

@@ -11,7 +11,7 @@ import { LocationsBlock, SystemBlock, ProfisportBlock } from "@/components/site/
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "JuklHealth Clubs - Training & Physio in Dornbirn & Widnau" },
+      { title: "Jukl Health Clubs – Training & Physio in Dornbirn & Widnau" },
       {
         name: "description",
         content:

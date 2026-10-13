@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero, Section, TopicCards, SECTION_Y } from "@/components/site/content";
 import { ClosingCta } from "@/components/site/ServicePage";
@@ -12,13 +13,13 @@ const video = { src: "/img/vortraege-video.mp4", poster: "/img/vortraege-video-p
 export const Route = createFileRoute("/vortraege")({
   head: () => ({
     meta: [
-      { title: "Vorträge & Workshops — JuklHealth" },
+      { title: pageTitle("Vorträge & Workshops") },
       {
         name: "description",
         content:
           "Wissenschaft in deinen Alltag — Keynotes, Workshops und Webinare für Unternehmen und Sportinstitutionen.",
       },
-      { property: "og:title", content: "Vorträge — JuklHealth" },
+      { property: "og:title", content: pageTitle("Vorträge & Workshops") },
       { property: "og:description", content: "Keynotes, Workshops & Webinare." },
       { property: "og:url", content: "https://juklhealth.com/vortraege" },
     ],

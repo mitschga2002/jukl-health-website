@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { contactFormLink } from "@/lib/contact-topics";
 import { PageShell, PageHero } from "@/components/site/content";
 import { PillLink } from "@/components/site/Pill";
@@ -17,13 +18,13 @@ const processImg = "/img/pt-motivation-1200.webp";
 export const Route = createFileRoute("/personaltraining")({
   head: () => ({
     meta: [
-      { title: "Personal Training – JuklHealth" },
+      { title: pageTitle("Personal Training") },
       {
         name: "description",
         content:
           "1:1 Personal Training in Dornbirn und Widnau: Anamnese, Bewegungsanalyse, individueller Plan und messbare Fortschritte – mit deinem persönlichen Coach nach dem JuklHealth System.",
       },
-      { property: "og:title", content: "Personal Training – JuklHealth" },
+      { property: "og:title", content: pageTitle("Personal Training") },
       {
         property: "og:description",
         content: "1:1 Personal Training mit voller Aufmerksamkeit – in Dornbirn und Widnau.",

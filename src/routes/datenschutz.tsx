@@ -1,16 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageTitle } from "@/lib/site";
 import { PageShell, PageHero, Section } from "@/components/site/content";
 
 export const Route = createFileRoute("/datenschutz")({
   head: () => ({
     meta: [
-      { title: "Datenschutzerklärung – JuklHealth" },
+      { title: pageTitle("Datenschutzerklärung") },
       {
         name: "description",
         content:
           "Datenschutzerklärung von Juklhealth. Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO.",
       },
-      { property: "og:title", content: "Datenschutz – JuklHealth" },
+      { property: "og:title", content: pageTitle("Datenschutz") },
       { property: "og:description", content: "Datenschutzerklärung gemäß DSGVO." },
       { name: "robots", content: "index, follow" },
       { property: "og:url", content: "https://juklhealth.com/datenschutz" },
