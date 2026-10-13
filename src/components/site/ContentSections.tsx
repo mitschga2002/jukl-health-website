@@ -376,6 +376,7 @@ function ClubMedia({
       poster={club.video.poster}
       label={club.imageAlt}
       active={active}
+      lazyPoster
     />
   ) : (
     <SmartImage

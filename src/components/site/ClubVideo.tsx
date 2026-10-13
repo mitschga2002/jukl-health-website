@@ -13,9 +13,17 @@ import { cn } from "@/lib/utils";
  * hover, so there a tap on the video shows them for a few seconds, the way
  * phone video players do; while hidden they cannot be tapped by accident. A
  * video the viewer paused stays paused when it scrolls back into view.
+ *
+ * A poster is fetched with the page even under `preload="none"`, so a video
+ * far down the page sets `lazyPoster` to hold it back until it is within
+ * `POSTER_MARGIN` of the viewport — early enough that it is painted before it
+ * scrolls in. Not for a video in the first screen: there the poster is what
+ * paints first.
  */
 /** How long a tap keeps the controls up on touch screens. */
 const REVEAL_MS = 3000;
+/** How far ahead of the viewport a lazy poster starts loading. */
+const POSTER_MARGIN = "1000px";
 
 export function ClubVideo({
   src,
@@ -23,6 +31,7 @@ export function ClubVideo({
   label,
   active = true,
   sound = false,
+  lazyPoster = false,
   className,
 }: {
   src: string;
@@ -34,10 +43,13 @@ export function ClubVideo({
   /** The clip has an audio track worth hearing: adds a mute toggle. It still
    *  starts muted, as browsers only autoplay muted video. */
   sound?: boolean;
+  /** Below the fold: fetch the poster only as the video nears the viewport. */
+  lazyPoster?: boolean;
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [visible, setVisible] = useState(false);
+  const [posterNear, setPosterNear] = useState(!lazyPoster);
   const [reduced, setReduced] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
   // null: the viewer has not touched the button, so autoplay decides.
@@ -80,6 +92,19 @@ export function ClubVideo({
 
   useEffect(() => {
     const video = ref.current;
+    if (!video || posterNear) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setPosterNear(true);
+      },
+      { rootMargin: POSTER_MARGIN },
+    );
+    io.observe(video);
+    return () => io.disconnect();
+  }, [posterNear]);
+
+  useEffect(() => {
+    const video = ref.current;
     if (!video) return;
     // React does not reliably reflect `muted` to the property, and browsers
     // only allow play() without a gesture on a muted video.
@@ -119,7 +144,7 @@ export function ClubVideo({
       <video
         ref={ref}
         src={src}
-        poster={poster}
+        poster={posterNear ? poster : undefined}
         aria-label={label}
         muted
         loop
