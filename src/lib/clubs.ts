@@ -26,7 +26,7 @@ export const clubs: ClubCard[] = [
     area: "160 m²",
     address: ["Bildgasse 10, Erdgeschoss", "A-6850 Dornbirn"],
     image: "/img/strength-club-1824.webp",
-    imageAlt: "Trainingsfläche im Strength Club Dornbirn",
+    imageAlt: "Mitglied vor der Strength-Club-Wand",
     video: { src: "/video/strength-club.mp4", poster: "/video/strength-club-poster.webp" },
     points: ["24/7 Zugang", "Max. 100 Mitglieder", "1 Jahr Betreuungssystem"],
     link: { to: "/strength-club" },

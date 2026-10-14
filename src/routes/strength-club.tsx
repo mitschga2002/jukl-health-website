@@ -9,7 +9,7 @@ import {
   StoriesSection,
   type OfferCard,
 } from "@/components/site/ServicePage";
-import { ClubLocation } from "@/components/site/ClubPage";
+import { ClubGallery, ClubLocation } from "@/components/site/ClubPage";
 
 const heroImg = "/img/strength-club-1824.webp";
 
@@ -38,8 +38,8 @@ const offers: OfferCard[] = [
   {
     title: "24/7 Membership",
     body: "Ein Jahr, sieben Tage die Woche, rund um die Uhr – trainiere, wann es in deinen Alltag passt.",
-    image: "/img/strength-club-1824.webp",
-    imageAlt: "Trainingsfläche im Strength Club Dornbirn",
+    image: "/img/sc-membership-1600.webp",
+    imageAlt: "Mitglied lehnt lächelnd an einem Gerät vor dem Strength-Club-Schriftzug",
     link: contactFormLink("Strength Club"),
   },
   {
@@ -52,8 +52,8 @@ const offers: OfferCard[] = [
   {
     title: "Personal Training",
     body: "Zusätzlich 1:1-Einheiten buchen, wenn du Technik, Kraft oder ein Ziel gezielt angehen willst.",
-    image: "/img/pt-kraft-1600.webp",
-    imageAlt: "Coach begleitet eine Kundin beim Kreuzheben",
+    image: "/img/sc-personal-training-1600.webp",
+    imageAlt: "Coach begleitet eine Kundin beim Kettlebell-Training im Strength Club",
     link: { to: "/personaltraining" },
   },
 ];
@@ -73,6 +73,24 @@ function StrengthClub() {
           { label: "Zugang", value: "24/7" },
           { label: "Mitglieder", value: "Max. 100" },
           { label: "Betreuung", value: "1 Jahr inklusive" },
+        ]}
+      />
+
+      <ClubGallery
+        eyebrow="EINBLICKE"
+        title="So trainierst du im Strength Club"
+        images={[
+          {
+            src: "/img/sc-high-five-1600.webp",
+            alt: "Coach und Mitglied geben sich vor der Strength-Club-Wand ein High five",
+          },
+          { src: "/img/sc-battle-ropes-1600.webp", alt: "Training mit Battle Ropes und Coach" },
+          { src: "/img/sc-rack-1600.webp", alt: "Kniebeuge mit der Langhantel im Rack" },
+          { src: "/img/sc-sitzend-1600.webp", alt: "Rudern sitzend am Kabelzug" },
+          {
+            src: "/img/sc-kabelzug-coach-1600.webp",
+            alt: "Coach begleitet eine Übung am Kabelzug",
+          },
         ]}
       />
 

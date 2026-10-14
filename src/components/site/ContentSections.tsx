@@ -34,7 +34,7 @@ const services = [
     tags: ["24/7", "Membership"],
     to: "/strength-club",
     image: "/img/strength-club-1824.webp",
-    imageAlt: "Trainingsfläche im Strength Club Dornbirn",
+    imageAlt: "Mitglied vor der Strength-Club-Wand",
   },
   {
     title: "Rehabili­tation & Verletzungs­prävention",

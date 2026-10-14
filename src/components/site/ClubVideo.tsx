@@ -19,6 +19,12 @@ import { cn } from "@/lib/utils";
  * `POSTER_MARGIN` of the viewport — early enough that it is painted before it
  * scrolls in. Not for a video in the first screen: there the poster is what
  * paints first.
+ *
+ * The poster is an `<img>` under the video rather than its `poster`
+ * attribute, and the video stays transparent until it has decoded a frame.
+ * With `preload="none"` the browser drops the poster as soon as play() starts
+ * loading and paints an empty box until the first frame arrives, which showed
+ * as a grey flash every time a video scrolled into view.
  */
 /** How long a tap keeps the controls up on touch screens. */
 const REVEAL_MS = 3000;
@@ -55,6 +61,8 @@ export function ClubVideo({
   // null: the viewer has not touched the button, so autoplay decides.
   const [wantsPlay, setWantsPlay] = useState<boolean | null>(null);
   const [playing, setPlaying] = useState(false);
+  // The video has a frame to show; until then the poster below shows through.
+  const [hasFrame, setHasFrame] = useState(false);
   const [muted, setMuted] = useState(true);
   const [revealed, setRevealed] = useState(false);
   const pointerType = useRef("mouse");
@@ -141,10 +149,18 @@ export function ClubVideo({
         }
       }}
     >
+      {posterNear ? (
+        <img
+          src={poster}
+          alt=""
+          aria-hidden
+          decoding="async"
+          className="absolute inset-0 size-full object-cover"
+        />
+      ) : null}
       <video
         ref={ref}
         src={src}
-        poster={posterNear ? poster : undefined}
         aria-label={label}
         muted
         loop
@@ -152,7 +168,12 @@ export function ClubVideo({
         preload="none"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
-        className="size-full object-cover"
+        onLoadedData={() => setHasFrame(true)}
+        onPlaying={() => setHasFrame(true)}
+        className={cn(
+          "relative size-full object-cover transition-opacity duration-300 motion-reduce:transition-none",
+          hasFrame ? "opacity-100" : "opacity-0",
+        )}
       />
       <div
         className={cn(

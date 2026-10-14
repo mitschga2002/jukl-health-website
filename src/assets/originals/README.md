@@ -80,3 +80,21 @@ Four stems have no master here (`angebot`, `lucas-vidal`, `profisport`,
 `Unbenannt 090.jpg`, which is **not stored in this repo** (23 MB). The master
 kept here is large enough to regenerate the whole ladder, whose top rung is
 1600 px — wider than the CDN-derived stems can reach.
+
+The Strength Club shoot (`sc-*.jpg` and `strength-club.jpg`) is another
+exception: thirteen Sony RAW files (`DSC03340.ARW` … `DSC04224.ARW`, 4240x2832,
+shot upright), which are **not stored in this repo**. Eight are used, each as a
+4:3 crop of the full-width upright frame taken after `-auto-orient`
+(`-crop 2832x2124+0+<y>`), so they sit in the same landscape frames as every
+other photo on the site:
+
+| master                     | source                 | y   | width |
+| -------------------------- | ---------------------- | --- | ----- |
+| `strength-club.jpg`        | `DSC04117` (logo wall) | 260 | 1824  |
+| `sc-membership.jpg`        | `DSC03340`             | 850 | 1600  |
+| `sc-personal-training.jpg` | `DSC03432`             | 680 | 1600  |
+| `sc-high-five.jpg`         | `DSC04224`             | 560 | 1600  |
+| `sc-battle-ropes.jpg`      | `DSC03465`             | 900 | 1600  |
+| `sc-rack.jpg`              | `DSC03556`             | 900 | 1600  |
+| `sc-sitzend.jpg`           | `DSC03729`             | 700 | 1600  |
+| `sc-kabelzug-coach.jpg`    | `DSC03617`             | 800 | 1600  |

@@ -697,7 +697,7 @@
   },
   "/img/strength-club-1824.webp": {
     "width": 1824,
-    "height": 1217,
+    "height": 1368,
     "variants": [
       {
         "url": "/img/strength-club-480.webp",
@@ -2321,6 +2321,216 @@
       },
       {
         "url": "/img/referenzen-hero-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/sc-personal-training-1600.webp": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "url": "/img/sc-personal-training-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/sc-personal-training-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/sc-personal-training-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/sc-personal-training-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/sc-personal-training-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/sc-personal-training-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/sc-high-five-1600.webp": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "url": "/img/sc-high-five-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/sc-high-five-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/sc-high-five-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/sc-high-five-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/sc-high-five-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/sc-high-five-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/sc-battle-ropes-1600.webp": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "url": "/img/sc-battle-ropes-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/sc-battle-ropes-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/sc-battle-ropes-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/sc-battle-ropes-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/sc-battle-ropes-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/sc-battle-ropes-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/sc-rack-1600.webp": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "url": "/img/sc-rack-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/sc-rack-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/sc-rack-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/sc-rack-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/sc-rack-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/sc-rack-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/sc-sitzend-1600.webp": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "url": "/img/sc-sitzend-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/sc-sitzend-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/sc-sitzend-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/sc-sitzend-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/sc-sitzend-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/sc-sitzend-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/sc-kabelzug-coach-1600.webp": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "url": "/img/sc-kabelzug-coach-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/sc-kabelzug-coach-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/sc-kabelzug-coach-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/sc-kabelzug-coach-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/sc-kabelzug-coach-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/sc-kabelzug-coach-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/img/sc-membership-1600.webp": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "url": "/img/sc-membership-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/sc-membership-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/sc-membership-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/sc-membership-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/sc-membership-1200.webp",
+        "width": 1200
+      },
+      {
+        "url": "/img/sc-membership-1600.webp",
         "width": 1600
       }
     ]
