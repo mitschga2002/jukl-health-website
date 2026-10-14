@@ -499,7 +499,7 @@ button {
   }
 
   /* Scroll reveal: every section below the hero eases up as its top edge comes
-     in, finishing by the time its top edge is a little above mid-screen. It is tied
+     in, finishing by the time its top edge is about two thirds up the screen. It is tied
      to scroll position rather than a one-shot trigger, so anything already in
      view on load (or reached by an anchor jump) simply renders in place. The
      hero is not a <section>, so it keeps its own entrance. */
@@ -515,7 +515,7 @@ button {
     main section {
       animation: jh-reveal var(--jh-scroll-ease) both;
       animation-timeline: view();
-      animation-range: cover 0% cover 50vh;
+      animation-range: cover 0% cover 40vh;
     }
 
     /* Sections whose cards rise on their own only fade: moving both would
@@ -534,7 +534,7 @@ button {
       --d: 0;
       animation: jh-rise var(--jh-scroll-ease) both;
       animation-timeline: view();
-      animation-range: cover calc(var(--d) * 6vh) cover calc(55vh + var(--d) * 6vh);
+      animation-range: cover calc(var(--d) * 6vh) cover calc(45vh + var(--d) * 6vh);
     }
 
     .jh-stagger > :nth-child(3n + 2) {
@@ -592,13 +592,20 @@ button {
 }
 
 /* In all three reveals the opacity is done well before the movement: an
-   element still see-through while it is nearly in place reads as a lag. */
+   element still see-through while it is nearly in place reads as a lag. They
+   start from `--jh-reveal-from` rather than fully transparent, so content
+   coming in at the bottom edge is already readable; the rise carries the
+   motion. */
+:root {
+  --jh-reveal-from: 0.35;
+}
+
 @keyframes jh-rise {
   from {
-    opacity: 0;
+    opacity: var(--jh-reveal-from);
     transform: translateY(3rem) scale(0.98);
   }
-  60% {
+  40% {
     opacity: 1;
   }
 }
@@ -611,19 +618,19 @@ button {
 
 @keyframes jh-reveal {
   from {
-    opacity: 0;
+    opacity: var(--jh-reveal-from);
     transform: translateY(2.5rem);
   }
-  60% {
+  40% {
     opacity: 1;
   }
 }
 
 @keyframes jh-reveal-fade {
   from {
-    opacity: 0;
+    opacity: var(--jh-reveal-from);
   }
-  60% {
+  40% {
     opacity: 1;
   }
 }
