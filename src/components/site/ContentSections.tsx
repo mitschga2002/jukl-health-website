@@ -35,7 +35,7 @@ const services = [
     to: "/strength-club",
     image: "/img/sc-membership-1600.webp",
     imageAlt: "Mitglied lehnt lächelnd an einem Gerät vor dem Strength-Club-Schriftzug",
-    imagePosition: "object-[center_40%]",
+    imagePosition: "object-[center_35%]",
   },
   {
     title: "Rehabili­tation & Verletzungs­prävention",
