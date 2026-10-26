@@ -2534,5 +2534,31 @@
         "width": 1600
       }
     ]
+  },
+  "/img/mike-galeli-1200.webp": {
+    "width": 1200,
+    "height": 1599,
+    "variants": [
+      {
+        "url": "/img/mike-galeli-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/mike-galeli-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/mike-galeli-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/mike-galeli-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/mike-galeli-1200.webp",
+        "width": 1200
+      }
+    ]
   }
 }

@@ -96,6 +96,16 @@ export const stories: Story[] = [
     imagePosition: "object-top",
   },
   {
+    name: "Mike Galeli",
+    role: "Privatperson",
+    quote:
+      "Dank Julian habe ich viel über die richtige Ernährung und effektives Training gelernt. Ich konnte gezielt Körperfett reduzieren, Muskeln aufbauen und meinen Körper deutlich besser definieren. Das Training hat immer Spaß gemacht und Julian wusste genau, wie er mich motivieren kann. Ein super Coach, den ich nur weiterempfehlen kann!",
+    highlight: "gezielt Körperfett reduzieren, Muskeln aufbauen",
+    category: "Privatpersonen",
+    image: "/img/mike-galeli-1200.webp",
+    imagePosition: "object-top",
+  },
+  {
     name: "Beate Schuster",
     role: "Unternehmerin aus Schlins",
     quote:
