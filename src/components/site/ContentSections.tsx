@@ -33,8 +33,9 @@ const services = [
     body: "160 m², 24/7-Zugang, exklusives Trainingsambiente. Exklusiv auf 100 Mitglieder begrenzt – inklusive Betreuungssystem über ein ganzes Jahr.",
     tags: ["24/7", "Membership"],
     to: "/strength-club",
-    image: "/img/profisport-1824.webp",
-    imageAlt: "Trainingsfläche im Strength Club mit Jaguar-Wandbild und Sprintbahn",
+    image: "/img/sc-membership-1600.webp",
+    imageAlt: "Mitglied lehnt lächelnd an einem Gerät vor dem Strength-Club-Schriftzug",
+    imagePosition: "object-[center_35%]",
   },
   {
     title: "Rehabili­tation & Verletzungs­prävention",
