@@ -97,7 +97,7 @@ export const stories: Story[] = [
   },
   {
     name: "Mike Galeli",
-    role: "Privatperson",
+    role: "Schauspieler & Unternehmer",
     quote:
       "Dank Julian habe ich viel über die richtige Ernährung und effektives Training gelernt. Ich konnte gezielt Körperfett reduzieren, Muskeln aufbauen und meinen Körper deutlich besser definieren. Das Training hat immer Spaß gemacht und Julian wusste genau, wie er mich motivieren kann. Ein super Coach, den ich nur weiterempfehlen kann!",
     highlight: "gezielt Körperfett reduzieren, Muskeln aufbauen",
@@ -113,6 +113,16 @@ export const stories: Story[] = [
     highlight: "Ehrlich, authentisch, motivierend.",
     category: "Unternehmen",
     image: "/img/beate-schuster-900.webp",
+    imagePosition: "object-top",
+  },
+  {
+    name: "Izabela Ion",
+    role: "Model",
+    quote:
+      "Was ich an Julians Arbeit besonders schätze, ist sein ganzheitlicher Ansatz. Er legt nicht nur Wert auf Kraft und körperliche Leistungsfähigkeit, sondern auch auf Beweglichkeit, Körperhaltung, Technik und das Zusammenspiel verschiedener körperlicher Fähigkeiten. Durch seine individuelle Herangehensweise entsteht ein Training, das auf die persönlichen Voraussetzungen und Ziele abgestimmt ist und weit über eine gewöhnliche Trainingseinheit hinausgeht.",
+    highlight: "sein ganzheitlicher Ansatz",
+    category: "Privatpersonen",
+    image: "/img/izabela-ion-1200.webp",
     imagePosition: "object-top",
   },
   {

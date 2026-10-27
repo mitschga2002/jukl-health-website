@@ -2560,5 +2560,31 @@
         "width": 1200
       }
     ]
+  },
+  "/img/izabela-ion-1200.webp": {
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "url": "/img/izabela-ion-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/izabela-ion-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/izabela-ion-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/izabela-ion-960.webp",
+        "width": 960
+      },
+      {
+        "url": "/img/izabela-ion-1200.webp",
+        "width": 1200
+      }
+    ]
   }
 }
