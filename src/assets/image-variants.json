@@ -2586,5 +2586,27 @@
         "width": 1200
       }
     ]
+  },
+  "/img/dietmar-gabriel-1024.webp": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "url": "/img/dietmar-gabriel-480.webp",
+        "width": 480
+      },
+      {
+        "url": "/img/dietmar-gabriel-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/img/dietmar-gabriel-768.webp",
+        "width": 768
+      },
+      {
+        "url": "/img/dietmar-gabriel-1024.webp",
+        "width": 1024
+      }
+    ]
   }
 }
