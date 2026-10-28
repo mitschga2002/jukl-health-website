@@ -129,7 +129,7 @@ export const stories: Story[] = [
     name: "Dietmar Gabriel",
     role: "Unternehmer",
     quote:
-      "Ein riesiges Dankeschön an julkhealth, der mir nach meiner OP wegen einer Spindelkanalverengung geholfen hat, meine Lähmungserscheinungen zu überwinden und meinen Rücken wieder zu stabilisieren. Heute bin ich wieder fit, meine Kraft ist zurück – und als Bonus sind mein Cholesterin und Blutdruck im grünen Bereich! 12 kg weniger und ein völlig neues Lebensgefühl – danke für die professionelle Unterstützung und Motivation!",
+      "Ein riesiges Dankeschön an JuklHealth, der mir nach meiner OP wegen einer Spindelkanalverengung geholfen hat, meine Lähmungserscheinungen zu überwinden und meinen Rücken wieder zu stabilisieren. Heute bin ich wieder fit, meine Kraft ist zurück – und als Bonus sind mein Cholesterin und Blutdruck im grünen Bereich! 12 kg weniger und ein völlig neues Lebensgefühl – danke für die professionelle Unterstützung und Motivation!",
     highlight: "12 kg weniger und ein völlig neues Lebensgefühl",
     category: "Unternehmen",
     image: "/img/dietmar-gabriel-1024.webp",
