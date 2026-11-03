@@ -1,9 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 import type { AcademyCourse } from "@/lib/academy.functions";
-import { cn } from "@/lib/utils";
-
-const EASE_PREMIUM = "duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]";
+import { AcademyCourseCover } from "@/components/site/AcademyCourseCover";
 
 /**
  * The app's course cards in the website's clothes: cover, title, tagline and
@@ -28,21 +26,7 @@ export function AcademyCourseCards({ items }: { items: readonly AcademyCourse[] 
             href={course.url}
             className="group flex flex-col overflow-hidden rounded-card bg-muted"
           >
-            <div className="relative aspect-[4/3] overflow-hidden bg-muted-foreground/10">
-              {course.coverImageUrl ? (
-                <img
-                  src={course.coverImageUrl}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  className={cn(
-                    "size-full object-cover transition-transform group-hover:scale-[1.05] motion-reduce:transform-none motion-reduce:transition-none",
-                    EASE_PREMIUM,
-                  )}
-                  style={{ objectPosition: course.coverImagePosition ?? "center" }}
-                />
-              ) : null}
-            </div>
+            <AcademyCourseCover src={course.coverImageUrl} position={course.coverImagePosition} />
             <div className="flex flex-1 flex-col gap-3 p-6 lg:p-8">
               <div className="flex items-start justify-between gap-4">
                 <h3 className="font-display text-[24px] leading-[1.25] text-foreground lg:text-[28px]">
