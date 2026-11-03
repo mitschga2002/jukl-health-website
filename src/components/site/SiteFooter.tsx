@@ -42,6 +42,7 @@ const sitemap = [
   {
     heading: "Mehr",
     links: [
+      { to: "/academy", label: "Academy" },
       { to: "/referenzen", label: "Referenzen" },
       { to: "/team", label: "Team" },
       { to: "/julian-kleinheinz", label: "Julian Kleinheinz" },

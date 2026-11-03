@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcademyRouteImport } from './routes/academy'
 import { Route as AnalysenRouteImport } from './routes/analysen'
 import { Route as AthletiktrainingRouteImport } from './routes/athletiktraining'
 import { Route as ClubsRouteImport } from './routes/clubs'
@@ -35,6 +36,11 @@ import { Route as VortraegeRouteImport } from './routes/vortraege'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyRoute = AcademyRouteImport.update({
+  id: '/academy',
+  path: '/academy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AnalysenRoute = AnalysenRouteImport.update({
@@ -145,6 +151,7 @@ const VortraegeRoute = VortraegeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/academy': typeof AcademyRoute
   '/analysen': typeof AnalysenRoute
   '/athletiktraining': typeof AthletiktrainingRoute
   '/clubs': typeof ClubsRoute
@@ -169,6 +176,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/academy': typeof AcademyRoute
   '/analysen': typeof AnalysenRoute
   '/athletiktraining': typeof AthletiktrainingRoute
   '/clubs': typeof ClubsRoute
@@ -194,6 +202,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/academy': typeof AcademyRoute
   '/analysen': typeof AnalysenRoute
   '/athletiktraining': typeof AthletiktrainingRoute
   '/clubs': typeof ClubsRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/academy'
     | '/analysen'
     | '/athletiktraining'
     | '/clubs'
@@ -244,6 +254,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/academy'
     | '/analysen'
     | '/athletiktraining'
     | '/clubs'
@@ -268,6 +279,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/academy'
     | '/analysen'
     | '/athletiktraining'
     | '/clubs'
@@ -293,6 +305,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcademyRoute: typeof AcademyRoute
   AnalysenRoute: typeof AnalysenRoute
   AthletiktrainingRoute: typeof AthletiktrainingRoute
   ClubsRoute: typeof ClubsRoute
@@ -323,6 +336,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy': {
+      id: '/academy'
+      path: '/academy'
+      fullPath: '/academy'
+      preLoaderRoute: typeof AcademyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/analysen': {
@@ -477,6 +497,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcademyRoute: AcademyRoute,
   AnalysenRoute: AnalysenRoute,
   AthletiktrainingRoute: AthletiktrainingRoute,
   ClubsRoute: ClubsRoute,

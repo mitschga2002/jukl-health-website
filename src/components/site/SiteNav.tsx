@@ -8,7 +8,10 @@ import logoBlack from "@/assets/jukl-wordmark-black-384.webp";
 import { PillLink } from "./Pill";
 import { cn } from "@/lib/utils";
 
-const mainLinks = [{ to: "/referenzen", label: "Referenzen" }] as const;
+const mainLinks = [
+  { to: "/academy", label: "Academy" },
+  { to: "/referenzen", label: "Referenzen" },
+] as const;
 
 const aboutLinks = [
   { to: "/team", label: "Team" },
@@ -75,7 +78,7 @@ function Dropdown({
     <div className="group relative">
       <button
         className={cn(
-          "flex items-center gap-0.5 text-base hover:text-foreground",
+          "flex items-center gap-0.5 whitespace-nowrap text-base hover:text-foreground",
           sectionActive ? "text-primary" : "text-muted-foreground",
         )}
       >
@@ -271,7 +274,8 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
               />
             </Link>
 
-            <div className="hidden items-center gap-6 lg:flex">
+            {/* Seven entries since Academy: a tighter gap at lg keeps "Über uns" on one line until the rail widens. */}
+            <div className="hidden items-center gap-4 lg:flex xl:gap-6">
               <Dropdown label="Clubs" items={clubLinks} />
               <Dropdown label="Angebot" items={trainingLinks} />
               <Dropdown label="Analysen" items={analysenLinks} />
@@ -279,7 +283,7 @@ export function SiteNav({ overlay = false }: { overlay?: boolean }) {
                 <Link
                   key={l.to}
                   to={l.to}
-                  className="text-base text-muted-foreground hover:text-foreground"
+                  className="whitespace-nowrap text-base text-muted-foreground hover:text-foreground"
                   activeProps={{ className: "text-primary" }}
                   activeOptions={{ exact: true }}
                 >
